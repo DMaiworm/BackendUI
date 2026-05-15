@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Containers - AdminConsole</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary-fixed-dim": "#b4c5ff",
+                        "error-container": "#ffdad6",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-container": "#d0e1fb",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-low": "#f3f3fe",
+                        "inverse-on-surface": "#f0f0fb",
+                        "error": "#ba1a1a",
+                        "on-surface-variant": "#434655",
+                        "surface-container-highest": "#e1e2ed",
+                        "surface-variant": "#e1e2ed",
+                        "surface-dim": "#d9d9e5",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "outline-variant": "#c3c6d7",
+                        "surface-bright": "#faf8ff",
+                        "surface-container": "#ededf9",
+                        "on-error": "#ffffff",
+                        "on-primary-container": "#eeefff",
+                        "tertiary-container": "#bc4800",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "outline": "#737686",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-error-container": "#93000a",
+                        "inverse-primary": "#b4c5ff",
+                        "tertiary": "#943700",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-tint": "#0053db",
+                        "on-primary": "#ffffff",
+                        "on-tertiary-container": "#ffede6",
+                        "on-background": "#191b23",
+                        "surface": "#faf8ff",
+                        "inverse-surface": "#2e3039",
+                        "surface-container-high": "#e7e7f3",
+                        "on-secondary-fixed": "#0b1c30",
+                        "background": "#faf8ff",
+                        "on-tertiary": "#ffffff",
+                        "on-surface": "#191b23",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-container": "#2563eb",
+                        "primary": "#004ac6",
+                        "secondary-fixed": "#d3e4fe",
+                        "secondary": "#505f76"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "md": "16px",
+                        "max_width": "1440px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "margin": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "h3": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #faf8ff;
+            color: #191b23;
+            font-family: 'Inter', sans-serif;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid #F1F5F9;
+        }
+        .ambient-shadow {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 flex flex-col bg-surface-container-lowest border-r border-outline-variant shadow-sm z-50">
+<div class="p-lg flex flex-col gap-sm">
+<h1 class="font-h2 text-h2 font-bold text-primary">AdminConsole</h1>
+<p class="font-label-sm text-on-surface-variant opacity-70">Configuration</p>
+</div>
+<nav class="mt-md flex-1 px-sm space-y-1 overflow-y-auto">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-body-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">storage</span>
+<span class="font-body-md">OnPrem</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">layers</span>
+<span class="font-body-md">Environments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">compare_arrows</span>
+<span class="font-body-md">Mappings</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">gavel</span>
+<span class="font-body-md">Legal</span>
+</a>
+<div class="pt-sm pb-xs px-md">
+<p class="text-[10px] uppercase font-bold text-outline tracking-widest">Configuration</p>
+</div>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">database</span>
+<span class="font-body-md">Storage Buckets</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">grid_view</span>
+<span class="font-body-md">Storage Partitions</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">link</span>
+<span class="font-body-md">Collaboration Links</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-primary transition-colors">history</span>
+<span class="font-body-md">Retention Categories</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container border-l-4 border-primary font-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">inventory_2</span>
+<span class="font-body-md font-semibold">Containers</span>
+</a>
+</nav>
+<div class="mt-auto p-md border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-md flex items-center justify-center gap-sm active:opacity-80 transition-all">
+<span class="material-symbols-outlined">add</span>
+            Add New Container
+        </button>
+<div class="mt-md space-y-1">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-body-sm">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-body-sm">Account</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- Main Wrapper -->
+<div class="flex-1 ml-[260px] h-screen flex flex-col overflow-hidden">
+<!-- TopAppBar -->
+<header class="h-16 fixed top-0 right-0 left-[260px] bg-surface flex justify-between items-center px-lg border-b border-outline-variant z-40">
+<div class="flex items-center flex-1 max-w-2xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-md py-sm bg-surface-container rounded-full border-none focus:ring-2 focus:ring-primary text-body-sm" placeholder="Search resources, containers, or settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<nav class="hidden md:flex gap-xl">
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Docs</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Logs</a>
+<a class="font-label-md text-on-surface-variant hover:text-primary transition-colors" href="#">Alerts</a>
+</nav>
+<div class="flex items-center gap-md border-l border-outline-variant pl-lg">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary">help</button>
+<div class="flex items-center gap-sm">
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCr1varImiJ2srEVV22WDDYm0g0GYZIaZyyOem6C3ofWOa01KWvHUh9CaM-oLL9K9Go4bdcvYZLWdCVkmVxmH0elRLkR9WSitjNvnt17_bxWSZFKa8W9bcaeyhPu2HYEXH8VyeJAAQvxMB1XkiQDnXGFK8SSgCBXDq_h2JEXU0_29GrSMXAjDehbPVBYpLmlq24wNMnHxjvWNYmruj62zcktHyQ_-vb6VFFUGStAVGY20gptAgdOHuTSiF9kaYlTqYC4RrPMmtq_XM"/>
+<span class="material-symbols-outlined text-on-surface-variant hover:text-primary">account_circle</span>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 mt-16 overflow-y-auto p-xl">
+<div class="max-w-max_width mx-auto space-y-xl">
+<!-- Title Section -->
+<div class="flex justify-between items-end">
+<div>
+<div class="flex items-center gap-xs text-on-surface-variant font-label-sm mb-xs">
+<span>Configuration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span>Containers</span>
+</div>
+<h2 class="font-h1 text-h1 text-on-surface">Containers</h2>
+</div>
+<div class="flex gap-md">
+<button class="flex items-center gap-sm px-lg py-sm rounded-lg bg-surface-container-high text-on-surface border border-outline-variant font-label-md hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-[20px]">sync</span>
+                        Re-sync
+                    </button>
+<button class="flex items-center gap-sm px-lg py-sm rounded-lg bg-primary text-on-primary font-label-md shadow-lg active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined text-[20px]">add</span>
+                        New Container
+                    </button>
+</div>
+</div>
+<!-- Filter Section -->
+<section class="glass-card p-lg rounded-xl ambient-shadow space-y-md">
+<div class="flex items-center gap-xs text-primary font-label-md cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+                    Advanced filters
+                </div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-md items-start"><div class="col-span-1 md:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-md items-end">
+<div class="space-y-1.5">
+<label class="font-label-sm text-on-surface-variant block">Name</label>
+<input class="w-full px-md py-sm border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-body-sm bg-surface outline-none" placeholder="Search name..." type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-on-surface-variant block">Description</label>
+<input class="w-full px-md py-sm border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-body-sm bg-surface outline-none" placeholder="Search description..." type="text"/>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-on-surface-variant block">Retention Category</label>
+<div class="relative">
+<select class="w-full pl-md pr-xl py-sm border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-body-sm appearance-none outline-none bg-surface">
+<option>All</option>
+<option>1r</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="flex gap-sm h-[40px] items-center">
+<button class="px-md py-[10px] rounded-lg border border-outline-variant text-on-surface-variant font-label-md hover:bg-surface-container-high transition-colors flex-1">Clear</button>
+<button class="px-md py-[10px] rounded-lg bg-primary text-on-primary font-label-md hover:bg-primary-container transition-colors flex-1">Update</button>
+</div>
+</div>
+<div class="col-span-1 md:col-span-3 grid grid-cols-1 md:grid-cols-4 gap-md items-start">
+<div class="space-y-1.5">
+<label class="font-label-sm text-on-surface-variant block">Use BYOK</label>
+<div class="relative">
+<select class="w-full pl-md pr-xl py-sm border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-body-sm appearance-none outline-none bg-surface">
+<option>All</option>
+<option>Yes</option>
+<option>No</option>
+</select>
+<span class="material-symbols-outlined absolute right-md top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="space-y-1.5">
+<label class="font-label-sm text-on-surface-variant block">BYOK Credential Name</label>
+<input class="w-full px-md py-sm border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary focus:border-primary text-body-sm bg-surface outline-none" placeholder="Credential name..." type="text"/>
+</div>
+<div class="md:col-span-2"></div>
+</div></div>
+</section>
+<!-- Table Search and Actions -->
+<div class="flex items-center gap-md">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant text-[20px]">search</span>
+<input class="w-full pl-xl pr-md py-md bg-surface-container-lowest border border-outline-variant rounded-lg text-body-sm focus:ring-2 focus:ring-primary" placeholder="Suche" type="text"/>
+</div>
+<button class="px-lg py-md rounded-lg bg-surface-container-high border border-outline-variant font-label-md flex items-center gap-sm hover:bg-surface-dim transition-colors">
+<span class="material-symbols-outlined text-[20px]">file_download</span>
+                    Export
+                </button>
+</div>
+<!-- Content Area / Table -->
+<div class="glass-card rounded-xl ambient-shadow overflow-hidden bg-surface-container-lowest">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="px-lg py-md w-12 text-center">
+<input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">
+<div class="flex items-center gap-xs">Name <span class="material-symbols-outlined text-[16px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">
+<div class="flex items-center gap-xs">Description <span class="material-symbols-outlined text-[16px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">
+<div class="flex items-center gap-xs">Retention Category <span class="material-symbols-outlined text-[16px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">
+<div class="flex items-center gap-xs">Container Type <span class="material-symbols-outlined text-[16px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider text-center">
+<div class="flex items-center justify-center gap-xs">Use BYOK <span class="material-symbols-outlined text-[16px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider">
+<div class="flex items-center gap-xs">Container BYOK Credential Name <span class="material-symbols-outlined text-[16px]">unfold_more</span></div>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant uppercase tracking-wider text-right">Aktionen</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md text-center"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-lg py-md font-body-md text-on-surface">Aaron Austin</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Default for Aaron Austin</td>
+<td class="px-lg py-md font-body-md text-on-surface">1r</td>
+<td class="px-lg py-md font-body-md text-on-surface">Email Structured</td>
+<td class="px-lg py-md text-center"><span class="text-error">✕</span></td>
+<td class="px-lg py-md font-body-md text-on-surface"></td>
+<td class="px-lg py-md text-right"><button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md text-center"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-lg py-md font-body-md text-on-surface">Abraham Hatton</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Default for Abraham Hatton</td>
+<td class="px-lg py-md font-body-md text-on-surface">1r</td>
+<td class="px-lg py-md font-body-md text-on-surface">Email Structured</td>
+<td class="px-lg py-md text-center"><span class="text-error">✕</span></td>
+<td class="px-lg py-md font-body-md text-on-surface"></td>
+<td class="px-lg py-md text-right"><button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md text-center"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-lg py-md font-body-md text-on-surface">Adalberto Harper</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Default for Adalberto Harper</td>
+<td class="px-lg py-md font-body-md text-on-surface">1r</td>
+<td class="px-lg py-md font-body-md text-on-surface">Email Structured</td>
+<td class="px-lg py-md text-center"><span class="text-error">✕</span></td>
+<td class="px-lg py-md font-body-md text-on-surface"></td>
+<td class="px-lg py-md text-right"><button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md text-center"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-lg py-md font-body-md text-on-surface">Adalberto Price</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Default for Adalberto Price</td>
+<td class="px-lg py-md font-body-md text-on-surface">1r</td>
+<td class="px-lg py-md font-body-md text-on-surface">Email Structured</td>
+<td class="px-lg py-md text-center"><span class="text-error">✕</span></td>
+<td class="px-lg py-md font-body-md text-on-surface"></td>
+<td class="px-lg py-md text-right"><button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md text-center"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-lg py-md font-body-md text-on-surface">Addie Foley</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Default for Addie Foley</td>
+<td class="px-lg py-md font-body-md text-on-surface">1r</td>
+<td class="px-lg py-md font-body-md text-on-surface">Email Structured</td>
+<td class="px-lg py-md text-center"><span class="text-error">✕</span></td>
+<td class="px-lg py-md font-body-md text-on-surface"></td>
+<td class="px-lg py-md text-right"><button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md text-center"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-lg py-md font-body-md text-on-surface">Addie Garrett</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Default for Addie Garrett</td>
+<td class="px-lg py-md font-body-md text-on-surface">1r</td>
+<td class="px-lg py-md font-body-md text-on-surface">Email Structured</td>
+<td class="px-lg py-md text-center"><span class="text-error">✕</span></td>
+<td class="px-lg py-md font-body-md text-on-surface"></td>
+<td class="px-lg py-md text-right"><button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button></td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="px-lg py-md text-center"><input class="rounded border-outline-variant text-primary focus:ring-primary" type="checkbox"/></td>
+<td class="px-lg py-md font-body-md text-on-surface">Alexander Gutshall</td>
+<td class="px-lg py-md font-body-md text-on-surface-variant">Default for Alexander Gutshall</td>
+<td class="px-lg py-md font-body-md text-on-surface">1r</td>
+<td class="px-lg py-md font-body-md text-on-surface">Email Structured</td>
+<td class="px-lg py-md text-center"><span class="text-error">✕</span></td>
+<td class="px-lg py-md font-body-md text-on-surface"></td>
+<td class="px-lg py-md text-right"><button class="material-symbols-outlined text-on-surface-variant hover:text-primary">more_horiz</button></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Pagination -->
+<div class="px-lg py-md border-t border-outline-variant flex items-center justify-between bg-surface-container-low">
+<p class="font-body-sm text-on-surface-variant">0 selected / 2.010 total</p>
+<div class="flex items-center gap-xs">
+<button class="p-xs rounded-md text-on-surface-variant hover:bg-surface-container-high disabled:opacity-30 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-[20px]">first_page</span>
+</button>
+<button class="p-xs rounded-md text-on-surface-variant hover:bg-surface-container-high disabled:opacity-30 disabled:cursor-not-allowed">
+<span class="material-symbols-outlined text-[20px]">chevron_left</span>
+</button>
+<div class="flex gap-xs mx-md">
+<button class="w-8 h-8 rounded-lg bg-primary text-on-primary font-label-md">1</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-high font-label-md">2</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-high font-label-md">3</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-high font-label-md">4</button>
+<button class="w-8 h-8 rounded-lg text-on-surface-variant hover:bg-surface-container-high font-label-md">5</button>
+</div>
+<button class="p-xs rounded-md text-on-surface-variant hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]">chevron_right</span>
+</button>
+<button class="p-xs rounded-md text-on-surface-variant hover:bg-surface-container-high">
+<span class="material-symbols-outlined text-[20px]">last_page</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Info Banner Section -->
+<div class="p-lg rounded-xl bg-secondary-container/30 border border-secondary-container flex items-start gap-md">
+<span class="material-symbols-outlined text-secondary mt-1">info</span>
+<div class="space-y-xs">
+<h4 class="font-label-md text-on-secondary-container">Understanding Containers</h4>
+<p class="font-body-sm text-on-secondary-container opacity-80">
+                        Containers serve as the primary organizational unit for data ingestion and management. Each container can have unique retention settings and BYOK (Bring Your Own Key) configurations.
+                    </p>
+</div>
+</div>
+</div>
+</main>
+<footer class="h-8 border-t border-outline-variant bg-surface flex items-center px-lg justify-between z-40">
+<p class="text-[10px] text-on-surface-variant">© 2025-2026 by cloudficient Software AG, Switzerland</p>
+<div class="flex items-center gap-xs">
+<span class="w-4 h-4 rounded-full bg-green-500"></span>
+<span class="text-[10px] font-bold text-on-surface-variant">ReMAD PLATFORM</span>
+</div>
+</footer>
+</div>
+</body></html>

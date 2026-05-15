@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>EV Vault Stores – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  .donut-segment { transition: stroke-dashoffset 1s ease-in-out; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'ev_vault_stores';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search EV vault stores...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Header -->
+      <div class="flex justify-between items-end">
+        <div>
+          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+            <a href="#" class="hover:text-primary transition-colors">Home</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <a href="../domains_management_list_view_sidebar_sync/domains_management_list_view_sidebar_sync.html" class="hover:text-primary transition-colors">Environments</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <a href="#" class="hover:text-primary transition-colors">Enterprise Vault</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <span class="fw-semibold text-on-surface">EV Vault Stores</span>
+          </nav>
+          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">EV Vault Stores</h1>
+        </div>
+        <button class="btn btn-primary flex items-center gap-2">
+          <span class="material-symbols-outlined" style="font-size:18px">add_box</span>
+          New EV Directory
+        </button>
+      </div>
+
+      <!-- KPI Bento Grid -->
+      <div class="grid grid-cols-12 gap-6">
+
+        <!-- Donut Chart Card -->
+        <div class="col-span-12 lg:col-span-6 card custom-shadow-l1">
+          <div class="card-body flex gap-6 items-center">
+            <div class="flex-1 space-y-4">
+              <h3 class="card-title mb-0">Distribution Across Archive Types</h3>
+              <div class="space-y-2">
+                <div class="flex items-center gap-2 small">
+                  <span class="w-3 h-3 rounded-full bg-primary flex-shrink-0"></span>
+                  <span class="flex-1">Exchange mailbox</span>
+                  <span class="fw-semibold">64%</span>
+                </div>
+                <div class="flex items-center gap-2 small">
+                  <span class="w-3 h-3 rounded-full bg-secondary flex-shrink-0"></span>
+                  <span class="flex-1">SMTP</span>
+                  <span class="fw-semibold">22%</span>
+                </div>
+                <div class="flex items-center gap-2 small">
+                  <span class="w-3 h-3 rounded-full bg-tertiary flex-shrink-0"></span>
+                  <span class="flex-1">File System</span>
+                  <span class="fw-semibold">14%</span>
+                </div>
+              </div>
+            </div>
+            <div class="w-48 h-48 relative flex-shrink-0 flex items-center justify-center">
+              <svg class="w-full h-full transform -rotate-90" viewBox="0 0 36 36">
+                <circle cx="18" cy="18" fill="transparent" r="16" stroke="#f3f3fe" stroke-width="4"></circle>
+                <circle class="donut-segment" cx="18" cy="18" fill="transparent" r="16" stroke="#004ac6" stroke-dasharray="64 100" stroke-linecap="round" stroke-width="4"></circle>
+                <circle class="donut-segment" cx="18" cy="18" fill="transparent" r="16" stroke="#505f76" stroke-dasharray="22 100" stroke-dashoffset="-64" stroke-linecap="round" stroke-width="4"></circle>
+              </svg>
+              <div class="absolute inset-0 flex flex-col items-center justify-center">
+                <span class="fw-bold" style="font-size:1.25rem">20.8k</span>
+                <span class="small text-muted">Archives</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Stats Cards Column -->
+        <div class="col-span-12 lg:col-span-6 grid grid-cols-2 gap-6">
+
+          <!-- Archives KPI -->
+          <div class="card custom-shadow-l1">
+            <div class="card-body flex flex-col justify-between h-full">
+              <div class="flex justify-between items-start">
+                <div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary">folder_zip</span>
+                </div>
+                <span class="badge badge-success">+2.4%</span>
+              </div>
+              <div class="mt-4">
+                <div class="small text-muted fw-semibold text-uppercase mb-1">Archives</div>
+                <div class="fw-bold" style="font-size:1.5rem">20.835</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Items KPI -->
+          <div class="card custom-shadow-l1">
+            <div class="card-body flex flex-col justify-between h-full">
+              <div class="flex justify-between items-start">
+                <div class="w-10 h-10 rounded-lg bg-secondary-container flex items-center justify-center">
+                  <span class="material-symbols-outlined text-primary">database</span>
+                </div>
+              </div>
+              <div class="mt-4">
+                <div class="small text-muted fw-semibold text-uppercase mb-1">Total Items</div>
+                <div class="fw-bold" style="font-size:1.5rem">5.904.545</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Total Storage Size (wide) -->
+          <div class="col-span-2 card custom-shadow-l1">
+            <div class="card-body flex justify-between items-center">
+              <div>
+                <div class="small text-muted fw-semibold text-uppercase mb-1">Total Storage Size</div>
+                <div class="fw-bold" style="font-size:1.875rem">283.14 GB</div>
+              </div>
+              <img alt="Wave chart" class="h-16 opacity-20"
+                   src="https://lh3.googleusercontent.com/aida/ADBb0ugMSu1Lhwsoaywy8RXBcT8GmOLvmNOsEBxfedco2JZk4kX8YKuKMyu2Hx4loDTQVut70ALv4OLkWluCqw-3Z244HENX-vZs1tM5-RE6uMoWwjUp48cVI56s_nO5TH36kk3HUBjQS0LKF_70eIld8EsP-3ENH3_FE0PxI2lLsQdJb-CiywON2FItEf6oUvs9EKY0ta3A2HAbv6JIZy2dUBojSnfKRlXMY_5R-wRZJW8c_oBtU2S_q-VFnVhnEg_XvNhRdGsdPm_4Pw"/>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="card custom-shadow-l1">
+
+        <!-- Toolbar -->
+        <div class="card-header flex justify-between items-center gap-4" style="background:var(--cnds-surface-container-low, #f3f3fe)">
+          <div class="flex items-center gap-3 flex-1">
+            <div class="relative" style="width:16rem">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">search</span>
+              </span>
+              <input class="cf-input-control w-full" style="padding-left:2.25rem" placeholder="Search" type="text"/>
+            </div>
+            <span class="badge badge-info flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:14px">info</span>
+              Filter active: Production Environments
+            </span>
+          </div>
+          <div class="flex items-center gap-2">
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">filter_list</span>
+              Filter
+            </button>
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">download</span>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full" style="min-width:900px">
+            <thead>
+              <tr>
+                <th style="width:48px"><input class="form-check-input" type="checkbox"/></th>
+                <th>Vault Store Entry ID</th>
+                <th>Vault Store Name</th>
+                <th>Vault Store SQL Server</th>
+                <th>Vault Store DB Name</th>
+                <th class="text-end" style="width:48px">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-1">
+                    <span class="small font-mono" style="max-width:9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="10392BFAA09994A428982447C34B0...">10392BFAA09994A428982447C34B0...</span>
+                    <button class="btn btn-link btn-sm p-1">
+                      <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">content_copy</span>
+                    </button>
+                  </div>
+                </td>
+                <td><span class="fw-semibold text-primary">DEVIEV12VSG01Enron</span></td>
+                <td class="small">DEVI-SQL2019-01\INSTANCE1</td>
+                <td class="small">EVVSDEVIEV12VSG01Enron_2</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-1">
+                    <span class="small font-mono" style="max-width:9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="1239AC737C1E19E4BA43568C051A49...">1239AC737C1E19E4BA43568C051A49...</span>
+                    <button class="btn btn-link btn-sm p-1">
+                      <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">content_copy</span>
+                    </button>
+                  </div>
+                </td>
+                <td><span class="fw-semibold text-primary">DEVIEV12VSG01VS01</span></td>
+                <td class="small">DEVI-SQL2019-01\INSTANCE1</td>
+                <td class="small">EVVSDEVIEV12VSG01VS01_1</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-1">
+                    <span class="small font-mono" style="max-width:9rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="14C85F35A6B778E44BF348E308AF24...">14C85F35A6B778E44BF348E308AF24...</span>
+                    <button class="btn btn-link btn-sm p-1">
+                      <span class="material-symbols-outlined text-on-surface-variant" style="font-size:16px">content_copy</span>
+                    </button>
+                  </div>
+                </td>
+                <td><span class="fw-semibold text-primary">DEVIEV12VSG01VS02</span></td>
+                <td class="small">DEVI-SQL2019-01\INSTANCE1</td>
+                <td class="small">EVVSDEVIEV12VSG01VS02_3</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Table Footer -->
+        <div class="card-footer flex justify-between items-center">
+          <span class="small text-muted">0 selected / 3 total</span>
+          <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 small">
+              <span class="text-muted">Rows per page:</span>
+              <select class="cf-input-control" style="width:auto">
+                <option>10</option>
+                <option>25</option>
+                <option>50</option>
+              </select>
+            </div>
+            <div class="flex items-center gap-1">
+              <button class="btn btn-link btn-sm p-1" disabled>
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_left</span>
+              </button>
+              <span class="small fw-semibold">1 of 1</span>
+              <button class="btn btn-link btn-sm p-1" disabled>
+                <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom Info Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <div class="card custom-shadow-l1">
+          <div class="card-body flex gap-4">
+            <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-primary">speed</span>
+            </div>
+            <div>
+              <h4 class="fw-semibold mb-1">Optimize Archive Performance</h4>
+              <p class="small text-muted mb-0">Run index defragmentation and SQL optimization tasks to ensure sub-second retrieval times for large vault stores.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="card custom-shadow-l1">
+          <div class="card-body flex gap-4">
+            <div class="w-12 h-12 rounded-lg bg-tertiary/10 flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-tertiary">rocket_launch</span>
+            </div>
+            <div>
+              <h4 class="fw-semibold mb-1">Migration Readiness</h4>
+              <p class="small text-muted mb-0">Analyze item counts and storage health to prepare for upcoming cloud migration batches to Office 365.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

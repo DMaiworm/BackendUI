@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Storage Partitions - AdminConsole</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "secondary": "#505f76",
+                        "tertiary": "#943700",
+                        "outline": "#737686",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-high": "#e7e7f3",
+                        "on-secondary-fixed": "#0b1c30",
+                        "secondary-fixed": "#d3e4fe",
+                        "primary": "#004ac6",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container": "#ededf9",
+                        "surface-container-low": "#f3f3fe",
+                        "on-surface-variant": "#434655",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "secondary-container": "#d0e1fb",
+                        "on-tertiary-fixed": "#360f00",
+                        "inverse-on-surface": "#f0f0fb",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "error": "#ba1a1a",
+                        "on-secondary-container": "#54647a",
+                        "on-surface": "#191b23",
+                        "surface-dim": "#d9d9e5",
+                        "surface-bright": "#faf8ff",
+                        "inverse-surface": "#2e3039",
+                        "surface-variant": "#e1e2ed",
+                        "primary-fixed": "#dbe1ff",
+                        "on-primary": "#ffffff",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-secondary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-primary-container": "#eeefff",
+                        "on-tertiary-container": "#ffede6",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-background": "#191b23",
+                        "primary-container": "#2563eb",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-tint": "#0053db",
+                        "on-error": "#ffffff",
+                        "tertiary-container": "#bc4800",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "background": "#faf8ff",
+                        "surface": "#faf8ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "outline-variant": "#c3c6d7",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "lg": "24px",
+                        "sm": "8px",
+                        "max_width": "1440px",
+                        "margin": "32px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "h3": ["Manrope"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #faf8ff; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .sidebar-active {
+            background-color: #d0e1fb;
+            color: #54647a;
+            border-left: 4px solid #004ac6;
+        }
+        .card-shadow {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- SideNavBar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col z-50">
+<div class="p-lg">
+<h1 class="font-h2 text-h2 font-bold text-primary">AdminConsole</h1>
+<p class="text-body-sm text-on-surface-variant">Endpoint Management</p>
+</div>
+<nav class="flex-1 px-md space-y-xs mt-md">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="storage">storage</span>
+<span class="font-label-md">OnPrem</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg sidebar-active" href="#">
+<span class="material-symbols-outlined" data-icon="layers">layers</span>
+<span class="font-label-md">Environments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-md">Assets</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-lg mt-auto">
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-md hover:opacity-90 transition-opacity">
+                Add New Endpoint
+            </button>
+</div>
+<div class="px-md pb-lg space-y-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- TopAppBar -->
+<header class="h-16 fixed top-0 right-0 left-[260px] bg-surface border-b border-outline-variant flex justify-between items-center px-lg z-40">
+<div class="flex items-center gap-xl w-full max-w-2xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant" data-icon="search">search</span>
+<input class="w-full pl-11 pr-md py-2 bg-surface-container-low border border-outline-variant rounded-full text-body-sm focus:ring-2 focus:ring-primary focus:border-primary transition-all" placeholder="Search partitions, connection strings, or buckets..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<nav class="hidden md:flex items-center gap-md pr-lg border-r border-outline-variant">
+<a class="text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Docs</a>
+<a class="text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Logs</a>
+<a class="text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Alerts</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="notifications">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors" data-icon="help">help</button>
+<div class="flex items-center gap-sm">
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4nVUSB_tP6CDWaJhfd5SfZxFIp7g8das8MTxu8dkPKfrF5SFOreO4uAQh4l6z1IC_QB88xX7qzHZNckqwXniQRxn5ZU4poh4GFiwqSEsyQrFBU8jTYqmfi_RHrZ6LDi01lClYWhWA5l2ysLgrvkg97-y0UGrxtPEDlGiHsUlU5haD1QyUsaMCD_pZ_anC8kU1tNGVbrqRTv3GU4LXvuluVFv8v4hCWfL-A5OArX0zeK1qBJQaNoH2iUJVOlHJ5__b8zwC0ZJHcLI"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="pl-[260px] pt-16 min-h-screen">
+<div class="max-w-max_width mx-auto p-xl">
+<!-- Page Header -->
+<div class="flex justify-between items-center mb-xl">
+<div>
+<h2 class="font-h1 text-h1 text-on-surface">Storage Partitions</h2>
+<p class="text-body-md text-on-surface-variant mt-xs">Manage your cloud and local storage allocations across the environment.</p>
+</div>
+<button class="flex items-center gap-sm bg-primary text-on-primary px-lg py-md rounded-lg font-label-md card-shadow hover:opacity-90 transition-all">
+<span class="material-symbols-outlined" data-icon="add">add</span>
+                    New Storage Partition
+                </button>
+</div>
+<!-- Main Workspace Card -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl card-shadow overflow-hidden mb-xl">
+<div class="p-lg border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-on-surface">Partition Overview</h3>
+<div class="flex gap-sm">
+<button class="flex items-center gap-sm px-md py-sm border border-outline-variant rounded-lg text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="filter_list">filter_list</span>
+                            Filter
+                        </button>
+<button class="flex items-center gap-sm px-md py-sm border border-outline-variant rounded-lg text-label-md hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="download">download</span>
+                            Export
+                        </button>
+</div>
+</div>
+<!-- Detailed Filter Section -->
+<div class="p-lg bg-surface-container-low border-b border-outline-variant">
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-md mb-md">
+<div class="space-y-xs">
+<label class="text-label-sm text-on-surface-variant">Partition Name</label>
+<input class="w-full px-md py-2 bg-surface-container-lowest border border-outline-variant rounded text-body-sm" placeholder="Search name..." type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="text-label-sm text-on-surface-variant">Storage Type</label>
+<select class="w-full px-md py-2 bg-surface-container-lowest border border-outline-variant rounded text-body-sm">
+<option>All Types</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="text-label-sm text-on-surface-variant">Partition State</label>
+<select class="w-full px-md py-2 bg-surface-container-lowest border border-outline-variant rounded text-body-sm">
+<option>All States</option>
+</select>
+</div>
+<div class="space-y-xs">
+<label class="text-label-sm text-on-surface-variant">Connection Identifier</label>
+<input class="w-full px-md py-2 bg-surface-container-lowest border border-outline-variant rounded text-body-sm" placeholder="ID..." type="text"/>
+</div>
+<div class="space-y-xs">
+<label class="text-label-sm text-on-surface-variant">Storage Bucket</label>
+<input class="w-full px-md py-2 bg-surface-container-lowest border border-outline-variant rounded text-body-sm" placeholder="Bucket Name..." type="text"/>
+</div>
+</div>
+<div class="flex justify-end gap-md">
+<button class="px-md py-2 text-label-md text-on-surface-variant hover:text-on-surface transition-colors">Clear</button>
+<button class="px-lg py-2 bg-primary text-on-primary rounded-lg text-label-md hover:opacity-90 transition-opacity flex items-center gap-sm">
+<span class="material-symbols-outlined text-[18px]">refresh</span>
+                            Update
+                        </button>
+</div>
+</div>
+<!-- Table Content -->
+<div class="w-full overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container text-label-md text-on-surface-variant">
+<th class="px-lg py-md border-b border-outline-variant">Partition Name</th>
+<th class="px-lg py-md border-b border-outline-variant">Storage Type</th>
+<th class="px-lg py-md border-b border-outline-variant">Partition State</th>
+<th class="px-lg py-md border-b border-outline-variant">Connection Identifier</th>
+<th class="px-lg py-md border-b border-outline-variant">Storage Bucket</th>
+<th class="px-lg py-md border-b border-outline-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="px-lg py-24" colspan="6">
+<div class="flex flex-col items-center justify-center text-center">
+<div class="w-24 h-24 mb-md opacity-20">
+<img alt="Empty Storage Illustration" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/ADBb0ugqhNT_lapBfG46j3k1jnHRqi3I3M3W4YgKo7cEgrFLn8AAsxd0qwxyEB9mo33T8YBkhXiykwUR6wM2hLbY_CIBrBT7zQZNnj67ddJYPFoO3znQu5E2ivDH17jBOiGSAIgf8Z9RL8vizP1sJjXN8GjMEDrFPWv4cfah0stOLzq_-815HjnODvNEncoWBINAWGUHgRU7iO48qW911b7EQuB207QnhqlYqRXFerRfBsMk3HK6N9x4-BR1IqGVJW5B80Hb9CSrseE9CA"/>
+</div>
+<h4 class="font-h3 text-h3 text-on-surface mb-sm">Keine Daten verfügbar</h4>
+<p class="text-body-md text-on-surface-variant max-w-md">
+                                            There are currently no storage partitions configured in this environment. Click the "New Storage Partition" button to get started with your first data allocation.
+                                        </p>
+<p class="text-body-sm text-on-surface-variant italic mt-lg">No data available in this view.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Bento Grid Secondary Info -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-lg">
+<!-- Module Health Check -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-shadow">
+<div class="flex items-center gap-md mb-md">
+<div class="w-10 h-10 rounded-lg bg-primary-container/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-primary" data-icon="health_and_safety">health_and_safety</span>
+</div>
+<h4 class="font-label-md text-on-surface">Storage Health Check</h4>
+</div>
+<div class="bg-primary/5 rounded-lg p-md mb-md">
+<p class="text-body-sm text-on-surface-variant">Continuous monitoring is active. All storage subsystems are reporting operational status.</p>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-label-sm text-on-surface-variant">Last Check: 2 mins ago</span>
+<a class="text-label-md text-primary hover:underline" href="#">View Log</a>
+</div>
+</div>
+<!-- Auto-Update Policy -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-shadow">
+<div class="flex items-center gap-md mb-md">
+<div class="w-10 h-10 rounded-lg bg-tertiary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary" data-icon="update">update</span>
+</div>
+<h4 class="font-label-md text-on-surface">Partition Scaling Policy</h4>
+</div>
+<div class="space-y-sm mb-md">
+<div class="flex justify-between">
+<span class="text-body-sm text-on-surface-variant">Auto-scaling</span>
+<span class="text-label-sm text-primary font-bold">ENABLED</span>
+</div>
+<div class="w-full bg-surface-container rounded-full h-1.5">
+<div class="bg-primary h-1.5 rounded-full w-2/3"></div>
+</div>
+</div>
+<button class="w-full py-sm border border-outline-variant rounded-lg text-label-md hover:bg-surface-container-low transition-colors">
+                        Configure Policies
+                    </button>
+</div>
+<!-- Usage Insights -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-lg card-shadow">
+<div class="flex items-center gap-md mb-md">
+<div class="w-10 h-10 rounded-lg bg-secondary/10 flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary" data-icon="insights">insights</span>
+</div>
+<h4 class="font-label-md text-on-surface">Quota Usage</h4>
+</div>
+<img alt="Usage Graph" class="w-full h-24 object-cover rounded-lg mb-md grayscale opacity-50" src="https://lh3.googleusercontent.com/aida/ADBb0ugMSu1Lhwsoaywy8RXBcT8GmOLvmNOsEBxfedco2JZk4kX8YKuKMyu2Hx4loDTQVut70ALv4OLkWluCqw-3Z244HENX-vZs1tM5-RE6uMoWwjUp48cVI56s_nO5TH36kk3HUBjQS0LKF_70eIld8EsP-3ENH3_FE0PxI2lLsQdJb-CiywON2FItEf6oUvs9EKY0ta3A2HAbv6JIZy2dUBojSnfKRlXMY_5R-wRZJW8c_oBtU2S_q-VFnVhnEg_XvNhRdGsdPm_4Pw"/>
+<p class="text-body-sm text-on-surface-variant text-center">Enable partitions to see usage analytics.</p>
+</div>
+</div>
+<!-- Footer -->
+<footer class="mt-xl pt-lg border-t border-outline-variant flex justify-between items-center text-on-surface-variant">
+<div class="flex gap-lg">
+<a class="text-body-sm hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="text-body-sm hover:text-primary transition-colors" href="#">Terms of Service</a>
+<a class="text-body-sm hover:text-primary transition-colors" href="#">API Documentation</a>
+</div>
+<div class="text-body-sm">
+                    © 2024 AdminConsole Enterprise. Build v2.4.11
+                </div>
+</footer>
+</div>
+</main>
+</body></html>

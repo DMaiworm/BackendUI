@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Proton Admin - Password Policy Settings</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-primary": "#b4c5ff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-bright": "#faf8ff",
+                        "primary-container": "#2563eb",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "inverse-surface": "#2e3039",
+                        "secondary": "#505f76",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-surface": "#191b23",
+                        "on-primary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary-container": "#eeefff",
+                        "surface": "#faf8ff",
+                        "surface-container-low": "#f3f3fe",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-dim": "#d9d9e5",
+                        "on-background": "#191b23",
+                        "tertiary-container": "#bc4800",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffede6",
+                        "error": "#ba1a1a",
+                        "outline": "#737686",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "surface-variant": "#e1e2ed",
+                        "surface-container": "#ededf9",
+                        "tertiary": "#943700",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-tint": "#0053db",
+                        "outline-variant": "#c3c6d7",
+                        "primary": "#004ac6",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-container-high": "#e7e7f3",
+                        "on-primary-fixed": "#00174b",
+                        "on-tertiary-fixed": "#360f00",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "on-surface-variant": "#434655",
+                        "error-container": "#ffdad6",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "inverse-on-surface": "#f0f0fb",
+                        "background": "#faf8ff",
+                        "on-error-container": "#93000a",
+                        "secondary-container": "#d0e1fb",
+                        "primary-fixed": "#dbe1ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "8px",
+                        "xl": "12px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "xs": "4px",
+                        "unit": "4px",
+                        "sm": "8px",
+                        "max_width": "1440px",
+                        "md": "16px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "h3": ["Manrope"],
+                        "label-sm": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #faf8ff; color: #191b23; -webkit-font-smoothing: antialiased; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; display: inline-block; vertical-align: middle; }
+        .card-shadow { box-shadow: 0px 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- SideNavBar Shell -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col z-50">
+<div class="p-lg">
+<h2 class="font-h2 text-h2 font-bold text-primary">AdminConsole</h2>
+<p class="text-label-sm font-label-sm text-on-surface-variant">Endpoint Management</p>
+</div>
+<nav class="flex-1 px-sm space-y-unit">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-label-md">OnPrem</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-md">Environments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-md">Assets</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container border-l-4 border-primary font-label-md" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-md space-y-sm">
+<button class="w-full bg-primary text-on-primary py-sm rounded-lg font-label-md hover:opacity-90 transition-opacity">
+                Add New Endpoint
+            </button>
+</div>
+<div class="p-sm border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Wrapper -->
+<div class="ml-[260px] flex flex-col min-h-screen">
+<!-- TopAppBar Shell -->
+<header class="h-16 fixed top-0 right-0 left-[260px] bg-surface border-b border-outline-variant flex justify-between items-center px-lg z-40">
+<div class="flex items-center gap-xl">
+<div class="relative flex-1 max-w-md">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="pl-xl pr-md py-xs bg-surface-container border border-outline-variant rounded-full text-body-sm focus:ring-2 focus:ring-primary focus:border-primary outline-none transition-all w-[400px]" placeholder="Search settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md">
+<nav class="flex items-center gap-lg mr-lg">
+<a class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Docs</a>
+<a class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Logs</a>
+<a class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Alerts</a>
+</nav>
+<div class="flex items-center gap-sm pr-md border-r border-outline-variant mr-md">
+<button class="p-sm text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-sm text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+</div>
+<button class="flex items-center gap-sm">
+<img alt="User Profile" class="w-8 h-8 rounded-full border border-outline-variant" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1ZBZEj1e8zxqqdUvN-_-VbV-i7fqQ5XWNi_8-eAUNj_Jl_ufp-nqQKw4tlpBm2Jp8fiYVQeOkR3Li2ZLsBumdoCYvlSz5UykXgb_rlD3Ppy68K8nUkr23utqq266ffQFFpU9x2YB0P5YKV_7Ib81XzDSZVrxYrTB8RakdX5aznEUFdKJC_dvfv6bTadIwPmlMK4PIKC1vmJftCQUlebrJJDPH3-SSc0WdMwEGaSPDAPmN6sVsR53NqFAzAt2Jx4aWY6cJYfC-CJg"/>
+<span class="material-symbols-outlined text-on-surface-variant">keyboard_arrow_down</span>
+</button>
+</div>
+</header>
+<!-- Content Canvas -->
+<main class="mt-16 p-xl flex-1 max-w-max_width">
+<!-- Breadcrumbs & Header -->
+<div class="mb-xl">
+<nav class="flex text-label-sm font-label-sm text-on-surface-variant mb-sm">
+<span>Administration</span>
+<span class="mx-sm">/</span>
+<span class="text-primary">Settings</span>
+</nav>
+<h1 class="font-h1 text-h1 text-on-surface">Settings</h1>
+</div><!-- Tab Navigation -->
+<div class="border-b border-outline-variant mb-xl pl-[292px]">
+<nav aria-label="Settings sections" class="flex gap-xl">
+<a class="pb-md border-b-2 border-primary text-primary font-label-md transition-colors" href="#">
+            Password Policy
+        </a>
+<a class="pb-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md transition-colors" href="#">
+            Lockout
+        </a>
+<a class="pb-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md transition-colors" href="#">
+            Identity Verification
+        </a>
+<a class="pb-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md transition-colors" href="#">
+            User Profile
+        </a>
+<a class="pb-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md transition-colors" href="#">
+            Sessions
+        </a>
+</nav>
+</div>
+<!-- Main Layout: Sidebar + Content -->
+<div class="flex gap-xl">
+<!-- MiddleNav / Sub-navigation (25%) -->
+<aside class="w-[260px] flex-shrink-0">
+<nav class="space-y-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary-fixed text-on-primary-fixed font-label-md transition-colors" href="#">
+                            Identitätsverwaltung
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">
+                            Account
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">
+                            Management
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">
+                            Legal
+                        </a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">
+                            Template
+                        </a>
+</nav>
+</aside>
+<!-- Settings Content (75%) -->
+<div class="flex-1 space-y-xl">
+<!-- Password Strength Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl card-shadow">
+<div class="flex items-center gap-md mb-xl">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<h2 class="font-h2 text-h2 text-on-surface">Password Strength Settings</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-xl max-w-4xl">
+<div class="space-y-lg">
+<div>
+<label class="block font-label-md text-on-surface-variant mb-sm">Required Length</label>
+<input class="w-full md:w-32 h-11 border border-outline rounded-lg px-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none transition-all" type="number" value="6"/>
+</div>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-sm">Required Unique Characters</label>
+<input class="w-full md:w-32 h-11 border border-outline rounded-lg px-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none transition-all" type="number" value="1"/>
+</div>
+</div>
+<div class="space-y-md">
+<label class="flex items-center gap-md cursor-pointer group">
+<div class="relative flex items-center">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all" type="checkbox"/>
+</div>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Require non-alphanumeric character</span>
+</label>
+<label class="flex items-center gap-md cursor-pointer group">
+<div class="relative flex items-center">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all" type="checkbox"/>
+</div>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Require lowercase character</span>
+</label>
+<label class="flex items-center gap-md cursor-pointer group">
+<div class="relative flex items-center">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all" type="checkbox"/>
+</div>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Require uppercase character</span>
+</label>
+<label class="flex items-center gap-md cursor-pointer group">
+<div class="relative flex items-center">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all" type="checkbox"/>
+</div>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Require digit</span>
+</label>
+</div>
+</div>
+</section>
+<!-- Password Change Section -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl p-xl card-shadow">
+<div class="flex items-center gap-md mb-xl">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">update</span>
+<h2 class="font-h2 text-h2 text-on-surface">Password Change Settings</h2>
+</div>
+<div class="space-y-xl max-w-4xl">
+<label class="flex items-center gap-md cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary transition-all" type="checkbox"/>
+<span class="font-body-md text-on-surface group-hover:text-primary transition-colors">Users must change password periodically</span>
+</label>
+<div>
+<label class="block font-label-md text-on-surface-variant mb-sm">Password Change Interval (Days)</label>
+<div class="flex items-center gap-md">
+<input class="w-full md:w-32 h-11 border border-outline rounded-lg px-md focus:ring-2 focus:ring-primary-container focus:border-primary outline-none transition-all" type="number" value="0"/>
+<span class="text-on-surface-variant font-body-sm italic">Set to 0 to disable periodic changes.</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Help Banner (Contextual) -->
+<div class="bg-primary-fixed text-on-primary-fixed p-lg rounded-xl flex items-start gap-md">
+<span class="material-symbols-outlined mt-1">info</span>
+<div>
+<p class="font-label-md mb-xs">Proton Admin Security Guidelines</p>
+<p class="font-body-sm opacity-90">Stronger password policies significantly reduce the risk of unauthorized access. We recommend at least 12 characters and multiple character types for standard administrative accounts.</p>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="flex justify-end pt-md">
+<div class="flex gap-md">
+<button class="px-xl h-11 rounded-lg font-label-md text-on-surface-variant hover:bg-surface-container transition-colors">
+                                Cancel
+                            </button>
+<button class="bg-primary-container text-on-primary-container px-xl h-11 rounded-lg font-label-md hover:shadow-lg transition-all active:scale-[0.98]">
+                                Save
+                            </button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

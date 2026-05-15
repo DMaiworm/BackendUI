@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Collaboration Links – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'config_collaboration_links';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search collaboration links, urls...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Page Header -->
+      <div class="flex justify-between items-center">
+        <div>
+          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+            <a href="#" class="hover:text-primary transition-colors">Configuration</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <span class="fw-semibold text-on-surface">Collaboration Links</span>
+          </nav>
+          <h1 class="fw-bold mb-1" style="font-size:1.875rem;line-height:2.25rem">Collaboration Links</h1>
+          <p class="text-muted mb-0">Manage and monitor external collaboration links and synchronization status.</p>
+        </div>
+        <button class="btn btn-primary flex items-center gap-1">
+          <span class="material-symbols-outlined" style="font-size:18px">add</span>
+          New Collaboration Link
+        </button>
+      </div>
+
+      <!-- Main Card -->
+      <div class="card custom-shadow-l1">
+
+        <!-- Card Header: Links Overview + Filter/Export -->
+        <div class="card-header flex items-center justify-between">
+          <h5 class="card-title mb-0">Links Overview</h5>
+          <div class="flex gap-2">
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">filter_list</span>
+              Filter
+            </button>
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">download</span>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Section -->
+        <div class="p-4 bg-surface-container-low" style="border-bottom:1px solid var(--cnds-outline-variant)">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="cf-input-field">
+              <label class="cf-input-label">URL</label>
+              <div class="cf-input-wrapper">
+                <input class="cf-input-control w-full" type="text" placeholder="Search URL..."/>
+              </div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Is Synced</label>
+              <div class="cf-input-wrapper">
+                <select class="cf-input-control w-full">
+                  <option>All Statuses</option>
+                  <option>Synced</option>
+                  <option>Pending</option>
+                  <option>Error</option>
+                </select>
+              </div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Is Enabled</label>
+              <div class="cf-input-wrapper">
+                <select class="cf-input-control w-full">
+                  <option>All States</option>
+                  <option>Enabled</option>
+                  <option>Disabled</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="flex justify-end gap-3">
+            <button class="btn btn-link fw-semibold">Clear</button>
+            <button class="btn btn-primary flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">refresh</span>
+              Update
+            </button>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th>Url</th>
+                <th>Created</th>
+                <th>Is Synced</th>
+                <th>Is Enabled</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td colspan="5" class="py-16 text-center">
+                  <div class="flex flex-col items-center justify-center">
+                    <div class="w-24 h-24 mb-4 opacity-20">
+                      <img alt="Empty Storage Illustration" class="w-full h-full object-contain"
+                           src="https://lh3.googleusercontent.com/aida/ADBb0ugqhNT_lapBfG46j3k1jnHRqi3I3M3W4YgKo7cEgrFLn8AAsxd0qwxyEB9mo33T8YBkhXiykwUR6wM2hLbY_CIBrBT7zQZNnj67ddJYPFoO3znQu5E2ivDH17jBOiGSAIgf8Z9RL8vizP1sJjXN8GjMEDrFPWv4cfah0stOLzq_-815HjnODvNEncoWBINAWGUHgRU7iO48qW911b7EQuB207QnhqlYqRXFerRfBsMk3HK6N9x4-BR1IqGVJW5B80Hb9CSrseE9CA"/>
+                    </div>
+                    <h5 class="fw-semibold mb-2">Keine Daten verfügbar</h5>
+                    <p class="text-muted small mb-3 mx-auto" style="max-width:28rem">
+                      There are currently no collaboration links configured in this environment. Click the "New Collaboration Link" button to get started.
+                    </p>
+                    <p class="small text-muted fst-italic mb-0">0 selected / 0 total</p>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+      </div>
+
+      <!-- Footer -->
+      <footer class="pt-4 flex justify-between items-center text-muted small" style="border-top:1px solid var(--cnds-outline-variant)">
+        <div class="flex gap-4">
+          <a href="#" class="text-muted hover:text-primary transition-colors">Privacy Policy</a>
+          <a href="#" class="text-muted hover:text-primary transition-colors">Terms of Service</a>
+          <a href="#" class="text-muted hover:text-primary transition-colors">API Documentation</a>
+        </div>
+        <div>© 2024 AdminConsole Enterprise. Build v2.4.11</div>
+      </footer>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

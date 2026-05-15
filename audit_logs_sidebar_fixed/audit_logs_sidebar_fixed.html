@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Logs – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'config_audit_logs';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search...';</script>
+  <script>const TOPNAV_ACTIVE = 'logs';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div>
+        <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+          <a href="#" class="hover:text-primary transition-colors">Configuration</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <span class="fw-semibold text-on-surface">Audit Logs</span>
+        </nav>
+        <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Audit Logs</h1>
+      </div>
+
+      <!-- Tab Navigation -->
+      <ul class="nav nav-tabs nav-tabs-nimbus mb-0" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a href="#" class="nav-link active" data-cnds-tab-init role="tab" aria-selected="true">Audit Logs</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a href="#" class="nav-link" data-cnds-tab-init role="tab" aria-selected="false">Entity Changes</a>
+        </li>
+      </ul>
+
+      <!-- Filter Card -->
+      <div class="card custom-shadow-l1">
+        <div class="card-body">
+          <div class="grid grid-cols-4 gap-4 mb-4">
+            <!-- Row 1 -->
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">START DATE</label>
+              <div class="cf-input-wrapper">
+                <input class="cf-input-control w-full" type="text" placeholder="tt.mm.jjjj"/>
+                <span class="material-symbols-outlined cf-input-icon" style="font-size:16px">calendar_month</span>
+              </div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">END DATE</label>
+              <div class="cf-input-wrapper">
+                <input class="cf-input-control w-full" type="text" placeholder="tt.mm.jjjj"/>
+                <span class="material-symbols-outlined cf-input-icon" style="font-size:16px">calendar_month</span>
+              </div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">USERNAME</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">URL</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <!-- Row 2 -->
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">MIN. DURATION</label>
+              <div class="cf-input-wrapper"><select class="cf-input-control w-full"><option>-</option></select></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">MAX. DURATION</label>
+              <div class="cf-input-wrapper"><select class="cf-input-control w-full"><option>-</option></select></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">HTTP METHOD</label>
+              <div class="cf-input-wrapper"><select class="cf-input-control w-full"><option>-</option></select></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">HTTP STATUS CODE</label>
+              <div class="cf-input-wrapper"><select class="cf-input-control w-full"><option>-</option></select></div>
+            </div>
+            <!-- Row 3 -->
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">APPLICATION NAME</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">CLIENT IP ADDRESS</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">CORRELATION ID</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label" style="font-size:11px;letter-spacing:0.05em">HAS EXCEPTION</label>
+              <div class="cf-input-wrapper"><select class="cf-input-control w-full"><option>-</option></select></div>
+            </div>
+          </div>
+          <div class="flex justify-end gap-3 mt-4 pt-4" style="border-top:1px solid var(--cnds-outline-variant)">
+            <button class="btn btn-primary">Update</button>
+            <button class="btn btn-secondary flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:16px">download</span>
+              Export to Excel
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Data Table Card -->
+      <div class="card custom-shadow-l1">
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th>Actions</th>
+                <th>HTTP Request</th>
+                <th>User</th>
+                <th>IP Address</th>
+                <th>Date</th>
+                <th>Duration (ms)</th>
+                <th>Application Name</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr>
+                <td><button class="btn btn-primary btn-sm">Details</button></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="badge badge-danger">500</span>
+                    <span class="badge badge-success">GET</span>
+                    <code class="small text-muted">/api/app/legal-cases/legal-hold-statistics</code>
+                  </div>
+                </td>
+                <td class="fw-semibold">Daniel.Maiworm</td>
+                <td class="small text-muted">::ffff:10.244.3.155</td>
+                <td class="small text-muted">06.05.2026 17:17</td>
+                <td class="small text-muted">2076</td>
+                <td class="small text-muted">Expireon.HttpApi.Host</td>
+              </tr>
+              <!-- Row 2 -->
+              <tr>
+                <td><button class="btn btn-primary btn-sm">Details</button></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="badge badge-warning">204</span>
+                    <span class="badge badge-info">PUT</span>
+                    <code class="small text-muted">/api/account-admin/settings</code>
+                  </div>
+                </td>
+                <td class="fw-semibold">foram.shah</td>
+                <td class="small text-muted">::ffff:10.244.3.155</td>
+                <td class="small text-muted">29.04.2026 08:49</td>
+                <td class="small text-muted">84</td>
+                <td class="small text-muted">Expireon.HttpApi.Host</td>
+              </tr>
+              <!-- Row 3 -->
+              <tr>
+                <td><button class="btn btn-primary btn-sm">Details</button></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="badge badge-warning">204</span>
+                    <span class="badge badge-danger">DELETE</span>
+                    <code class="small text-muted">/api/identity/users/3a094228-c27c...</code>
+                  </div>
+                </td>
+                <td class="fw-semibold">admin</td>
+                <td class="small text-muted">::ffff:10.244.3.155</td>
+                <td class="small text-muted">24.04.2026 20:59</td>
+                <td class="small text-muted">296</td>
+                <td class="small text-muted">Expireon.HttpApi.Host</td>
+              </tr>
+              <!-- Row 4 -->
+              <tr>
+                <td><button class="btn btn-primary btn-sm">Details</button></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="badge badge-warning">204</span>
+                    <span class="badge badge-danger">DELETE</span>
+                    <code class="small text-muted">/api/identity/users/3a0ec810-bbe4...</code>
+                  </div>
+                </td>
+                <td class="fw-semibold">admin</td>
+                <td class="small text-muted">::ffff:10.244.3.155</td>
+                <td class="small text-muted">24.04.2026 20:59</td>
+                <td class="small text-muted">257</td>
+                <td class="small text-muted">Expireon.HttpApi.Host</td>
+              </tr>
+              <!-- Row 5 -->
+              <tr>
+                <td><button class="btn btn-primary btn-sm">Details</button></td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <span class="badge badge-danger">500</span>
+                    <span class="badge badge-success">GET</span>
+                    <code class="small text-muted">/api/app/file-system-export-policy</code>
+                  </div>
+                </td>
+                <td class="fw-semibold">Ron.Brown</td>
+                <td class="small text-muted">::ffff:10.244.3.155</td>
+                <td class="small text-muted">08.04.2026 14:03</td>
+                <td class="small text-muted">46</td>
+                <td class="small text-muted">Expireon.HttpApi.Host</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex items-center justify-between">
+          <span class="small text-muted">1,470 total</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

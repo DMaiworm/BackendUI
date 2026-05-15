@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Security Logs – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'admin_security_log';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search security logs...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div>
+        <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+          <a href="#" class="hover:text-primary transition-colors">Administration</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <span class="fw-semibold text-on-surface">Security Logs</span>
+        </nav>
+        <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Security Logs</h1>
+        <p class="text-muted mt-1 mb-0">Audit authentication events, access changes, and suspicious activity.</p>
+      </div>
+
+      <!-- Tab Navigation -->
+      <ul class="nav nav-tabs nav-tabs-nimbus mb-0" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a href="#" class="nav-link active" data-cnds-tab-init role="tab" aria-selected="true">Security Logs</a>
+        </li>
+        <li class="nav-item" role="presentation">
+          <a href="#" class="nav-link" data-cnds-tab-init role="tab" aria-selected="false">Identity Changes</a>
+        </li>
+      </ul>
+
+      <!-- Filter Card -->
+      <div class="card custom-shadow-l1">
+        <div class="card-body">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+            <div class="cf-input-field">
+              <label class="cf-input-label">Start Date</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text" placeholder="tt.mm.jjjj"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">End Date</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text" placeholder="tt.mm.jjjj"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Application</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Identity</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Username</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Action</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Client</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Correlation Id</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">IP Address</label>
+              <div class="cf-input-wrapper"><input class="cf-input-control w-full" type="text"/></div>
+            </div>
+          </div>
+          <div class="flex justify-end gap-2">
+            <button class="btn btn-link fw-semibold">Bereinigen</button>
+            <button class="btn btn-primary">Suche</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="card custom-shadow-l1">
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th>Date</th>
+                <th>Action</th>
+                <th>IP-Address</th>
+                <th>Browser</th>
+                <th>Application</th>
+                <th>Identity</th>
+                <th>Username</th>
+                <th>Client</th>
+                <th>Correlation Id</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="small text-muted">24.04.2024 10:15:32</td>
+                <td class="small fw-semibold">Login Success</td>
+                <td class="small text-muted">192.168.1.10</td>
+                <td class="small text-muted">Chrome 124.0</td>
+                <td class="small text-muted">Admin Portal</td>
+                <td class="small text-muted">User</td>
+                <td class="small">admin@proton.com</td>
+                <td class="small text-muted">Web Client</td>
+                <td class="small text-muted" style="font-family:monospace">5f3b7c...</td>
+              </tr>
+              <tr>
+                <td class="small text-muted">24.04.2024 09:42:11</td>
+                <td class="small fw-semibold">Password Reset</td>
+                <td class="small text-muted">45.12.33.201</td>
+                <td class="small text-muted">Safari 17.4</td>
+                <td class="small text-muted">Identity Service</td>
+                <td class="small text-muted">User</td>
+                <td class="small">j.doe@proton.com</td>
+                <td class="small text-muted">Mobile App</td>
+                <td class="small text-muted" style="font-family:monospace">a2e1d4...</td>
+              </tr>
+              <tr>
+                <td class="small text-muted">23.04.2024 16:22:05</td>
+                <td class="small fw-semibold">Logout</td>
+                <td class="small text-muted">10.0.5.54</td>
+                <td class="small text-muted">Firefox 125.0</td>
+                <td class="small text-muted">Admin Portal</td>
+                <td class="small text-muted">User</td>
+                <td class="small">m.smith@proton.com</td>
+                <td class="small text-muted">Web Client</td>
+                <td class="small text-muted" style="font-family:monospace">9c8b72...</td>
+              </tr>
+              <tr>
+                <td class="small text-muted">23.04.2024 14:05:44</td>
+                <td class="small fw-semibold text-danger">Failed Login</td>
+                <td class="small text-muted">203.0.113.12</td>
+                <td class="small text-muted">Edge 124.0</td>
+                <td class="small text-muted">API Gateway</td>
+                <td class="small text-muted">System</td>
+                <td class="small">svc_backup</td>
+                <td class="small text-muted">Automation Tool</td>
+                <td class="small text-muted" style="font-family:monospace">f1a2b3...</td>
+              </tr>
+              <tr>
+                <td class="small text-muted">22.04.2024 11:30:10</td>
+                <td class="small fw-semibold">Update Profile</td>
+                <td class="small text-muted">82.165.4.12</td>
+                <td class="small text-muted">Chrome 124.0</td>
+                <td class="small text-muted">Account Manager</td>
+                <td class="small text-muted">User</td>
+                <td class="small">admin@proton.com</td>
+                <td class="small text-muted">Web Client</td>
+                <td class="small text-muted" style="font-family:monospace">4d5e6f...</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card-footer flex items-center justify-between">
+          <span class="small text-muted">542 total</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span></a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Endpoints – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'endpoints';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search endpoints...';</script>
+  <script>const TOPNAV_ACTIVE = 'docs';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div class="flex justify-between items-end">
+        <div>
+          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+            <a href="#" class="hover:text-primary transition-colors">Home</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <a href="#" class="hover:text-primary transition-colors">OnPrem</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <span class="fw-semibold text-on-surface">Endpoints</span>
+          </nav>
+          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Endpoints</h1>
+        </div>
+        <button class="btn btn-primary flex items-center gap-1">
+          <span class="material-symbols-outlined" style="font-size:20px">add_circle</span>
+          New Endpoint
+        </button>
+      </div>
+
+      <!-- Getting Started Banner -->
+      <div class="alert alert-info flex items-start gap-4 mb-0">
+        <div class="bg-primary-container p-3 rounded-lg flex-shrink-0">
+          <span class="material-symbols-outlined text-on-primary" style="font-size:22px">lightbulb</span>
+        </div>
+        <div class="flex-1">
+          <div class="fw-semibold mb-1" style="font-size:1.125rem">Getting Started with Management</div>
+          <p class="small mb-0">To begin managing your infrastructure, you can manually add endpoints or use the 'Deploy Agent' button above to automate bulk enrollment. Monitoring data will populate the map once the first heartbeat is received.</p>
+        </div>
+        <button style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);color:inherit;border-radius:6px;padding:4px 12px;font-size:0.875rem;font-weight:600;cursor:pointer;white-space:nowrap;flex-shrink:0">
+          Dismiss
+        </button>
+      </div>
+
+      <!-- Map Visualization Card -->
+      <div class="card custom-shadow-l1">
+        <div class="card-header flex justify-between items-center">
+          <h5 class="card-title mb-0">Live Distribution Map</h5>
+          <div class="flex gap-2">
+            <span class="flex items-center gap-1 small text-on-surface-variant px-2 py-1 bg-surface-variant rounded-full">
+              <span class="w-2 h-2 rounded-full bg-primary d-inline-block"></span>
+              42 Online
+            </span>
+            <span class="flex items-center gap-1 small text-on-surface-variant px-2 py-1 bg-surface-variant rounded-full">
+              <span class="w-2 h-2 rounded-full d-inline-block" style="background:#ba1a1a"></span>
+              3 Offline
+            </span>
+          </div>
+        </div>
+        <div class="card-body p-0">
+          <div class="relative bg-surface-dim h-96 flex items-center justify-center overflow-hidden">
+            <img alt="Global Endpoint Distribution Map" class="w-full h-full object-cover"
+                 src="../_shared/world-map.svg"/>
+            <div class="absolute bottom-4 left-4 flex flex-col gap-2">
+              <button class="btn btn-secondary p-2">
+                <span class="material-symbols-outlined" style="font-size:20px">add</span>
+              </button>
+              <button class="btn btn-secondary p-2">
+                <span class="material-symbols-outlined" style="font-size:20px">remove</span>
+              </button>
+              <button class="btn btn-secondary p-2">
+                <span class="material-symbols-outlined" style="font-size:20px">my_location</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Filters Bar -->
+      <div class="flex flex-wrap items-center gap-3">
+        <div class="flex items-center gap-2 px-4 py-2 rounded-full bg-surface-container-lowest border border-outline-variant" style="box-shadow:0 4px 12px rgba(0,0,0,0.05)">
+          <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">filter_list</span>
+          <span class="fw-semibold small text-on-surface">Filter By:</span>
+          <div class="flex gap-1">
+            <span class="flex items-center gap-1 bg-secondary-container text-on-secondary-fixed-variant px-3 py-1 rounded-full small">
+              Status: Online
+              <button class="btn btn-link p-0 ms-1" style="line-height:1">
+                <span class="material-symbols-outlined text-on-surface-variant" style="font-size:14px">close</span>
+              </button>
+            </span>
+            <span class="flex items-center gap-1 bg-secondary-container text-on-secondary-fixed-variant px-3 py-1 rounded-full small">
+              Region: North America
+              <button class="btn btn-link p-0 ms-1" style="line-height:1">
+                <span class="material-symbols-outlined text-on-surface-variant" style="font-size:14px">close</span>
+              </button>
+            </span>
+          </div>
+        </div>
+        <button class="btn btn-link fw-semibold">Add Filter +</button>
+        <div class="ms-auto flex items-center gap-2">
+          <span class="small text-muted">Showing 45 results</span>
+          <button class="btn btn-secondary btn-sm flex items-center gap-1">
+            <span class="material-symbols-outlined" style="font-size:18px">sort</span>
+            Sort
+          </button>
+        </div>
+      </div>
+
+      <!-- Data Table Card -->
+      <div class="card custom-shadow-l1">
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th>Endpoint Name</th>
+                <th>Status</th>
+                <th>Description</th>
+                <th>Creation Time</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1: Active -->
+              <tr>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary" style="font-size:20px">desktop_windows</span>
+                    </div>
+                    <span class="fw-semibold">NYC-CORP-LPT01</span>
+                  </div>
+                </td>
+                <td><span class="badge badge-primary">Active</span></td>
+                <td class="small text-muted">Marketing team laptop - High priority</td>
+                <td class="small text-muted">Oct 24, 2023, 14:32</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 2: Active -->
+              <tr>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary" style="font-size:20px">dns</span>
+                    </div>
+                    <span class="fw-semibold">LON-DB-SRV04</span>
+                  </div>
+                </td>
+                <td><span class="badge badge-primary">Active</span></td>
+                <td class="small text-muted">Production Database - London Node</td>
+                <td class="small text-muted">Nov 02, 2023, 09:15</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 3: Disconnected -->
+              <tr>
+                <td>
+                  <div class="flex items-center gap-2" style="opacity:0.6">
+                    <div class="w-8 h-8 rounded bg-surface-variant flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">laptop_mac</span>
+                    </div>
+                    <span class="fw-semibold">SFO-EXEC-MAC12</span>
+                  </div>
+                </td>
+                <td><span class="badge badge-secondary">Disconnected</span></td>
+                <td class="small text-muted fst-italic">Device unresponsive for 48h</td>
+                <td class="small text-muted">Oct 12, 2023, 18:00</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 4: Active -->
+              <tr>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="w-8 h-8 rounded bg-primary-fixed flex items-center justify-center flex-shrink-0">
+                      <span class="material-symbols-outlined text-primary" style="font-size:20px">tablet_android</span>
+                    </div>
+                    <span class="fw-semibold">BER-POS-TAB02</span>
+                  </div>
+                </td>
+                <td><span class="badge badge-primary">Active</span></td>
+                <td class="small text-muted">Retail POS tablet - Berlin Store</td>
+                <td class="small text-muted">Jan 15, 2024, 11:22</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex justify-between items-center">
+          <div class="flex gap-2">
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">chevron_left</span>
+              Previous
+            </button>
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              Next
+              <span class="material-symbols-outlined" style="font-size:18px">chevron_right</span>
+            </button>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="small text-muted">Page 1 of 5</span>
+            <select class="cf-input-control" style="width:auto">
+              <option>10 per page</option>
+              <option>25 per page</option>
+              <option>50 per page</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Users Management - Proton Admin</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ffede6",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "secondary": "#505f76",
+                        "on-tertiary": "#ffffff",
+                        "on-background": "#191b23",
+                        "tertiary-fixed": "#ffdbcd",
+                        "on-tertiary-fixed": "#360f00",
+                        "primary": "#004ac6",
+                        "outline": "#737686",
+                        "surface": "#faf8ff",
+                        "secondary-container": "#d0e1fb",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-primary-fixed": "#00174b",
+                        "on-error-container": "#93000a",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-surface-variant": "#434655",
+                        "inverse-surface": "#2e3039",
+                        "surface-variant": "#e1e2ed",
+                        "surface-container-high": "#e7e7f3",
+                        "secondary-fixed": "#d3e4fe",
+                        "surface-tint": "#0053db",
+                        "surface-container-low": "#f3f3fe",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "tertiary-container": "#bc4800",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#ededf9",
+                        "on-primary-container": "#eeefff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-surface": "#191b23",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "primary-fixed": "#dbe1ff",
+                        "error": "#ba1a1a",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "error-container": "#ffdad6",
+                        "surface-dim": "#d9d9e5",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "background": "#faf8ff",
+                        "outline-variant": "#c3c6d7",
+                        "surface-container-lowest": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "inverse-primary": "#b4c5ff",
+                        "surface-bright": "#faf8ff",
+                        "tertiary": "#943700",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-error": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "32px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "margin": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "max_width": "1440px",
+                        "md": "16px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"]
+                    },
+                    "fontSize": {
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #faf8ff;
+            color: #191b23;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+        .card-shadow {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-hidden">
+<!-- Sidebar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest border-r border-outline-variant flex flex-col z-50">
+<div class="p-lg flex items-center gap-sm">
+<span class="font-h2 text-h2 font-bold text-primary">AdminConsole</span>
+</div>
+<nav class="flex-1 mt-sm px-sm space-y-xs overflow-y-auto">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-label-md">OnPrem</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-md">Environments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-md">Assets</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors group" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md">Security</span>
+</a>
+<!-- Active Settings (assuming Administration is under Settings or Settings is parent) -->
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container border-l-4 border-primary transition-colors group" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-sm border-t border-outline-variant">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="h-16 fixed top-0 right-0 left-[260px] bg-surface border-b border-outline-variant flex items-center justify-between px-lg z-40">
+<div class="flex-1 max-w-2xl">
+<div class="relative group">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-outline group-focus-within:text-primary transition-colors">search</span>
+<input class="w-full bg-surface-container border border-outline-variant rounded-full py-2 pl-12 pr-md focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all text-body-sm" placeholder="Search for users, roles, or endpoints..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md ml-lg">
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="w-10 h-10 rounded-full hover:bg-surface-container-high flex items-center justify-center text-on-surface-variant transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-px h-8 bg-outline-variant mx-xs"></div>
+<div class="flex items-center gap-sm">
+<div class="w-8 h-8 rounded-full overflow-hidden border border-outline-variant">
+<img alt="User Avatar" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ui6NqQu7sM_q1yZ5-3eyyr9BLF2xP9bo8pWwVpZUqPxzXCXPndVbFq-xl6Wutbl-tnwyDhQKGnHfUEEfr5i_EV2e4Tmbd6jIBUvlOFPd4xoZiAW48bmgkxlc4runDqNKHwTuMvrvRek1eN4lLxaSX_2d-lP07N-KTJmw-VkNqemKnBsH_JolfYqEN8_eqrCaL_yCVh6LyQTa5wjMKe8oB057GTabY3m486byEd7E9abPcZaNMxUCh8mf1YoqHuyJAwB-RH7lUWlpQ"/>
+</div>
+<span class="font-label-md text-on-surface">Admin User</span>
+<span class="material-symbols-outlined text-outline">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[260px] mt-16 p-xl h-[calc(100vh-64px)] overflow-y-auto">
+<div class="max-w-max_width mx-auto">
+<!-- Breadcrumbs & Header -->
+<div class="flex items-center justify-between mb-lg">
+<div class="space-y-xs">
+<nav class="flex items-center gap-xs text-label-sm text-outline">
+<span>Administration</span>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-on-surface-variant">Users</span>
+</nav>
+<h1 class="font-h1 text-h1 text-on-surface">Users</h1>
+</div>
+<button class="bg-primary-container text-on-primary-container hover:opacity-90 transition-opacity px-lg py-sm rounded-lg flex items-center gap-sm font-label-md card-shadow">
+<span class="material-symbols-outlined">person_add</span>
+                    New User
+                </button>
+</div>
+<!-- Table Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant card-shadow overflow-hidden">
+<!-- Filters/Actions Header -->
+<div class="p-md flex items-center justify-between border-b border-outline-variant bg-surface-container-low/30">
+<div class="flex items-center gap-md">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-sm top-1/2 -translate-y-1/2 text-outline text-[20px]">filter_list</span>
+<select class="bg-surface-container-lowest border border-outline-variant rounded-lg py-sm pl-9 pr-md text-body-sm focus:ring-primary focus:border-primary appearance-none min-w-[140px]">
+<option>Filter by Role</option>
+</select>
+</div>
+<button class="flex items-center gap-xs px-md py-sm text-on-surface-variant hover:text-primary transition-colors text-label-md">
+<span class="material-symbols-outlined">download</span>
+                            Export
+                        </button>
+</div>
+<div class="flex items-center gap-sm">
+<span class="text-body-sm text-outline">Showing 1-10 of 48 users</span>
+<div class="flex items-center border border-outline-variant rounded-lg">
+<button class="p-xs hover:bg-surface-container-high disabled:opacity-30">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-xs hover:bg-surface-container-high">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Table Content -->
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low">
+<tr>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Actions</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Username</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Email Address</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Roles</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Phone Number</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Name</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Surname</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold text-center">Active</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Account Locked until</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold text-center">Email confirmed</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold text-center">2FA</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold text-center">Login count</th>
+<th class="p-md text-label-sm text-outline border-b border-outline-variant font-semibold">Creation time</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1: marek -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-md whitespace-nowrap">
+<button class="px-md py-1 border border-primary text-primary hover:bg-primary/5 rounded font-label-md text-[13px] transition-colors">Actions</button>
+</td>
+<td class="p-md font-label-md text-on-surface">marek</td>
+<td class="p-md text-body-sm text-on-surface-variant">marek.m@proton.ch</td>
+<td class="p-md whitespace-nowrap">
+<span class="px-xs py-0.5 bg-secondary-container text-on-secondary-container rounded text-[11px] font-bold uppercase tracking-wider">ADMIN</span>
+</td>
+<td class="p-md text-body-sm text-on-surface-variant">+41 78 123 45 67</td>
+<td class="p-md text-body-sm text-on-surface">Marek</td>
+<td class="p-md text-body-sm text-on-surface">Müller</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-body-sm text-outline italic">—</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-outline">cancel</span>
+</td>
+<td class="p-md text-center text-body-sm">142</td>
+<td class="p-md text-body-sm text-outline whitespace-nowrap">2023-05-12 14:20</td>
+</tr>
+<!-- Row 2: legalUser -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-md whitespace-nowrap">
+<button class="px-md py-1 border border-primary text-primary hover:bg-primary/5 rounded font-label-md text-[13px] transition-colors">Actions</button>
+</td>
+<td class="p-md font-label-md text-on-surface">legalUser</td>
+<td class="p-md text-body-sm text-on-surface-variant">legal@proton.ch</td>
+<td class="p-md whitespace-nowrap">
+<span class="px-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded text-[11px] font-bold uppercase tracking-wider">LEGAL</span>
+</td>
+<td class="p-md text-body-sm text-on-surface-variant">+41 79 456 78 90</td>
+<td class="p-md text-body-sm text-on-surface">Legal</td>
+<td class="p-md text-body-sm text-on-surface">Department</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-body-sm text-outline italic">—</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-center text-body-sm">45</td>
+<td class="p-md text-body-sm text-outline whitespace-nowrap">2023-08-20 09:15</td>
+</tr>
+<!-- Row 3: michel.zehnder -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-md whitespace-nowrap">
+<button class="px-md py-1 border border-primary text-primary hover:bg-primary/5 rounded font-label-md text-[13px] transition-colors">Actions</button>
+</td>
+<td class="p-md font-label-md text-on-surface">michel.zehnder</td>
+<td class="p-md text-body-sm text-on-surface-variant">m.zehnder@corp.com</td>
+<td class="p-md whitespace-nowrap">
+<div class="flex flex-wrap gap-xs">
+<span class="px-xs py-0.5 bg-secondary-container text-on-secondary-container rounded text-[11px] font-bold uppercase">MANAGER</span>
+<span class="px-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded text-[11px] font-bold uppercase">VIEWER</span>
+</div>
+</td>
+<td class="p-md text-body-sm text-on-surface-variant">+41 77 987 65 43</td>
+<td class="p-md text-body-sm text-on-surface">Michel</td>
+<td class="p-md text-body-sm text-on-surface">Zehnder</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-body-sm text-outline italic">—</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-outline">cancel</span>
+</td>
+<td class="p-md text-center text-body-sm">812</td>
+<td class="p-md text-body-sm text-outline whitespace-nowrap">2022-11-30 16:45</td>
+</tr>
+<!-- Row 4: foram.shah -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-md whitespace-nowrap">
+<button class="px-md py-1 border border-primary text-primary hover:bg-primary/5 rounded font-label-md text-[13px] transition-colors">Actions</button>
+</td>
+<td class="p-md font-label-md text-on-surface">foram.shah</td>
+<td class="p-md text-body-sm text-on-surface-variant">foram.shah@tech.com</td>
+<td class="p-md whitespace-nowrap">
+<span class="px-xs py-0.5 bg-surface-container-high text-on-surface-variant rounded text-[11px] font-bold uppercase tracking-wider">DEVELOPER</span>
+</td>
+<td class="p-md text-body-sm text-on-surface-variant">+91 98765 43210</td>
+<td class="p-md text-body-sm text-on-surface">Foram</td>
+<td class="p-md text-body-sm text-on-surface">Shah</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-error">block</span>
+</td>
+<td class="p-md text-body-sm text-error font-medium">2024-05-15</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-center text-body-sm">12</td>
+<td class="p-md text-body-sm text-outline whitespace-nowrap">2024-01-05 10:30</td>
+</tr>
+<!-- Row 5: sarah.connor -->
+<tr class="hover:bg-surface-container-low/50 transition-colors">
+<td class="p-md whitespace-nowrap">
+<button class="px-md py-1 border border-primary text-primary hover:bg-primary/5 rounded font-label-md text-[13px] transition-colors">Actions</button>
+</td>
+<td class="p-md font-label-md text-on-surface">sarah.connor</td>
+<td class="p-md text-body-sm text-on-surface-variant">s.connor@sky.net</td>
+<td class="p-md whitespace-nowrap">
+<span class="px-xs py-0.5 bg-secondary-container text-on-secondary-container rounded text-[11px] font-bold uppercase tracking-wider">SECURITY</span>
+</td>
+<td class="p-md text-body-sm text-on-surface-variant">+1 555-0199</td>
+<td class="p-md text-body-sm text-on-surface">Sarah</td>
+<td class="p-md text-body-sm text-on-surface">Connor</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-body-sm text-outline italic">—</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-outline">cancel</span>
+</td>
+<td class="p-md text-center">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</td>
+<td class="p-md text-center text-body-sm">3</td>
+<td class="p-md text-body-sm text-outline whitespace-nowrap">2024-03-28 23:11</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Footer Pagination -->
+<div class="p-md border-t border-outline-variant bg-surface-container-lowest flex items-center justify-between">
+<div class="flex items-center gap-md">
+<span class="text-body-sm text-on-surface-variant">Items per page:</span>
+<select class="bg-surface-container-low border border-outline-variant rounded py-1 px-sm text-body-sm">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+</div>
+<div class="flex items-center gap-lg">
+<span class="text-body-sm text-on-surface-variant">Page 1 of 5</span>
+<div class="flex items-center gap-xs">
+<button class="p-sm rounded hover:bg-surface-container-low disabled:opacity-20" disabled="">
+<span class="material-symbols-outlined">first_page</span>
+</button>
+<button class="p-sm rounded hover:bg-surface-container-low disabled:opacity-20" disabled="">
+<span class="material-symbols-outlined">navigate_before</span>
+</button>
+<button class="p-sm rounded hover:bg-surface-container-low">
+<span class="material-symbols-outlined">navigate_next</span>
+</button>
+<button class="p-sm rounded hover:bg-surface-container-low">
+<span class="material-symbols-outlined">last_page</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Dashboard Stats Summary (Bento Style) -->
+<div class="mt-xl grid grid-cols-1 md:grid-cols-4 gap-lg">
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-shadow">
+<div class="flex items-center justify-between mb-sm">
+<span class="text-label-sm text-outline uppercase tracking-wider">Total Users</span>
+<span class="material-symbols-outlined text-primary">group</span>
+</div>
+<div class="text-h2 font-h2 text-on-surface">1,284</div>
+<div class="mt-xs text-body-sm text-tertiary font-medium">↑ 12% this month</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-shadow">
+<div class="flex items-center justify-between mb-sm">
+<span class="text-label-sm text-outline uppercase tracking-wider">Active Now</span>
+<span class="material-symbols-outlined text-primary">person_check</span>
+</div>
+<div class="text-h2 font-h2 text-on-surface">42</div>
+<div class="mt-xs text-body-sm text-outline">Across 4 regions</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-shadow">
+<div class="flex items-center justify-between mb-sm">
+<span class="text-label-sm text-outline uppercase tracking-wider">Pending MFA</span>
+<span class="material-symbols-outlined text-error">shield_lock</span>
+</div>
+<div class="text-h2 font-h2 text-on-surface">15</div>
+<div class="mt-xs text-body-sm text-error font-medium">Requires attention</div>
+</div>
+<div class="bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-shadow">
+<div class="flex items-center justify-between mb-sm">
+<span class="text-label-sm text-outline uppercase tracking-wider">New Registrations</span>
+<span class="material-symbols-outlined text-primary">app_registration</span>
+</div>
+<div class="text-h2 font-h2 text-on-surface">8</div>
+<div class="mt-xs text-body-sm text-outline">In last 24 hours</div>
+</div>
+</div>
+</div>
+</main>
+<!-- FAB (Contextual for New User) -->
+<button class="fixed bottom-margin right-margin bg-primary text-on-primary w-14 h-14 rounded-full flex items-center justify-center shadow-xl hover:scale-110 active:scale-95 transition-all z-50 md:hidden">
+<span class="material-symbols-outlined">add</span>
+</button>
+</body></html>

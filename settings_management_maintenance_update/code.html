@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Management Settings - Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-high": "#e7e7f3",
+                        "on-secondary-container": "#54647a",
+                        "inverse-surface": "#2e3039",
+                        "surface-container-low": "#f3f3fe",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-primary-fixed": "#00174b",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "error": "#ba1a1a",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "primary": "#004ac6",
+                        "on-tertiary": "#ffffff",
+                        "outline-variant": "#c3c6d7",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "error-container": "#ffdad6",
+                        "surface-bright": "#faf8ff",
+                        "primary-fixed": "#dbe1ff",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-primary-container": "#eeefff",
+                        "surface-container": "#ededf9",
+                        "on-surface": "#191b23",
+                        "secondary-container": "#d0e1fb",
+                        "surface-tint": "#0053db",
+                        "on-background": "#191b23",
+                        "on-error": "#ffffff",
+                        "inverse-primary": "#b4c5ff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-container": "#ffede6",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-surface-variant": "#434655",
+                        "on-primary": "#ffffff",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-dim": "#d9d9e5",
+                        "outline": "#737686",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#ffdbcd",
+                        "tertiary-container": "#bc4800",
+                        "surface": "#faf8ff",
+                        "secondary-fixed": "#d3e4fe",
+                        "secondary": "#505f76",
+                        "on-error-container": "#93000a",
+                        "surface-variant": "#e1e2ed",
+                        "primary-container": "#2563eb",
+                        "tertiary": "#943700",
+                        "background": "#faf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "lg": "24px",
+                        "max_width": "1440px",
+                        "md": "16px",
+                        "gutter": "24px",
+                        "xs": "4px",
+                        "xl": "32px",
+                        "sm": "8px",
+                        "margin": "32px",
+                        "unit": "4px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            color: #191b23;
+        }
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .card-shadow { box-shadow: 0px 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="font-body-md text-body-md">
+<!-- SideNavBar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 flex flex-col bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline z-50">
+<div class="p-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-[32px]" style="font-variation-settings: 'FILL' 1;">shield_with_heart</span>
+<span class="font-h2 text-h2 font-bold text-primary dark:text-inverse-primary">Expireon</span>
+</div>
+<nav class="flex-1 mt-md px-sm space-y-unit">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-label-md">OnPrem</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-md">Environments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-md">Assets</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-secondary-container text-on-secondary-container font-label-md" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto border-t border-outline-variant p-sm space-y-xs">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Wrapper -->
+<div class="ml-[260px] flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="h-16 fixed top-0 right-0 left-[260px] flex justify-between items-center px-lg bg-surface dark:bg-surface-container-highest border-b border-outline-variant dark:border-outline z-40">
+<div class="flex items-center flex-1 max-w-2xl">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full pl-xl pr-md py-2.5 bg-surface-container-low border border-outline-variant rounded-full text-body-sm focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-on-surface-variant" placeholder="Search in settings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-md ml-lg">
+<button class="flex items-center p-sm text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="flex items-center p-sm text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="h-8 w-8 rounded-full overflow-hidden border border-outline-variant cursor-pointer ml-sm">
+<img alt="User profile avatar" class="h-full w-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ui6NqQu7sM_q1yZ5-3eyyr9BLF2xP9bo8pWwVpZUqPxzXCXPndVbFq-xl6Wutbl-tnwyDhQKGnHfUEEfr5i_EV2e4Tmbd6jIBUvlOFPd4xoZiAW48bmgkxlc4runDqNKHwTuMvrvRek1eN4lLxaSX_2d-lP07N-KTJmw-VkNqemKnBsH_JolfYqEN8_eqrCaL_yCVh6LyQTa5wjMKe8oB057GTabY3m486byEd7E9abPcZaNMxUCh8mf1YoqHuyJAwB-RH7lUWlpQ"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="mt-16 p-xl flex-1 max-w-max_width">
+<!-- Breadcrumbs & Header Section -->
+<div class="mb-xl">
+<nav class="flex text-label-sm font-label-sm text-on-surface-variant mb-sm">
+<span>Administration</span>
+<span class="mx-sm">/</span>
+<span class="text-primary">Settings</span>
+</nav>
+<h1 class="font-h1 text-h1 text-on-surface">Settings</h1>
+</div>
+<!-- Tab Navigation Area -->
+<div class="border-b border-outline-variant mb-xl pl-[284px]">
+<nav aria-label="Settings sections" class="flex gap-xl overflow-x-auto no-scrollbar">
+<a class="pb-md border-b-2 hover:text-on-surface hover:border-outline-variant font-label-md transition-colors whitespace-nowrap border-primary text-primary" href="#">Actions</a>
+<a class="pb-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md transition-colors whitespace-nowrap" href="#">Mapping Cleanup</a>
+<a class="pb-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface hover:border-outline-variant font-label-md transition-colors whitespace-nowrap" href="#">User Profile</a>
+</nav>
+</div>
+<!-- Layout Wrapper: Sidebar + Workspace -->
+<div class="flex gap-xl">
+<!-- Left Sidebar Navigation (MiddleNav) -->
+<aside class="w-[260px] flex-shrink-0">
+<nav class="space-y-xs">
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">Identity Management</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">Account</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg bg-primary-fixed text-on-primary-fixed font-label-md transition-colors" href="#">Management</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">Legal</a>
+<a class="flex items-center gap-md px-md py-sm rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-label-md" href="#">Template</a>
+</nav>
+</aside>
+<!-- Main Workspace Area -->
+<div class="flex-1 space-y-xl">
+<!-- Management Header inside Workspace -->
+<header class="mb-lg">
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">Management</h2>
+<p class="text-on-surface-variant font-body-sm">Manage system actions, cache synchronizations, and database cleanups.</p>
+</header>
+<!-- System Maintenance banner -->
+<div class="bg-primary-fixed text-on-primary-fixed p-lg rounded-xl flex items-start gap-md mb-xl">
+<span class="material-symbols-outlined text-primary mt-1">info</span>
+<div>
+<p class="font-label-md">System Maintenance</p>
+<p class="text-body-sm">Perform manual synchronizations and data recalculations to ensure system integrity.</p>
+</div>
+</div>
+<div class="space-y-xl">
+<!-- Re-Calculate Card -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-shadow p-xl">
+<div class="space-y-md">
+<h3 class="font-h3 text-h3 text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined">calculate</span>
+                                Re-Calculate
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- EV Mapping Statistics -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">EV Mapping Statistics</h4>
+<p class="text-body-sm text-on-surface-variant">Re-calculates current mapping statistics for Enterprise Vault containers.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Re-Calculate</button>
+</div>
+</div>
+<!-- Container Age Statistics -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Container Age Statistics</h4>
+<p class="text-body-sm text-on-surface-variant">Updates the age structure analysis for all active storage containers.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Re-Calculate</button>
+</div>
+</div>
+<!-- Container Attachment Statistics -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Container Attachment Statistics</h4>
+<p class="text-body-sm text-on-surface-variant">This action will trigger re-creation of Container Attachment statistics. It might take a while.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Re-Calculate</button>
+</div>
+</div>
+<!-- Source One Statistics -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Source One Statistics</h4>
+<p class="text-body-sm text-on-surface-variant">This action will trigger re-creation of Source One Mapping statistics. It might take a while.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Re-Calculate</button>
+</div>
+</div>
+<!-- Cumulative Statistics -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Cumulative Statistics</h4>
+<p class="text-body-sm text-on-surface-variant">This action will trigger re-calculation of account wide statistics including aggregations of: total sizes, document counts, document types, file type groupings, YoY growth, and retention expiration forecasts. It might take a while.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Re-Calculate</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Maintenance Card (formerly Other) -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden card-shadow p-xl">
+<div class="space-y-md">
+<h3 class="font-h3 text-h3 text-on-surface flex items-center gap-sm">
+<span class="material-symbols-outlined">build</span>
+                                Maintenance
+                            </h3>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-md">
+<!-- Recover Appliance -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Recover Appliance</h4>
+<p class="text-body-sm text-on-surface-variant">This action will trigger recovery of appliance. It might take a while.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Recover</button>
+</div>
+</div>
+<!-- Cleanup Redis cache for Custodians -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Cleanup Redis cache for Custodians</h4>
+<p class="text-body-sm text-on-surface-variant">Removes temporary cache data related to custodian lookups and synchronizations.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Cleanup</button>
+</div>
+</div>
+<!-- Load Appliance Redis Cache -->
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Load Appliance Redis Cache</h4>
+<p class="text-body-sm text-on-surface-variant">Pre-loads the appliance cache with metadata to improve search and retrieval performance.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Re-Load</button>
+</div>
+</div>
+<div class="flex flex-col justify-between p-lg border border-outline-variant rounded-lg bg-surface-bright hover:bg-surface-container transition-all">
+<div class="mb-lg">
+<h4 class="font-label-md text-on-surface text-lg">Re-sync Custodians</h4>
+<p class="text-body-sm text-on-surface-variant">Synchronizes all custodian information with the central directory service.</p>
+</div>
+<div class="flex justify-end">
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md hover:brightness-110 transition-all shadow-sm active:scale-[0.98]">Re-Sync</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- Footer Actions -->
+<div class="flex justify-end pt-md">
+<div class="flex gap-md">
+<button class="px-xl h-11 rounded-lg font-label-md text-on-surface-variant hover:bg-surface-container transition-colors">Cancel</button>
+<button class="bg-primary-container text-on-primary-container px-xl h-11 rounded-lg font-label-md hover:shadow-lg transition-all active:scale-[0.98]">Save</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

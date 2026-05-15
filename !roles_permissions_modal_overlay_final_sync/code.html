@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-[#faf8ff]" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Roles - Proton Admin</title>
+<!-- Google Fonts: Manrope & Inter -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#ffede6",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "background": "#faf8ff",
+                        "surface-container": "#ededf9",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-background": "#191b23",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-tint": "#0053db",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "surface": "#faf8ff",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#943700",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-error-container": "#93000a",
+                        "on-primary-fixed": "#00174b",
+                        "on-surface-variant": "#434655",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-variant": "#e1e2ed",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "outline-variant": "#c3c6d7",
+                        "on-tertiary": "#ffffff",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "on-surface": "#191b23",
+                        "primary-container": "#2563eb",
+                        "on-secondary": "#ffffff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "outline": "#737686",
+                        "surface-container-low": "#f3f3fe",
+                        "secondary-container": "#d0e1fb",
+                        "primary": "#004ac6",
+                        "on-tertiary-fixed": "#360f00",
+                        "secondary": "#505f76",
+                        "on-primary": "#ffffff",
+                        "inverse-surface": "#2e3039",
+                        "tertiary-container": "#bc4800",
+                        "surface-dim": "#d9d9e5",
+                        "primary-fixed": "#dbe1ff",
+                        "error": "#ba1a1a",
+                        "surface-container-highest": "#e1e2ed",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container-high": "#e7e7f3",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-primary-container": "#eeefff",
+                        "inverse-primary": "#b4c5ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "max_width": "1440px",
+                        "unit": "4px",
+                        "margin": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "lg": "24px",
+                        "xl": "32px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style data-purpose="custom-layout">
+        body { font-family: 'Manrope', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+</head>
+<body class="h-full overflow-hidden flex font-body-md text-on-surface">
+<!-- BEGIN: SideNavBar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-white border-r border-outline-variant shadow-sm flex flex-col z-40">
+<div class="p-lg">
+<h1 class="font-h2 text-h2 font-bold text-primary">AdminConsole</h1>
+<p class="text-on-surface-variant font-label-sm">Endpoint Management</p>
+</div>
+<nav class="flex-1 px-md space-y-unit overflow-y-auto custom-scrollbar">
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-label-md">OnPrem</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-md">Environments</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-md">Assets</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md">Security</span>
+</div>
+<div class="flex flex-col gap-unit">
+<div class="flex items-center justify-between px-md py-sm text-on-surface-variant cursor-pointer">
+<div class="flex items-center gap-md">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-label-md">Administration</span>
+</div>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+<div class="pl-xl space-y-unit">
+<div class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container border-l-4 border-primary rounded-lg cursor-pointer">
+<span class="material-symbols-outlined text-[18px]">group</span>
+<span class="font-label-md">Roles</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</div>
+</nav>
+<div class="px-md pb-xl border-t border-outline-variant pt-md bg-white">
+<button class="w-full bg-primary text-on-primary py-md px-lg rounded-xl font-label-md shadow-md hover:opacity-90 transition-opacity mb-xl">
+                Add New Endpoint
+            </button>
+<div class="space-y-unit">
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Support</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Account</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: SideNavBar -->
+<div class="flex-1 flex flex-col min-w-0 bg-white ml-[260px]">
+<!-- BEGIN: TopNav -->
+<header class="h-16 border-b border-gray-200 flex items-center justify-between px-8 bg-white flex-shrink-0" data-purpose="top-nav">
+<div class="flex-1 max-w-2xl">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-6">
+<div class="flex items-center space-x-4">
+<a class="text-sm font-medium text-gray-500 hover:text-gray-700" href="#">Docs</a>
+<a class="text-sm font-medium text-gray-500 hover:text-gray-700" href="#">Logs</a>
+<a class="text-sm font-medium text-gray-500 hover:text-gray-700" href="#">Alerts</a>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-gray-400 hover:text-gray-600">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<div class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+<span class="mr-1">DE</span>
+<span class="material-symbols-outlined text-sm">expand_more</span>
+</div>
+</div>
+</div>
+</header>
+<!-- END: TopNav -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto bg-[#faf8ff] p-8 relative">
+<!-- BEGIN: HeaderSection -->
+<div class="mb-6 flex justify-between items-end">
+<div>
+<nav class="flex text-sm text-gray-500 mb-2">
+<span class="material-symbols-outlined text-sm mr-1">home</span>
+<span class="mx-1">/</span>
+<span>Administration</span>
+<span class="mx-1">/</span>
+<span class="text-gray-900 font-medium">Roles</span>
+</nav>
+<h1 class="text-2xl font-bold text-gray-900">Roles</h1>
+</div>
+<button class="bg-primary text-on-primary px-4 py-2 rounded-lg font-label-md shadow hover:opacity-90 transition flex items-center gap-2">
+<span class="material-symbols-outlined text-sm">add</span> New Role
+                </button>
+</div>
+<!-- END: HeaderSection -->
+<!-- Search Bar Area -->
+<div class="mb-6">
+<div class="relative">
+<input class="w-full border-gray-200 rounded-lg py-3 pl-4 pr-12 text-sm focus:ring-primary focus:border-primary bg-white shadow-sm" placeholder="Suche" type="text"/>
+<button class="absolute right-2 top-2 p-1.5 bg-primary text-white rounded-md">
+<span class="material-symbols-outlined text-sm">search</span>
+</button>
+</div>
+</div>
+<!-- BEGIN: TableSection -->
+<section class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden" data-purpose="data-table">
+<table class="min-w-full divide-y divide-gray-200">
+<thead class="bg-gray-50">
+<tr>
+<th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">Actions</th>
+<th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">Role Name</th>
+<th class="px-6 py-4 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">User Count</th>
+</tr>
+</thead>
+<tbody class="bg-white divide-y divide-gray-200">
+<!-- Row 1 -->
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">settings</span> Actions
+                                </button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Test</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">settings</span> Actions
+                                </button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Key Management</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">settings</span> Actions
+                                </button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="text-sm text-gray-900">Legal</span>
+<span class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Public/Öffentlich</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">3</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">settings</span> Actions
+                                </button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="text-sm text-gray-900">LegalAdmin</span>
+<span class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Public/Öffentlich</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">1</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">settings</span> Actions
+                                </button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="text-sm text-gray-900">IT</span>
+<span class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Public/Öffentlich</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">0</td>
+</tr>
+<!-- Row 6 -->
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">settings</span> Actions
+                                </button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="text-sm text-gray-900">Default</span>
+<span class="bg-rose-100 text-rose-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Standard</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">22</td>
+</tr>
+<!-- Row 7 -->
+<tr class="hover:bg-gray-50">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary text-on-primary px-3 py-1.5 rounded-lg text-xs font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">settings</span> Actions
+                                </button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="text-sm text-gray-900">admin</span>
+<span class="bg-blue-100 text-blue-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase">Public/Öffentlich</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">11</td>
+</tr>
+</tbody>
+</table>
+<!-- BEGIN: Pagination/Footer -->
+<div class="bg-gray-50 px-6 py-4 border-t border-gray-200">
+<div class="text-sm text-gray-500 font-medium">7 total</div>
+</div>
+<!-- END: Pagination/Footer -->
+</section>
+<!-- END: TableSection -->
+</main>
+<!-- END: MainContent -->
+</div>
+<!-- BEGIN: Permissions Modal Overlay -->
+<div class="fixed inset-0 z-[100] flex items-center justify-center p-xl">
+<!-- Semi-transparent backdrop -->
+<div class="absolute inset-0 bg-black/40 backdrop-blur-sm"></div>
+<!-- Modal Content Container -->
+<div class="relative bg-surface-container-lowest w-full max-w-5xl h-[800px] max-h-full rounded-xl shadow-2xl flex flex-col overflow-hidden border border-outline-variant animate-in zoom-in duration-200">
+<!-- Modal Header -->
+<header class="p-lg border-b border-outline-variant flex flex-col gap-md">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-sm">
+<h2 class="font-h2 text-h2 text-on-surface">Permissions - <span class="text-primary">Test Role</span></h2>
+</div>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-on-surface transition-colors p-1">close</button>
+</div>
+<div class="flex items-center justify-between gap-xl">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">filter_list</span>
+<input class="w-full h-11 pl-11 pr-md bg-surface-container-low border border-outline-variant rounded-lg focus:ring-2 focus:ring-primary-container outline-none text-body-md" placeholder="Filter permissions..." type="text"/>
+</div>
+<div class="flex items-center gap-md px-md py-sm rounded-lg bg-surface-container">
+<span class="font-label-md text-on-surface">Grant all permissions</span>
+<label class="relative inline-flex items-center cursor-pointer">
+<input class="sr-only peer" type="checkbox"/>
+<div class="w-11 h-6 bg-outline-variant peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-primary"></div>
+</label>
+</div>
+</div>
+</header>
+<!-- Modal Content (Two-Column Split) -->
+<div class="flex-1 flex overflow-hidden">
+<!-- Left Column: Categories -->
+<aside class="w-80 border-r border-outline-variant bg-surface-container-low overflow-y-auto custom-scrollbar">
+<div class="p-md space-y-sm">
+<button class="w-full flex items-center justify-between p-md rounded-lg bg-primary-container text-on-primary-container font-label-md text-left">
+<span class="flex items-center gap-md">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">account_circle</span>
+                                Identity Management
+                            </span>
+<span class="bg-on-primary-container/20 px-2 py-0.5 rounded-full text-xs">12</span>
+</button>
+<button class="w-full flex items-center justify-between p-md rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-body-md text-left">
+<span class="flex items-center gap-md">
+<span class="material-symbols-outlined">receipt_long</span>
+                                Audit Logging
+                            </span>
+<span class="bg-outline-variant/30 px-2 py-0.5 rounded-full text-xs">8</span>
+</button>
+<button class="w-full flex items-center justify-between p-md rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-body-md text-left">
+<span class="flex items-center gap-md">
+<span class="material-symbols-outlined">manage_accounts</span>
+                                Account
+                            </span>
+<span class="bg-outline-variant/30 px-2 py-0.5 rounded-full text-xs">4</span>
+</button>
+<button class="w-full flex items-center justify-between p-md rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-body-md text-left">
+<span class="flex items-center gap-md">
+<span class="material-symbols-outlined">language</span>
+                                Language Management
+                            </span>
+<span class="bg-outline-variant/30 px-2 py-0.5 rounded-full text-xs">6</span>
+</button>
+<button class="w-full flex items-center justify-between p-md rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-body-md text-left">
+<span class="flex items-center gap-md">
+<span class="material-symbols-outlined">description</span>
+                                Template Management
+                            </span>
+<span class="bg-outline-variant/30 px-2 py-0.5 rounded-full text-xs">15</span>
+</button>
+<button class="w-full flex items-center justify-between p-md rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors font-body-md text-left">
+<span class="flex items-center gap-md">
+<span class="material-symbols-outlined">settings_suggest</span>
+                                Advanced Config
+                            </span>
+<span class="bg-outline-variant/30 px-2 py-0.5 rounded-full text-xs">5</span>
+</button>
+</div>
+</aside>
+<!-- Right Column: Details Hierarchy -->
+<main class="flex-1 overflow-y-auto bg-surface-container-lowest custom-scrollbar">
+<div class="p-xl space-y-lg">
+<div class="flex items-center gap-md border-b border-outline-variant pb-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">badge</span>
+<h3 class="font-h3 text-h3 text-on-surface">Identity Management Permissions</h3>
+</div>
+<!-- Nested Hierarchy Examples -->
+<div class="space-y-md">
+<!-- Category: User Management -->
+<div class="border border-outline-variant rounded-xl overflow-hidden">
+<div class="bg-surface-container px-lg py-md flex items-center gap-md border-b border-outline-variant">
+<input checked="" class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label-md text-on-surface">User Management</span>
+</div>
+<div class="p-lg space-y-md">
+<label class="flex items-center gap-md">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface">Create Users</span>
+</label>
+<!-- Nested: Edit Users -->
+<div class="space-y-sm">
+<label class="flex items-center gap-md">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface font-semibold">Edit Users</span>
+</label>
+<div class="ml-xl space-y-sm border-l-2 border-outline-variant pl-lg">
+<label class="flex items-center gap-md">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm text-on-surface-variant">Manage Roles</span>
+</label>
+<label class="flex items-center gap-md">
+<input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm text-on-surface-variant">Manage Organization Tree</span>
+</label>
+<label class="flex items-center gap-md">
+<input checked="" class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-sm text-on-surface-variant">Reset Passwords</span>
+</label>
+</div>
+</div>
+<label class="flex items-center gap-md">
+<input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface">Delete Users</span>
+</label>
+</div>
+</div>
+<!-- Category: Group Management -->
+<div class="border border-outline-variant rounded-xl overflow-hidden">
+<div class="bg-surface-container px-lg py-md flex items-center gap-md border-b border-outline-variant">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="font-label-md text-on-surface">Group Management</span>
+</div>
+<div class="p-lg space-y-md">
+<label class="flex items-center gap-md">
+<input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface">Create Groups</span>
+</label>
+<label class="flex items-center gap-md">
+<input class="w-4 h-4 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-body-md text-on-surface">Modify Group Membership</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+<!-- Modal Footer -->
+<footer class="p-lg border-t border-outline-variant bg-surface-container-low flex justify-end gap-md">
+<button class="px-lg h-11 rounded-lg font-label-md text-on-surface-variant hover:bg-surface-container-high transition-colors">
+                    Cancel
+                </button>
+<button class="px-xl h-11 bg-primary text-on-primary rounded-lg font-label-md shadow-md hover:bg-primary-container transition-all active:scale-[0.98]">
+                    Save Changes
+                </button>
+</footer>
+</div>
+</div>
+<!-- END: Permissions Modal Overlay -->
+</body></html>

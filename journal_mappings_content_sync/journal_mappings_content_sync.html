@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Journal Mappings – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'ev_journal_mappings';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search archive mappings...';</script>
+  <script>const TOPNAV_ACTIVE = 'alerts';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div>
+        <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+          <a href="#" class="hover:text-primary transition-colors">Home</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <a href="../archive_mappings_page_title_sync/archive_mappings_page_title_sync.html" class="hover:text-primary transition-colors">Mappings</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <a href="#" class="hover:text-primary transition-colors">Enterprise Vault</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <span class="fw-semibold text-on-surface">Journal Mappings</span>
+        </nav>
+        <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Journal Mappings</h1>
+      </div>
+
+      <!-- Dashboard Stats Header -->
+      <div class="grid grid-cols-12 gap-6 items-stretch">
+
+        <!-- Migration Chart Card -->
+        <div class="col-span-12 lg:col-span-8 card custom-shadow-l1">
+          <div class="card-body">
+            <div class="flex justify-between items-center mb-4">
+              <div>
+                <h2 class="fw-semibold mb-1" style="font-size:1.25rem">Migration</h2>
+                <p class="small text-muted mb-0">Real-time status of archive synchronization across endpoints.</p>
+              </div>
+              <div class="flex gap-3">
+                <span class="flex items-center gap-1 small">
+                  <span class="w-2 h-2 rounded-full bg-primary d-inline-block"></span>
+                  Migrated
+                </span>
+                <span class="flex items-center gap-1 small">
+                  <span class="w-2 h-2 rounded-full bg-outline-variant d-inline-block"></span>
+                  Remaining
+                </span>
+              </div>
+            </div>
+            <div class="rounded-lg overflow-hidden" style="height:12rem;background:var(--cnds-surface-container,#ededf9)">
+              <img class="w-full h-full object-cover" style="opacity:0.9"
+                   src="https://lh3.googleusercontent.com/aida/ADBb0uhZAYTsEzLwfLskc_3F_3Alf_A2VWT_He5rgdxCTKlaUsGdHzkYSvAEsJ2JI65OMGRc-MBoHYmbI-0u8aPjGTjd8M8ju2BIwiehqripz5Y_0qc-5LOU4pyzb3s-qkYqRJwV5DkB72nLtur4OOSomfJd0EGbtSIYis4w5rSfk37ubSxqyUSKYMszh1tuh5oF9k1-TquyPKKkxiNsC_MWefjJsYH-lD4Z_4aDctf5UP553mh3fuTLGFAw_7PT6snm-OEBA9rqYEKx"
+                   alt="Migration chart"/>
+            </div>
+          </div>
+        </div>
+
+        <!-- KPI Cards Column -->
+        <div class="col-span-12 lg:col-span-4 flex flex-col gap-4">
+
+          <div class="card custom-shadow-l1 flex-1">
+            <div class="card-body flex flex-col justify-center">
+              <div class="small text-muted fw-semibold text-uppercase mb-2">Migrated Items</div>
+              <div class="fw-bold text-primary" style="font-size:2rem">977,412</div>
+            </div>
+          </div>
+
+          <div class="card custom-shadow-l1 flex-1">
+            <div class="card-body flex flex-col justify-center">
+              <div class="small text-muted fw-semibold text-uppercase mb-2">Total Items</div>
+              <div class="fw-bold" style="font-size:2rem">977,412</div>
+            </div>
+          </div>
+
+          <div class="card custom-shadow-l1 flex-1">
+            <div class="card-body flex flex-col justify-center">
+              <div class="small text-muted fw-semibold text-uppercase mb-2">Average Item Size</div>
+              <div class="fw-bold" style="font-size:2rem">109.654 KB</div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="card custom-shadow-l1">
+
+        <!-- Tab bar + toolbar in card-header -->
+        <div class="card-header flex items-center gap-4 p-0 ps-4" style="background:var(--cnds-surface-container-low,#f3f3fe)">
+          <ul class="nav nav-tabs nav-tabs-nimbus border-0 flex-shrink-0" style="margin-bottom:-1px" role="tablist">
+            <li class="nav-item" role="presentation">
+              <a href="#" class="nav-link active" data-cnds-tab-init role="tab" aria-selected="true">Active</a>
+            </li>
+            <li class="nav-item" role="presentation">
+              <a href="#" class="nav-link" data-cnds-tab-init role="tab" aria-selected="false">Finished</a>
+            </li>
+          </ul>
+          <div class="flex-1"></div>
+          <div class="flex items-center gap-2 pe-4">
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">filter_alt</span>
+              Filter
+            </button>
+            <button class="btn btn-secondary btn-sm flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">download</span>
+              Export
+            </button>
+          </div>
+        </div>
+
+        <!-- Data Table -->
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Archive Name</th>
+                <th>Progress</th>
+                <th>Total Items</th>
+                <th>Collected Items</th>
+                <th>Migrated Items</th>
+                <th>Failed Items</th>
+                <th>Delta</th>
+                <th>Last Success</th>
+                <th>Created</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-semibold text-primary">58</td>
+                <td class="fw-semibold">LargeJournal</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="progress mb-0" style="width:6rem;height:6px">
+                      <div class="progress-bar" role="progressbar" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="small text-muted">100%</span>
+                  </div>
+                </td>
+                <td class="small text-muted">755,961</td>
+                <td class="small text-muted">755,961</td>
+                <td class="small text-muted">755,961</td>
+                <td class="small text-muted">0</td>
+                <td class="small text-muted">0</td>
+                <td class="small text-muted">30.10.2024, 20:59:55</td>
+                <td class="small text-muted">30.10.2024, 14:46:16</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="fw-semibold text-primary">62</td>
+                <td class="fw-semibold">Journal EV12 01</td>
+                <td>
+                  <div class="flex items-center gap-2">
+                    <div class="progress mb-0" style="width:6rem;height:6px">
+                      <div class="progress-bar" role="progressbar" style="width:100%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <span class="small text-muted">100%</span>
+                  </div>
+                </td>
+                <td class="small text-muted">221,451</td>
+                <td class="small text-muted">221,451</td>
+                <td class="small text-muted">221,451</td>
+                <td class="small text-muted">0</td>
+                <td class="small text-muted">0</td>
+                <td class="small text-muted">30.12.2024, 17:40:59</td>
+                <td class="small text-muted">30.12.2024, 16:16:02</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex items-center justify-between">
+          <span class="small text-muted">Showing 1 to 2 of 2 entries</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Info Banner -->
+      <div class="alert alert-info flex items-start gap-3 mb-0">
+        <span class="material-symbols-outlined flex-shrink-0" style="font-size:22px;margin-top:2px">info</span>
+        <div>
+          <div class="fw-semibold mb-1">Active Mapping Strategy</div>
+          <p class="small mb-0">All active archive mappings are currently utilizing the 'Sequential Batching' migration strategy. If throughput falls below 50MB/s, consider adjusting agent deployment density in the Environments module.</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

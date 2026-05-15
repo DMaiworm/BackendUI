@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Unresolved Custodians – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'ad_unresolved';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search custodians...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div>
+        <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+          <a href="#" class="hover:text-primary transition-colors">Home</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <a href="../domains_management_list_view_sidebar_sync/domains_management_list_view_sidebar_sync.html" class="hover:text-primary transition-colors">Environments</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <a href="#" class="hover:text-primary transition-colors">Active Directory</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <span class="fw-semibold text-on-surface">Unresolved Custodians</span>
+        </nav>
+        <div class="flex justify-between items-end">
+          <div>
+            <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Unresolved Custodians</h1>
+            <p class="text-muted mt-1 mb-0">Manage orphaned Active Directory accounts that require manual reconciliation.</p>
+          </div>
+          <button class="btn btn-primary flex items-center gap-1">
+            <span class="material-symbols-outlined" style="font-size:18px">merge</span>
+            Bulk Merge Custodians
+          </button>
+        </div>
+      </div>
+
+      <!-- Search & Filter Card -->
+      <div class="card custom-shadow-l1">
+        <div class="card-body space-y-4">
+
+          <!-- Search Row -->
+          <div class="flex gap-3 items-center">
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">search</span>
+              </span>
+              <input class="cf-input-control w-full" style="padding-left:2.25rem" placeholder="Search by name, email, or identifier..." type="text"/>
+            </div>
+            <button class="btn btn-secondary flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">tune</span>
+              Advanced Filters
+            </button>
+          </div>
+
+          <!-- Filter Panel -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2" style="border-top:1px solid var(--cnds-outline-variant,#c3c6d7)">
+            <div class="cf-input-field">
+              <label class="cf-input-label">Domain</label>
+              <div class="cf-input-wrapper">
+                <select class="cf-input-control w-full">
+                  <option value="">All Domains</option>
+                  <option>ad.dev1.cflabs.io</option>
+                  <option>ad.prod.cflabs.io</option>
+                </select>
+              </div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Status</label>
+              <div class="cf-input-wrapper">
+                <select class="cf-input-control w-full">
+                  <option value="">All Statuses</option>
+                  <option selected>Unresolved</option>
+                  <option>Merged</option>
+                  <option>Ignored</option>
+                </select>
+              </div>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Identifier Type</label>
+              <div class="cf-input-wrapper">
+                <select class="cf-input-control w-full">
+                  <option value="">All Types</option>
+                  <option>User Account</option>
+                  <option>Service Account</option>
+                  <option>Legacy Migration</option>
+                </select>
+              </div>
+            </div>
+            <div class="md:col-span-3 flex items-center justify-end gap-3">
+              <button class="btn btn-link fw-semibold">Clear Filters</button>
+              <button class="btn btn-primary">Apply</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Data Table Card -->
+      <div class="card custom-shadow-l1">
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th style="width:48px"><input class="form-check-input" type="checkbox"/></th>
+                <th>Name</th>
+                <th>Domain ID</th>
+                <th>Status</th>
+                <th class="text-end">Aktionen</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary fw-bold" style="font-size:11px;flex-shrink:0">EX</div>
+                    <span class="fw-semibold">expireontestuser7350@ad.dev1.cflabs.io</span>
+                  </div>
+                </td>
+                <td class="small text-muted">AD-DEV1-7350</td>
+                <td><span class="badge badge-warning">Unresolved</span></td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 2 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary fw-bold" style="font-size:11px;flex-shrink:0">AS</div>
+                    <span class="fw-semibold">asmith_test_vault@ad.dev1.cflabs.io</span>
+                  </div>
+                </td>
+                <td class="small text-muted">AD-DEV1-V922</td>
+                <td><span class="badge badge-warning">Unresolved</span></td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 3 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary fw-bold" style="font-size:11px;flex-shrink:0">ST</div>
+                    <span class="fw-semibold">staging-custodian-99@ad.prod.cflabs.io</span>
+                  </div>
+                </td>
+                <td class="small text-muted">PROD-STG-99</td>
+                <td><span class="badge badge-warning">Unresolved</span></td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 4 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary fw-bold" style="font-size:11px;flex-shrink:0">JD</div>
+                    <span class="fw-semibold">jdoe_legacy_migration@ad.dev1.cflabs.io</span>
+                  </div>
+                </td>
+                <td class="small text-muted">AD-DEV1-L001</td>
+                <td><span class="badge badge-warning">Unresolved</span></td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Row 5 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <div class="flex items-center gap-3">
+                    <div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center text-primary fw-bold" style="font-size:11px;flex-shrink:0">SA</div>
+                    <span class="fw-semibold">svc-account-reconcile@ad.dev1.cflabs.io</span>
+                  </div>
+                </td>
+                <td class="small text-muted">AD-DEV1-SVC</td>
+                <td><span class="badge badge-warning">Unresolved</span></td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex items-center justify-between">
+          <span class="small text-muted">Showing 1–5 of 127 custodians</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#">Previous</a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- About Custodian Management -->
+      <div class="card custom-shadow-l1">
+        <div class="card-body flex gap-4 items-center">
+          <div class="p-3 bg-secondary-container rounded-xl flex-shrink-0">
+            <span class="material-symbols-outlined text-primary" style="font-size:28px;font-variation-settings:'FILL' 1">info</span>
+          </div>
+          <div class="flex-1 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div class="max-w-3xl">
+              <h3 class="fw-semibold mb-1" style="font-size:1.125rem">About Custodian Management</h3>
+              <p class="small text-muted mb-0">
+                Unresolved custodians are directory service entries that don't align with system records. This typically happens during sync cycles or migrations. Use "Merge" to associate these orphans with verified identities.
+              </p>
+            </div>
+            <div class="flex gap-3 whitespace-nowrap">
+              <a href="#" class="btn btn-link fw-semibold flex items-center gap-1">
+                View Documentation
+                <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span>
+              </a>
+              <a href="#" class="btn btn-link fw-semibold flex items-center gap-1">
+                Sync Settings
+                <span class="material-symbols-outlined" style="font-size:16px">settings</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

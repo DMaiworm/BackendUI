@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html class="h-full" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Custodians – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font (Nimbus Standard) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "tertiary": "#943700",
+          "on-primary-container": "#eeefff",
+          "on-error": "#ffffff",
+          "surface-container": "#ededf9",
+          "error-container": "#ffdad6",
+          "secondary-fixed": "#d3e4fe",
+          "primary-fixed": "#dbe1ff",
+          "surface-container-high": "#e7e7f3",
+          "surface-variant": "#e1e2ed",
+          "outline-variant": "#c3c6d7",
+          "error": "#ba1a1a",
+          "inverse-primary": "#b4c5ff",
+          "outline": "#737686",
+          "tertiary-fixed": "#ffdbcd",
+          "on-secondary": "#ffffff",
+          "on-error-container": "#93000a",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface-variant": "#434655",
+          "primary": "#004ac6",
+          "inverse-surface": "#2e3039",
+          "on-surface": "#191b23",
+          "tertiary-fixed-dim": "#ffb596",
+          "primary-fixed-dim": "#b4c5ff",
+          "on-background": "#191b23",
+          "surface-dim": "#d9d9e5",
+          "on-secondary-container": "#54647a",
+          "on-secondary-fixed-variant": "#38485d",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "on-secondary-fixed": "#0b1c30",
+          "secondary-container": "#d0e1fb",
+          "on-primary": "#ffffff",
+          "background": "#faf8ff",
+          "surface-container-highest": "#e1e2ed",
+          "primary-container": "#2563eb",
+          "tertiary-container": "#bc4800",
+          "surface-tint": "#0053db",
+          "on-tertiary": "#ffffff",
+          "secondary": "#505f76",
+          "surface-container-lowest": "#ffffff",
+          "surface": "#faf8ff",
+          "on-primary-fixed-variant": "#003ea8",
+          "surface-container-low": "#f3f3fe",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary-fixed": "#00174b",
+          "on-tertiary-container": "#ffede6",
+          "surface-bright": "#faf8ff"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    vertical-align: middle;
+  }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'ad_custodians';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search custodians...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] w-full mx-auto space-y-6">
+
+      <!-- Breadcrumbs -->
+      <nav class="flex items-center gap-1 text-xs text-on-surface-variant">
+        <a href="#" class="hover:text-primary">Home</a>
+        <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+        <a href="../domains_management_list_view_sidebar_sync/domains_management_list_view_sidebar_sync.html" class="hover:text-primary">Environments</a>
+        <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+        <a href="#" class="hover:text-primary">Active Directory</a>
+        <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+        <span class="text-on-surface font-semibold">Custodians</span>
+      </nav>
+
+      <!-- Page Header -->
+      <div class="flex justify-between items-end">
+        <div>
+          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Custodians</h1>
+          <p class="text-muted mt-1">Manage and merge Active Directory custodian records across your global environment.</p>
+        </div>
+        <div class="flex gap-3">
+          <button class="btn btn-secondary flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:18px">download</span>
+            Export Data
+          </button>
+          <button class="btn btn-primary flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:18px">merge</span>
+            Bulk Merge Custodians
+          </button>
+        </div>
+      </div>
+
+      <!-- Stats / Notice Row -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- KPI Card -->
+        <div class="card custom-shadow-l1 h-100">
+          <div class="card-body flex items-center gap-4">
+            <div class="h-16 w-16 rounded-full bg-secondary-container flex items-center justify-center flex-shrink-0">
+              <span class="material-symbols-outlined text-primary" style="font-size:32px">group</span>
+            </div>
+            <div>
+              <div class="small text-muted fw-semibold text-uppercase">Total Custodians</div>
+              <div class="fw-bold text-primary" style="font-size:2rem;line-height:1.1">84.896</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Hygiene Notice Banner -->
+        <div class="md:col-span-2 relative overflow-hidden bg-primary-container rounded-xl flex items-center justify-between p-6 cursor-pointer" style="min-height:100px">
+          <div class="z-10 relative">
+            <h3 class="fw-bold text-on-primary-container" style="font-size:1.125rem">Data Hygiene Notice</h3>
+            <p class="mt-1" style="color:rgba(238,239,255,0.85);max-width:28rem;font-size:0.875rem">
+              There are 1,248 unmerged duplicate records detected in the Active Directory sync. Run the Bulk Merge tool to consolidate.
+            </p>
+          </div>
+          <button class="z-10 flex-shrink-0 ml-4" style="background:rgba(255,255,255,0.15);border:1px solid rgba(255,255,255,0.4);color:#fff;border-radius:6px;padding:6px 16px;font-size:0.875rem;font-weight:600;cursor:pointer;white-space:nowrap">
+            View Duplicates
+          </button>
+        </div>
+
+      </div>
+
+      <!-- Main Data Table Card -->
+      <div class="card custom-shadow-l1">
+
+        <!-- Table Controls -->
+        <div class="card-header flex justify-between items-center" style="background:rgba(243,243,254,0.5)">
+          <div class="flex items-center gap-3">
+            <div class="relative">
+              <span class="absolute inset-y-0 left-3 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">filter_list</span>
+              </span>
+              <input class="cf-input-control" style="padding-left:2.25rem;width:20rem" placeholder="Filter by name, SID or department..." type="text"/>
+            </div>
+            <button class="btn btn-link flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">tune</span>
+              Advanced Filters
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="small text-muted">Showing 1-15 of 84,896</span>
+            <div class="flex border border-outline-variant rounded overflow-hidden">
+              <button class="btn btn-link p-1 border-r border-outline-variant" style="border-radius:0">
+                <span class="material-symbols-outlined" style="font-size:20px">chevron_left</span>
+              </button>
+              <button class="btn btn-link p-1" style="border-radius:0">
+                <span class="material-symbols-outlined" style="font-size:20px">chevron_right</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full" style="min-width:1200px">
+            <thead>
+              <tr>
+                <th style="width:48px;text-align:center"><input class="form-check-input" type="checkbox"/></th>
+                <th>Name</th>
+                <th>SID</th>
+                <th>UPN</th>
+                <th>Sam Account Name</th>
+                <th>SMTP Address</th>
+                <th>Display Name</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Title</th>
+                <th>Department</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="text-center"><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">Aalderink, John</td>
+                <td class="text-muted small font-mono">S-1-5-21-362...</td>
+                <td class="small">j.aalderink@corp.net</td>
+                <td class="small">jaalderink</td>
+                <td class="small">john.a@proton.com</td>
+                <td class="small">John Aalderink</td>
+                <td class="small">John</td>
+                <td class="small">Aalderink</td>
+                <td class="small">Senior Analyst</td>
+                <td class="small">Operations</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center"><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">Abbott, Sarah</td>
+                <td class="text-muted small font-mono">S-1-5-21-988...</td>
+                <td class="small">sabbott@corp.net</td>
+                <td class="small">sabbott</td>
+                <td class="small">s.abbott@proton.com</td>
+                <td class="small">Sarah Abbott</td>
+                <td class="small">Sarah</td>
+                <td class="small">Abbott</td>
+                <td class="small">DevOps Engineer</td>
+                <td class="small">Engineering</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <!-- Duplicate warning row -->
+              <tr class="bg-error-container/10">
+                <td class="text-center"><input class="form-check-input" type="checkbox"/></td>
+                <td>
+                  <span class="fw-semibold text-primary">Abele, Marcus</span>
+                  <span class="material-symbols-outlined text-danger ms-1" style="font-size:16px" title="Duplicate record detected">warning</span>
+                </td>
+                <td class="text-muted small font-mono">S-1-5-21-412...</td>
+                <td class="small">mabele@corp.net</td>
+                <td class="small">mabele</td>
+                <td class="small">marcus.abele@proton.com</td>
+                <td class="small">Marcus Abele</td>
+                <td class="small">Marcus</td>
+                <td class="small">Abele</td>
+                <td class="small">Project Lead</td>
+                <td class="small">Product</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center"><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">Abraham, Thomas</td>
+                <td class="text-muted small font-mono">S-1-5-21-722...</td>
+                <td class="small">tabraham@corp.net</td>
+                <td class="small">tabraham</td>
+                <td class="small">t.abraham@proton.com</td>
+                <td class="small">Thomas Abraham</td>
+                <td class="small">Thomas</td>
+                <td class="small">Abraham</td>
+                <td class="small">HR Manager</td>
+                <td class="small">Human Resources</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+              <tr>
+                <td class="text-center"><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">Ackerman, Linda</td>
+                <td class="text-muted small font-mono">S-1-5-21-511...</td>
+                <td class="small">lackerman@corp.net</td>
+                <td class="small">lackerman</td>
+                <td class="small">linda.a@proton.com</td>
+                <td class="small">Linda Ackerman</td>
+                <td class="small">Linda</td>
+                <td class="small">Ackerman</td>
+                <td class="small">Legal Counsel</td>
+                <td class="small">Legal</td>
+                <td class="text-end">
+                  <button class="btn btn-link btn-sm p-1">
+                    <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex justify-between items-center">
+          <div class="flex items-center gap-3">
+            <select class="cf-input-control" style="width:auto">
+              <option>15 per page</option>
+              <option>50 per page</option>
+              <option>100 per page</option>
+            </select>
+            <span class="small text-muted">Page 1 of 5,660</span>
+          </div>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item disabled"><a class="page-link" href="#">...</a></li>
+              <li class="page-item"><a class="page-link" href="#">5660</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+
+      </div>
+
+      <!-- Contextual Help Card -->
+      <div class="card custom-shadow-l1">
+        <div class="card-body flex gap-4 items-start">
+          <span class="material-symbols-outlined text-primary flex-shrink-0" style="font-size:28px">info</span>
+          <div>
+            <h5 class="card-title mb-1">About Custodian Management</h5>
+            <p class="small text-muted mb-0">
+              Custodians are individuals identified as having relevant data for discovery. The system automatically syncs these from Active Directory. Use the <span class="fw-semibold text-primary">Bulk Merge</span> tool if you find multiple accounts (e.g., admin and standard user) belonging to the same physical person to ensure all data is tracked under a single identity.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="text-center small text-muted py-2">
+        © 2024 Expireon Enterprise Endpoint Management. All rights reserved.
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

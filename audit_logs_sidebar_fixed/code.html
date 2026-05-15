@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-[#faf8ff]" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Audit Logs - Proton Admin</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+                "outline": "#737686",
+                "on-surface": "#191b23",
+                "tertiary": "#943700",
+                "on-tertiary-container": "#ffede6",
+                "on-tertiary": "#ffffff",
+                "primary-fixed": "#dbe1ff",
+                "on-primary-fixed": "#00174b",
+                "tertiary-container": "#bc4800",
+                "on-tertiary-fixed-variant": "#7d2d00",
+                "on-secondary-fixed-variant": "#38485d",
+                "surface-container": "#ededf9",
+                "surface": "#faf8ff",
+                "primary-container": "#2563eb",
+                "on-tertiary-fixed": "#360f00",
+                "secondary-container": "#d0e1fb",
+                "on-primary": "#ffffff",
+                "error": "#ba1a1a",
+                "on-error-container": "#93000a",
+                "surface-variant": "#e1e2ed",
+                "secondary-fixed-dim": "#b7c8e1",
+                "on-secondary-fixed": "#0b1c30",
+                "on-secondary-container": "#54647a",
+                "tertiary-fixed-dim": "#ffb596",
+                "on-background": "#191b23",
+                "surface-dim": "#d9d9e5",
+                "secondary-fixed": "#d3e4fe",
+                "inverse-surface": "#2e3039",
+                "surface-container-lowest": "#ffffff",
+                "on-secondary": "#ffffff",
+                "on-error": "#ffffff",
+                "surface-container-highest": "#e1e2ed",
+                "inverse-primary": "#b4c5ff",
+                "on-primary-fixed-variant": "#003ea8",
+                "error-container": "#ffdad6",
+                "surface-tint": "#0053db",
+                "background": "#faf8ff",
+                "outline-variant": "#c3c6d7",
+                "secondary": "#505f76",
+                "surface-container-high": "#e7e7f3",
+                "surface-bright": "#faf8ff",
+                "primary": "#004ac6",
+                "surface-container-low": "#f3f3fe",
+                "tertiary-fixed": "#ffdbcd",
+                "primary-fixed-dim": "#b4c5ff",
+                "inverse-on-surface": "#f0f0fb",
+                "on-surface-variant": "#434655",
+                "on-primary-container": "#eeefff"
+        },
+        "borderRadius": {
+                "DEFAULT": "0.25rem",
+                "lg": "0.5rem",
+                "xl": "0.75rem",
+                "full": "9999px"
+        },
+        "spacing": {
+                "md": "16px",
+                "xl": "32px",
+                "max_width": "1440px",
+                "xs": "4px",
+                "gutter": "24px",
+                "unit": "4px",
+                "margin": "32px",
+                "lg": "24px",
+                "sm": "8px"
+        },
+        "fontFamily": {
+                "body-md": [ "Inter" ],
+                "body-lg": [ "Inter" ],
+                "h2": [ "Manrope" ],
+                "h1": [ "Manrope" ],
+                "label-md": [ "Inter" ],
+                "label-sm": [ "Inter" ],
+                "h3": [ "Manrope" ],
+                "body-sm": [ "Inter" ]
+        },
+        "fontSize": {
+                "body-md": [ "16px", { "lineHeight": "24px", "fontWeight": "400" } ],
+                "body-lg": [ "18px", { "lineHeight": "28px", "fontWeight": "400" } ],
+                "h2": [ "24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600" } ],
+                "h1": [ "30px", { "lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700" } ],
+                "label-md": [ "14px", { "lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600" } ],
+                "label-sm": [ "12px", { "lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500" } ],
+                "h3": [ "20px", { "lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600" } ],
+                "body-sm": [ "14px", { "lineHeight": "20px", "fontWeight": "400" } ]
+        }
+      },
+    },
+  }
+</script>
+<style data-purpose="custom-layout">
+    body { font-family: 'Manrope', sans-serif; }
+    .table-row-hover:hover { background-color: #f9fafb; }
+    .badge-500 { background-color: #fee2e2; color: #dc2626; }
+    .badge-204 { background-color: #fef9c3; color: #854d0e; }
+    .badge-method-get { background-color: #dcfce7; color: #166534; }
+    .badge-method-put { background-color: #dbeafe; color: #1e40af; }
+    .badge-method-delete { background-color: #ffedd5; color: #9a3412; }
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #e5e7eb; border-radius: 10px; }
+  </style>
+</head>
+<body class="h-full overflow-hidden flex">
+<!-- BEGIN: SideNavBar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-white border-r border-outline-variant shadow-sm flex flex-col z-50">
+<div class="p-lg">
+<h1 class="font-h2 text-h2 font-bold text-primary">AdminConsole</h1>
+<p class="text-on-surface-variant font-label-sm">Endpoint Management</p>
+</div>
+<nav class="flex-1 px-md space-y-unit overflow-y-auto custom-scrollbar">
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">storage</span>
+<span class="font-label-md">OnPrem</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-md">Environments</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-md">Assets</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md">Security</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container border-l-4 border-primary rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label-md">Audit Logs</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</div>
+</nav>
+<div class="px-md pb-xl border-t border-outline-variant pt-md bg-white">
+<button class="w-full bg-primary text-on-primary py-md px-lg rounded-xl font-label-md shadow-md hover:opacity-90 transition-opacity mb-xl">
+                Add New Endpoint
+            </button>
+<div class="space-y-unit">
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Support</span>
+</div>
+<div class="flex items-center gap-md px-md py-sm transition-colors text-on-surface-variant hover:bg-surface-container-low rounded-lg cursor-pointer">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Account</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: SideNavBar -->
+<div class="flex-1 flex flex-col min-w-0 bg-white ml-[260px]">
+<!-- BEGIN: TopNav -->
+<header class="h-16 border-b border-gray-200 flex items-center justify-between px-8 bg-white flex-shrink-0" data-purpose="top-nav">
+<div class="flex-1 max-w-2xl">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-gray-400">
+<svg class="h-5 w-5" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border border-gray-200 rounded-lg text-sm focus:ring-primary focus:border-primary" placeholder="Search..." type="text"/>
+</div>
+</div>
+<div class="flex items-center space-x-4">
+<button class="p-2 text-gray-400 hover:text-gray-600">
+<svg class="h-6 w-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="flex items-center text-sm font-medium text-gray-700 cursor-pointer">
+<span class="mr-1">DE</span>
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</header>
+<!-- END: TopNav -->
+<!-- BEGIN: MainContent -->
+<main class="flex-1 overflow-y-auto bg-[#faf8ff] p-8">
+<!-- BEGIN: HeaderSection -->
+<div class="mb-6">
+<nav class="flex text-sm text-gray-500 mb-2">
+<span>Configuration</span>
+<span class="mx-2 text-gray-300">/</span>
+<span class="text-gray-900 font-medium">Audit Logs</span>
+</nav>
+<h1 class="text-2xl font-bold text-gray-900">Audit Logs</h1>
+</div>
+<!-- END: HeaderSection -->
+<!-- BEGIN: Tabs -->
+<div class="border-b border-gray-200 mb-6">
+<nav class="-mb-px flex space-x-8">
+<a class="border-b-2 border-primary py-4 px-1 text-sm font-semibold text-primary" href="#">Audit Logs</a>
+<a class="border-b-2 border-transparent py-4 px-1 text-sm font-medium text-gray-500 hover:text-gray-700 hover:border-gray-300" href="#">Entity Changes</a>
+</nav>
+</div>
+<!-- END: Tabs -->
+<!-- BEGIN: FilterSection -->
+<section class="bg-white p-6 rounded-lg border border-gray-200 shadow-sm mb-6" data-purpose="filter-grid">
+<div class="grid grid-cols-4 gap-4 mb-4">
+<!-- Row 1 -->
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">START DATE</label>
+<div class="relative">
+<input class="w-full border-gray-200 rounded-lg text-sm py-2" placeholder="tt.mm.jjjj" type="text"/>
+<svg class="absolute right-3 top-2.5 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">END DATE</label>
+<div class="relative">
+<input class="w-full border-gray-200 rounded-lg text-sm py-2" placeholder="tt.mm.jjjj" type="text"/>
+<svg class="absolute right-3 top-2.5 h-4 w-4 text-gray-400" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">USERNAME</label>
+<input class="w-full border-gray-200 rounded-lg text-sm py-2" type="text"/>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">URL</label>
+<input class="w-full border-gray-200 rounded-lg text-sm py-2" type="text"/>
+</div>
+<!-- Row 2 -->
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">MIN. DURATION</label>
+<select class="w-full border-gray-200 rounded-lg text-sm py-2">
+<option>-</option>
+</select>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">MAX. DURATION</label>
+<select class="w-full border-gray-200 rounded-lg text-sm py-2">
+<option>-</option>
+</select>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">HTTP METHOD</label>
+<select class="w-full border-gray-200 rounded-lg text-sm py-2">
+<option>-</option>
+</select>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">HTTP STATUS CODE</label>
+<select class="w-full border-gray-200 rounded-lg text-sm py-2">
+<option>-</option>
+</select>
+</div>
+<!-- Row 3 -->
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">APPLICATION NAME</label>
+<input class="w-full border-gray-200 rounded-lg text-sm py-2" type="text"/>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">CLIENT IP ADDRESS</label>
+<input class="w-full border-gray-200 rounded-lg text-sm py-2" type="text"/>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">CORRELATION ID</label>
+<input class="w-full border-gray-200 rounded-lg text-sm py-2" type="text"/>
+</div>
+<div data-purpose="filter-item">
+<label class="block text-xs font-semibold text-gray-500 uppercase mb-1">HAS EXCEPTION</label>
+<select class="w-full border-gray-200 rounded-lg text-sm py-2">
+<option>-</option>
+</select>
+</div>
+</div>
+<div class="flex justify-end space-x-3 mt-6 border-t pt-4">
+<button class="px-6 py-2 bg-primary text-white text-sm font-semibold rounded-lg hover:opacity-90 transition">Update</button>
+<button class="px-6 py-2 bg-white border border-gray-200 text-gray-700 text-sm font-semibold rounded-lg hover:bg-gray-50 transition flex items-center"><svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg> Export to Excel</button>
+</div>
+</section>
+<!-- END: FilterSection -->
+<!-- BEGIN: TableSection -->
+<section class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden" data-purpose="data-table">
+<table class="min-w-full divide-y divide-gray-200">
+<thead class="bg-gray-50">
+<tr>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">ACTIONS</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">HTTP REQUEST</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">USER</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">IP ADDRESS</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">DATE</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">DURATION (MS)</th>
+<th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider" scope="col">APPLICATION NAME</th>
+</tr>
+</thead>
+<tbody class="bg-white divide-y divide-gray-200">
+<!-- Row 1 -->
+<tr class="table-row-hover">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded-lg text-xs font-semibold transition">Details</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-500">500</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-method-get">GET</span>
+<span class="text-xs text-gray-600 font-mono">/api/app/legal-cases/legal-hold-statistics</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Daniel.Maiworm</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">::ffff:10.244.3.155</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">06.05.2026 17:17</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">2076</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Expireon.HttpApi.Host</td>
+</tr>
+<!-- Row 2 -->
+<tr class="table-row-hover">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded-lg text-xs font-semibold transition">Details</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-204">204</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-method-put">PUT</span>
+<span class="text-xs text-gray-600 font-mono">/api/account-admin/settings</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">foram.shah</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">::ffff:10.244.3.155</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">29.04.2026 08:49</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">84</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Expireon.HttpApi.Host</td>
+</tr>
+<!-- Row 3 -->
+<tr class="table-row-hover">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded-lg text-xs font-semibold transition">Details</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-204">204</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-method-delete">DELETE</span>
+<span class="text-xs text-gray-600 font-mono">/api/identity/users/3a094228-c27c...</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">admin</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">::ffff:10.244.3.155</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">24.04.2026 20:59</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">296</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Expireon.HttpApi.Host</td>
+</tr>
+<!-- Row 4 -->
+<tr class="table-row-hover">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded-lg text-xs font-semibold transition">Details</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-204">204</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-method-delete">DELETE</span>
+<span class="text-xs text-gray-600 font-mono">/api/identity/users/3a0ec810-bbe4...</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">admin</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">::ffff:10.244.3.155</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">24.04.2026 20:59</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">257</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Expireon.HttpApi.Host</td>
+</tr>
+<!-- Row 5 -->
+<tr class="table-row-hover">
+<td class="px-6 py-4 whitespace-nowrap">
+<button class="bg-primary/10 text-primary hover:bg-primary hover:text-white px-3 py-1 rounded-lg text-xs font-semibold transition">Details</button>
+</td>
+<td class="px-6 py-4 whitespace-nowrap">
+<div class="flex items-center space-x-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-500">500</span>
+<span class="px-2 py-0.5 rounded text-[10px] font-bold badge-method-get">GET</span>
+<span class="text-xs text-gray-600 font-mono">/api/app/file-system-export-policy</span>
+</div>
+</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">Ron.Brown</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">::ffff:10.244.3.155</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">08.04.2026 14:03</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">46</td>
+<td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Expireon.HttpApi.Host</td>
+</tr>
+</tbody>
+</table>
+<!-- BEGIN: Pagination -->
+<div class="bg-gray-50 px-6 py-4 border-t border-gray-200 flex items-center justify-between">
+<div class="text-sm text-gray-500 font-medium">1,470 total</div>
+<div class="flex items-center space-x-1">
+<button class="p-2 text-gray-400 hover:text-gray-600 disabled:opacity-50" disabled="">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="px-3 py-1 text-sm font-semibold text-white bg-primary rounded-lg">1</button>
+<button class="px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition">2</button>
+<button class="px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition">3</button>
+<button class="px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition">4</button>
+<button class="px-3 py-1 text-sm font-medium text-gray-600 hover:bg-gray-100 rounded-lg transition">5</button>
+<button class="p-2 text-gray-400 hover:text-gray-600 transition">
+<svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+</div>
+</div>
+<!-- END: Pagination -->
+</section>
+<!-- END: TableSection -->
+</main>
+<!-- END: MainContent -->
+</div>
+</body></html>

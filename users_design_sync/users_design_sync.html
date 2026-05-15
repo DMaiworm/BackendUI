@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Users – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'admin_users';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search users, roles, or endpoints...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+            <a href="#" class="hover:text-primary transition-colors">Administration</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <span class="fw-semibold text-on-surface">Users</span>
+          </nav>
+          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Users</h1>
+          <p class="text-muted mt-1 mb-0">Manage user accounts, roles, and access credentials.</p>
+        </div>
+        <button class="btn btn-primary flex items-center gap-1">
+          <span class="material-symbols-outlined" style="font-size:18px">person_add</span>
+          New User
+        </button>
+      </div>
+
+      <!-- Table Card -->
+      <div class="card custom-shadow-l1">
+        <!-- Filter Header -->
+        <div class="card-header flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">filter_list</span>
+            <select class="cf-input-control" style="width:auto">
+              <option>Filter by Role</option>
+              <option>ADMIN</option>
+              <option>LEGAL</option>
+              <option>DEVELOPER</option>
+            </select>
+            <button class="btn btn-link fw-semibold small flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:16px">download</span>
+              Export
+            </button>
+          </div>
+          <div class="flex items-center gap-2">
+            <span class="small text-muted">Showing 1-10 of 48 users</span>
+            <button class="btn btn-secondary btn-sm p-1" disabled>
+              <span class="material-symbols-outlined" style="font-size:18px">chevron_left</span>
+            </button>
+            <button class="btn btn-secondary btn-sm p-1">
+              <span class="material-symbols-outlined" style="font-size:18px">chevron_right</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Table (wide — needs horizontal scroll) -->
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th>Actions</th>
+                <th>Username</th>
+                <th>Email Address</th>
+                <th>Roles</th>
+                <th>Phone Number</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th class="text-center">Active</th>
+                <th>Account Locked until</th>
+                <th class="text-center">Email confirmed</th>
+                <th class="text-center">2FA</th>
+                <th class="text-center">Login count</th>
+                <th>Creation time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- marek -->
+              <tr>
+                <td><button class="btn btn-secondary btn-sm">Actions</button></td>
+                <td class="fw-semibold small">marek</td>
+                <td class="small text-muted">marek.m@proton.ch</td>
+                <td><span class="badge badge-primary">ADMIN</span></td>
+                <td class="small text-muted">+41 78 123 45 67</td>
+                <td class="small">Marek</td>
+                <td class="small">Müller</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="small text-muted fst-italic">—</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="text-center"><span class="material-symbols-outlined text-muted" style="font-size:20px">cancel</span></td>
+                <td class="text-center small">142</td>
+                <td class="small text-muted">2023-05-12 14:20</td>
+              </tr>
+              <!-- legalUser -->
+              <tr>
+                <td><button class="btn btn-secondary btn-sm">Actions</button></td>
+                <td class="fw-semibold small">legalUser</td>
+                <td class="small text-muted">legal@proton.ch</td>
+                <td><span class="badge badge-secondary">LEGAL</span></td>
+                <td class="small text-muted">+41 79 456 78 90</td>
+                <td class="small">Legal</td>
+                <td class="small">Department</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="small text-muted fst-italic">—</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="text-center small">45</td>
+                <td class="small text-muted">2023-08-20 09:15</td>
+              </tr>
+              <!-- michel.zehnder -->
+              <tr>
+                <td><button class="btn btn-secondary btn-sm">Actions</button></td>
+                <td class="fw-semibold small">michel.zehnder</td>
+                <td class="small text-muted">m.zehnder@corp.com</td>
+                <td>
+                  <div class="flex gap-1 flex-wrap">
+                    <span class="badge badge-primary">MANAGER</span>
+                    <span class="badge badge-secondary">VIEWER</span>
+                  </div>
+                </td>
+                <td class="small text-muted">+41 77 987 65 43</td>
+                <td class="small">Michel</td>
+                <td class="small">Zehnder</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="small text-muted fst-italic">—</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="text-center"><span class="material-symbols-outlined text-muted" style="font-size:20px">cancel</span></td>
+                <td class="text-center small">812</td>
+                <td class="small text-muted">2022-11-30 16:45</td>
+              </tr>
+              <!-- foram.shah (locked) -->
+              <tr>
+                <td><button class="btn btn-secondary btn-sm">Actions</button></td>
+                <td class="fw-semibold small">foram.shah</td>
+                <td class="small text-muted">foram.shah@tech.com</td>
+                <td><span class="badge badge-secondary">DEVELOPER</span></td>
+                <td class="small text-muted">+91 98765 43210</td>
+                <td class="small">Foram</td>
+                <td class="small">Shah</td>
+                <td class="text-center"><span class="material-symbols-outlined text-danger" style="font-size:20px">block</span></td>
+                <td class="small text-danger fw-semibold">2024-05-15</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="text-center small">12</td>
+                <td class="small text-muted">2024-01-05 10:30</td>
+              </tr>
+              <!-- sarah.connor -->
+              <tr>
+                <td><button class="btn btn-secondary btn-sm">Actions</button></td>
+                <td class="fw-semibold small">sarah.connor</td>
+                <td class="small text-muted">s.connor@sky.net</td>
+                <td><span class="badge badge-primary">SECURITY</span></td>
+                <td class="small text-muted">+1 555-0199</td>
+                <td class="small">Sarah</td>
+                <td class="small">Connor</td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="small text-muted fst-italic">—</td>
+                <td class="text-center"><span class="material-symbols-outlined text-muted" style="font-size:20px">cancel</span></td>
+                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_circle</span></td>
+                <td class="text-center small">3</td>
+                <td class="small text-muted">2024-03-28 23:11</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex items-center justify-between">
+          <div class="flex items-center gap-2">
+            <span class="small text-muted">Items per page:</span>
+            <select class="cf-input-control" style="width:auto">
+              <option>10</option>
+              <option>25</option>
+              <option>50</option>
+            </select>
+          </div>
+          <div class="flex items-center gap-3">
+            <span class="small text-muted">Page 1 of 5</span>
+            <div class="flex items-center gap-1">
+              <button class="btn btn-secondary btn-sm p-1" disabled>
+                <span class="material-symbols-outlined" style="font-size:18px">first_page</span>
+              </button>
+              <button class="btn btn-secondary btn-sm p-1" disabled>
+                <span class="material-symbols-outlined" style="font-size:18px">navigate_before</span>
+              </button>
+              <button class="btn btn-secondary btn-sm p-1">
+                <span class="material-symbols-outlined" style="font-size:18px">navigate_next</span>
+              </button>
+              <button class="btn btn-secondary btn-sm p-1">
+                <span class="material-symbols-outlined" style="font-size:18px">last_page</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- KPI Stat Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <div class="flex items-center justify-between mb-2">
+              <p class="small text-muted text-uppercase fw-semibold mb-0">Total Users</p>
+              <span class="material-symbols-outlined text-primary">group</span>
+            </div>
+            <div class="fw-bold" style="font-size:2rem">1,284</div>
+            <div class="small text-tertiary fw-semibold mt-1">↑ 12% this month</div>
+          </div>
+        </div>
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <div class="flex items-center justify-between mb-2">
+              <p class="small text-muted text-uppercase fw-semibold mb-0">Active Now</p>
+              <span class="material-symbols-outlined text-primary">person_check</span>
+            </div>
+            <div class="fw-bold" style="font-size:2rem">42</div>
+            <div class="small text-muted mt-1">Across 4 regions</div>
+          </div>
+        </div>
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <div class="flex items-center justify-between mb-2">
+              <p class="small text-muted text-uppercase fw-semibold mb-0">Pending MFA</p>
+              <span class="material-symbols-outlined text-danger">shield_lock</span>
+            </div>
+            <div class="fw-bold" style="font-size:2rem">15</div>
+            <div class="small text-danger fw-semibold mt-1">Requires attention</div>
+          </div>
+        </div>
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <div class="flex items-center justify-between mb-2">
+              <p class="small text-muted text-uppercase fw-semibold mb-0">New Registrations</p>
+              <span class="material-symbols-outlined text-primary">app_registration</span>
+            </div>
+            <div class="fw-bold" style="font-size:2rem">8</div>
+            <div class="small text-muted mt-1">In last 24 hours</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

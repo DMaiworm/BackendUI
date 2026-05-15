@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Settings – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<script id="tailwind-config">
+  tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "inverse-surface": "#2e3039",
+          "secondary-fixed": "#d3e4fe",
+          "error": "#ba1a1a",
+          "surface": "#faf8ff",
+          "primary-fixed": "#dbe1ff",
+          "secondary-fixed-dim": "#b7c8e1",
+          "on-error": "#ffffff",
+          "on-background": "#191b23",
+          "surface-container-high": "#e7e7f3",
+          "surface-container-highest": "#e1e2ed",
+          "on-surface-variant": "#434655",
+          "on-primary-container": "#eeefff",
+          "tertiary": "#943700",
+          "on-secondary-fixed": "#0b1c30",
+          "surface-tint": "#0053db",
+          "primary-fixed-dim": "#b4c5ff",
+          "primary-container": "#2563eb",
+          "primary": "#004ac6",
+          "background": "#faf8ff",
+          "on-secondary": "#ffffff",
+          "on-tertiary-fixed-variant": "#7d2d00",
+          "surface-container-lowest": "#ffffff",
+          "tertiary-container": "#bc4800",
+          "on-tertiary": "#ffffff",
+          "on-secondary-container": "#54647a",
+          "on-tertiary-container": "#ffede6",
+          "outline-variant": "#c3c6d7",
+          "outline": "#737686",
+          "surface-container": "#ededf9",
+          "on-primary-fixed": "#00174b",
+          "inverse-primary": "#b4c5ff",
+          "error-container": "#ffdad6",
+          "on-primary-fixed-variant": "#003ea8",
+          "tertiary-fixed-dim": "#ffb596",
+          "surface-dim": "#d9d9e5",
+          "on-tertiary-fixed": "#360f00",
+          "on-primary": "#ffffff",
+          "secondary": "#505f76",
+          "on-secondary-fixed-variant": "#38485d",
+          "surface-bright": "#faf8ff",
+          "inverse-on-surface": "#f0f0fb",
+          "on-surface": "#191b23",
+          "surface-container-low": "#f3f3fe",
+          "secondary-container": "#d0e1fb",
+          "surface-variant": "#e1e2ed",
+          "on-error-container": "#93000a",
+          "tertiary-fixed": "#ffdbcd"
+        }
+      }
+    }
+  }
+</script>
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'admin_settings';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search settings...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto">
+
+      <!-- Breadcrumb & Page Title -->
+      <div class="mb-6">
+        <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+          <a href="#" class="hover:text-primary transition-colors">Administration</a>
+          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+          <span class="fw-semibold text-on-surface">Settings</span>
+        </nav>
+        <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Settings</h1>
+      </div>
+
+      <!-- Tab Navigation -->
+      <ul class="nav nav-tabs mb-6">
+        <li class="nav-item"><a href="#" class="nav-link active">Password Policy</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Lockout</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Identity Verification</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">User Profile</a></li>
+        <li class="nav-item"><a href="#" class="nav-link">Sessions</a></li>
+      </ul>
+
+      <!-- Layout: MiddleNav + Workspace -->
+      <div class="flex gap-6">
+
+        <!-- MiddleNav Sidebar -->
+        <div class="flex-shrink-0" style="width:220px">
+          <nav class="space-y-1">
+            <a href="#" class="flex items-center px-3 py-2 rounded-lg small fw-semibold bg-primary-fixed text-on-primary-fixed">Identitätsverwaltung</a>
+            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Account</a>
+            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Management</a>
+            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Legal</a>
+            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Template</a>
+          </nav>
+        </div>
+
+        <!-- Main Workspace -->
+        <div class="flex-1 space-y-6">
+
+          <!-- Password Strength Settings -->
+          <div class="card custom-shadow-l1">
+            <div class="card-header flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">verified_user</span>
+              <h5 class="card-title mb-0">Password Strength Settings</h5>
+            </div>
+            <div class="card-body">
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                  <div>
+                    <label class="cf-input-label">Required Length</label>
+                    <input class="cf-input-control" style="width:8rem" type="number" value="6"/>
+                  </div>
+                  <div>
+                    <label class="cf-input-label">Required Unique Characters</label>
+                    <input class="cf-input-control" style="width:8rem" type="number" value="1"/>
+                  </div>
+                </div>
+                <div class="space-y-3">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input class="form-check-input" type="checkbox" checked/>
+                    <span class="small">Require non-alphanumeric character</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input class="form-check-input" type="checkbox" checked/>
+                    <span class="small">Require lowercase character</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input class="form-check-input" type="checkbox" checked/>
+                    <span class="small">Require uppercase character</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input class="form-check-input" type="checkbox" checked/>
+                    <span class="small">Require digit</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Password Change Settings -->
+          <div class="card custom-shadow-l1">
+            <div class="card-header flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">update</span>
+              <h5 class="card-title mb-0">Password Change Settings</h5>
+            </div>
+            <div class="card-body space-y-4">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input class="form-check-input" type="checkbox"/>
+                <span class="small">Users must change password periodically</span>
+              </label>
+              <div>
+                <label class="cf-input-label">Password Change Interval (Days)</label>
+                <div class="flex items-center gap-3">
+                  <input class="cf-input-control" style="width:8rem" type="number" value="0"/>
+                  <span class="small text-muted fst-italic">Set to 0 to disable periodic changes.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Info Banner -->
+          <div class="flex items-start gap-3 p-4 rounded-lg bg-primary-fixed text-on-primary-fixed">
+            <span class="material-symbols-outlined flex-shrink-0" style="margin-top:2px">info</span>
+            <div>
+              <div class="fw-semibold small mb-1">Security Guidelines</div>
+              <p class="small mb-0" style="opacity:0.9">Stronger password policies significantly reduce the risk of unauthorized access. We recommend at least 12 characters and multiple character types for standard administrative accounts.</p>
+            </div>
+          </div>
+
+          <!-- Footer Actions -->
+          <div class="flex justify-end gap-2 pb-4">
+            <button class="btn btn-secondary">Cancel</button>
+            <button class="btn btn-primary">Save</button>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
