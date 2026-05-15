@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+                  "inverse-surface": "#2e3039",
+                  "secondary-fixed": "#d3e4fe",
+                  "error": "#ba1a1a",
+                  "surface": "#faf8ff",
+                  "primary-fixed": "#dbe1ff",
+                  "secondary-fixed-dim": "#b7c8e1",
+                  "on-error": "#ffffff",
+                  "on-background": "#191b23",
+                  "surface-container-high": "#e7e7f3",
+                  "surface-container-highest": "#e1e2ed",
+                  "on-surface-variant": "#434655",
+                  "on-primary-container": "#eeefff",
+                  "tertiary": "#943700",
+                  "on-secondary-fixed": "#0b1c30",
+                  "surface-tint": "#0053db",
+                  "primary-fixed-dim": "#b4c5ff",
+                  "primary-container": "#2563eb",
+                  "primary": "#004ac6",
+                  "background": "#faf8ff",
+                  "on-secondary": "#ffffff",
+                  "on-tertiary-fixed-variant": "#7d2d00",
+                  "surface-container-lowest": "#ffffff",
+                  "tertiary-container": "#bc4800",
+                  "on-tertiary": "#ffffff",
+                  "on-secondary-container": "#54647a",
+                  "on-tertiary-container": "#ffede6",
+                  "outline-variant": "#c3c6d7",
+                  "outline": "#737686",
+                  "surface-container": "#ededf9",
+                  "on-primary-fixed": "#00174b",
+                  "inverse-primary": "#b4c5ff",
+                  "error-container": "#ffdad6",
+                  "on-primary-fixed-variant": "#003ea8",
+                  "tertiary-fixed-dim": "#ffb596",
+                  "surface-dim": "#d9d9e5",
+                  "on-tertiary-fixed": "#360f00",
+                  "on-primary": "#ffffff",
+                  "secondary": "#505f76",
+                  "on-secondary-fixed-variant": "#38485d",
+                  "surface-bright": "#faf8ff",
+                  "inverse-on-surface": "#f0f0fb",
+                  "on-surface": "#191b23",
+                  "surface-container-low": "#f3f3fe",
+                  "secondary-container": "#d0e1fb",
+                  "surface-variant": "#e1e2ed",
+                  "on-error-container": "#93000a",
+                  "tertiary-fixed": "#ffdbcd"
+          },
+          "borderRadius": {
+                  "DEFAULT": "0.25rem",
+                  "lg": "0.5rem",
+                  "xl": "0.75rem",
+                  "full": "9999px"
+          },
+          "spacing": {
+                  "gutter": "24px",
+                  "sm": "8px",
+                  "lg": "24px",
+                  "xl": "32px",
+                  "unit": "4px",
+                  "md": "16px",
+                  "xs": "4px",
+                  "max_width": "1440px",
+                  "margin": "32px"
+          },
+          "fontFamily": {
+                  "label-sm": ["Inter"],
+                  "label-md": ["Inter"],
+                  "body-sm": ["Inter"],
+                  "body-md": ["Inter"],
+                  "h3": ["Manrope"],
+                  "h2": ["Manrope"],
+                  "h1": ["Manrope"],
+                  "body-lg": ["Inter"]
+          },
+          "fontSize": {
+                  "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                  "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                  "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                  "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                  "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                  "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                  "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                  "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    .custom-shadow-l1 { shadow: 0px 4px 12px rgba(0,0,0,0.05); }
+  </style>
+</head>
+<body class="bg-background text-on-background font-body-md">
+<!-- SideNavBar -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline shadow-sm flex flex-col z-50">
+<div class="p-lg flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" data-icon="shield">shield</span>
+</div>
+<div>
+<h1 class="font-h2 text-h2 font-bold text-primary dark:text-inverse-primary leading-none">AdminConsole</h1>
+<p class="text-label-sm text-on-surface-variant">Endpoint Management</p>
+</div>
+</div>
+<nav class="flex-1 mt-md px-sm">
+<!-- Dashboard Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- OnPrem Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="storage">storage</span>
+<span class="font-label-md text-label-md">OnPrem</span>
+</a>
+<!-- Environments Tab (Active) -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg bg-secondary-container text-on-secondary-container border-l-4 border-primary font-label-md mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="layers" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="font-label-md text-label-md">Environments</span>
+</a>
+<!-- Assets Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-md text-label-md">Assets</span>
+</a>
+<!-- Security Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<!-- Settings Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-sm border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md flex items-center justify-center gap-sm mb-md hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+                Add New Endpoint
+            </button>
+<a class="flex items-center gap-md px-md py-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg mt-unit" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Wrapper -->
+<div class="ml-[260px] flex flex-col min-h-screen">
+<!-- TopAppBar -->
+<header class="h-16 fixed top-0 right-0 left-[260px] bg-surface border-b border-outline-variant flex justify-between items-center px-lg z-40">
+<div class="flex items-center gap-xl">
+<div class="hidden md:flex items-center gap-md flex-1">
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-[20px]">search</span>
+<input class="pl-10 pr-4 py-2 bg-surface-container-low border border-outline-variant rounded-full text-label-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent w-full max-w-md" placeholder="Search resources..." type="text"/>
+</div>
+<nav class="flex items-center gap-lg ml-xl">
+<a class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Docs</a>
+<a class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Logs</a>
+<a class="font-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Alerts</a>
+</nav>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<div class="flex items-center gap-md text-on-surface-variant">
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">notifications</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-primary transition-colors">help</span>
+<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" data-alt="A professional headshot of a modern corporate administrator in a bright, high-key office setting. The person has a friendly and approachable expression, looking directly at the camera. The background is softly blurred with hints of glass partitions and clean white walls, reflecting a trustworthy and organized workplace environment." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBHZWZRwhmT8l9cLW4pUftnsVTfvr0s2KHnYMQUKb6ZHfWIZ1RP6BEF9CT0EhFF6ZhPBD5BpQ7LNNZKSE7v-FnwfINPnK9je_RhLFzjsIivgc520z5VuaCqoU5F-jkmJvPXy8KYmIwrX_vnBnjL-TBUoj6I8T5dAxaBveyAxx7flKYdiXnmotvt5JIVvEHkA1nWpt2RLKnY3CDeIVpROtNkDbj1WjfSbDbkwMuCj19Zv8a3krK3Z0cFllavh60ydg0Qt3m36vbc4s4"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Content Area -->
+<main class="mt-16 p-xl max-w-max_width mx-auto w-full flex flex-col gap-xl">
+<!-- Breadcrumbs & Header Section -->
+<div class="flex flex-col gap-sm">
+<nav class="flex items-center text-label-sm text-outline">
+<a class="hover:text-primary transition-colors" href="#">Environments</a>
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<a class="hover:text-primary transition-colors" href="#">Active Directory</a>
+<span class="material-symbols-outlined text-[16px] mx-1">chevron_right</span>
+<span class="text-on-surface-variant">Domains</span>
+</nav>
+<div class="flex justify-between items-end">
+<h2 class="font-h1 text-h1 text-on-surface">Domains</h2>
+<button class="bg-primary text-on-primary px-xl py-md rounded-lg font-label-md flex items-center gap-sm hover:brightness-90 shadow-sm transition-all">
+<span class="material-symbols-outlined">sync</span>
+            Scan AD
+          </button>
+</div>
+</div>
+<!-- Summary & Info Box Grid -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg">
+<!-- Summary Card -->
+<div class="md:col-span-3 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+<p class="text-label-sm text-outline font-semibold tracking-wider uppercase">AD DOMAINS</p>
+<div class="flex items-center gap-md mt-sm">
+<span class="font-h1 text-[40px] leading-none text-primary">1</span>
+<span class="material-symbols-outlined text-primary-container bg-primary-fixed rounded-full p-2">dns</span>
+</div>
+</div>
+<!-- Health Check Info Box -->
+<div class="md:col-span-9 bg-primary-fixed/30 border border-primary-fixed p-lg rounded-xl flex items-start gap-md">
+<span class="material-symbols-outlined text-primary text-[28px] mt-1">info</span>
+<div class="flex-1">
+<h4 class="font-label-md text-on-surface mb-1">Health Check Status</h4>
+<p class="text-body-sm text-on-surface-variant">The latest domain health check completed successfully. All domain controllers in the linked forest are reporting optimal connectivity and synchronization status. No critical replication errors detected in the last 24-hour cycle.</p>
+</div>
+<button class="text-primary font-label-md bg-white border border-primary-fixed px-lg py-sm rounded-lg hover:bg-primary-fixed/50 transition-colors self-center whitespace-nowrap">
+            View Detailed Log
+          </button>
+</div>
+</div>
+<!-- Main Data Table Container -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant bg-surface-container-low">
+<th class="px-lg py-md font-label-md text-on-surface-variant">Domain Name</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Ldap Path</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Domain Mode Level</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Native Id</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Module</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-lg">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 bg-primary-fixed rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined">lan</span>
+</div>
+<span class="font-label-md text-on-surface">ad.dev1.cflabs.io</span>
+</div>
+</td>
+<td class="px-lg py-lg text-body-sm text-outline">DC=ad,DC=dev1,DC=cflabs,DC=io</td>
+<td class="px-lg py-lg">
+<span class="px-sm py-1 bg-secondary-fixed text-on-secondary-fixed rounded-full text-label-sm font-medium">WINDOWS2016</span>
+</td>
+<td class="px-lg py-lg text-body-sm font-mono text-outline">4244b7-8821-4f7d</td>
+<td class="px-lg py-lg">
+<div class="flex items-center gap-xs text-on-surface-variant">
+<span class="material-symbols-outlined text-[18px]">terminal</span>
+<span class="text-body-sm">DEMO-01-AD</span>
+</div>
+</td>
+<td class="px-lg py-lg">
+<button class="text-on-surface-variant hover:text-primary transition-colors p-1 rounded-md">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination -->
+<div class="p-lg border-t border-outline-variant flex items-center justify-between bg-surface-container-low/50">
+<p class="text-label-sm text-outline">Showing 1 of 1 results</p>
+<div class="flex items-center gap-sm">
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-outline hover:bg-surface-container-high disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded bg-primary text-on-primary flex items-center justify-center text-label-sm font-bold shadow-sm">
+              1
+            </button>
+<button class="w-8 h-8 rounded border border-outline-variant flex items-center justify-center text-outline hover:bg-surface-container-high disabled:opacity-50" disabled="">
+<span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Illustration/Graphic Footer Area -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mt-xl opacity-80">
+<div class="h-[200px] rounded-xl overflow-hidden relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="A clean, professional data visualization dashboard background featuring soft blue and white abstract gradients. The composition uses sleek geometric lines and subtle data nodes that suggest connectivity and network infrastructure. The lighting is bright and airy, perfectly aligned with a high-trust corporate admin interface aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0ugqhNT_lapBfG46j3k1jnHRqi3I3M3W4YgKo7cEgrFLn8AAsxd0qwxyEB9mo33T8YBkhXiykwUR6wM2hLbY_CIBrBT7zQZNnj67ddJYPFoO3znQu5E2ivDH17jBOiGSAIgf8Z9RL8vizP1sJjXN8GjMEDrFPWv4cfah0stOLzq_-815HjnODvNEncoWBINAWGUHgRU7iO48qW911b7EQuB207QnhqlYqRXFerRfBsMk3HK6N9x4-BR1IqGVJW5B80Hb9CSrseE9CA"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-lg">
+<div class="text-white">
+<p class="font-label-md">Network Topology Insight</p>
+<p class="text-label-sm opacity-80">Explore the underlying infrastructure of your domains.</p>
+</div>
+</div>
+</div>
+<div class="h-[200px] rounded-xl overflow-hidden relative group cursor-pointer">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" data-alt="An abstract digital representation of cloud computing and server architecture. Glowing light paths connect various nodes in a bright, expansive space. The palette consists of primary blues and soft grays, creating a feeling of organized complexity and technological reliability for a modern administrator." src="https://lh3.googleusercontent.com/aida/ADBb0uhbI3XvJRkUhy38D1RTVr5UY7BNeXY7z1RWYQbozCQzWzdfxfu4rQBCc2HjhfvhiPpw8PJsV6xLru1bGrz7nPpyFEJQN150hXVNH64dPdXcNdCnC0EILC6141bL-hh9hY61pDWHmm1yE2nAZGpXdsGRt-2Na1AM0oJFbbf3A3lh56de3yz91zqHiYjcJ4rQd7nhMaQCvphdBJGhE0uicP533uZ5AicDakk2Ii5zRORg3kilrh9TbSWDn59yWHlvhVXyd1dMoSXASQ"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/40 to-transparent flex items-end p-lg">
+<div class="text-white">
+<p class="font-label-md">Forest Synchronization</p>
+<p class="text-label-sm opacity-80">Monitor multi-forest synchronization status in real-time.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

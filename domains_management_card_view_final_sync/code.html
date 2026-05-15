@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Domains Management - Endpoint Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "inverse-surface": "#2e3039",
+                        "secondary-fixed": "#d3e4fe",
+                        "error": "#ba1a1a",
+                        "surface": "#faf8ff",
+                        "primary-fixed": "#dbe1ff",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-error": "#ffffff",
+                        "on-background": "#191b23",
+                        "surface-container-high": "#e7e7f3",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-surface-variant": "#434655",
+                        "on-primary-container": "#eeefff",
+                        "tertiary": "#943700",
+                        "on-secondary-fixed": "#0b1c30",
+                        "surface-tint": "#0053db",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "primary-container": "#2563eb",
+                        "primary": "#004ac6",
+                        "background": "#faf8ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-container": "#bc4800",
+                        "on-tertiary": "#ffffff",
+                        "on-secondary-container": "#54647a",
+                        "on-tertiary-container": "#ffede6",
+                        "outline-variant": "#c3c6d7",
+                        "outline": "#737686",
+                        "surface-container": "#ededf9",
+                        "on-primary-fixed": "#00174b",
+                        "inverse-primary": "#b4c5ff",
+                        "error-container": "#ffdad6",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-dim": "#d9d9e5",
+                        "on-tertiary-fixed": "#360f00",
+                        "on-primary": "#ffffff",
+                        "secondary": "#505f76",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-bright": "#faf8ff",
+                        "inverse-on-surface": "#f0f0fb",
+                        "on-surface": "#191b23",
+                        "surface-container-low": "#f3f3fe",
+                        "secondary-container": "#d0e1fb",
+                        "surface-variant": "#e1e2ed",
+                        "on-error-container": "#93000a",
+                        "tertiary-fixed": "#ffdbcd"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "xl": "32px",
+                        "unit": "4px",
+                        "md": "16px",
+                        "xs": "4px",
+                        "max_width": "1440px",
+                        "margin": "32px"
+                    },
+                    "fontFamily": {
+                        "label-sm": ["Inter"],
+                        "label-md": ["Inter"],
+                        "body-sm": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-lg": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { background-color: #faf8ff; }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+        .card-shadow { box-shadow: 0px 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Sidebar Shell -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest dark:bg-inverse-surface border-r border-outline-variant dark:border-outline shadow-sm flex flex-col z-50">
+<div class="p-lg flex items-center gap-sm">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-on-primary" data-icon="shield">shield</span>
+</div>
+<div>
+<h1 class="font-h2 text-h2 font-bold text-primary dark:text-inverse-primary leading-none">AdminConsole</h1>
+<p class="text-label-sm text-on-surface-variant">Endpoint Management</p>
+</div>
+</div>
+<nav class="flex-1 mt-md px-sm">
+<!-- Dashboard Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<!-- OnPrem Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="storage">storage</span>
+<span class="font-label-md text-label-md">OnPrem</span>
+</a>
+<!-- Environments Tab (Active) -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg bg-secondary-container text-on-secondary-container border-l-4 border-primary font-label-md mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="layers" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="font-label-md text-label-md">Environments</span>
+</a>
+<!-- Assets Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="devices">devices</span>
+<span class="font-label-md text-label-md">Assets</span>
+</a>
+<!-- Security Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="security">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<!-- Settings Tab -->
+<a class="flex items-center gap-md px-md py-3 rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors mb-unit" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-sm border-t border-outline-variant">
+<button class="w-full bg-primary text-on-primary py-3 rounded-lg font-label-md flex items-center justify-center gap-sm mb-md hover:brightness-110 transition-all">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+            Add New Endpoint
+        </button>
+<a class="flex items-center gap-md px-md py-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg" href="#">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+<span class="text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-2 text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg mt-unit" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="text-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="h-16 fixed top-0 right-0 left-[260px] bg-surface border-b border-outline-variant flex justify-between items-center px-lg z-40">
+<div class="flex items-center gap-xl flex-1">
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline" data-icon="search">search</span>
+<input class="w-full bg-surface-container-low border border-outline-variant rounded-lg py-2 pl-10 pr-4 focus:ring-2 focus:ring-primary focus:outline-none text-label-md" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<nav class="flex items-center gap-lg mr-lg">
+<a class="text-on-surface-variant hover:text-on-surface font-label-md" href="#">Docs</a>
+<a class="text-on-surface-variant hover:text-on-surface font-label-md" href="#">Logs</a>
+<a class="text-primary border-b-2 border-primary py-5 font-label-md" href="#">Alerts</a>
+</nav>
+<div class="flex items-center gap-md pr-md border-r border-outline-variant">
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 bg-error rounded-full"></span>
+</button>
+<button class="p-2 text-on-surface-variant hover:bg-surface-container rounded-full transition-colors">
+<span class="material-symbols-outlined" data-icon="help">help</span>
+</button>
+</div>
+<div class="flex items-center gap-sm pl-md">
+<img alt="User Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCEcr5MgpN2KwviINMhezyht4gfjXaiIs7WxcYvUp9Lii13PKvJ2OUBeUCJHy0gMTs9nfKsy0Phm7_am7GHUsgujnFsaMW2o_xzfl8EgUqFNpwPDgVz8sl6ly5CmyI4ss1oImuhvT9bvp3b7Oqg7yO2_TxTgLDI7ni1UWUsdQwOyas3XCdULIGA5BqlfEKvUveOz6Necr0OK4TufsIfDRkj7jxq86lWBsCeV2WINTfp06vuVJWUT__M04fo9jNjYS2p8jJjQuE7BU"/>
+<span class="material-symbols-outlined text-on-surface-variant cursor-pointer" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="ml-[260px] mt-16 p-xl">
+<div class="max-w-max_width mx-auto">
+<!-- Page Header Section -->
+<div class="flex justify-between items-end mb-xl">
+<div>
+<div class="flex items-center gap-sm text-on-surface-variant mb-unit">
+<span class="text-label-sm uppercase tracking-wider">Environments</span>
+<span class="material-symbols-outlined text-[16px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-label-sm uppercase tracking-wider font-semibold text-primary">Domains</span>
+</div>
+<h1 class="font-h1 text-h1 text-on-surface">Domains</h1>
+</div>
+<button class="bg-primary text-on-primary px-lg py-2.5 rounded-lg font-label-md flex items-center gap-sm shadow-sm hover:brightness-110 transition-all">
+<span class="material-symbols-outlined" data-icon="search_check">search_check</span>
+                Scan AD
+            </button>
+</div>
+<!-- Summary Status Bar -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-lg mb-xl">
+<!-- AD DOMAINS KPI Card (Preserved from Screen 24) -->
+<div class="md:col-span-3 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.05)]">
+<p class="text-label-sm text-outline font-semibold tracking-wider uppercase">AD DOMAINS</p>
+<div class="flex items-center gap-md mt-sm">
+<span class="font-h1 text-[40px] leading-none text-primary">1</span>
+<span class="material-symbols-outlined text-primary-container bg-primary-fixed rounded-full p-2">dns</span>
+</div>
+</div>
+<!-- Health Check Info Box (Synchronized with SCREEN_23) -->
+<div class="md:col-span-9 bg-primary-fixed/30 border border-primary-fixed p-lg rounded-xl flex items-start gap-md">
+<span class="material-symbols-outlined text-primary text-[28px] mt-1">info</span>
+<div class="flex-1">
+<h4 class="font-label-md text-on-surface mb-1">Health Check Status</h4>
+<p class="text-body-sm text-on-surface-variant">The latest domain health check completed successfully. All domain controllers in the linked forest are reporting optimal connectivity and synchronization status. No critical replication errors detected in the last 24-hour cycle.</p>
+</div>
+<button class="text-primary font-label-md bg-white border border-primary-fixed px-lg py-sm rounded-lg hover:bg-primary-fixed/50 transition-colors self-center whitespace-nowrap">
+                    View Detailed Log
+                </button>
+</div>
+</div>
+<!-- Domain Cards Container (Updated to 2 columns on desktop) -->
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-lg">
+<!-- Domain Card 1 -->
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl card-shadow overflow-hidden group hover:border-primary/50 transition-colors">
+<div class="p-lg bg-surface-container-low border-b border-outline-variant flex justify-between items-start">
+<div class="flex items-center gap-md">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined" data-icon="domain">domain</span>
+</div>
+<div>
+<h3 class="text-h3 font-bold text-on-surface">ad.corp.local</h3>
+<div class="flex items-center gap-unit">
+<span class="w-2 h-2 rounded-full bg-green-500"></span>
+<span class="text-label-sm text-on-surface-variant">Healthy</span>
+</div>
+</div>
+</div>
+<button class="p-2 hover:bg-surface-container rounded-lg transition-colors">
+<span class="material-symbols-outlined text-outline" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+<div class="p-lg space-y-md">
+<div class="space-y-unit">
+<label class="text-label-sm text-on-surface-variant font-semibold">LDAP PATH</label>
+<p class="text-body-md font-mono bg-surface-variant/30 px-3 py-1.5 rounded border border-outline-variant/50 text-on-surface-variant overflow-hidden text-ellipsis whitespace-nowrap">LDAP://DC=ad,DC=corp,DC=local</p>
+</div>
+<div class="grid grid-cols-2 gap-md">
+<div>
+<label class="text-label-sm text-on-surface-variant font-semibold">MODE LEVEL</label>
+<div class="flex items-center gap-sm mt-unit">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant" data-icon="history_edu">history_edu</span>
+<span class="text-body-md">2016</span>
+</div>
+</div>
+<div>
+<label class="text-label-sm text-on-surface-variant font-semibold">MODULE</label>
+<div class="flex items-center gap-sm mt-unit">
+<span class="material-symbols-outlined text-[18px] text-on-surface-variant" data-icon="extension">extension</span>
+<span class="text-body-md">DirectorySync</span>
+</div>
+</div>
+</div>
+<div class="pt-md border-t border-outline-variant">
+<label class="text-label-sm text-on-surface-variant font-semibold">NATIVE ID</label>
+<p class="text-body-md text-on-surface mt-unit font-mono">S-1-5-21-235619-3241</p>
+</div>
+</div>
+<div class="px-lg py-md bg-surface-container-low flex justify-between items-center">
+<span class="text-label-sm text-on-surface-variant">Last scanned: 12 mins ago</span>
+<button class="text-primary font-label-md flex items-center gap-xs hover:gap-sm transition-all">
+                        Manage Domain
+                        <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+<!-- Empty State / Add Domain Placeholder -->
+<div class="border-2 border-dashed border-outline-variant rounded-xl flex flex-col items-center justify-center p-xl hover:border-primary/50 hover:bg-primary-container/5 transition-all cursor-pointer group">
+<div class="w-14 h-14 rounded-full bg-surface-container-high flex items-center justify-center mb-md group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-[32px] text-outline" data-icon="add_moderator">add_moderator</span>
+</div>
+<h4 class="font-h3 text-on-surface mb-unit">Register Domain</h4>
+<p class="text-body-sm text-on-surface-variant text-center px-lg">Securely connect another Active Directory environment to the console.</p>
+</div>
+</div>
+<!-- Contextual Help Section (Graphic Background) -->
+<section class="mt-xl relative rounded-2xl overflow-hidden h-64 flex items-center px-xl">
+<img alt="Background Graphic" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/ADBb0ugqhNT_lapBfG46j3k1jnHRqi3I3M3W4YgKo7cEgrFLn8AAsxd0qwxyEB9mo33T8YBkhXiykwUR6wM2hLbY_CIBrBT7zQZNnj67ddJYPFoO3znQu5E2ivDH17jBOiGSAIgf8Z9RL8vizP1sJjXN8GjMEDrFPWv4cfah0stOLzq_-815HjnODvNEncoWBINAWGUHgRU7iO48qW911b7EQuB207QnhqlYqRXFerRfBsMk3HK6N9x4-BR1IqGVJW5B80Hb9CSrseE9CA"/>
+<div class="relative z-10 max-w-lg">
+<h2 class="text-h1 font-bold text-on-primary mb-md">Advanced Directory Insights</h2>
+<p class="text-body-md text-on-primary/90 mb-lg">Unlock deeper visibility into your organizational units and security groups with automated health reporting.</p>
+<button class="bg-surface text-primary px-lg py-3 rounded-lg font-label-md shadow-lg hover:bg-surface-container-low transition-colors">
+                    Explore Insights
+                </button>
+</div>
+</section>
+</div>
+</main>
+</body></html>

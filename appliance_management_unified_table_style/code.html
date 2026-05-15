@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-slate-50" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Appliance Management | AdminConsole</title>
+<!-- Tailwind CSS CDN with plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Fonts: Inter & Manrope -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "tertiary-fixed-dim": "#ffb596",
+                    "outline-variant": "#c3c6d7",
+                    "primary": "#004ac6",
+                    "surface-container-lowest": "#ffffff",
+                    "on-secondary-fixed-variant": "#38485d",
+                    "on-secondary-fixed": "#0b1c30",
+                    "secondary": "#505f76",
+                    "tertiary-fixed": "#ffdbcd",
+                    "on-tertiary-container": "#ffede6",
+                    "primary-fixed-dim": "#b4c5ff",
+                    "on-background": "#191b23",
+                    "inverse-on-surface": "#f0f0fb",
+                    "surface-container-low": "#f3f3fe",
+                    "secondary-fixed-dim": "#b7c8e1",
+                    "on-error-container": "#93000a",
+                    "background": "#faf8ff",
+                    "error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#003ea8",
+                    "secondary-container": "#d0e1fb",
+                    "on-tertiary-fixed-variant": "#7d2d00",
+                    "tertiary-container": "#bc4800",
+                    "surface-variant": "#e1e2ed",
+                    "surface-tint": "#0053db",
+                    "inverse-surface": "#2e3039",
+                    "surface-bright": "#faf8ff",
+                    "error": "#ba1a1a",
+                    "on-primary-container": "#eeefff",
+                    "on-tertiary": "#ffffff",
+                    "on-surface-variant": "#434655",
+                    "on-surface": "#191b23",
+                    "on-secondary": "#ffffff",
+                    "on-primary": "#ffffff",
+                    "tertiary": "#943700",
+                    "outline": "#737686",
+                    "on-tertiary-fixed": "#360f00",
+                    "surface-container-high": "#e7e7f3",
+                    "secondary-fixed": "#d3e4fe",
+                    "on-secondary-container": "#54647a",
+                    "on-error": "#ffffff",
+                    "inverse-primary": "#b4c5ff",
+                    "on-primary-fixed": "#00174b",
+                    "surface-dim": "#d9d9e5",
+                    "primary-fixed": "#dbe1ff",
+                    "primary-container": "#2563eb",
+                    "surface-container-highest": "#e1e2ed",
+                    "surface-container": "#ededf9",
+                    "surface": "#faf8ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "margin": "32px",
+                    "unit": "4px",
+                    "max_width": "1440px",
+                    "sm": "8px",
+                    "lg": "24px",
+                    "xs": "4px",
+                    "xl": "32px",
+                    "md": "16px",
+                    "gutter": "24px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-sm": ["Inter"],
+                    "body-lg": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "h3": ["Manrope"],
+                    "label-md": ["Inter"],
+                    "body-md": ["Inter"]
+            },
+            "fontSize": {
+                    "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                    "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}],
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                    "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                    "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}]
+            }
+          },
+        },
+      }
+    </script>
+<style data-purpose="layout-styles">
+        ::-webkit-scrollbar {
+          width: 6px;
+          height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+          background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .custom-shadow-l1 {
+            box-shadow: 0px 4px 12px rgba(0,0,0,0.05);
+        }
+    </style>
+</head>
+<body class="h-full overflow-hidden flex bg-background text-on-background">
+<!-- BEGIN: MainSidebar -->
+<aside class="w-64 bg-surface-container-lowest border-r border-outline-variant flex flex-col shrink-0" data-purpose="sidebar">
+<div class="p-6">
+<h1 class="text-primary font-h2 text-h2 font-bold tracking-tight">AdminConsole</h1>
+<p class="text-on-surface-variant text-label-sm font-medium opacity-70">Endpoint Management</p>
+</div>
+<nav class="flex-1 px-4 space-y-1 overflow-y-auto">
+<a class="flex items-center px-3 py-2 text-sm font-medium text-on-surface-variant rounded-md hover:bg-surface-container-low" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Dashboard
+        </a>
+<div class="space-y-1">
+<button class="w-full flex items-center justify-between px-3 py-2 text-sm font-semibold text-primary bg-secondary-container rounded-md">
+<span class="flex items-center">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 7v10c0 2.21 3.58 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.58 4 8 4s8-1.79 8-4M4 7c0-2.21 3.58-4 8-4s8 1.79 8 4m0 5c0 2.21-3.58 4-8 4s-8-1.79-8-4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                    OnPrem
+                </span>
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="pl-11 space-y-1 mt-1">
+<a class="block py-2 text-sm text-on-surface-variant hover:text-on-surface" href="#">Endpoints</a>
+<a class="block py-2 text-sm font-semibold text-on-surface" href="#">Appliances</a>
+<a class="block py-2 text-sm text-on-surface-variant hover:text-on-surface" href="#">Modules</a>
+</div>
+</div>
+<a class="flex items-center px-3 py-2 text-sm font-medium text-on-surface-variant rounded-md hover:bg-surface-container-low" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Environments
+        </a>
+<a class="flex items-center px-3 py-2 text-sm font-medium text-on-surface-variant rounded-md hover:bg-surface-container-low" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Mappings
+        </a>
+<a class="flex items-center px-3 py-2 text-sm font-medium text-on-surface-variant rounded-md hover:bg-surface-container-low" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Legal
+        </a>
+</nav>
+<div class="p-4 border-t border-outline-variant">
+<button class="w-full flex items-center justify-center gap-2 bg-primary hover:brightness-90 text-on-primary font-semibold py-2 px-4 rounded-lg text-sm transition-colors shadow-sm">
+<svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+            Add New Appliance
+        </button>
+<div class="mt-4 space-y-1">
+<a class="flex items-center px-3 py-2 text-sm font-medium text-on-surface-variant hover:text-on-surface" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Support
+            </a>
+<a class="flex items-center px-3 py-2 text-sm font-medium text-on-surface-variant hover:text-on-surface" href="#">
+<svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                Account
+            </a>
+</div>
+</div>
+</aside>
+<!-- END: MainSidebar -->
+<!-- BEGIN: MainContentArea -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+<!-- BEGIN: TopNavigation -->
+<header class="h-16 bg-surface-container-lowest border-b border-outline-variant flex items-center justify-between px-8 shrink-0">
+<div class="flex items-center flex-1 max-w-xl">
+<div class="relative w-full">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<svg class="h-4 w-4 text-on-surface-variant" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</span>
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-md leading-5 bg-surface-container-low placeholder-on-surface-variant focus:outline-none focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary focus:border-primary sm:text-sm" placeholder="Search appliances..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6 ml-4">
+<nav class="hidden md:flex items-center gap-6 text-sm font-medium text-on-surface-variant">
+<a class="hover:text-primary" href="#">Docs</a>
+<a class="hover:text-primary" href="#">Logs</a>
+<a class="hover:text-primary" href="#">Alerts</a>
+</nav>
+<div class="h-6 w-px bg-outline-variant"></div>
+<div class="flex items-center gap-4">
+<button class="text-on-surface-variant hover:text-on-surface">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<button class="text-on-surface-variant hover:text-on-surface">
+<svg class="w-6 h-6" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="w-8 h-8 rounded-full bg-inverse-surface flex items-center justify-center text-on-primary text-xs font-bold">
+                    DM
+                </div>
+</div>
+</div>
+</header>
+<!-- END: TopNavigation -->
+<main class="flex-1 overflow-y-auto p-8 space-y-8" data-purpose="main-dashboard-view">
+<!-- BEGIN: BreadcrumbsAndHeader -->
+<div class="flex items-center justify-between">
+<div>
+<nav aria-label="Breadcrumb" class="flex text-xs text-on-surface-variant mb-2 font-label-sm">
+<ol class="flex items-center space-x-2">
+<li><a class="hover:text-on-surface" href="#">Home</a></li>
+<li class="flex items-center space-x-2">
+<svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" fill-rule="evenodd"></path></svg>
+<a class="hover:text-on-surface" href="#">OnPrem</a>
+</li>
+<li class="flex items-center space-x-2">
+<svg class="w-3 h-3" fill="currentColor" viewbox="0 0 20 20"><path clip-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" fill-rule="evenodd"></path></svg>
+<span class="text-on-surface font-semibold">Appliances</span>
+</li>
+</ol>
+</nav>
+<h2 class="text-h1 font-h1 font-bold text-on-surface tracking-tight">Appliances</h2>
+</div>
+<button class="inline-flex items-center px-4 py-2 bg-primary hover:brightness-90 text-on-primary text-sm font-semibold rounded-lg shadow-sm">
+<svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 4v16m8-8H4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                New Appliance
+            </button>
+</div>
+<!-- END: BreadcrumbsAndHeader -->
+<!-- BEGIN: MapSection -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm border border-outline-variant overflow-hidden custom-shadow-l1" data-purpose="distribution-map">
+<div class="p-4 border-b border-outline-variant flex items-center justify-between">
+<h3 class="font-h3 text-h3 font-semibold text-on-surface">Appliance Distribution</h3>
+<div class="flex items-center gap-4">
+<span class="flex items-center text-label-sm text-on-surface-variant font-medium">
+<span class="w-2 h-2 rounded-full bg-primary mr-2"></span> 1 Online
+                    </span>
+<span class="flex items-center text-label-sm text-on-surface-variant font-medium">
+<span class="w-2 h-2 rounded-full bg-outline-variant mr-2"></span> 0 Offline
+                    </span>
+</div>
+</div>
+<div class="relative bg-surface-dim h-[400px] flex items-center justify-center">
+<img alt="World Distribution Map" class="w-full h-full object-cover" data-purpose="high-fidelity-map" src="https://lh3.googleusercontent.com/aida/ADBb0ugqhNT_lapBfG46j3k1jnHRqi3I3M3W4YgKo7cEgrFLn8AAsxd0qwxyEB9mo33T8YBkhXiykwUR6wM2hLbY_CIBrBT7zQZNnj67ddJYPFoO3znQu5E2ivDH17jBOiGSAIgf8Z9RL8vizP1sJjXN8GjMEDrFPWv4cfah0stOLzq_-815HjnODvNEncoWBINAWGUHgRU7iO48qW911b7EQuB207QnhqlYqRXFerRfBsMk3HK6N9x4-BR1IqGVJW5B80Hb9CSrseE9CA"/>
+<div class="absolute bottom-4 right-4 flex flex-col gap-2">
+<button class="bg-surface-container-lowest p-2 rounded-md shadow-md hover:bg-surface-variant text-on-surface border border-outline-variant"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M12 6v6m0 0v6m0-6h6m-6 0H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+<button class="bg-surface-container-lowest p-2 rounded-md shadow-md hover:bg-surface-variant text-on-surface border border-outline-variant"><svg class="w-4 h-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M18 12H6" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg></button>
+</div>
+</div>
+</div>
+<!-- END: MapSection -->
+<!-- BEGIN: FiltersAndTableSection -->
+<div class="space-y-4" data-purpose="appliance-inventory">
+<!-- Search and Filters Bar -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<button class="inline-flex items-center px-4 py-2 border border-outline-variant rounded-lg bg-surface-container-lowest text-sm font-medium text-on-surface hover:bg-surface-container-low">
+<svg class="w-4 h-4 mr-2 text-on-surface-variant" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Advanced filters
+                        <svg class="w-3 h-3 ml-2 text-on-surface-variant" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M19 9l-7 7-7-7" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</button>
+<div class="h-6 w-px bg-outline-variant mx-2"></div>
+<div class="relative max-w-sm">
+<input class="block w-full pl-10 pr-3 py-2 border border-outline-variant rounded-lg text-sm bg-surface-container-lowest placeholder-on-surface-variant focus:ring-primary focus:border-primary" placeholder="Suche" type="text"/>
+<div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+<svg class="h-4 w-4 text-on-surface-variant" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<select class="text-sm border-outline-variant rounded-lg focus:ring-primary focus:border-primary bg-surface-container-lowest">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+<button class="inline-flex items-center px-4 py-2 bg-surface-container-lowest border border-outline-variant rounded-lg text-sm font-medium text-on-surface hover:bg-surface-container-low">
+<svg class="w-4 h-4 mr-2 text-on-surface-variant" fill="none" stroke="currentColor" viewbox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>
+                        Export
+                    </button>
+</div>
+</div>
+<!-- BEGIN: SCREEN_9 Style Table -->
+<section class="bg-surface-container-lowest border border-outline-variant rounded-xl overflow-hidden custom-shadow-l1 mb-xl" data-purpose="data-table-container">
+<table class="w-full text-left border-collapse">
+<thead class="bg-surface-container-low border-b border-outline-variant">
+<tr>
+<th class="px-lg py-md font-label-md text-on-surface-variant w-12">
+<input class="h-4 w-4 text-primary border-outline-variant rounded focus:ring-primary" type="checkbox"/>
+</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Appliance Name</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Appliance DNS Name</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Is Online</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Last Seen</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Private IP Address</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant">Public IP Address</th>
+<th class="px-lg py-md font-label-md text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-md">
+<input class="h-4 w-4 text-primary border-outline-variant rounded focus:ring-primary" type="checkbox"/>
+</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="h-8 w-8 rounded bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary text-[20px]">dns</span>
+</div>
+<span class="font-label-md text-on-surface">Appliance-US</span>
+</div>
+</td>
+<td class="px-lg py-md text-body-sm text-on-surface-variant">
+                                demo-1-appapi.expireon.cloud
+                            </td>
+<td class="px-lg py-md">
+<span class="flex items-center gap-xs text-label-sm text-primary">
+<span class="h-2 w-2 rounded-full bg-primary"></span> Active
+                                </span>
+</td>
+<td class="px-lg py-md text-body-sm text-on-surface-variant">
+                                06.05.2026, 14:03:44
+                            </td>
+<td class="px-lg py-md text-body-sm text-on-surface-variant">-</td>
+<td class="px-lg py-md text-body-sm text-on-surface-variant">-</td>
+<td class="px-lg py-md text-right">
+<button class="p-sm rounded-lg hover:bg-surface-variant transition-colors text-on-surface-variant">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+<!-- BEGIN: Exact Pagination from SCREEN_9 -->
+<div class="p-lg border-t border-outline-variant flex justify-between items-center bg-surface-container-low">
+<div class="flex gap-sm">
+<button class="bg-surface-container-lowest border border-outline-variant px-md py-sm rounded-lg text-label-md text-on-surface-variant hover:bg-surface-variant transition-colors flex items-center gap-xs">
+<span class="material-symbols-outlined text-[18px]">chevron_left</span> Previous
+                        </button>
+<button class="bg-surface-container-lowest border border-outline-variant px-md py-sm rounded-lg text-label-md text-on-surface-variant hover:bg-surface-variant transition-colors flex items-center gap-xs">
+                            Next <span class="material-symbols-outlined text-[18px]">chevron_right</span>
+</button>
+</div>
+<div class="flex items-center gap-md">
+<span class="text-body-sm text-on-surface-variant">Page 1 of 5</span>
+<select class="bg-surface-container-lowest border-outline-variant text-body-sm rounded-lg focus:ring-primary focus:border-primary">
+<option>10 per page</option>
+<option>25 per page</option>
+<option>50 per page</option>
+</select>
+</div>
+</div>
+<!-- END: Pagination -->
+</section>
+<!-- END: SCREEN_9 Style Table -->
+</div>
+<!-- END: FiltersAndTableSection -->
+</main>
+</div>
+<!-- END: MainContentArea -->
+</body></html>

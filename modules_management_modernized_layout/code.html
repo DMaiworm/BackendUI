@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Modules Management - AdminConsole</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "tertiary-fixed-dim": "#ffb596",
+                        "primary": "#004ac6",
+                        "background": "#faf8ff",
+                        "surface-container-low": "#f3f3fe",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "on-surface-variant": "#434655",
+                        "on-primary-container": "#eeefff",
+                        "inverse-primary": "#b4c5ff",
+                        "outline-variant": "#c3c6d7",
+                        "tertiary-container": "#bc4800",
+                        "on-error": "#ffffff",
+                        "primary-container": "#2563eb",
+                        "inverse-surface": "#2e3039",
+                        "on-primary-fixed": "#00174b",
+                        "surface-container-lowest": "#ffffff",
+                        "error": "#ba1a1a",
+                        "secondary-container": "#d0e1fb",
+                        "on-primary": "#ffffff",
+                        "error-container": "#ffdad6",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface-dim": "#d9d9e5",
+                        "outline": "#737686",
+                        "on-background": "#191b23",
+                        "secondary-fixed": "#d3e4fe",
+                        "on-tertiary": "#ffffff",
+                        "surface-variant": "#e1e2ed",
+                        "tertiary-fixed": "#ffdbcd",
+                        "surface-container-highest": "#e1e2ed",
+                        "on-error-container": "#93000a",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "surface-tint": "#0053db",
+                        "on-secondary-fixed": "#0b1c30",
+                        "inverse-on-surface": "#f0f0fb",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "surface-bright": "#faf8ff",
+                        "on-secondary-container": "#54647a",
+                        "secondary": "#505f76",
+                        "tertiary": "#943700",
+                        "primary-fixed": "#dbe1ff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-container": "#ffede6",
+                        "surface-container-high": "#e7e7f3",
+                        "surface-container": "#ededf9",
+                        "on-surface": "#191b23",
+                        "surface": "#faf8ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "xl": "32px",
+                        "margin": "32px",
+                        "max_width": "1440px",
+                        "sm": "8px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "unit": "4px",
+                        "md": "16px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Inter"],
+                        "h3": ["Manrope"],
+                        "body-md": ["Inter"],
+                        "label-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body {
+            background-color: #faf8ff;
+            color: #191b23;
+        }
+    </style>
+</head>
+<body class="font-body-md text-body-md overflow-hidden">
+<!-- Sidebar Shell -->
+<aside class="w-[260px] h-full fixed left-0 top-0 flex flex-col bg-surface-container-lowest border-r border-outline-variant shadow-sm z-50">
+<div class="p-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-h2" style="font-variation-settings: 'FILL' 1;">terminal</span>
+<div class="flex flex-col">
+<span class="font-h2 text-h2 font-bold text-primary">AdminConsole</span>
+<span class="text-label-sm text-on-surface-variant">Endpoint Management</span>
+</div>
+</div>
+<nav class="flex-1 mt-md px-md space-y-xs">
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-label-md">Dashboard</span>
+</a>
+<!-- Active Tab: OnPrem -->
+<a class="flex items-center gap-md p-md rounded-lg bg-secondary-container text-on-secondary-container border-l-4 border-primary" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">storage</span>
+<span class="font-label-md">OnPrem</span>
+</a>
+<div class="pl-xl space-y-xs mt-xs">
+<a class="flex items-center gap-sm py-sm text-on-surface-variant hover:text-primary transition-colors" href="#">
+<span class="font-label-md">Nodes</span>
+</a>
+<a class="flex items-center gap-sm py-sm text-primary font-semibold" href="#">
+<span class="font-label-md">Modules</span>
+</a>
+</div>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">layers</span>
+<span class="font-label-md">Environments</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">devices</span>
+<span class="font-label-md">Assets</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">security</span>
+<span class="font-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label-md">Settings</span>
+</a>
+</nav>
+<div class="px-md mb-lg">
+<button class="w-full flex items-center justify-center gap-sm py-md px-lg bg-primary-container text-white rounded-xl shadow-sm hover:opacity-90 transition-all">
+<span class="material-symbols-outlined">add</span>
+<span class="font-label-md">Add New Endpoint</span>
+</button>
+</div>
+<div class="p-md border-t border-outline-variant space-y-xs">
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md p-md rounded-lg text-on-surface-variant hover:bg-surface-container-low" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Top App Bar -->
+<header class="h-16 fixed top-0 right-0 left-[260px] flex justify-between items-center px-lg bg-surface border-b border-outline-variant z-40">
+<div class="flex items-center gap-xl">
+<div class="relative w-[600px]">
+<span class="material-symbols-outlined absolute left-md top-1/2 -translate-y-1/2 text-on-surface-variant">search</span>
+<input class="w-full h-10 pl-10 pr-md bg-surface-container-low border-none rounded-full text-label-md focus:ring-2 focus:ring-primary/20" placeholder="Search modules..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<nav class="hidden md:flex items-center gap-lg mr-lg">
+<a class="text-on-surface-variant hover:text-primary font-label-md" href="#">Docs</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md" href="#">Logs</a>
+<a class="text-on-surface-variant hover:text-primary font-label-md" href="#">Alerts</a>
+</nav>
+<div class="flex items-center gap-md">
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-xs text-on-surface-variant hover:bg-surface-container-high rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User profile" class="w-full h-full object-cover" data-alt="A professional headshot of a corporate IT administrator in a clean, high-key office setting. The individual is wearing a smart casual outfit, with soft, directional lighting highlighting their approachable yet serious demeanor. The background is a blurred, modern office environment with hints of technology and glass walls, maintaining a bright and trustworthy aesthetic." src="https://lh3.googleusercontent.com/aida/ADBb0uhbI3XvJRkUhy38D1RTVr5UY7BNeXY7z1RWYQbozCQzWzdfxfu4rQBCc2HjhfvhiPpw8PJsV6xLru1bGrz7nPpyFEJQN150hXVNH64dPdXcNdCnC0EILC6141bL-hh9hY61pDWHmm1yE2nAZGpXdsGRt-2Na1AM0oJFbbf3A3lh56de3yz91zqHiYjcJ4rQd7nhMaQCvphdBJGhE0uicP533uZ5AicDakk2Ii5zRORg3kilrh9TbSWDn59yWHlvhVXyd1dMoSXASQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Main Content -->
+<main class="ml-[260px] mt-16 p-lg bg-background min-h-[calc(100vh-64px)] overflow-y-auto">
+<div class="max-w-max_width mx-auto">
+<!-- Breadcrumbs & Title Section -->
+<div class="flex justify-between items-end mb-lg">
+<div>
+<nav class="flex items-center gap-xs text-on-surface-variant mb-xs">
+<a class="text-label-sm hover:text-primary transition-colors" href="#">Home</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<a class="text-label-sm hover:text-primary transition-colors" href="#">OnPrem</a>
+<span class="material-symbols-outlined text-[14px]">chevron_right</span>
+<span class="text-label-sm font-semibold text-on-surface">Modules</span>
+</nav>
+<h1 class="font-h1 text-h1 text-on-surface">Modules</h1>
+</div>
+<button class="flex items-center gap-sm py-md px-xl bg-primary-container text-white rounded-lg shadow-sm hover:bg-primary transition-all font-label-md">
+<span class="material-symbols-outlined">add</span>
+                    New Module
+                </button>
+</div>
+<!-- Table Card -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant shadow-[0px_4px_12px_rgba(0,0,0,0.05)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low border-b border-outline-variant">
+<th class="p-md font-label-md text-on-surface-variant">Module Name</th>
+<th class="p-md font-label-md text-on-surface-variant">Module Type</th>
+<th class="p-md font-label-md text-on-surface-variant">Computer Name</th>
+<th class="p-md font-label-md text-on-surface-variant">Private IP Address</th>
+<th class="p-md font-label-md text-on-surface-variant">Is Online</th>
+<th class="p-md font-label-md text-on-surface-variant">Last Seen</th>
+<th class="p-md font-label-md text-on-surface-variant">Module Version</th>
+<th class="p-md font-label-md text-on-surface-variant">Latest Version</th>
+<th class="p-md font-label-md text-on-surface-variant">Status</th>
+<th class="p-md font-label-md text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant">
+<!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-md font-label-md text-primary font-semibold">DEMO-01-AD</td>
+<td class="p-md font-body-sm text-on-surface-variant">Active Directory</td>
+<td class="p-md font-body-sm text-on-surface-variant">WIN-SRV-2022</td>
+<td class="p-md font-body-sm text-on-surface-variant">10.0.0.42</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-sm text-label-sm text-success text-[#15803d]">
+<span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
+                                        Online
+                                    </span>
+</td>
+<td class="p-md font-body-sm text-on-surface-variant">Just now</td>
+<td class="p-md font-body-sm text-on-surface-variant">2.4.1</td>
+<td class="p-md font-body-sm text-on-surface-variant">2.4.1</td>
+<td class="p-md">
+<span class="bg-[#dcfce7] text-[#166534] text-label-sm px-sm py-xs rounded-full">Latest</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-md font-label-md text-primary font-semibold">DEMO-01-NFI</td>
+<td class="p-md font-body-sm text-on-surface-variant">Network Inspector</td>
+<td class="p-md font-body-sm text-on-surface-variant">PROXMOX-NODE-01</td>
+<td class="p-md font-body-sm text-on-surface-variant">10.0.0.128</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-sm text-label-sm text-[#15803d]">
+<span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
+                                        Online
+                                    </span>
+</td>
+<td class="p-md font-body-sm text-on-surface-variant">2 mins ago</td>
+<td class="p-md font-body-sm text-on-surface-variant">1.9.8</td>
+<td class="p-md font-body-sm text-on-surface-variant">2.0.1</td>
+<td class="p-md">
+<span class="bg-[#fef9c3] text-[#854d0e] text-label-sm px-sm py-xs rounded-full">Update Required</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-md font-label-md text-primary font-semibold">DEMO-01-SQL</td>
+<td class="p-md font-body-sm text-on-surface-variant">Database Proxy</td>
+<td class="p-md font-body-sm text-on-surface-variant">DB-CLUSTER-04</td>
+<td class="p-md font-body-sm text-on-surface-variant">192.168.1.10</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-sm text-label-sm text-on-surface-variant opacity-50">
+<span class="w-2 h-2 rounded-full bg-outline"></span>
+                                        Offline
+                                    </span>
+</td>
+<td class="p-md font-body-sm text-on-surface-variant">14 hours ago</td>
+<td class="p-md font-body-sm text-on-surface-variant">3.1.0</td>
+<td class="p-md font-body-sm text-on-surface-variant">3.1.0</td>
+<td class="p-md">
+<span class="bg-[#dcfce7] text-[#166534] text-label-sm px-sm py-xs rounded-full">Latest</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-md font-label-md text-primary font-semibold">DEMO-02-APP</td>
+<td class="p-md font-body-sm text-on-surface-variant">App Engine</td>
+<td class="p-md font-body-sm text-on-surface-variant">WEB-CLUSTER-02</td>
+<td class="p-md font-body-sm text-on-surface-variant">10.0.0.210</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-sm text-label-sm text-[#15803d]">
+<span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
+                                        Online
+                                    </span>
+</td>
+<td class="p-md font-body-sm text-on-surface-variant">Just now</td>
+<td class="p-md font-body-sm text-on-surface-variant">5.2.4</td>
+<td class="p-md font-body-sm text-on-surface-variant">5.2.4</td>
+<td class="p-md">
+<span class="bg-[#dcfce7] text-[#166534] text-label-sm px-sm py-xs rounded-full">Latest</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+<!-- Row 5 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="p-md font-label-md text-primary font-semibold">DEMO-MGMT-GW</td>
+<td class="p-md font-body-sm text-on-surface-variant">Secure Gateway</td>
+<td class="p-md font-body-sm text-on-surface-variant">GW-VPC-01</td>
+<td class="p-md font-body-sm text-on-surface-variant">172.16.0.5</td>
+<td class="p-md">
+<span class="inline-flex items-center gap-sm text-label-sm text-[#15803d]">
+<span class="w-2 h-2 rounded-full bg-[#22c55e]"></span>
+                                        Online
+                                    </span>
+</td>
+<td class="p-md font-body-sm text-on-surface-variant">5 mins ago</td>
+<td class="p-md font-body-sm text-on-surface-variant">1.0.4</td>
+<td class="p-md font-body-sm text-on-surface-variant">1.1.0</td>
+<td class="p-md">
+<span class="bg-[#fef9c3] text-[#854d0e] text-label-sm px-sm py-xs rounded-full">Update Required</span>
+</td>
+<td class="p-md text-right">
+<button class="text-on-surface-variant hover:text-primary transition-colors">
+<span class="material-symbols-outlined">more_vert</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Pagination Footer -->
+<div class="p-lg border-t border-outline-variant flex justify-between items-center bg-surface-container-lowest">
+<div class="flex items-center gap-md">
+<span class="text-label-sm text-on-surface-variant">Rows per page:</span>
+<div class="relative">
+<select class="appearance-none bg-surface-container-low border border-outline-variant rounded-lg px-md py-sm text-label-sm pr-lg focus:ring-primary focus:border-primary">
+<option>10</option>
+<option>25</option>
+<option>50</option>
+</select>
+<span class="material-symbols-outlined absolute right-xs top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-xl">
+<span class="text-label-sm text-on-surface-variant">Page 1 of 5</span>
+<div class="flex items-center gap-sm">
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant opacity-50 cursor-not-allowed">
+<span class="material-symbols-outlined">chevron_left</span>
+</button>
+<button class="p-sm rounded-lg border border-outline-variant text-on-surface-variant hover:bg-surface-container-low transition-colors">
+<span class="material-symbols-outlined">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Supporting Information Section -->
+<div class="mt-xl grid grid-cols-1 md:grid-cols-2 gap-lg">
+<div class="p-lg rounded-xl bg-primary/5 border border-primary/10 flex items-start gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<h4 class="font-label-md text-primary mb-xs">Module Health Check</h4>
+<p class="text-body-sm text-on-surface-variant">Scheduled health checks for On-Premise modules are running correctly. All 42 nodes are currently reporting back to the primary console without latency issues.</p>
+</div>
+</div>
+<div class="p-lg rounded-xl bg-surface-container-lowest border border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-md">
+<div class="w-12 h-12 rounded-lg bg-secondary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-on-secondary-container">system_update_alt</span>
+</div>
+<div>
+<h4 class="font-label-md text-on-surface">Auto-Update Policy</h4>
+<p class="text-body-sm text-on-surface-variant">Active for 12/15 environments</p>
+</div>
+</div>
+<button class="text-primary font-label-md hover:underline">Manage Rules</button>
+</div>
+</div>
+</div>
+</main>
+<!-- Canvas Background Image (Lower Priority/Subtle Deco) -->
+<div class="fixed bottom-0 right-0 -z-10 opacity-5 pointer-events-none w-1/2 overflow-hidden">
+<img alt="Abstract technological background" class="w-full grayscale" data-alt="A sophisticated abstract technological background featuring flowing lines of code and data points in a minimalist digital space. The color palette is strictly grayscale, adhering to a light-mode corporate aesthetic. Soft shadows and subtle blurs create a sense of depth and complexity without overwhelming the primary UI components. The mood is precise, organized, and high-trust." src="https://lh3.googleusercontent.com/aida/ADBb0ugqhNT_lapBfG46j3k1jnHRqi3I3M3W4YgKo7cEgrFLn8AAsxd0qwxyEB9mo33T8YBkhXiykwUR6wM2hLbY_CIBrBT7zQZNnj67ddJYPFoO3znQu5E2ivDH17jBOiGSAIgf8Z9RL8vizP1sJjXN8GjMEDrFPWv4cfah0stOLzq_-815HjnODvNEncoWBINAWGUHgRU7iO48qW911b7EQuB207QnhqlYqRXFerRfBsMk3HK6N9x4-BR1IqGVJW5B80Hb9CSrseE9CA"/>
+</div>
+</body></html>

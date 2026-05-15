@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Archive Mappings - Endpoint Manager</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-surface": "#191b23",
+                        "on-primary-container": "#eeefff",
+                        "surface-container-high": "#e7e7f3",
+                        "primary-fixed": "#dbe1ff",
+                        "on-background": "#191b23",
+                        "on-secondary-fixed-variant": "#38485d",
+                        "on-primary-fixed": "#00174b",
+                        "outline-variant": "#c3c6d7",
+                        "on-primary-fixed-variant": "#003ea8",
+                        "secondary-fixed-dim": "#b7c8e1",
+                        "on-tertiary-fixed-variant": "#7d2d00",
+                        "on-secondary-container": "#54647a",
+                        "surface-container-low": "#f3f3fe",
+                        "secondary-fixed": "#d3e4fe",
+                        "background": "#faf8ff",
+                        "secondary": "#505f76",
+                        "surface-container-highest": "#e1e2ed",
+                        "tertiary": "#943700",
+                        "surface": "#faf8ff",
+                        "tertiary-container": "#bc4800",
+                        "error-container": "#ffdad6",
+                        "surface-container": "#ededf9",
+                        "on-tertiary-fixed": "#360f00",
+                        "surface-tint": "#0053db",
+                        "surface-bright": "#faf8ff",
+                        "on-surface-variant": "#434655",
+                        "surface-variant": "#e1e2ed",
+                        "secondary-container": "#d0e1fb",
+                        "tertiary-fixed-dim": "#ffb596",
+                        "surface-container-lowest": "#ffffff",
+                        "outline": "#737686",
+                        "tertiary-fixed": "#ffdbcd",
+                        "primary-container": "#2563eb",
+                        "on-tertiary": "#ffffff",
+                        "inverse-surface": "#2e3039",
+                        "on-tertiary-container": "#ffede6",
+                        "on-error-container": "#93000a",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#0b1c30",
+                        "on-primary": "#ffffff",
+                        "surface-dim": "#d9d9e5",
+                        "primary-fixed-dim": "#b4c5ff",
+                        "primary": "#004ac6",
+                        "inverse-on-surface": "#f0f0fb",
+                        "error": "#ba1a1a",
+                        "inverse-primary": "#b4c5ff",
+                        "on-secondary": "#ffffff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "unit": "4px",
+                        "max_width": "1440px",
+                        "lg": "24px",
+                        "gutter": "24px",
+                        "xl": "32px",
+                        "xs": "4px",
+                        "sm": "8px",
+                        "md": "16px",
+                        "margin": "32px"
+                    },
+                    "fontFamily": {
+                        "label-md": ["Inter"],
+                        "body-md": ["Inter"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Inter"]
+                    },
+                    "fontSize": {
+                        "label-md": ["14px", {"lineHeight": "16px", "letterSpacing": "0.01em", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                        "h3": ["20px", {"lineHeight": "28px", "letterSpacing": "0em", "fontWeight": "600"}],
+                        "h1": ["30px", {"lineHeight": "38px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                        "label-sm": ["12px", {"lineHeight": "14px", "letterSpacing": "0.02em", "fontWeight": "500"}],
+                        "h2": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                        "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { background-color: #faf8ff; }
+        .card-level-1 { box-shadow: 0px 4px 12px rgba(0,0,0,0.05); }
+    </style>
+</head>
+<body class="font-body-md text-on-surface">
+<!-- Sidebar Component -->
+<aside class="w-[260px] h-full fixed left-0 top-0 bg-surface-container-lowest flex flex-col border-r border-outline-variant shadow-sm z-50">
+<div class="p-lg flex items-center gap-sm">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-h2 text-h2 font-bold text-primary">AdminConsole</span>
+</div>
+<div class="px-md py-sm">
+<span class="text-label-sm font-label-sm text-outline px-sm uppercase tracking-wider">Main Navigation</span>
+</div>
+<nav class="flex-1 px-sm space-y-xs overflow-y-auto">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">dashboard</span>
+<span class="font-label-md text-label-md">Dashboard</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">storage</span>
+<span class="font-label-md text-label-md">OnPrem</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm bg-secondary-container text-on-secondary-container border-l-4 border-primary rounded-lg" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">layers</span>
+<span class="font-label-md text-label-md">Environments</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">devices</span>
+<span class="font-label-md text-label-md">Assets</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">security</span>
+<span class="font-label-md text-label-md">Security</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined group-hover:text-primary transition-colors">settings</span>
+<span class="font-label-md text-label-md">Settings</span>
+</a>
+</nav>
+<div class="p-md border-t border-outline-variant">
+<button class="w-full bg-primary-container text-on-primary-container font-label-md text-label-md py-md rounded-lg flex items-center justify-center gap-sm shadow-sm active:opacity-80 transition-all">
+<span class="material-symbols-outlined text-md">add</span>
+                Add New Endpoint
+            </button>
+</div>
+<div class="p-sm mb-lg">
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-label-md text-label-md">Support</span>
+</a>
+<a class="flex items-center gap-md px-md py-sm text-on-surface-variant hover:bg-surface-container-low transition-colors rounded-lg group" href="#">
+<span class="material-symbols-outlined">person</span>
+<span class="font-label-md text-label-md">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Area -->
+<main class="ml-[260px] flex flex-col min-h-screen relative">
+<!-- TopAppBar Component -->
+<header class="h-16 sticky top-0 right-0 left-[260px] bg-surface flex justify-between items-center px-lg z-40">
+<div class="flex items-center gap-xl flex-1">
+<div class="flex items-center bg-surface-container-low rounded-full px-md py-xs flex-1 max-w-2xl border border-outline-variant ml-xl">
+<span class="material-symbols-outlined text-outline text-md mr-sm">search</span>
+<input class="bg-transparent border-none focus:ring-0 text-body-sm w-full" placeholder="Search archive mappings..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-lg">
+<nav class="flex gap-lg">
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Docs</a>
+<a class="font-label-md text-label-md text-on-surface-variant hover:text-on-surface transition-colors" href="#">Logs</a>
+<a class="font-label-md text-label-md text-primary border-b-2 border-primary pb-sm mt-[2px]" href="#">Alerts</a>
+</nav>
+<div class="h-6 w-[1px] bg-outline-variant"></div>
+<div class="flex items-center gap-md">
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">notifications</button>
+<button class="material-symbols-outlined text-on-surface-variant hover:text-primary transition-colors">help</button>
+<div class="w-8 h-8 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<img alt="User Profile" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDXjfr-Upf6udV3Y5UixDu2gMjxkTrANKXueYeaJM1DlrT67TARk2RX8GIYFjFXDm8iR4v6B9oyDEHKTfxDVani0AIjF4rENTA_BlO30qVv7WGw7OrOcOPT22SXXtWnuRVxVXBefRilEOt_yF_-0kZyMPO5wU2N9xQOLY3W5bNybJShudCWT1ENVZpeK_9tfg3EhO5H2QH2F2AMniYZD5B0rM7svlkrf8v1I0OyeZceZvVuBBefc3Lw70iurrGZtU3pAENfp3A8rIQ"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Page Canvas -->
+<div class="p-xl space-y-xl max-w-max_width"><div class="mb-lg">
+<h1 class="font-h1 text-h1 text-on-surface">Journal Mappings</h1>
+</div>
+<!-- Dashboard Stats Header -->
+<div class="grid grid-cols-12 gap-lg items-stretch">
+<!-- Migration Chart Section (IMAGE_12) -->
+<div class="col-span-12 lg:col-span-8 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-level-1">
+<div class="flex justify-between items-center mb-md">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface mb-xs">Migration</h2>
+<p class="text-body-sm text-on-surface-variant">Real-time status of archive synchronization across endpoints.</p>
+</div>
+<div class="flex gap-sm">
+<span class="flex items-center gap-xs text-label-sm font-label-sm"><span class="w-2 h-2 rounded-full bg-primary"></span> Migrated</span>
+<span class="flex items-center gap-xs text-label-sm font-label-sm"><span class="w-2 h-2 rounded-full bg-outline-variant"></span> Remaining</span>
+</div>
+</div>
+<div class="h-48 w-full bg-surface-container rounded-lg overflow-hidden relative">
+<img class="w-full h-full object-cover opacity-90" src="https://lh3.googleusercontent.com/aida/ADBb0uhZAYTsEzLwfLskc_3F_3Alf_A2VWT_He5rgdxCTKlaUsGdHzkYSvAEsJ2JI65OMGRc-MBoHYmbI-0u8aPjGTjd8M8ju2BIwiehqripz5Y_0qc-5LOU4pyzb3s-qkYqRJwV5DkB72nLtur4OOSomfJd0EGbtSIYis4w5rSfk37ubSxqyUSKYMszh1tuh5oF9k1-TquyPKKkxiNsC_MWefjJsYH-lD4Z_4aDctf5UP553mh3fuTLGFAw_7PT6snm-OEBA9rqYEKx"/>
+</div>
+</div>
+<!-- KPI Cards Section (IMAGE_12) -->
+<div class="col-span-12 lg:col-span-4 flex flex-col gap-lg">
+<div class="flex-1 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-level-1 flex flex-col justify-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wide">Migrated Items</span>
+<div class="flex items-baseline gap-sm mt-xs"><span class="font-h1 text-h1 text-primary">977,412</span></div>
+</div>
+<div class="flex-1 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-level-1 flex flex-col justify-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wide">Total Items</span>
+<div class="flex items-baseline gap-sm mt-xs">
+<span class="font-h1 text-h1 text-on-surface">977,412</span>
+</div>
+</div>
+<div class="flex-1 bg-surface-container-lowest p-lg rounded-xl border border-outline-variant card-level-1 flex flex-col justify-center">
+<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wide">Average Item Size</span>
+<div class="flex items-baseline gap-sm mt-xs">
+<span class="font-h1 text-h1 text-on-surface">109.654 KB</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Table Section Container -->
+<div class="bg-surface-container-lowest rounded-xl border border-outline-variant card-level-1 overflow-hidden">
+<!-- Tab Selection (IMAGE_12 Style) -->
+<div class="flex items-center border-b border-outline-variant px-lg bg-surface-container-low/50">
+<button class="px-lg py-md border-b-2 border-primary text-primary font-label-md text-label-md transition-colors">
+                        Active
+                    </button>
+<button class="px-lg py-md border-b-2 border-transparent text-on-surface-variant hover:text-on-surface font-label-md text-label-md transition-colors">
+                        Finished
+                    </button>
+<div class="flex-1"></div>
+<div class="flex items-center gap-md">
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-label-sm font-label-sm hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-md">filter_alt</span> Filter
+                        </button>
+<button class="flex items-center gap-xs px-md py-sm bg-surface-container-lowest border border-outline-variant rounded-lg text-label-sm font-label-sm hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-md">download</span> Export
+                        </button>
+</div>
+</div>
+<!-- Replace Table design with SCREEN_21 Style -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/30 border-b border-outline-variant">
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Id</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Archive Name</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Progress</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Total Items</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Collected Items</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Migrated Items</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Failed Items</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Delta</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Last Success</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Created</th>
+<th class="px-lg py-md font-label-md text-label-md text-on-surface-variant">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant"><!-- Row 1 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-md font-label-md text-label-md text-primary">58</td>
+<td class="px-lg py-md font-label-md text-label-md text-on-surface font-semibold">LargeJournal</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 100%"></div>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">100%</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">755,961</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">755,961</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">755,961</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">0</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">0</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">30.10.2024, 20:59:55</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">30.10.2024, 14:46:16</td>
+<td class="px-lg py-md">
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="px-lg py-md font-label-md text-label-md text-primary">62</td>
+<td class="px-lg py-md font-label-md text-label-md text-on-surface font-semibold">Journal EV12 01</td>
+<td class="px-lg py-md">
+<div class="flex items-center gap-sm">
+<div class="w-24 h-1.5 bg-surface-container rounded-full overflow-hidden">
+<div class="h-full bg-primary" style="width: 100%"></div>
+</div>
+<span class="text-label-sm font-label-sm text-on-surface-variant">100%</span>
+</div>
+</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">221,451</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">221,451</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">221,451</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">0</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">0</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">30.12.2024, 17:40:59</td>
+<td class="px-lg py-md font-body-sm text-body-sm text-on-surface-variant">30.12.2024, 16:16:02</td>
+<td class="px-lg py-md">
+<button class="material-symbols-outlined text-outline group-hover:text-primary transition-colors">more_vert</button>
+</td>
+</tr></tbody>
+</table>
+</div>
+<!-- Table Footer/Pagination -->
+<div class="px-lg py-md bg-surface-container-low/30 border-t border-outline-variant flex items-center justify-between">
+<span class="text-body-sm text-on-surface-variant font-body-sm">Showing 1 to 2 of 2 entries</span>
+<div class="flex gap-xs">
+<button class="p-sm rounded-lg border border-outline-variant hover:bg-surface-container-high disabled:opacity-50 transition-colors" disabled="">
+<span class="material-symbols-outlined text-md">chevron_left</span>
+</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg bg-primary text-on-primary font-label-md">1</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high font-label-md transition-colors">2</button>
+<button class="w-10 h-10 flex items-center justify-center rounded-lg border border-outline-variant hover:bg-surface-container-high font-label-md transition-colors">3</button>
+<button class="p-sm rounded-lg border border-outline-variant hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined text-md">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Contextual Info Banner -->
+<div class="bg-blue-50 border border-blue-100 rounded-xl p-lg flex items-start gap-md">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">info</span>
+<div>
+<h4 class="font-label-md text-label-md text-primary mb-xs">Active Mapping Strategy</h4>
+<p class="text-body-sm text-on-secondary-container">All active archive mappings are currently utilizing the 'Sequential Batching' migration strategy. If throughput falls below 50MB/s, consider adjusting agent deployment density in the Environments module.</p>
+</div>
+</div>
+</div>
+</main>
+</body></html>
