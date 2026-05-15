@@ -230,22 +230,22 @@
     ${group('administration', 'manage_accounts', 'Administration', adminOpen)}
     ${collapseStart(adminOpen)}
 
-      ${subGroup('admin_identity', 'Identitätsverwaltung', adminIdOpen)}
+      ${subGroup('admin_identity', 'Identity Management', adminIdOpen)}
       ${collapseStart(adminIdOpen)}
-        ${subsub('#', 'admin_org_units', 'Organisationseinheiten')}
-        ${subsub('../roles_design_sync/roles_design_sync.html', 'admin_roles', 'Rollen')}
-        ${subsub('../users_design_sync/users_design_sync.html', 'admin_users', 'Benutzer')}
-        ${subsub('../security_logs_design_sync/security_logs_design_sync.html', 'admin_security_log', 'Sicherheitsprotokoll')}
+        ${subsub('#', 'admin_org_units', 'Org Units')}
+        ${subsub('../roles_design_sync/roles_design_sync.html', 'admin_roles', 'Roles')}
+        ${subsub('../users_design_sync/users_design_sync.html', 'admin_users', 'Users')}
+        ${subsub('../security_logs_design_sync/security_logs_design_sync.html', 'admin_security_log', 'Security Log')}
       ${collapseEnd()}
 
-      ${subGroup('admin_lang', 'Sprachverwaltung', adminLgOpen)}
+      ${subGroup('admin_lang', 'Language Management', adminLgOpen)}
       ${collapseStart(adminLgOpen)}
-        ${subsub('../languages_improved_readability_card_view/languages_improved_readability_card_view.html', 'admin_languages', 'Sprachen')}
-        ${subsub('../languages_texte/languages_texte.html', 'admin_texts', 'Texte')}
+        ${subsub('../languages_improved_readability_card_view/languages_improved_readability_card_view.html', 'admin_languages', 'Languages')}
+        ${subsub('../languages_texte/languages_texte.html', 'admin_texts', 'Texts')}
       ${collapseEnd()}
 
-      ${sub('../text_templates_localization_sync/text_templates_localization_sync.html', 'admin_templates', 'Textvorlagen')}
-      ${sub('../settings_management_maintenance_update/settings_management_maintenance_update.html', 'admin_settings', 'Einstellungen')}
+      ${sub('../text_templates_localization_sync/text_templates_localization_sync.html', 'admin_templates', 'Text Templates')}
+      ${sub('../settings_management_maintenance_update/settings_management_maintenance_update.html', 'admin_settings', 'Settings')}
     ${collapseEnd()}
 
   </ul>
