@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="de" data-cnds-theme="light">
+<head>
+  <script>
+    // Suppress benign ResizeObserver loop warning (must run before any CSS loads)
+    window.addEventListener('error', e => {
+      if (e.message && e.message.includes('ResizeObserver')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return true;
+      }
+    }, true);
+    window.onerror = function(msg) {
+      if (typeof msg === 'string' && msg.includes('ResizeObserver')) return true;
+    };
+    const _origError = console.error;
+    console.error = function(...args) {
+      if (args[0] && String(args[0]).includes('ResizeObserver')) return;
+      _origError.apply(console, args);
+    };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nimbus · Gap Analysis vs. Designer Mockup</title>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --doc-bg: #faf9f7;
+      --doc-card: #ffffff;
+      --doc-border: #ebe9e4;
+      --doc-text: #1a1a1a;
+      --doc-mute: #6b6b6b;
+      --doc-accent: var(--cnds-product-expireon-blue-500, #4e45d6);
+      --doc-accent-soft: var(--cnds-product-expireon-blue-50, #efeefb);
+      --doc-success: #2d682f;
+      --doc-success-soft: #e6f4e7;
+      --doc-warn: #b85c01;
+      --doc-warn-soft: #fff5eb;
+      --doc-danger: #942700;
+      --doc-danger-soft: #ffe5da;
+      --doc-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-text); font-family: "Nunito Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { font-size: 15px; line-height: 1.55; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+    .doc { max-width: 1180px; margin: 0 auto; padding: 56px 32px 80px; }
+    .doc > * + * { margin-top: 52px; }
+
+    /* Hero */
+    .hero { padding-bottom: 30px; border-bottom: 1px solid var(--doc-border); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--doc-accent); padding: 6px 12px; background: var(--doc-accent-soft); border-radius: 999px; }
+    .hero h1 { font-size: 46px; line-height: 1.05; letter-spacing: -0.025em; margin: 16px 0 10px; font-weight: 800; }
+    .hero p.lead { font-size: 17.5px; line-height: 1.55; color: var(--doc-mute); max-width: 760px; margin: 0; }
+
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--doc-border); }
+    .sec-num { font-family: var(--doc-mono); font-size: 12px; font-weight: 600; color: var(--doc-accent); padding-top: 4px; }
+    .sec-head h2 { margin: 0; font-size: 28px; letter-spacing: -0.02em; font-weight: 700; }
+    .sec-head .tag { margin-left: auto; font-size: 12px; color: var(--doc-mute); }
+
+    /* Score */
+    .score-row {
+      display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px;
+      margin-bottom: 28px;
+    }
+    .score-card {
+      padding: 22px 24px;
+      background: var(--doc-card);
+      border: 1px solid var(--doc-border);
+      border-radius: 12px;
+    }
+    .score-card .num {
+      font-size: 44px; line-height: 1; font-weight: 800; letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+    .score-card.critical .num { color: var(--doc-danger); }
+    .score-card.warn .num { color: var(--doc-warn); }
+    .score-card.info .num { color: var(--doc-accent); }
+    .score-card .label {
+      font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--doc-mute);
+    }
+    .score-card .sub {
+      font-size: 13.5px; color: var(--doc-mute); margin-top: 4px; line-height: 1.4;
+    }
+
+    /* Gap items */
+    .gap-list { display: grid; gap: 14px; }
+    .gap {
+      display: grid;
+      grid-template-columns: 56px 1fr 130px;
+      gap: 18px;
+      padding: 20px 22px;
+      background: var(--doc-card);
+      border: 1px solid var(--doc-border);
+      border-radius: 12px;
+      align-items: start;
+    }
+    .gap .num {
+      width: 36px; height: 36px;
+      border-radius: 999px;
+      background: var(--doc-accent-soft);
+      color: var(--doc-accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--doc-mono); font-size: 12.5px; font-weight: 700;
+    }
+    .gap .body h3 {
+      margin: 0 0 6px; font-size: 16px; font-weight: 700;
+    }
+    .gap .body .blurb { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: #2b2b2b; }
+    .gap .body .blurb code { font-family: var(--doc-mono); font-size: 12.5px; padding: 1px 5px; border-radius: 3px; background: rgba(0,0,0,0.04); color: var(--doc-accent); }
+    .gap .body .compare { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 8px; }
+    .gap .body .compare div {
+      padding: 8px 10px; font-size: 12.5px;
+      border: 1px solid var(--doc-border); border-radius: 6px;
+    }
+    .gap .body .compare .has-it { background: var(--doc-success-soft); border-color: #c8e3cc; }
+    .gap .body .compare .missing { background: #fffaf4; border-color: #f3d9c1; }
+    .gap .body .compare .label {
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      display: block; margin-bottom: 4px;
+    }
+    .gap .body .compare .has-it .label { color: var(--doc-success); }
+    .gap .body .compare .missing .label { color: var(--doc-warn); }
+
+    .gap .severity {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 6px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      align-self: start;
+      white-space: nowrap;
+    }
+    .sev-critical { background: var(--doc-danger-soft); color: var(--doc-danger); }
+    .sev-major { background: var(--doc-warn-soft); color: var(--doc-warn); }
+    .sev-minor { background: var(--doc-accent-soft); color: var(--doc-accent); }
+    .sev-conflict { background: #f3e6f8; color: #6f1aa1; }
+
+    /* Group headers */
+    .group-head {
+      font-size: 13px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      color: var(--doc-mute);
+      padding: 16px 0 8px;
+      display: flex; align-items: center; gap: 10px;
+    }
+    .group-head .count {
+      font-family: var(--doc-mono); font-size: 11px; font-weight: 600;
+      padding: 2px 8px; border-radius: 999px;
+      background: rgba(0,0,0,0.04); color: var(--doc-mute);
+    }
+    .group-head::before, .group-head::after {
+      content: ''; flex: 0; min-width: 28px; height: 1px; background: var(--doc-border);
+    }
+    .group-head::before { flex: 0; }
+
+    /* Take */
+    .take {
+      padding: 24px 28px;
+      background: linear-gradient(135deg, var(--doc-accent) 0%, var(--cnds-product-expireon-blue-700, #241e89) 100%);
+      color: #fff;
+      border-radius: 14px;
+    }
+    .take h3 { margin: 0 0 8px; font-size: 19px; }
+    .take p { margin: 0; font-size: 14.5px; line-height: 1.55; opacity: 0.92; }
+    .take p + p { margin-top: 10px; }
+    .take strong { background: rgba(255,255,255,0.16); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .doc { padding: 36px 18px 60px; }
+      .gap { grid-template-columns: 40px 1fr; }
+      .gap .severity { grid-column: 2; justify-self: start; }
+      .gap .body .compare { grid-template-columns: 1fr; }
+      .score-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="doc">
+
+    <header class="hero" data-screen-label="00 Cover">
+      <span class="hero-eyebrow"><span class="material-symbols-outlined" style="font-size:14px">find_in_page</span> Nimbus · Gap Analysis</span>
+      <h1>What Nimbus<br>doesn’t (yet) cover.</h1>
+      <p class="lead">
+        The designer mockup contains <strong>14 patterns</strong> that the official Nimbus docs either don’t address at all,
+        cover only partially, or contradict outright. These gaps aren’t „Nimbus is bad“ — they’re „Nimbus needs an
+        application-layer extension“. For the NextGen AdminConsole we’ve already built every one of them into
+        <code style="font-family:var(--doc-mono);font-size:14px;background:rgba(0,0,0,0.04);padding:1px 6px;border-radius:4px">_shared/expireon-app.css</code> — the designer effectively predicted
+        what Nimbus needs next.
+      </p>
+    </header>
+
+    <!-- ─────────────────── SUMMARY ─────────────────── -->
+    <section data-screen-label="01 Summary">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2>At a glance</h2>
+        <span class="tag">14 gaps in 4 categories</span>
+      </div>
+
+      <div class="score-row">
+        <div class="score-card critical">
+          <div class="num">6</div>
+          <div class="label">Critical Gaps</div>
+          <div class="sub">Patterns every admin UI needs — completely undocumented</div>
+        </div>
+        <div class="score-card warn">
+          <div class="num">5</div>
+          <div class="label">Major Gaps</div>
+          <div class="sub">Partially documented or pattern application unclear</div>
+        </div>
+        <div class="score-card info">
+          <div class="num">3</div>
+          <div class="label">Conflicts</div>
+          <div class="sub">Nimbus says A, designer does B</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── CRITICAL ─────────────────── -->
+    <section data-screen-label="02 Critical">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>Critical Gaps</h2>
+        <span class="tag">every admin page needs them — not in Nimbus</span>
+      </div>
+
+      <div class="gap-list">
+
+        <div class="gap">
+          <span class="num">G1</span>
+          <div class="body">
+            <h3>KPI / Stat Card pattern</h3>
+            <p class="blurb">Four big numbers up top — the first visual anchor on any datatable page. Mockup shows a centered mega-number with the label above and a delta indicator below.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span>Only generic <code>.card</code> + <code>.card-body</code>. No KPI-specific tokens for number size, centering, delta indicator.</div>
+              <div class="has-it"><span class="label">We built</span><code>.kpi-strip</code>, <code>.kpi</code>, <code>.kpi-value</code> (3.25rem), <code>.kpi-delta.up/down/neutral</code></div>
+            </div>
+          </div>
+          <span class="severity sev-critical">Critical</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G2</span>
+          <div class="body">
+            <h3>App shell composition</h3>
+            <p class="blurb">How sidenav + topnav + main scroll area + canvas margins fit together — with the right heights and z-index layers.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span>Components documented individually. No layout template showing how they combine — header height, sidenav width variable, body scrolling.</div>
+              <div class="has-it"><span class="label">We built</span><code>.app-main</code>, <code>.app-scroll</code>, <code>.app-canvas</code> with max-width 1440. Sidenav override CSS in <code>_shared/sidenav.js</code>.</div>
+            </div>
+          </div>
+          <span class="severity sev-critical">Critical</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G3</span>
+          <div class="body">
+            <h3>Avatar component</h3>
+            <p class="blurb">Every user list, every audit entry, every comment UI needs avatars. Mockup shows purple-gradient bubbles with initials.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span>Not documented. There’s <code>.flags</code> (country icons) — but no user-avatar component with initials, sizes, or a status indicator dot.</div>
+              <div class="has-it"><span class="label">We built</span><code>.avatar-bubble</code> with a gradient BG sourced from the Expireon token. Plus <code>.icon-tile</code> as a variant for entity icons.</div>
+            </div>
+          </div>
+          <span class="severity sev-critical">Critical</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G4</span>
+          <div class="body">
+            <h3>Datatable toolbar (compound)</h3>
+            <p class="blurb">Search field + Search button + filter funnel + Show dropdown + view-toggle + Export dropdown + primary CTA in one row. A complex compound pattern.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span><code>toolbars.css</code> exists (basic layout), but no documented datatable toolbar with that specific control composition.</div>
+              <div class="has-it"><span class="label">We built</span><code>.toolbar-v2</code> with all sub-patterns: <code>.toolbar-search</code>, <code>.icon-funnel-btn</code>, <code>.show-control</code>, <code>.view-toggle</code>.</div>
+            </div>
+          </div>
+          <span class="severity sev-critical">Critical</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G5</span>
+          <div class="body">
+            <h3>Pagination · rows-per-page</h3>
+            <p class="blurb">„Rows per page: 10 ▼ · 1–10 of 100 · « ‹ › »“ — the standard pagination of any modern datatable.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span>Only Bootstrap-compatible numbered <code>.pagination</code> (1/2/3) and a short <code>.pagination-toolbar</code>. No rows-per-page + range + arrows-only.</div>
+              <div class="has-it"><span class="label">We built</span><code>.pager</code> + <code>.pager-rpp</code> + <code>.pager-range</code> + <code>.pager-arrows</code>. A new component altogether.</div>
+            </div>
+          </div>
+          <span class="severity sev-critical">Critical</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G6</span>
+          <div class="body">
+            <h3>View toggle: Table ↔ Cards</h3>
+            <p class="blurb">Two connected icon buttons, one active. Standard for lists that can also render as a card grid — relevant for the entire P2 family.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span>Not documented. <code>buttongroup.html</code> exists in the docs, but no toggle-group pattern with an active state.</div>
+              <div class="has-it"><span class="label">We built</span><code>.view-toggle</code> with aria-label + JS active-state sync. Extensible to further view modes.</div>
+            </div>
+          </div>
+          <span class="severity sev-critical">Critical</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─────────────────── MAJOR ─────────────────── -->
+    <section data-screen-label="03 Major">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2>Major Gaps</h2>
+        <span class="tag">partially documented or application unclear</span>
+      </div>
+
+      <div class="gap-list">
+
+        <div class="gap">
+          <span class="num">G7</span>
+          <div class="body">
+            <h3>Section strip / caps locator</h3>
+            <p class="blurb">„ON-PREM | ENDPOINTS“ as a slim caps strip at the top of the canvas. Replaces the classic breadcrumb.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span>Has <code>breadcrumb.css</code> (Bootstrap style with chevrons). No caps-strip pattern for the page locator.</div>
+              <div class="has-it"><span class="label">We built</span><code>.section-strip</code> with 0.18em letter-spacing + divider.</div>
+            </div>
+          </div>
+          <span class="severity sev-major">Major</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G8</span>
+          <div class="body">
+            <h3>Page eyebrow (instead of H1)</h3>
+            <p class="blurb">All-caps headline 0.875rem as the only page headline. Typographically unusual but explicitly chosen in the mockup.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span>Has heading modifiers (<code>.bold</code>, <code>.light</code>) for <code>h1</code>–<code>h6</code>. No „eyebrow as page title“ pattern. Doesn’t appear in the docs either.</div>
+              <div class="has-it"><span class="label">We built</span><code>.page-eyebrow h1</code> with 0.12em letter-spacing + uppercase.</div>
+            </div>
+          </div>
+          <span class="severity sev-major">Major</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G9</span>
+          <div class="body">
+            <h3>Filter row (always-on) + active chips</h3>
+            <p class="blurb">Filter selects permanently visible below the toolbar + active filters as removable chips.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span><code>chips.css</code> exists (basic chip), but no „active filter as chip“ UX pattern and no filter-row pattern.</div>
+              <div class="has-it"><span class="label">We built</span><code>.filter-row</code> + <code>.filter-chip</code> with close button.</div>
+            </div>
+          </div>
+          <span class="severity sev-major">Major</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G10</span>
+          <div class="body">
+            <h3>Split button / „Export as ▼“ dropdown</h3>
+            <p class="blurb">Secondary button with a caret indicator for format selection. A classic SaaS pattern.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span><code>buttongroup.html</code> + <code>dropdown.css</code> exist, but no documented split-/dropdown-button pattern.</div>
+              <div class="has-it"><span class="label">We built</span><code>.btn-dropdown</code> with arrow_drop_down material icon.</div>
+            </div>
+          </div>
+          <span class="severity sev-major">Major</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">G11</span>
+          <div class="body">
+            <h3>Datatable v2 — header &amp; cell tokens</h3>
+            <p class="blurb">Column headers in tiny caps with 0.08em letter-spacing, inline sort indicator, compact 11px headers. First column with icon tile + two-line stack.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus</span><code>tables.css</code> documents the base table + <code>.table-hover</code>. No spec for caps-header typography, sort indicator, stack cells, mono cells.</div>
+              <div class="has-it"><span class="label">We built</span><code>.th-sort</code>, <code>.cell-stack</code>, <code>.cell-primary</code>, <code>.cell-secondary</code>, <code>.cell-mono</code>, <code>.cell-avatar</code>.</div>
+            </div>
+          </div>
+          <span class="severity sev-major">Major</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─────────────────── CONFLICTS ─────────────────── -->
+    <section data-screen-label="04 Conflicts">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <h2>Conflicts — Nimbus says A, designer does B</h2>
+        <span class="tag">needs to be resolved</span>
+      </div>
+
+      <div class="gap-list">
+
+        <div class="gap">
+          <span class="num">C1</span>
+          <div class="body">
+            <h3>Sub-nav active state: stripe vs. pill</h3>
+            <p class="blurb">Nimbus shows in <code>cnds-sidenav.html</code> a <strong>3 px accent stripe on the left</strong> (<code>box-shadow: inset 3px 0 0 var(--cnds-product-accent)</code>) + soft background. The designer mockup uses a <strong>full rounded pill background</strong> instead, no stripe.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus official</span>3 px stripe on the left + soft BG. Currently implemented in our <code>_shared/sidenav.js</code>.</div>
+              <div class="missing"><span class="label">Designer mockup</span>Full pill with rounded background, no stripe.</div>
+            </div>
+          </div>
+          <span class="severity sev-conflict">Conflict</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">C2</span>
+          <div class="body">
+            <h3>Status: badge pill vs. colored text</h3>
+            <p class="blurb">Nimbus <code>badges.css</code> defines <code>.badge-dot.badge-success</code> as a pill with BG + dot. Designer mockup shows status as <strong>colored text with a small dot, without pill background</strong>.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus official</span>Pill + dot + text with BG tint.</div>
+              <div class="missing"><span class="label">Designer mockup</span>Only colored text + dot, no pill BG. → We built a <code>.status</code> class as the hybrid.</div>
+            </div>
+          </div>
+          <span class="severity sev-conflict">Conflict</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">C3</span>
+          <div class="body">
+            <h3>Header logo size: 40 px (spec) vs. 32 px (mockup)</h3>
+            <p class="blurb">Nimbus <code>sidenav.css</code> specifies <code>.sidenav-header img { max-height: 40px }</code>. The designer mockup shows the Expireon logo noticeably more compact — around 26–30 px.</p>
+            <div class="compare">
+              <div class="missing"><span class="label">Nimbus official</span><code>max-height: 40px</code></div>
+              <div class="missing"><span class="label">Designer mockup</span>~28 px tall — we use 32 px in the current sidenav. Slightly off.</div>
+            </div>
+          </div>
+          <span class="severity sev-conflict">Conflict</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─────────────────── MY TAKE ─────────────────── -->
+    <section data-screen-label="05 My Take">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <h2>What this means for Nimbus</h2>
+      </div>
+
+      <div class="take">
+        <h3>Nimbus is a solid foundation DS — but not an app DS.</h3>
+        <p>
+          What Nimbus delivers: <strong>tokens, primitives, base components</strong> (buttons, cards, tables,
+          badges, forms, alerts, modals). That part is genuinely clean and consistent. What Nimbus <em>doesn’t</em> deliver:
+          <strong>application patterns</strong> — the compositions on top of the primitives that turn into an actual SaaS admin UI.
+        </p>
+        <p>
+          The designer essentially <strong>predicted what Nimbus needs as an application layer</strong>.
+          Every single gap on this list should land in Nimbus v2 (or a Nimbus-Apps add-on), because the other
+          Cloudficient apps (CaseFusion, Hyperlize) need exactly the same patterns.
+        </p>
+        <p>
+          Our <code style="font-family:var(--doc-mono);font-size:13px;background:rgba(255,255,255,0.16);padding:1px 6px;border-radius:4px">_shared/expireon-app.css</code> is effectively <strong>a first draft of the Nimbus application layer</strong> —
+          14 patterns I’d hand back to the Nimbus maintainers.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─────────────────── PROPOSAL ─────────────────── -->
+    <section data-screen-label="06 Proposal">
+      <div class="sec-head">
+        <span class="sec-num">06</span>
+        <h2>Proposal</h2>
+      </div>
+      <ol style="font-size:15px;line-height:1.7;color:#2b2b2b;max-width:780px;padding-left:1.4em;">
+        <li><strong>Pass this list to Scott Williams (Nimbus author).</strong> Plus our finished CSS snippets from <code>expireon-app.css</code> as a reference implementation.</li>
+        <li><strong>Extend the Nimbus roadmap</strong> with an <em>„Application Patterns“</em> layer: KPI cards, app shell, datatable v2, pager v2, filter row, avatar, view toggle, split button, section strip.</li>
+        <li><strong>Resolve the 3 conflicts explicitly</strong> — either the designer is right (then update the Nimbus docs) or Nimbus is right (then update the mockup). Probably case by case: the sub-nav pill looks nicer, but status text without a pill is objectively cleaner.</li>
+        <li><strong>Until that happens</strong>: we live with <code>expireon-app.css</code> as the application layer for Expireon. Other Cloudficient products could adopt the stylesheet as-is.</li>
+      </ol>
+    </section>
+
+  </main>
+</body>
+</html>

@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en" data-cnds-theme="light">
+<head>
+  <script>
+    window.addEventListener('error', e => {
+      if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }
+    }, true);
+    const _origError = console.error;
+    console.error = function(...args) {
+      if (args[0] && String(args[0]).includes('ResizeObserver')) return;
+      _origError.apply(console, args);
+    };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P2 · Custodians + Detail + 6 entity screens</title>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --doc-bg: #faf9f7;
+      --doc-card: #ffffff;
+      --doc-border: #ebe9e4;
+      --doc-text: #1a1a1a;
+      --doc-mute: #6b6b6b;
+      --doc-accent: var(--cnds-product-expireon-blue-500, #4e45d6);
+      --doc-accent-soft: var(--cnds-product-expireon-blue-50, #efeefb);
+      --doc-success: #2d682f;
+      --doc-success-soft: #e6f4e7;
+      --doc-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-text); font-family: "Nunito Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { font-size: 15px; line-height: 1.55; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+    .doc { max-width: 1280px; margin: 0 auto; padding: 56px 32px 80px; }
+    .doc > * + * { margin-top: 48px; }
+
+    .hero { padding-bottom: 28px; border-bottom: 1px solid var(--doc-border); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--doc-success); padding: 6px 12px; background: var(--doc-success-soft); border-radius: 999px; }
+    .hero h1 { font-size: 46px; line-height: 1.05; letter-spacing: -0.025em; margin: 16px 0 10px; font-weight: 800; }
+    .hero p.lead { font-size: 17.5px; line-height: 1.55; color: var(--doc-mute); max-width: 780px; margin: 0; }
+
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--doc-border); }
+    .sec-num { font-family: var(--doc-mono); font-size: 12px; font-weight: 600; color: var(--doc-accent); padding-top: 4px; }
+    .sec-head h2 { margin: 0; font-size: 28px; letter-spacing: -0.02em; font-weight: 700; }
+    .sec-head .tag { margin-left: auto; font-size: 12px; color: var(--doc-mute); }
+
+    .applied { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+    .applied-card { padding: 18px 20px; background: var(--doc-card); border: 1px solid var(--doc-border); border-radius: 10px; }
+    .applied-card h4 { margin: 0 0 4px; font-size: 14.5px; }
+    .applied-card .tag { font-family: var(--doc-mono); font-size: 11px; font-weight: 700; padding: 2px 7px; border-radius: 4px; background: var(--doc-accent-soft); color: var(--doc-accent); display: inline-block; margin-bottom: 6px; }
+    .applied-card p { margin: 0; font-size: 13px; color: var(--doc-mute); line-height: 1.5; }
+
+    .preview-card {
+      border: 1px solid var(--doc-border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+      box-shadow: 0 4px 24px rgba(78, 69, 214, 0.08);
+      border-color: var(--cnds-product-expireon-blue-100, #dbd9f7);
+    }
+    .preview-chrome {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px;
+      background: #f7f5f0;
+      border-bottom: 1px solid var(--doc-border);
+      font-size: 12.5px;
+    }
+    .preview-chrome .dots { display: flex; gap: 5px; }
+    .preview-chrome .dot { width: 11px; height: 11px; border-radius: 999px; background: rgba(0,0,0,0.12); }
+    .preview-chrome .url {
+      flex: 1; text-align: center;
+      font-family: var(--doc-mono); color: var(--doc-mute);
+      background: rgba(0,0,0,0.04); padding: 4px 12px; border-radius: 6px;
+      max-width: 480px; margin: 0 auto;
+    }
+    .preview-chrome a {
+      font-size: 12.5px; font-weight: 600; color: var(--doc-accent); text-decoration: none;
+      display: inline-flex; align-items: center; gap: 4px;
+    }
+    .preview-chrome a:hover { text-decoration: underline; }
+    .preview-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid var(--doc-border);
+      background: linear-gradient(to bottom, #fbfaf8, #fff);
+    }
+    .preview-meta h3 { margin: 0; font-size: 16px; font-weight: 700; }
+    .preview-meta p { margin: 2px 0 0; font-size: 12.5px; color: var(--doc-mute); }
+    .preview-card iframe { display: block; width: 100%; height: 880px; border: 0; background: #fff; }
+
+    .footer-cta {
+      margin-top: 56px;
+      padding: 30px 36px;
+      background: linear-gradient(135deg, var(--doc-accent) 0%, var(--cnds-product-expireon-blue-700, #241e89) 100%);
+      color: #fff; border-radius: 14px;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+    }
+    .footer-cta h3 { margin: 0 0 6px; font-size: 20px; }
+    .footer-cta p { margin: 0; opacity: 0.9; font-size: 14px; }
+    .footer-cta .actions { display: flex; gap: 10px; }
+    .footer-cta .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 16px; border-radius: 8px;
+      font-size: 13.5px; font-weight: 700; text-decoration: none;
+      background: rgba(255,255,255,0.16); color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .footer-cta .btn:hover { background: rgba(255,255,255,0.26); }
+    .footer-cta .btn.primary { background: #fff; color: var(--doc-accent); border-color: #fff; }
+
+    @media (max-width: 1000px) {
+      .doc { padding: 36px 18px 60px; }
+      .applied { grid-template-columns: 1fr; }
+      .preview-card iframe { height: 640px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="doc">
+
+    <header class="hero" data-screen-label="00 Cover">
+      <span class="hero-eyebrow"><span class="material-symbols-outlined" style="font-size:14px">view_quilt</span> P2 · complete · 8 screens</span>
+      <h1>People-Rows, Entity-Cards,<br>and one Detail screen.</h1>
+      <p class="lead">
+        P2 is in: 7 list screens + 1 detail screen, all running off the same shared CSS. <strong>N6 People-Row</strong>
+        for people and small entity lists, <strong>Entity-Card Grid</strong> for highly-visual lists (Modules, Languages,
+        Retention Policies), and <strong>N5 Two-Column Detail + Sidecard</strong> for single-record overview screens.
+        Sourced from CaseFusion, expressed in <code style="font-family:var(--doc-mono);font-size:14px;background:rgba(0,0,0,0.04);padding:1px 6px;border-radius:4px">_shared/expireon-app.css</code>.
+      </p>
+    </header>
+
+    <section data-screen-label="01 Patterns applied">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2>Patterns applied across P2</h2>
+        <span class="tag">5 building blocks · 8 screens</span>
+      </div>
+
+      <div class="applied">
+        <div class="applied-card">
+          <span class="tag">N6</span>
+          <h4>People-Row Card</h4>
+          <p>Custodians (people) · Containers · Collaboration Links · Internal Domains — with a square <code style="font-size:12px">.entity-icon</code> variant for non-person entities.</p>
+        </div>
+        <div class="applied-card">
+          <span class="tag">Entity Grid</span>
+          <h4>3- or 4-col Entity Cards</h4>
+          <p>Modules · Retention Categories (3-col) and Languages (4-col with flag-icons + progress bars). For lists where each item has a strong visual identity.</p>
+        </div>
+        <div class="applied-card">
+          <span class="tag">N5</span>
+          <h4>Two-Column Detail + Sidecard</h4>
+          <p>Endpoint Detail — main card with record meta + V4 text-link footer; narrow sidecard with Linked Modules + numeric badge + „Deploy Module“ footer link.</p>
+        </div>
+        <div class="applied-card">
+          <span class="tag">V1</span>
+          <h4>KPI Strip Bar</h4>
+          <p>Used on 6 of 8 screens. One container, internal dividers, no per-cell borders. Cleaner than five separate KPI cards.</p>
+        </div>
+        <div class="applied-card">
+          <span class="tag">V4</span>
+          <h4>Text-link footer actions</h4>
+          <p>Uppercase text-links in primary color (with muted/danger variants) replace solid buttons inside cards everywhere a non-primary action lives.</p>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="02 Custodians">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>Custodians · N6 People-Row Card</h2>
+        <span class="tag">people list · the original CaseFusion pattern</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / environments / active-directory / custodians</div>
+          <a href="custodians_management_hybrid_view_cards_in_list_layout/custodians_management_hybrid_view_cards_in_list_layout.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>Custodians</h3>
+            <p>7 people · cards-view active · sort-by + ascending · divider-KPI strip · VIP · Travel · Legal Hold</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="custodians_management_hybrid_view_cards_in_list_layout/custodians_management_hybrid_view_cards_in_list_layout.html" title="Custodians N6"></iframe>
+      </div>
+    </section>
+
+    <section data-screen-label="03 Endpoint Detail">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2>Endpoint Detail · N5 Two-Column + Sidecard</h2>
+        <span class="tag">first single-record detail screen · paired with Endpoints list</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / on-prem / endpoints / nyc-corp-lpt01</div>
+          <a href="endpoint_detail/endpoint_detail.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>NYC-CORP-LPT01 · Endpoint Detail</h3>
+            <p>5 KPIs (divider-strip) · 2-col detail+linked-modules · text-link footers · recent activity table</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="endpoint_detail/endpoint_detail.html" title="Endpoint Detail N5"></iframe>
+      </div>
+    </section>
+
+    <section data-screen-label="04 Modules">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <h2>Modules · Entity Card Grid (3-col)</h2>
+        <span class="tag">deployable services as visual entities</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / on-prem / modules</div>
+          <a href="modules_management_card_view_layout/modules_management_card_view_layout.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>Modules</h3>
+            <p>9 deployable services · colored icon-tiles per category · status text in card-foot</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="modules_management_card_view_layout/modules_management_card_view_layout.html" title="Modules"></iframe>
+      </div>
+    </section>
+
+    <section data-screen-label="05 Languages">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <h2>Languages · Entity Card Grid (4-col)</h2>
+        <span class="tag">flag-icons + progress mini-bars</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / administration / languages</div>
+          <a href="languages_improved_readability_card_view/languages_improved_readability_card_view.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>Languages</h3>
+            <p>12 locales · flag-emoji tile · progress mini-bar · native script in subtitle</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="languages_improved_readability_card_view/languages_improved_readability_card_view.html" title="Languages"></iframe>
+      </div>
+    </section>
+
+    <section data-screen-label="06 Retention">
+      <div class="sec-head">
+        <span class="sec-num">06</span>
+        <h2>Retention Categories · Entity Card Grid</h2>
+        <span class="tag">policy cards with disposition + auto-apply</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / configuration / retention</div>
+          <a href="retention_categories_design_sync/retention_categories_design_sync.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>Retention Categories</h3>
+            <p>9 policies · SOX / SEC / GDPR / Custom · status text + duration tokens</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="retention_categories_design_sync/retention_categories_design_sync.html" title="Retention"></iframe>
+      </div>
+    </section>
+
+    <section data-screen-label="07 Containers">
+      <div class="sec-head">
+        <span class="sec-num">07</span>
+        <h2>Containers · N6 with entity-icon</h2>
+        <span class="tag">archive containers as rows</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / configuration / containers</div>
+          <a href="containers_design_sync/containers_design_sync.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>Containers</h3>
+            <p>7 mailbox/journal/file containers · GDPR tag · sealed legacy · DR mirror</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="containers_design_sync/containers_design_sync.html" title="Containers"></iframe>
+      </div>
+    </section>
+
+    <section data-screen-label="08 Collaboration Links">
+      <div class="sec-head">
+        <span class="sec-num">08</span>
+        <h2>Collaboration Links · N6 with entity-icon</h2>
+        <span class="tag">external sharing links · active/expired states</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / configuration / collaboration-links</div>
+          <a href="collaboration_links_design_sync/collaboration_links_design_sync.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>Collaboration Links</h3>
+            <p>6 sharing links · Active / Expired / One-time tags · hits counter · expiry</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="collaboration_links_design_sync/collaboration_links_design_sync.html" title="Collaboration Links"></iframe>
+      </div>
+    </section>
+
+    <section data-screen-label="09 Internal Domains">
+      <div class="sec-head">
+        <span class="sec-num">09</span>
+        <h2>Internal Domains · N6 with entity-icon</h2>
+        <span class="tag">DNS-style entity list · verification status</span>
+      </div>
+
+      <div class="preview-card">
+        <div class="preview-chrome">
+          <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+          <div class="url">expireon.app / configuration / internal-domains</div>
+          <a href="internal_domains_design_sync/internal_domains_design_sync.html" target="_blank" rel="noopener">
+            <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Fullscreen
+          </a>
+        </div>
+        <div class="preview-meta">
+          <div>
+            <h3>Internal Domains</h3>
+            <p>7 domains · Primary / Active / Legacy tags · DKIM &amp; SPF status</p>
+          </div>
+        </div>
+        <iframe loading="lazy" src="internal_domains_design_sync/internal_domains_design_sync.html" title="Internal Domains"></iframe>
+      </div>
+    </section>
+
+    <div class="footer-cta">
+      <div>
+        <h3>P2 complete. 8 screens shipped on the v3 application layer.</h3>
+        <p>All 26 prototypes (15 datatable from P1 v2 + 8 P2 + 3 misc) now share <code style="font-family:var(--doc-mono);font-size:13px;background:rgba(255,255,255,0.16);padding:1px 6px;border-radius:4px">expireon-app.css</code>.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="CaseFusion Gap Analysis.html">
+          <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span> CaseFusion Analysis
+        </a>
+        <a class="btn" href="P1 Datatables v2.html">
+          <span class="material-symbols-outlined" style="font-size:16px">history</span> P1 v2
+        </a>
+        <a class="btn primary" href="custodians_management_hybrid_view_cards_in_list_layout/custodians_management_hybrid_view_cards_in_list_layout.html" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span> Open Custodians
+        </a>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

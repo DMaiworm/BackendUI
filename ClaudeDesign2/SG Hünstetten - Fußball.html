@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html class="light" lang="de">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Fußball Abteilung | SG Hünstetten</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-error": "#ffffff",
+              "on-background": "#1b1c1c",
+              "on-tertiary-fixed-variant": "#364958",
+              "on-primary": "#ffffff",
+              "secondary-fixed-dim": "#e1c700",
+              "primary": "#052856",
+              "on-primary-container": "#90aae0",
+              "surface-tint": "#445e8f",
+              "background": "#fbf9f8",
+              "outline": "#747780",
+              "primary-container": "#223e6d",
+              "inverse-primary": "#acc7fe",
+              "error": "#ba1a1a",
+              "tertiary-fixed": "#d1e5f8",
+              "on-primary-fixed": "#001a40",
+              "secondary-fixed": "#ffe324",
+              "surface-bright": "#fbf9f8",
+              "primary-fixed": "#d7e2ff",
+              "surface-variant": "#e4e2e1",
+              "tertiary": "#182b39",
+              "on-secondary-fixed-variant": "#514700",
+              "inverse-on-surface": "#f3f0f0",
+              "surface-container-highest": "#e4e2e1",
+              "surface-container-low": "#f6f3f2",
+              "surface-container": "#f0eded",
+              "secondary-container": "#fde000",
+              "tertiary-container": "#2e4150",
+              "on-tertiary-fixed": "#091d2b",
+              "surface-container-high": "#eae8e7",
+              "on-secondary-container": "#706300",
+              "on-primary-fixed-variant": "#2b4676",
+              "on-tertiary": "#ffffff",
+              "secondary": "#6c5e00",
+              "outline-variant": "#c4c6d0",
+              "surface-dim": "#dcd9d9",
+              "on-surface-variant": "#44474f",
+              "on-tertiary-container": "#99adbf",
+              "surface-container-lowest": "#ffffff",
+              "on-surface": "#1b1c1c",
+              "on-secondary-fixed": "#211c00",
+              "tertiary-fixed-dim": "#b5c9dc",
+              "surface": "#fbf9f8",
+              "primary-fixed-dim": "#acc7fe",
+              "inverse-surface": "#303030",
+              "on-secondary": "#ffffff",
+              "error-container": "#ffdad6",
+              "on-error-container": "#93000a"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-gradient {
+            background: radial-gradient(circle at top right, #223e6d 0%, #052856 100%);
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+</style>
+</head>
+<body class="bg-background text-on-background font-body selection:bg-secondary-container selection:text-on-secondary-container">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img').forEach(function(img) {
+    img.addEventListener('error', function() {
+      this.style.background = 'repeating-linear-gradient(45deg,#1a3260 0,#1a3260 2px,#223e6d 2px,#223e6d 14px)';
+      this.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    });
+  });
+});
+</script>
+
+<!-- TopAppBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#052856] dark:bg-[#052856] bg-opacity-90 backdrop-blur-xl shadow-2xl shadow-black/20">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black text-white italic tracking-tighter font-headline"><div class="flex items-center gap-3">
+<span class="text-white font-headline font-black text-2xl tracking-tighter uppercase flex items-baseline gap-2">
+  <span class="text-[#fde000]">SG</span> Hünstetten
+</span>
+</div></div>
+<div class="hidden md:flex items-center gap-8 font-headline font-bold tracking-tight uppercase text-sm">
+<a class="text-[#fde000] border-b-4 border-[#fde000] pb-1 hover:scale-105 transition-all duration-300" href="#">1. Mannschaft</a>
+<a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">2. Mannschaft</a>
+<a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Alte Herren</a>
+<a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Fan-Shop</a>
+</div>
+<button class="bg-[#fde000] text-[#052856] px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-wider text-xs hover:scale-105 active:scale-95 transition-all duration-300">
+                Probetraining
+            </button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[65vh] max-h-[700px] flex items-center overflow-hidden kinetic-gradient">
+<div class="absolute inset-0 opacity-40">
+<img class="w-full h-full object-cover mix-blend-overlay" alt="Dynamic football action under floodlights" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0F7zNmUEL80ymp_mO1kHgTtn8at44ijkh1HejnBBpBLT2EmwbvhzPrqTvcF0EJLJ7cxEdAeNASPc5UxzWJmeI7FLxwRcc6wVM4arIY2V9Zs0yFLXzd52jAYL5HSIMICM_GHdlPziSwoZx0EpE2Vbm7A-o7_Ik0EaTn5ZqaIjyKIwvtkwvLLWLz7bb-aw9qhAebQ3GNQ1dmey1uWcdMrd7g-AcKr-p1USlZJotBVQVRkxNiPgMrRyk2ClNkHPPW2ZReNdykyNo034"/>
+</div>
+<div class="relative z-10 max-w-screen-2xl mx-auto px-8 w-full">
+<div class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full text-sm font-bold mb-6 tracking-widest uppercase animate-pulse">
+                    Tradition seit 1944
+                </div>
+<h1 class="font-headline font-black text-white text-5xl md:text-7xl lg:text-8xl leading-[0.9] max-w-4xl tracking-tighter">
+                    Fußball: <br/>
+<span class="text-secondary-container italic">Tradition &amp; Leidenschaft</span>
+</h1>
+<p class="mt-8 text-on-primary-container text-xl md:text-2xl max-w-xl font-medium leading-relaxed">
+                    Willkommen im sportlichen Herzstück von Hünstetten. Wo Kameradschaft auf Leistung trifft.
+                </p>
+</div>
+</section>
+<!-- Sponsoren Logo-Leiste -->
+<section class="bg-surface-container-low py-12">
+<div class="max-w-screen-2xl mx-auto px-8">
+<p class="text-center font-headline font-bold text-outline text-xs uppercase tracking-[0.3em] mb-8">Unsere starken Partner</p>
+<div class="flex flex-wrap justify-center items-center gap-12 opacity-60 grayscale hover:grayscale-0 transition-all duration-500">
+<img class="h-12 object-contain" alt="Partner Logo 1" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAi9fmS2TY80M4PpLs-wUyft8NcNLFv_nElvfyvZiOTWQHZrp8ylxvnIl_0nn7ySA4u9i9uI6NPlj5GIKSTXqO5L_IHkMFCt1jnD-xGxif6V-7qDzG58OKIMcAr-SnK9Bj17Gv4KxRUvTV1o9SUjTzYtegSxamB4MmsIC0jvnoOLNr_Htdey3Ui8_NBrPI6-_Zy0FIAWo4_0QQvRRG9yDQpy7gL8nNoGV-HGkzBhtblK-2QdtVhJ4qDZgaoD4lrcs5BX4LKKXpwFBA"/>
+<img class="h-12 object-contain" alt="Partner Logo 2" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAN0hRKKb07HzuAzwivKkusKT5d7DM50KlDFNUbG6uzh5I1L9w9lUonXx6IN04Oq7Exl9h8s4-iRQC3YPnz_axB5E9skKNPjLFtSpDgmV7t0FJWNJ3kAn9pOTkv1clt9LhO30xmkIOtsxocXBJNNf-d9Od5NaWlm9oZFzKrTRt2omxwaAj_NxxNDZpIs-v4WFEw5I_5ijRyn1zr32GnH_AWtIohFQStFDduKSVkY3fuMVTPD7gkpOCE1gq4mdpE2O-QMwH3eMBxP-I"/>
+<img class="h-12 object-contain" alt="Partner Logo 3" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATPPDrp_beF6gPoelJ9eMxHDPEgd8wBUKqr94EF-s_6kckin7V7mAoOES1hbPT0z2cvyAxC4ITYpBxOlWTSllnOYGTYwggqyOD_SyygkmkelClyEI5nF6_csGT2ScKP3w0wDUbzJ5PcWlnMwwPhoWSonRSx8U9jWFIKmmUJVJEESW4d-iS6dS9CdqmsQyYrJc5ZAE8Djsv-iofb1o4kyQWmwyK868O6_wbfzwQbOWF8ctENUwbTLDH0p5qAh5oNTEMYaFY8QBN-xE"/>
+<img class="h-12 object-contain" alt="Partner Logo 4" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBR8qXIq7f4o2fApbSB-1iGjpZ_gPWj2oroQpSxHtNfZ5X7SoY1nSwxr9QQVm0Rk342VstVtRmOxEc5jC4tyEBE8zbXolm-Z6l_g_a77qNmvGgGv69rp6Go_JGgHN4O0RjrTYYiUdY-E9hJ6wetuzyhMVcvkhg5cXC4RE2VRyzomvRrPHnk-ans2DLCQqUq_wAbIv406K48AMtgInQ5w2snRsNcPM2dnXHUzHcM5QCY4tZUDgElOstbXZBmlqGj0sX4IWO8L-B-aNs"/>
+</div>
+</div>
+</section>
+<!-- 1. Mannschaft -->
+<section class="pt-24 pb-12 bg-surface overflow-hidden">
+<div class="max-w-screen-2xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+<div>
+<span class="text-primary font-headline font-bold text-lg">Regionalklasse West</span>
+<h2 class="text-5xl md:text-6xl font-headline font-black tracking-tighter text-primary mt-2 uppercase">1. MANNSCHAFT</h2>
+</div>
+<div class="flex gap-4">
+<div class="bg-surface-container-highest px-6 py-4 rounded-xl">
+<span class="block text-xs uppercase font-bold text-outline">Platzierung</span>
+<span class="text-3xl font-black text-primary">3.</span>
+</div>
+<div class="bg-surface-container-highest px-6 py-4 rounded-xl">
+<span class="block text-xs uppercase font-bold text-outline">Punkte</span>
+<span class="text-3xl font-black text-primary">42</span>
+</div>
+</div>
+</div>
+<div class="relative w-full aspect-[21/9] rounded-2xl overflow-hidden shadow-2xl group">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Official team photo of 20+ soccer players" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmGvdf7JDjKnmgfYvXuXRth7cILXlDs1LXnWD3Maf8e9IddvQ9ffKI0IhM01mg7P4y1cUrYpQSL8zaI_FXKqLy1Zgbirtnrn0bgUdvO6tq9EYsYn6wAFgjOIL-7MrTt773dRbOVoBA96QFO4wdqdc5gUTAWpvwwheA5TeggTkH4mdBKedgQv4zVkUO_9RZrGHpvKzoXZchZzOg_4OIP4ho7APFMGiR5eX3ptXKYLNWjTl2KTJhuI1r5K02eKHq7iO6E44JiYsWHmU"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+<div class="absolute bottom-8 left-8">
+<p class="text-white text-xl font-headline font-bold">Kader Saison 2024/25</p>
+</div>
+</div>
+</div>
+</section>
+<!-- News Section -->
+<section class="py-12 bg-surface">
+<div class="max-w-screen-2xl mx-auto px-8">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-4xl font-headline font-black tracking-tighter text-primary uppercase">NEWS</h2>
+<a class="bg-primary text-white px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-wider text-xs hover:bg-primary-container transition-all flex items-center gap-2" href="#">
+                        Zur News-Übersicht <span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- News Card 1 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Action from last weekend match" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHvVAleUYJuzPYEJLha9Mltwo3iwaT9oBgo3mEwObzsZoanwYaw01L-KbX3TIRuOVq2XwRtuklNU8uwJXsv5RNoKW9dPZN0F7C04pxnTGPE8SYCZkwBKG_R9oBuK_TI2umowvmVNXm9VU1QcN_B8DjxP2IVZcXRnOFd8UYxNtkHViFHXMn3b8yWMuuz1MHb317fpziGXFfGHZhunvvp2LLDw4QyMYSa-XRDsesuYe2QhSPbEC9kt8BZvZKddVlJ5vXPV8cojxLm8c"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Historischer Heimsieg</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 124 Fans gefällt das</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Spielbericht lesen</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">photo_library</span>
+</div>
+</div>
+<!-- News Card 2 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="New training equipment arriving" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDroGgypJqh_NjO26ER5fmmp56PlgowMJOWIjKMLS20CbTtiIvvdTTjCQPD5xtD_MUoRMSSf8h_9ZIVaVI4wVror7hxPPuNUX1KyTCgYEI6VChhP0klIMolspXmr74ZahILL0CrTKN2bkdDa3bdcpplic8sH8H6rwfww_DPytZQYFpXx8rqu61lgYgIYuF60sZBkCOYaGZ8It84tCZIESow35BN00zmMJoVridedgX9DiyPF3sSA2NA2HzayUsxJql5EvP360LmCog"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Fokus auf Derby-Woche</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 89 Reaktionen</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Trainings-Update</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">videocam</span>
+</div>
+</div>
+<!-- News Card 3 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Fans celebrate together" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPIYsb43XGuYJPaQPMsMkUxdP1MiQ-2FS6AfGfmI272VB6MSI11yEgJX0PyxIIqiBcy_AmskdhJwP_824zxujCJiqdAIBXlCVl3LT9cTQS31cJsVUnjQ4Hy402hjpa7VK8xfj12ihI3hJkQlDpw6JGah09c25k9erGCUErHwVhE0mVBdplggsrrhTrrfF1fY6yZYqLxUYkFVVioMYieixqVTHE9i2_MAe368jFMQzvu3bG4sTNCba8ZxQ02fLPn1lf-HOwt7TxHVc"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Danke für den Support</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 210 Fans</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Fan-Galerie</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">image</span>
+</div>
+</div>
+<!-- News Card 4 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Ball in mid-air during match" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDg19QyLYNyYlt7Lxm0rcY_e3vrfthaqQnGTam4_dPbWeIC7lDPq_rl5IlkB6RsM6j_U71wEjmhRt5onNLHV9_WZzyxyagrj4YEz8aiBCcDdJuPSprLfwAdnnoBPmglJiAZjQI1eAOgN-P8KlcbSSDRqsS_fwpjfrVTH6a1G1grMti7B3EDcxcs9Zq2oK8ZfTIH_u84k5i1O4rTgupjttwATpmZggyaMuDY6Xep5pD6j7WAlX4NAQdfGMvB7qoiA76SknEbaopAeN0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Transfer-Update</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 156</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Neuverpflichtung</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">notifications</span>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-center gap-4 py-4 border-t border-outline-variant/30">
+<span class="text-primary font-bold text-xs flex items-center gap-2">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Folge uns auf Instagram @SGHuenstetten_Fussball
+                    </span>
+</div>
+</div>
+</section>
+<!-- Staff Section -->
+<section class="py-16 bg-surface">
+<div class="max-w-screen-2xl mx-auto px-8">
+<h2 class="text-3xl font-headline font-black tracking-tighter text-primary uppercase mb-10 border-b-2 border-primary pb-4 inline-block">STAFF</h2>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+<!-- Head Coach Timo Jung (Featured Profile) -->
+<div class="lg:col-span-7 bg-surface-container-low rounded-3xl p-8 shadow-sm border border-outline-variant/20 flex flex-col md:flex-row gap-8 items-center md:items-start group hover:shadow-xl transition-all duration-500">
+<div class="w-full md:w-64 h-80 shrink-0 relative overflow-hidden rounded-2xl shadow-lg">
+<img class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" alt="Head Coach Timo Jung" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBRtgEWaCizGCs8T14xnJy9wrtUwtKi8dNCD9JeBZWodzAmAwKEqqNQ4dK4vTVAbyY62pTrPkdjxhYw1psQCEK4fUEnRAAhpuJBeOU-MgmFw8Y8F1_x2KtwvcY8RYFHWBQLlvcuvwtXhLs2IO7cuI7CGm153IzPBor5M7We228_P8xqjO0rdM2EvRBagQRQYTrWs7aR75SG_jrvgpqTyiVPsx7Rt-BQ2Y4lCfDeT3eQTfY4Mwe3aoDvGY0V33N8xiO6FfOzPaZjhj4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
+</div>
+<div class="flex-1 flex flex-col justify-center">
+<div class="inline-block bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full text-[10px] font-bold tracking-widest uppercase mb-4 w-fit">Head Coach</div>
+<h3 class="text-4xl font-headline font-black text-primary mb-4 uppercase tracking-tighter">Timo Jung</h3>
+<p class="text-base text-on-surface-variant leading-relaxed mb-6 font-medium">
+                        Strategischer Vordenker mit einer klaren Vision für attraktiven Offensivfußball. Seit 2018 prägt er die sportliche Identität der SG Hünstetten und fördert konsequent junge Talente aus dem eigenen Unterbau.
+                    </p>
+<div class="flex gap-4">
+<a class="inline-flex items-center gap-2 font-headline font-bold text-white bg-primary px-6 py-2.5 rounded-full shadow-md hover:bg-primary-container transition-all text-sm" href="#">
+                            Vita &amp; Erfolge
+                            <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Additional Staff (2x2 Grid) -->
+<div class="lg:col-span-5 grid grid-cols-2 gap-4">
+<!-- Nikolaij Melcher -->
+<div class="bg-surface-container rounded-2xl p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all group">
+<div class="w-28 h-28 mb-4 relative overflow-hidden rounded-xl shadow-md border-2 border-white">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Portrait of Nikolaij Melcher" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAedbn3SHC539gw2MCq4odTyjIiR3FQNhBbnAdzBRODDJI9VKQRnpkbevE8B031iGcVOvn4EeRh0fZfRLTxPWi96rpYNylzDdWkuUWMBoCrNZmwJJEBxo7CkycgUj55Uu8Eo62R0XPTR14iKC8va4L2I8x_ougR_rGJK7aSWc8382HBcVbx8bvZiRr1iIByhuFkVBq0Yp_xE-Yg7qamYWJ0NK2_pu2JiZm2aPbvXbhvt20HpWcmwszU1R2JGblp_1SKVQT3FVQPBLg"/>
+</div>
+<span class="text-secondary font-bold tracking-widest uppercase text-[9px] mb-1">Co-Trainer</span>
+<h3 class="text-sm font-headline font-extrabold text-primary uppercase leading-tight">Nikolaij Melcher</h3>
+<p class="text-[10px] text-on-surface-variant mt-2 font-medium opacity-80">Spielende Unterstützung</p>
+</div>
+<!-- Arno Grosmann -->
+<div class="bg-surface-container rounded-2xl p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all group">
+<div class="w-28 h-28 mb-4 relative overflow-hidden rounded-xl shadow-md border-2 border-white">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Portrait of Arno Grosmann" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgNKSFNoWCARbYt6ThP0e4r9n8IieNXTyZxbFVsho_zyX67lFEIHgt5Ml0wdQRfxIeFtX-W9n58zQe3fef3aBRb3jN0RX2dx9HJxwtD-aDjvnUNyHL7hn3kTjavwg8JsEtMejXysbhOQOEu6DmSg2G8q44weqeMgV6ImKYDpUHlekVWlOliobdFT1P7OtixvD-fNyFVY15Y8Bz1-UrrWyDW2PSm9eioBkgUjrtOEUekrWob-z2-jMftn6ynUBMUKZtQxzhobS3uY0"/>
+</div>
+<span class="text-secondary font-bold tracking-widest uppercase text-[9px] mb-1">Torwart-Trainer</span>
+<h3 class="text-sm font-headline font-extrabold text-primary uppercase leading-tight">Arno Grosmann</h3>
+<p class="text-[10px] text-on-surface-variant mt-2 font-medium opacity-80">Torwartspiel &amp; Reflexe</p>
+</div>
+<!-- Marcel Faust -->
+<div class="bg-surface-container rounded-2xl p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all group">
+<div class="w-28 h-28 mb-4 relative overflow-hidden rounded-xl shadow-md border-2 border-white">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Portrait of Marcel Faust" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtx6GiUJCVRcwS_ca-s-ZNzUH_jkucyU7oANcb522AlyJcBoZ17O_LLcRQJDsFx_RgEq1zAF272QDa-AYvF9xKKT8kp_Yd9tNQ8tuBSCcxIsUu3eONIRxqqIhsqTeA8X-zIMl4Hk9IBQH833ZuEDNkJBs8pn3uqpaPqDxy-Kj8IGCI6e3aBr0Ri9YU-XYyNTz2zZEAg5PsI_zdV9Hc4wbvDZVB1gOxevfUMAYz65aVW02QZ_xEzZkQdGksblRUmB7r-oIMuC_OBao"/>
+</div>
+<span class="text-secondary font-bold tracking-widest uppercase text-[9px] mb-1">Teammanager</span>
+<h3 class="text-sm font-headline font-extrabold text-primary uppercase leading-tight">Marcel Faust</h3>
+<p class="text-[10px] text-on-surface-variant mt-2 font-medium opacity-80">Organisation &amp; Logistik</p>
+</div>
+<!-- Hans Jung -->
+<div class="bg-surface-container rounded-2xl p-5 flex flex-col items-center text-center shadow-sm hover:shadow-md transition-all group">
+<div class="w-28 h-28 mb-4 relative overflow-hidden rounded-xl shadow-md border-2 border-white">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Portrait of Hans Jung" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAhew3JHMhDdgHYu_tiHKNPxK3hyCX91YHEvo0Bmd7YHUl1V1X48Loo4kJA9wUjHnYW0fElIgySm6LQPQRcc5DfUTIQED5V8bItcRFgmHn7wISNkPKOdrkGGMV-TtilEnhn2bjoUqlFW62QOBAeTVc0WAOEEajW9iC4wzCfv5VJQl7IjFGZ04H1UBYaMnCNLlj-29NrIP7VU4xOBzEqXYKQ-cwPewAolDkKyzc9LnXhBiEoz3Zb1AQlwZJ5jq9ysz1hnh87NRzNgV8"/>
+</div>
+<span class="text-secondary font-bold tracking-widest uppercase text-[9px] mb-1">Sportl. Leiter</span>
+<h3 class="text-sm font-headline font-extrabold text-primary uppercase leading-tight">Hans Jung</h3>
+<p class="text-[10px] text-on-surface-variant mt-2 font-medium opacity-80">Kaderplanung &amp; Vision</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Sponsors Banner -->
+<section class="bg-primary-container py-12 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6">
+<p class="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-10">Starke Partner für den Erfolg</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">BIOGRUND</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">ROSENBAUM</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">VOLKSBANK</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">SPARKASSE</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">SPORT-ECKE</div>
+</div>
+</div>
+</section>
+<!-- Spieltag Zentrale & 2. Mannschaft Layout -->
+<section class="py-24 bg-surface">
+<div class="max-w-screen-2xl mx-auto px-8 grid grid-cols-1 lg:grid-cols-12 gap-16">
+<!-- 2. Mannschaft Content -->
+<div class="lg:col-span-8">
+<span class="text-secondary font-headline font-bold text-lg">Unterbau &amp; Talentschmiede</span>
+<h2 class="text-5xl font-headline font-black tracking-tighter text-primary mt-2 mb-8">2. MANNSCHAFT</h2>
+<div class="relative w-full aspect-video rounded-3xl overflow-hidden shadow-xl mb-10">
+<img class="w-full h-full object-cover" alt="Team photo of second team squad" src="https://lh3.googleusercontent.com/aida-public/AB6AXuACP3qpiuo2WuoIaNjeILX4XUQYPnRZ0jCvmQlDpKrF4IHMDINw4gSQlDXb4t0HQwr0KEyUkple8VHPTdMglBXZ2OLRRSCW_SCb0zQIGHyNGxJJ1y0r6ereFKb2zRfrMM77kt2svczmbML89JFYUgnTzEK4v-cgpYCRBnaaFiLiyhp7MQxdo5PhuvKFYXkkR5cQaQicgu5Zd4fBwPQI8DmZurP62VZF3XfzarmoaQnF7G1k9QnKVhGn9gHVZROphEy9t8X9DC2LqNo"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/40 to-transparent"></div>
+</div>
+<div class="grid md:grid-cols-2 gap-8">
+<div class="p-8 bg-surface-container rounded-2xl">
+<h4 class="font-headline font-bold text-primary text-xl mb-4">Das Karrieresprungbrett</h4>
+<p class="text-on-surface-variant">Unsere Reserve ist weit mehr als eine zweite Wahl. Hier fokussieren wir uns auf junge Spieler, die über Spielpraxis den direkten Anschluss an den Kader der 1. Mannschaft suchen.</p>
+</div>
+<div class="p-8 bg-surface-container rounded-2xl">
+<h4 class="font-headline font-bold text-primary text-xl mb-4">Ergeiz &amp; Zusammenhalt</h4>
+<p class="text-on-surface-variant">Unter professionellen Bedingungen trainieren unsere Talente hart für ihren Traum. Die Durchlässigkeit zwischen den Teams ist unser größter Trumpf.</p>
+</div>
+</div>
+</div>
+<!-- Spieltag Zentrale -->
+<div class="lg:col-span-4">
+<div class="bg-surface-container-low rounded-3xl p-8 sticky top-32">
+<h3 class="text-2xl font-headline font-extrabold text-primary mb-8 flex items-center gap-3">
+<span class="material-symbols-outlined text-secondary">sports_soccer</span>
+                            Spieltag-Zentrale
+                        </h3>
+<!-- Letzte Ergebnisse -->
+<div class="mb-10">
+<h4 class="text-xs font-bold text-outline uppercase tracking-widest mb-4">Letzte Ergebnisse</h4>
+<div class="space-y-4">
+<div class="flex justify-between items-center p-3 bg-white rounded-xl shadow-sm">
+<span class="text-sm font-semibold">SV Wallrabenstein</span>
+<span class="bg-primary text-white px-3 py-1 rounded font-bold">1:2</span>
+<span class="text-sm font-bold text-primary">SG Hünstetten</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-white rounded-xl shadow-sm">
+<span class="text-sm font-bold text-primary">SG Hünstetten</span>
+<span class="bg-primary text-white px-3 py-1 rounded font-bold">4:0</span>
+<span class="text-sm font-semibold">TuS Beuerbach</span>
+</div>
+<div class="flex justify-between items-center p-3 bg-white rounded-xl shadow-sm opacity-60">
+<span class="text-sm font-semibold">SG Orlen</span>
+<span class="bg-outline text-white px-3 py-1 rounded font-bold">1:1</span>
+<span class="text-sm font-bold text-primary">SG Hünstetten</span>
+</div>
+</div>
+</div>
+<!-- Nächste Begegnungen -->
+<div>
+<h4 class="text-xs font-bold text-outline uppercase tracking-widest mb-4">Nächste Spiele</h4>
+<div class="space-y-3">
+<div class="p-4 border-l-4 border-secondary-container bg-surface-container-highest rounded-r-xl">
+<p class="text-[10px] font-bold text-outline mb-1">SO, 15:00 UHR • HEIMSPIEL</p>
+<p class="font-bold text-primary">SG Hünstetten vs. SV Neuhof</p>
+</div>
+<div class="p-4 border-l-4 border-outline-variant bg-surface-container-highest rounded-r-xl">
+<p class="text-[10px] font-bold text-outline mb-1">SO, 13:00 UHR • AUSWÄRTS</p>
+<p class="font-bold text-primary">FSV Wörsdorf vs. SG Hünstetten II</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Alte Herren Banner -->
+<section class="relative py-24 md:py-32 overflow-hidden">
+<div class="absolute inset-0">
+<img class="w-full h-full object-cover" alt="Social soccer game at sunset" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPIYsb43XGuYJPaQPMsMkUxdP1MiQ-2FS6AfGfmI272VB6MSI11yEgJX0PyxIIqiBcy_AmskdhJwP_824zxujCJiqdAIBXlCVl3LT9cTQS31cJsVUnjQ4Hy402hjpa7VK8xfj12ihI3hJkQlDpw6JGah09c25k9erGCUErHwVhE0mVBdplggsrrhTrrfF1fY6yZYqLxUYkFVVioMYieixqVTHE9i2_MAe368jFMQzvu3bG4sTNCba8ZxQ02fLPn1lf-HOwt7TxHVc"/>
+<div class="absolute inset-0 bg-primary/70 backdrop-blur-[2px]"></div>
+</div>
+<div class="relative z-10 max-w-screen-2xl mx-auto px-8 text-center">
+<span class="inline-block text-secondary-container font-headline font-bold text-lg mb-4 tracking-[0.2em] uppercase">Gemeinschaft &amp; Fußball</span>
+<h2 class="text-4xl md:text-6xl font-headline font-black text-white mb-6 uppercase tracking-tighter">ALTE HERREN</h2>
+<p class="text-white text-xl md:text-2xl max-w-2xl mx-auto mb-10 font-medium leading-relaxed drop-shadow-lg">
+                    Für die Legenden, die den Ball noch immer am liebsten am Fuß haben. Freizeitkicker mit Leidenschaft, Gemeinschaft und bester Stimmung nach dem Abpfiff.
+                </p>
+<button class="bg-secondary-container text-on-secondary-container px-12 py-5 rounded-full font-headline font-black text-lg uppercase tracking-widest hover:scale-105 active:scale-95 shadow-2xl transition-all duration-300">
+                    Mitkicken
+                </button>
+</div>
+</section>
+<!-- Fan-Shop -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-screen-2xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-center mb-16">
+<div>
+<h2 class="text-5xl font-headline font-black text-primary tracking-tighter uppercase">SG Hünstetten Fan-Shop</h2>
+<p class="text-on-surface-variant mt-2 text-lg italic">Zeig Flagge für deinen Verein.</p>
+</div>
+<button class="mt-6 md:mt-0 px-8 py-4 bg-primary text-white rounded-xl font-headline font-bold flex items-center gap-3 hover:bg-primary-container transition-all">
+                        Alle Artikel <span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product 1 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Blue club rain jacket with logo" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2V573FaaC-lVusVrI44uQ4b8GywIhs4Pv0YY4uVEcQjsfykdHlJ-3ZMSIeq3S64XdL0FCElOAV6zVUGd7s1jTe443LBiv2DLff75lhUr14QiT4FeN6Qh96s6W2wFEpZX3QhOiHyw48c3dtFldd14dli3cmS76ZXS5wW9IYsevyF1vFDiUo-YADYAW_s99PcHaRs7glmpNMEkTJiChfx1e2Rtrmh2rDCm23aZFYayg5B7mDjFyEGGbn4HVw8XEZdSK1LjID0ig-Tg"/>
+<span class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container text-xs font-bold px-3 py-1 rounded-full uppercase">Bestseller</span>
+</div>
+<h4 class="font-bold text-primary text-xl">Allwetter-Jacke "Pro"</h4>
+<p class="text-outline text-sm mt-1">Deep Blue Legacy Design</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">79,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Yellow and blue striped scarf" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7Q0bbCYYA1o_fEJC1eE-OLtre38sf5ox-Bg7V6gWKq15a0uG4Yimd7dc7otaKOcYE1z0Re6QIyPMZxd1FIkNnJ-rAGWHi7sxUa_w9I60zy6XjW8fOVTx8WyM_UM4mdRV5MpDa2T2kQyGE7YzclOTBuk9wxzWFxW5tuSL2mzsp4Mes8pjXVEkNfJOp7gdMnGdy8xvUR_cL7c7OaLt0RL-1OdK-PWvwaS_j_G4LYcJVsjpmbKdQOss3Q0hSpHd3UyKMGhes1Ht4hLs"/>
+</div>
+<h4 class="font-bold text-primary text-xl">Fan-Schal "Hünstetten"</h4>
+<p class="text-outline text-sm mt-1">100% Tradition</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">14,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="Navy blue beanie with yellow embroidery" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_qcexn1QakqKyUiv8NnEoXBxrrrv1hwlj6hLy4s_vZRMVG85imVveu9LIO3pA9J-3--xC9TQh5Dwu8Bs4tIW-veoBLWATFFU-_h5FF3U1Z3ppoE9Fgl5K3khNTTOpEQrx7aNpcWd6rT95mZ8MkPqsejrODHpPsPPMgUYvfodbsONlxMlbH9KNxKXZxWqO32xsyPJCnd6JKAvCF9cKh2IhgoGRMEU03loYW3PDjXWCGJ56x1UUt8159dza99Z5DXkt_3rgmKeNiZo"/>
+</div>
+<h4 class="font-bold text-primary text-xl">Wintermütze Classic</h4>
+<p class="text-outline text-sm mt-1">Hält den Kopf warm</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">19,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" alt="White polo shirt with blue club crest" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtv0I899I6DiERhzC4IisiBfNU5ZLu-IClwoxh8ARV2DAO1CCk9re4gyyv9mzxrw2wT_PwxspLBwvkUUn4wtmZbJieXKFZNaz6mWwAARsLfCl6mqwPDsCyDVWSNKxu0jXT7RR5Qbkj4WUvdpQVmclOWkOa8_zR-3ZyiZ2AkCvwnCocgrWzMe8d_3Um-Jfkc1mw0Oi3w54CvMdM61IekryK3sikL075v7rJdTdt2AIMcMnL9YPy2oUL_PCjUv4gJ9NRpaScXzgqd-8"/>
+</div>
+<h4 class="font-bold text-primary text-xl">Polo-Shirt Vereinsliebe</h4>
+<p class="text-outline text-sm mt-1">Pikée-Qualität</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">34,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Sponsors Banner -->
+<section class="bg-primary-container py-12 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6">
+<p class="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-10">Starke Partner für den Erfolg</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">BIOGRUND</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">ROSENBAUM</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">VOLKSBANK</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">SPARKASSE</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">SPORT-ECKE</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary pt-24 pb-12 overflow-hidden relative">
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
+<div class="space-y-8">
+<div class="flex items-baseline gap-2 mb-4">
+  <span class="text-[#fde000] font-headline font-black text-4xl leading-none" style="letter-spacing:-0.05em;">SG</span>
+  <span class="text-white font-headline font-bold text-xl" style="letter-spacing:-0.02em;">HÜNSTETTEN</span>
+</div>
+<p class="text-white/60 max-w-sm leading-relaxed">Seit über 80 Jahren die Heimat für Sportbegeisterte in der Region. Tradition trifft Dynamik.</p>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Verein</h4>
+<ul class="space-y-4 text-white/70 font-bold text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Teams</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Vorstand</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Satzung</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Kontakt</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Rechtliches</h4>
+<ul class="space-y-4 text-white/70 font-bold text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Impressum</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Datenschutz</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Mitgliedschaft</a></li>
+</ul>
+</div>
+</div>
+<div>
+<h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Newsletter</h4>
+<p class="text-white/60 text-sm mb-6">Erhalte die neuesten Infos direkt per Mail.</p>
+<div class="flex gap-2">
+<input class="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm w-full focus:outline-none focus:border-secondary-container" placeholder="Deine E-Mail" type="email"/>
+<button class="bg-secondary-container text-primary p-3 rounded-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em]">© 2025 SG Hünstetten – Fußball · Powered by <span class="text-[#fde000]">KlubHaus</span></p>
+</div>
+</div>
+</footer>
+</body>
+</html>

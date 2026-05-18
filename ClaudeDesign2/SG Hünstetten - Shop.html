@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Shop | SG HÜNSTETTEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          primary: "#052856",
+          "primary-container": "#223E6D",
+          "on-primary-container": "#90AAE0",
+          "primary-fixed": "#D7E2FF",
+          "secondary-container": "#FDE000",
+          "on-secondary-container": "#052856",
+          surface: "#FBF9F8",
+          "surface-container-lowest": "#FFFFFF",
+          "surface-container-low": "#F6F3F2",
+          "surface-container": "#F0EDED",
+          "surface-container-high": "#EAE8E7",
+          "on-surface": "#1B1C1C",
+          "on-surface-variant": "#44474F",
+          "outline-variant": "#C4C6D0",
+          outline: "#747780",
+          error: "#BA1A1A",
+          "ok-green": "#2E7D32"
+        },
+        fontFamily: {
+          headline: ["Lexend"],
+          display: ["Lexend"],
+          body: ["Plus Jakarta Sans"],
+          label: ["Plus Jakarta Sans"]
+        }
+      }
+    }
+  }
+</script>
+<style>
+  body { font-family: "Plus Jakarta Sans", sans-serif; }
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+  .kinetic-slant { transform: skewX(-12deg); }
+  .kinetic-rotate { transform: rotate(-2deg); }
+  .vanguard-gradient { background: linear-gradient(135deg, #052856 0%, #0a408a 100%); }
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { scrollbar-width: none; }
+  .drawer { transform: translateX(100%); transition: transform .35s cubic-bezier(.2,.8,.2,1); }
+  .drawer.open { transform: translateX(0); }
+  .modal-bg { opacity: 0; pointer-events: none; transition: opacity .25s ease; }
+  .modal-bg.open { opacity: 1; pointer-events: auto; }
+  .product-card { transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease; }
+  .product-card:hover { transform: translateY(-6px); }
+  .product-card:hover .product-img { transform: scale(1.04); }
+  .product-img { transition: transform .6s cubic-bezier(.2,.8,.2,1); }
+  .chip-active { background:#052856 !important; color:#FDE000 !important; }
+  .step-dot.active { background:#FDE000; }
+  .step-dot.done { background:#052856; }
+  .placeholder-img { background: repeating-linear-gradient(45deg,#1a3260 0,#1a3260 2px,#223e6d 2px,#223e6d 14px); }
+  .heart-active { color:#BA1A1A !important; font-variation-settings:'FILL' 1, 'wght' 500, 'GRAD' 0, 'opsz' 24; }
+</style>
+</head>
+<body class="bg-surface text-on-surface">
+
+<!-- ========== TOP NAV ========== -->
+<header class="fixed top-0 left-0 right-0 z-40 bg-[#052856]/95 backdrop-blur-xl shadow-lg">
+  <nav class="flex justify-between items-center w-full px-6 lg:px-10 py-4">
+    <div class="flex items-center gap-8">
+      <a href="#" class="text-2xl font-black italic text-[#FDE000] tracking-widest font-headline">SG HÜNSTETTEN</a>
+      <div class="hidden lg:flex items-center gap-7 font-headline font-black italic uppercase tracking-tighter text-sm">
+        <a class="text-white/70 hover:text-white" href="#">Club</a>
+        <a class="text-white/70 hover:text-white" href="#">Teams</a>
+        <a class="text-white/70 hover:text-white" href="#">Heritage</a>
+        <a class="text-white/70 hover:text-white" href="#">Members</a>
+        <a class="text-[#FDE000] border-b-4 border-[#FDE000] pb-1" href="#">Shop</a>
+      </div>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="wishlistBtn" class="relative w-10 h-10 rounded-xl bg-white/10 hover:bg-white/15 text-white grid place-items-center">
+        <span class="material-symbols-outlined">favorite</span>
+        <span id="wishlistBadge" class="absolute -top-1 -right-1 min-w-5 h-5 px-1 bg-[#FDE000] text-[#052856] text-[10px] font-black rounded-full grid place-items-center hidden">0</span>
+      </button>
+      <button id="cartBtn" class="relative flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-2 rounded-xl font-headline font-black italic uppercase tracking-wider text-sm hover:scale-105 active:scale-95 transition-transform">
+        <span class="material-symbols-outlined text-lg">shopping_bag</span>
+        <span class="hidden sm:inline">Cart</span>
+        <span id="cartBadge" class="min-w-5 h-5 px-1 bg-primary text-secondary-container text-[10px] font-black rounded-full grid place-items-center">0</span>
+      </button>
+    </div>
+  </nav>
+</header>
+
+<main class="pt-20">
+
+<!-- ========== HERO ========== -->
+<section class="relative h-[480px] flex items-center overflow-hidden bg-primary">
+  <div class="absolute inset-0 placeholder-img opacity-30"></div>
+  <div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/80 to-primary/40"></div>
+  <div class="absolute -right-12 top-12 opacity-10 font-headline font-black italic text-[16rem] leading-none text-white select-none kinetic-slant pointer-events-none">SHOP</div>
+  <div class="container mx-auto px-8 relative z-10">
+    <span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label font-black text-xs tracking-[0.25em] uppercase mb-6 kinetic-rotate">OFFICIAL FAN STORE · 80 YEARS</span>
+    <h1 class="text-5xl md:text-7xl font-headline font-black italic text-white uppercase leading-[0.9] tracking-tight mb-4">
+      Trag die <br/><span class="text-secondary-container">Farben.</span>
+    </h1>
+    <p class="text-lg md:text-xl text-white/80 max-w-2xl font-medium">Trikots, Fanartikel und Vereinsmerchandise — direkt vom Verein, mit jedem Kauf unterstützt du die Jugendarbeit.</p>
+    <div class="mt-8 flex flex-wrap gap-3 text-xs uppercase tracking-widest font-bold">
+      <span class="px-4 py-2 bg-white/10 backdrop-blur text-white rounded-full flex items-center gap-2"><span class="material-symbols-outlined text-sm">local_shipping</span>Versand 4,90€</span>
+      <span class="px-4 py-2 bg-white/10 backdrop-blur text-white rounded-full flex items-center gap-2"><span class="material-symbols-outlined text-sm">storefront</span>Abholung Diehlenhof gratis</span>
+      <span class="px-4 py-2 bg-white/10 backdrop-blur text-white rounded-full flex items-center gap-2"><span class="material-symbols-outlined text-sm">verified</span>Mitglieder −10%</span>
+    </div>
+  </div>
+</section>
+
+<!-- ========== CATEGORY STRIP ========== -->
+<section class="bg-surface-container-lowest border-b border-outline-variant/40">
+  <div class="container mx-auto px-8 py-6 flex items-center gap-3 overflow-x-auto no-scrollbar">
+    <span class="font-label text-[10px] font-bold uppercase tracking-[0.3em] text-on-surface-variant shrink-0 mr-2">Kategorien</span>
+    <button data-cat="all" class="cat-chip chip-active px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Alle</button>
+    <button data-cat="trikots" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Trikots</button>
+    <button data-cat="trainingsanzug" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Trainingsanzug</button>
+    <button data-cat="hoodies" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Hoodies & Tees</button>
+    <button data-cat="caps" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Caps & Mützen</button>
+    <button data-cat="schals" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Schals & Fanartikel</button>
+    <button data-cat="taschen" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Taschen</button>
+    <button data-cat="bälle" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Bälle & Equipment</button>
+    <button data-cat="kids" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Kids</button>
+    <button data-cat="vintage" class="cat-chip px-4 py-2 rounded-full bg-surface-container-high text-primary font-headline font-bold italic text-sm uppercase tracking-wider whitespace-nowrap">Vintage 1944</button>
+  </div>
+  <div class="container mx-auto px-8 pb-6">
+    <button id="searchBtn" class="w-full flex items-center gap-3 bg-surface-container hover:bg-surface-container-high transition-colors text-on-surface-variant px-5 py-4 rounded-2xl border border-outline-variant/40">
+      <span class="material-symbols-outlined text-primary">search</span>
+      <span class="text-sm uppercase tracking-widest font-bold">Suche Trikots, Caps, Schals…</span>
+      <span class="ml-auto text-[10px] px-2 py-1 bg-surface-container-high text-primary rounded font-black tracking-wider">⌘K</span>
+    </button>
+  </div>
+</section>
+
+<!-- ========== CATALOG ========== -->
+<section class="container mx-auto px-8 py-16">
+  <div class="flex flex-col lg:flex-row gap-10">
+
+    <!-- ===== Filter Sidebar ===== -->
+    <aside class="lg:w-72 shrink-0">
+      <div class="bg-surface-container-lowest rounded-3xl p-6 lg:sticky lg:top-28 border border-outline-variant/40">
+        <div class="flex items-center justify-between mb-6">
+          <h3 class="font-headline font-black italic uppercase text-primary text-lg">Filter</h3>
+          <button id="resetFilters" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant hover:text-primary">Zurücksetzen</button>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="font-label font-black text-[10px] tracking-[0.25em] uppercase text-primary mb-3">Sport</h4>
+          <div class="flex flex-wrap gap-2" id="sportFilter">
+            <button data-sport="all" class="sport-chip chip-active px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-surface-container-high text-primary">Alle</button>
+            <button data-sport="fußball" class="sport-chip px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-surface-container-high text-primary">Fußball</button>
+            <button data-sport="leichtathletik" class="sport-chip px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-surface-container-high text-primary">Leichtathletik</button>
+            <button data-sport="badminton" class="sport-chip px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-surface-container-high text-primary">Badminton</button>
+            <button data-sport="tischtennis" class="sport-chip px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-surface-container-high text-primary">Tischtennis</button>
+            <button data-sport="pilates" class="sport-chip px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-surface-container-high text-primary">Pilates</button>
+            <button data-sport="general" class="sport-chip px-3 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider bg-surface-container-high text-primary">Vereinsfans</button>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="font-label font-black text-[10px] tracking-[0.25em] uppercase text-primary mb-3">Größe</h4>
+          <div class="grid grid-cols-4 gap-2" id="sizeFilter">
+            <button data-size="all" class="size-chip chip-active py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary col-span-4">Alle Größen</button>
+            <button data-size="XS" class="size-chip py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary">XS</button>
+            <button data-size="S" class="size-chip py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary">S</button>
+            <button data-size="M" class="size-chip py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary">M</button>
+            <button data-size="L" class="size-chip py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary">L</button>
+            <button data-size="XL" class="size-chip py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary">XL</button>
+            <button data-size="XXL" class="size-chip py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary">XXL</button>
+            <button data-size="kids" class="size-chip col-span-2 py-2 rounded-lg text-xs font-bold uppercase bg-surface-container-high text-primary">Kids 116-164</button>
+          </div>
+        </div>
+
+        <div class="mb-6">
+          <h4 class="font-label font-black text-[10px] tracking-[0.25em] uppercase text-primary mb-3">Preis · max <span id="priceVal" class="text-primary">120</span>€</h4>
+          <input id="priceRange" type="range" min="5" max="120" value="120" class="w-full accent-primary"/>
+        </div>
+
+        <div class="mb-2">
+          <h4 class="font-label font-black text-[10px] tracking-[0.25em] uppercase text-primary mb-3">Sonstiges</h4>
+          <label class="flex items-center gap-3 py-1.5 text-sm">
+            <input type="checkbox" id="onlyStock" class="accent-primary w-4 h-4 rounded"/>
+            <span>Nur lieferbare Artikel</span>
+          </label>
+          <label class="flex items-center gap-3 py-1.5 text-sm">
+            <input type="checkbox" id="onlyNew" class="accent-primary w-4 h-4 rounded"/>
+            <span>Nur Neuheiten</span>
+          </label>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ===== Product Grid ===== -->
+    <div class="flex-1 min-w-0">
+      <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+        <div>
+          <span class="font-label font-black text-[10px] tracking-[0.25em] uppercase text-primary">Sortiment</span>
+          <h2 class="text-3xl md:text-4xl font-headline font-black italic text-primary uppercase mt-1"><span id="resultCount">24</span> Artikel</h2>
+        </div>
+        <div class="flex items-center gap-3">
+          <label class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Sortieren</label>
+          <select id="sortSelect" class="bg-surface-container-lowest border border-outline-variant rounded-xl px-4 py-2 text-sm font-bold focus:ring-primary">
+            <option value="featured">Empfohlen</option>
+            <option value="new">Neuheiten zuerst</option>
+            <option value="price-asc">Preis aufsteigend</option>
+            <option value="price-desc">Preis absteigend</option>
+            <option value="rating">Beste Bewertung</option>
+          </select>
+        </div>
+      </div>
+      <div id="productGrid" class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6"></div>
+      <div id="noResults" class="hidden text-center py-20">
+        <span class="material-symbols-outlined text-6xl text-on-surface-variant/40">search_off</span>
+        <h3 class="font-headline font-black italic text-2xl text-primary uppercase mt-4">Nichts gefunden</h3>
+        <p class="text-on-surface-variant mt-2">Probier andere Filter oder setze sie zurück.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ========== EDITORIAL: WHY OFFICIAL ========== -->
+<section class="bg-primary text-white py-20 overflow-hidden relative">
+  <div class="absolute -left-12 -bottom-20 opacity-10 font-headline font-black italic text-[18rem] leading-none select-none">SGH</div>
+  <div class="container mx-auto px-8 relative z-10 grid md:grid-cols-3 gap-10">
+    <div>
+      <span class="material-symbols-outlined text-secondary-container text-4xl mb-4">verified</span>
+      <h3 class="font-headline font-black italic uppercase text-2xl mb-2">100% Original</h3>
+      <p class="text-white/70">Alle Trikots offiziell lizenziert mit Vereinswappen und Stickerei vom Hauptausrüster.</p>
+    </div>
+    <div>
+      <span class="material-symbols-outlined text-secondary-container text-4xl mb-4">favorite</span>
+      <h3 class="font-headline font-black italic uppercase text-2xl mb-2">Zweck statt Profit</h3>
+      <p class="text-white/70">Jeder Euro fließt zurück in Jugendabteilung, Plätze und Trainerausbildung.</p>
+    </div>
+    <div>
+      <span class="material-symbols-outlined text-secondary-container text-4xl mb-4">undo</span>
+      <h3 class="font-headline font-black italic uppercase text-2xl mb-2">30 Tage Rückgabe</h3>
+      <p class="text-white/70">Größe nicht gepasst? Tausch unkompliziert im Vereinsheim oder per Versand.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ========== SPONSORS ========== -->
+<section class="py-16 bg-surface">
+  <div class="container mx-auto px-8">
+    <p class="text-center font-label font-black text-[10px] uppercase tracking-[0.4em] text-primary/60 mb-10">Unterstützt von unseren Premium Partnern</p>
+    <div class="grid grid-cols-2 md:grid-cols-5 gap-6 items-center">
+      <div class="h-16 bg-surface-container-high rounded-2xl grid place-items-center font-headline font-black italic text-primary/40">SPONSOR ONE</div>
+      <div class="h-16 bg-surface-container-high rounded-2xl grid place-items-center font-headline font-black italic text-primary/40">ELITE PARTNER</div>
+      <div class="h-16 bg-surface-container-high rounded-2xl grid place-items-center font-headline font-black italic text-primary/40">KINETIC LABS</div>
+      <div class="h-16 bg-surface-container-high rounded-2xl grid place-items-center font-headline font-black italic text-primary/40">VICTORY WEAR</div>
+      <div class="h-16 bg-surface-container-high rounded-2xl grid place-items-center font-headline font-black italic text-primary/40">VOLKSBANK</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ========== FOOTER ========== -->
+<footer class="bg-[#052856] w-full flex flex-col items-center gap-8 p-12 mt-auto">
+  <div class="container mx-auto flex flex-col items-center gap-10">
+    <div class="w-full py-8 border-y border-white/10 flex flex-wrap justify-center gap-12 opacity-60">
+      <div class="font-headline font-black italic text-white/50 text-2xl uppercase">Sponsor One</div>
+      <div class="font-headline font-black italic text-white/50 text-2xl uppercase">Elite Partner</div>
+      <div class="font-headline font-black italic text-white/50 text-2xl uppercase">Kinetic Labs</div>
+      <div class="font-headline font-black italic text-white/50 text-2xl uppercase">Victory Wear</div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-between items-center w-full gap-8">
+      <div class="font-headline font-black italic text-[#FDE000] text-3xl">SG HÜNSTETTEN</div>
+      <div class="flex gap-8 text-xs uppercase tracking-[0.1em] text-white/60">
+        <a class="hover:text-[#FDE000] transition-colors" href="#">Club Statutes</a>
+        <a class="hover:text-[#FDE000] transition-colors" href="#">Privacy Policy</a>
+        <a class="hover:text-[#FDE000] transition-colors" href="#">Imprint</a>
+        <a class="hover:text-[#FDE000] transition-colors" href="#">Versand & Rückgabe</a>
+        <a class="hover:text-[#FDE000] transition-colors" href="#">Contact</a>
+      </div>
+      <div class="flex gap-4">
+        <div class="w-10 h-10 rounded-full bg-white/10 grid place-items-center text-white hover:bg-secondary-container hover:text-primary transition-all cursor-pointer"><span class="material-symbols-outlined">share</span></div>
+        <div class="w-10 h-10 rounded-full bg-white/10 grid place-items-center text-white hover:bg-secondary-container hover:text-primary transition-all cursor-pointer"><span class="material-symbols-outlined">mail</span></div>
+      </div>
+    </div>
+    <div class="text-white/40 text-center text-[10px] uppercase tracking-[0.2em]">© 2024 SG HÜNSTETTEN. 80 YEARS OF EXCELLENCE.</div>
+  </div>
+</footer>
+
+<!-- ========== SEARCH OVERLAY ========== -->
+<div id="searchOverlay" class="fixed inset-0 z-50 hidden">
+  <div class="absolute inset-0 bg-primary/70 backdrop-blur-sm" onclick="toggleSearch(false)"></div>
+  <div class="relative max-w-2xl mx-auto mt-32 bg-surface-container-lowest rounded-3xl shadow-2xl overflow-hidden">
+    <div class="flex items-center gap-3 px-6 py-5 border-b border-outline-variant/30">
+      <span class="material-symbols-outlined text-primary">search</span>
+      <input id="searchInput" type="text" placeholder="Suche Trikots, Caps, Schals…" class="flex-1 bg-transparent outline-none text-lg font-bold placeholder:font-medium placeholder:text-on-surface-variant"/>
+      <button onclick="toggleSearch(false)" class="text-xs uppercase tracking-widest font-bold text-on-surface-variant px-2 py-1 bg-surface-container rounded">ESC</button>
+    </div>
+    <div id="searchResults" class="max-h-96 overflow-y-auto p-2"></div>
+  </div>
+</div>
+
+<!-- ========== CART DRAWER ========== -->
+<div id="cartBg" class="modal-bg fixed inset-0 z-40 bg-primary/60 backdrop-blur-sm" onclick="toggleCart(false)"></div>
+<aside id="cartDrawer" class="drawer fixed top-0 right-0 h-full w-full max-w-md bg-surface z-50 shadow-2xl flex flex-col">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-outline-variant/40">
+    <div>
+      <span class="font-label font-black text-[10px] tracking-[0.25em] uppercase text-primary">Warenkorb</span>
+      <h3 class="font-headline font-black italic uppercase text-primary text-2xl">Dein Bag</h3>
+    </div>
+    <button onclick="toggleCart(false)" class="w-10 h-10 rounded-xl bg-surface-container grid place-items-center"><span class="material-symbols-outlined">close</span></button>
+  </div>
+  <div id="cartItems" class="flex-1 overflow-y-auto px-6 py-4"></div>
+  <div id="cartFooter" class="border-t border-outline-variant/40 p-6 bg-surface-container-lowest">
+    <div class="flex justify-between text-sm mb-2"><span>Zwischensumme</span><span id="cartSubtotal">0,00€</span></div>
+    <div class="flex justify-between text-sm mb-2"><span>Versand</span><span id="cartShipping">4,90€</span></div>
+    <div class="flex justify-between text-sm mb-4 text-ok-green"><span class="flex items-center gap-1"><span class="material-symbols-outlined text-base">verified</span>Mitgliederrabatt 10%</span><span id="cartDiscount">−0,00€</span></div>
+    <div class="flex justify-between font-headline font-black italic text-2xl text-primary mb-5"><span>GESAMT</span><span id="cartTotal">0,00€</span></div>
+    <button onclick="openCheckout()" class="w-full bg-secondary-container text-on-secondary-container py-4 rounded-xl font-headline font-black italic uppercase tracking-wider text-lg shadow-lg hover:scale-[1.02] active:scale-95 transition-transform">Zur Kasse</button>
+    <p class="mt-3 text-xs text-on-surface-variant text-center">Sichere Bezahlung · 30 Tage Rückgabe · Lieferung in 2-4 Werktagen</p>
+  </div>
+</aside>
+
+<!-- ========== WISHLIST DRAWER ========== -->
+<div id="wishlistBg" class="modal-bg fixed inset-0 z-40 bg-primary/60 backdrop-blur-sm" onclick="toggleWishlist(false)"></div>
+<aside id="wishlistDrawer" class="drawer fixed top-0 right-0 h-full w-full max-w-md bg-surface z-50 shadow-2xl flex flex-col">
+  <div class="flex items-center justify-between px-6 py-5 border-b border-outline-variant/40">
+    <div>
+      <span class="font-label font-black text-[10px] tracking-[0.25em] uppercase text-primary">Merkliste</span>
+      <h3 class="font-headline font-black italic uppercase text-primary text-2xl">Wishlist</h3>
+    </div>
+    <button onclick="toggleWishlist(false)" class="w-10 h-10 rounded-xl bg-surface-container grid place-items-center"><span class="material-symbols-outlined">close</span></button>
+  </div>
+  <div id="wishlistItems" class="flex-1 overflow-y-auto px-6 py-4"></div>
+</aside>
+
+<!-- ========== CHECKOUT ========== -->
+<div id="checkoutBg" class="modal-bg fixed inset-0 z-50 bg-primary/80 backdrop-blur-sm overflow-y-auto">
+  <div class="min-h-full grid place-items-center py-10 px-4">
+    <div class="bg-surface w-full max-w-5xl rounded-3xl shadow-2xl overflow-hidden">
+      <div class="flex items-center justify-between px-8 py-5 border-b border-outline-variant/40 bg-primary text-white">
+        <div class="flex items-center gap-3"><span class="font-headline font-black italic text-2xl text-secondary-container">SG</span><span class="font-headline font-black italic uppercase">Checkout</span></div>
+        <button onclick="closeCheckout()" class="w-10 h-10 rounded-xl bg-white/10 grid place-items-center text-white"><span class="material-symbols-outlined">close</span></button>
+      </div>
+
+      <!-- Stepper -->
+      <div class="px-8 py-6 border-b border-outline-variant/40 flex items-center gap-3 overflow-x-auto no-scrollbar">
+        <div class="flex items-center gap-2"><span class="step-dot active w-3 h-3 rounded-full bg-outline-variant" data-step="1"></span><span class="font-headline font-black italic uppercase text-sm text-primary" data-step-label="1">1. Adresse</span></div>
+        <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+        <div class="flex items-center gap-2"><span class="step-dot w-3 h-3 rounded-full bg-outline-variant" data-step="2"></span><span class="font-headline font-black italic uppercase text-sm text-on-surface-variant" data-step-label="2">2. Versand</span></div>
+        <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+        <div class="flex items-center gap-2"><span class="step-dot w-3 h-3 rounded-full bg-outline-variant" data-step="3"></span><span class="font-headline font-black italic uppercase text-sm text-on-surface-variant" data-step-label="3">3. Bezahlung</span></div>
+        <span class="material-symbols-outlined text-on-surface-variant">chevron_right</span>
+        <div class="flex items-center gap-2"><span class="step-dot w-3 h-3 rounded-full bg-outline-variant" data-step="4"></span><span class="font-headline font-black italic uppercase text-sm text-on-surface-variant" data-step-label="4">4. Bestätigung</span></div>
+      </div>
+
+      <div class="grid lg:grid-cols-[1fr_400px] gap-0">
+        <!-- Step Forms -->
+        <div class="p-8">
+          <!-- Step 1 -->
+          <div class="checkout-step" data-step-content="1">
+            <h3 class="font-headline font-black italic uppercase text-3xl text-primary mb-6">Wohin geht's?</h3>
+            <div class="grid grid-cols-2 gap-4 mb-4">
+              <input type="text" placeholder="Vorname" class="border-2 border-outline-variant/40 rounded-xl px-4 py-3 focus:border-primary outline-none" value="Max"/>
+              <input type="text" placeholder="Nachname" class="border-2 border-outline-variant/40 rounded-xl px-4 py-3 focus:border-primary outline-none" value="Mustermann"/>
+            </div>
+            <input type="email" placeholder="E-Mail" class="w-full border-2 border-outline-variant/40 rounded-xl px-4 py-3 mb-4 focus:border-primary outline-none" value="max@example.de"/>
+            <input type="text" placeholder="Straße & Hausnummer" class="w-full border-2 border-outline-variant/40 rounded-xl px-4 py-3 mb-4 focus:border-primary outline-none" value="Sportweg 1"/>
+            <div class="grid grid-cols-3 gap-4 mb-4">
+              <input type="text" placeholder="PLZ" class="border-2 border-outline-variant/40 rounded-xl px-4 py-3 focus:border-primary outline-none" value="65510"/>
+              <input type="text" placeholder="Stadt" class="col-span-2 border-2 border-outline-variant/40 rounded-xl px-4 py-3 focus:border-primary outline-none" value="Hünstetten"/>
+            </div>
+            <label class="flex items-center gap-3 mt-4 text-sm"><input type="checkbox" class="accent-primary w-4 h-4"/>Ich bin SGH-Mitglied (Mitgliedsnummer im nächsten Schritt)</label>
+          </div>
+
+          <!-- Step 2 -->
+          <div class="checkout-step hidden" data-step-content="2">
+            <h3 class="font-headline font-black italic uppercase text-3xl text-primary mb-6">Wie soll's ankommen?</h3>
+            <div class="space-y-3">
+              <label class="ship-opt flex items-center gap-4 p-5 border-2 border-primary rounded-2xl cursor-pointer bg-primary/5">
+                <input type="radio" name="ship" value="4.90" checked class="accent-primary"/>
+                <span class="material-symbols-outlined text-primary">local_shipping</span>
+                <div class="flex-1">
+                  <div class="font-headline font-bold italic text-primary">DHL Paket</div>
+                  <div class="text-xs text-on-surface-variant">2-4 Werktage · klimaneutral</div>
+                </div>
+                <span class="font-headline font-black italic text-primary">4,90€</span>
+              </label>
+              <label class="ship-opt flex items-center gap-4 p-5 border-2 border-outline-variant/40 rounded-2xl cursor-pointer hover:border-primary">
+                <input type="radio" name="ship" value="9.90" class="accent-primary"/>
+                <span class="material-symbols-outlined text-primary">bolt</span>
+                <div class="flex-1">
+                  <div class="font-headline font-bold italic text-primary">DHL Express</div>
+                  <div class="text-xs text-on-surface-variant">Nächster Werktag</div>
+                </div>
+                <span class="font-headline font-black italic text-primary">9,90€</span>
+              </label>
+              <label class="ship-opt flex items-center gap-4 p-5 border-2 border-outline-variant/40 rounded-2xl cursor-pointer hover:border-primary">
+                <input type="radio" name="ship" value="0" class="accent-primary"/>
+                <span class="material-symbols-outlined text-primary">storefront</span>
+                <div class="flex-1">
+                  <div class="font-headline font-bold italic text-primary">Abholung Diehlenhof</div>
+                  <div class="text-xs text-on-surface-variant">Vereinsheim · ab Donnerstag</div>
+                </div>
+                <span class="font-headline font-black italic text-secondary text-on-secondary-container bg-secondary-container px-2 py-1 rounded-lg">GRATIS</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Step 3 -->
+          <div class="checkout-step hidden" data-step-content="3">
+            <h3 class="font-headline font-black italic uppercase text-3xl text-primary mb-6">Wie zahlst du?</h3>
+            <div class="grid grid-cols-2 gap-3 mb-6">
+              <label class="pay-opt flex items-center gap-3 p-4 border-2 border-primary rounded-2xl cursor-pointer bg-primary/5">
+                <input type="radio" name="pay" checked class="accent-primary"/>
+                <span class="font-headline font-bold italic text-primary">SEPA Lastschrift</span>
+              </label>
+              <label class="pay-opt flex items-center gap-3 p-4 border-2 border-outline-variant/40 rounded-2xl cursor-pointer hover:border-primary">
+                <input type="radio" name="pay" class="accent-primary"/>
+                <span class="font-headline font-bold italic text-primary">Kreditkarte</span>
+              </label>
+              <label class="pay-opt flex items-center gap-3 p-4 border-2 border-outline-variant/40 rounded-2xl cursor-pointer hover:border-primary">
+                <input type="radio" name="pay" class="accent-primary"/>
+                <span class="font-headline font-bold italic text-primary">PayPal</span>
+              </label>
+              <label class="pay-opt flex items-center gap-3 p-4 border-2 border-outline-variant/40 rounded-2xl cursor-pointer hover:border-primary">
+                <input type="radio" name="pay" class="accent-primary"/>
+                <span class="font-headline font-bold italic text-primary">Kauf auf Rechnung</span>
+              </label>
+            </div>
+            <input type="text" placeholder="IBAN  ·  DE12 3456 7890 1234 5678 90" class="w-full border-2 border-outline-variant/40 rounded-xl px-4 py-3 mb-3 focus:border-primary outline-none font-mono"/>
+            <input type="text" placeholder="Mitgliedsnummer (optional, für 10% Rabatt)" class="w-full border-2 border-outline-variant/40 rounded-xl px-4 py-3 focus:border-primary outline-none"/>
+          </div>
+
+          <!-- Step 4 -->
+          <div class="checkout-step hidden text-center" data-step-content="4">
+            <div class="w-24 h-24 rounded-full bg-secondary-container grid place-items-center mx-auto mb-6">
+              <span class="material-symbols-outlined text-on-secondary-container text-5xl">check</span>
+            </div>
+            <h3 class="font-headline font-black italic uppercase text-4xl text-primary mb-3">Danke!</h3>
+            <p class="text-on-surface-variant mb-6">Deine Bestellung <span id="orderId" class="font-bold text-primary">#SGH-2026-04219</span> ist eingegangen. Du erhältst eine Bestätigung per E-Mail.</p>
+            <div class="bg-surface-container rounded-2xl p-6 text-left max-w-md mx-auto">
+              <div class="flex justify-between text-sm mb-2"><span>Lieferung erwartet</span><span class="font-bold">12.–14. Mai 2026</span></div>
+              <div class="flex justify-between text-sm mb-2"><span>Tracking</span><span class="font-bold text-primary">Sobald verfügbar</span></div>
+              <div class="flex justify-between text-sm"><span>Status</span><span class="text-ok-green font-bold flex items-center gap-1"><span class="material-symbols-outlined text-base">verified</span>Bestätigt</span></div>
+            </div>
+            <button onclick="closeCheckout(); resetCart();" class="mt-8 bg-primary text-white px-8 py-4 rounded-xl font-headline font-black italic uppercase tracking-wider">Weiter shoppen</button>
+          </div>
+
+          <!-- Nav buttons -->
+          <div class="mt-8 flex justify-between" id="checkoutNav">
+            <button id="checkoutBack" class="px-6 py-3 rounded-xl border-2 border-outline-variant/40 font-headline font-black italic uppercase tracking-wider text-on-surface-variant hover:border-primary hover:text-primary">Zurück</button>
+            <button id="checkoutNext" class="px-8 py-3 rounded-xl bg-secondary-container text-on-secondary-container font-headline font-black italic uppercase tracking-wider hover:scale-105 transition-transform">Weiter</button>
+          </div>
+        </div>
+
+        <!-- Order summary -->
+        <div class="bg-surface-container-low p-8 border-l border-outline-variant/40">
+          <h4 class="font-headline font-black italic uppercase text-primary text-lg mb-4">Deine Bestellung</h4>
+          <div id="checkoutItems" class="space-y-3 max-h-72 overflow-y-auto pr-2 mb-6 no-scrollbar"></div>
+          <div class="border-t border-outline-variant/40 pt-4 space-y-2 text-sm">
+            <div class="flex justify-between"><span>Zwischensumme</span><span id="checkoutSubtotal">0,00€</span></div>
+            <div class="flex justify-between"><span>Versand</span><span id="checkoutShipping">4,90€</span></div>
+            <div class="flex justify-between text-ok-green"><span>Mitgliederrabatt</span><span id="checkoutDiscount">−0,00€</span></div>
+            <div class="flex justify-between font-headline font-black italic text-2xl text-primary pt-3 border-t border-outline-variant/40 mt-3"><span>GESAMT</span><span id="checkoutTotal">0,00€</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========== TOAST ========== -->
+<div id="toast" class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[60] bg-primary text-white px-6 py-4 rounded-2xl shadow-2xl font-bold flex items-center gap-3 opacity-0 pointer-events-none transition-all duration-300">
+  <span class="material-symbols-outlined text-secondary-container">check_circle</span>
+  <span id="toastMsg">Hinzugefügt</span>
+</div>
+
+<!-- ========== DATA + LOGIC ========== -->
+<script>
+/* ===== Product catalog ===== */
+const PRODUCTS = [
+  { id:'trikot-home', name:'Heimtrikot Anniversary 26/27', cat:'trikots', sport:'fußball', price:69.90, oldPrice:79.90, sizes:['S','M','L','XL','XXL'], rating:4.9, reviews:128, badge:'NEU', new:true, stock:true, color:'#052856', desc:'Limited 80-Jahre-Edition mit gesticktem Wappen.' },
+  { id:'trikot-away', name:'Auswärtstrikot 26/27', cat:'trikots', sport:'fußball', price:64.90, sizes:['S','M','L','XL'], rating:4.7, reviews:64, new:true, stock:true, color:'#FDE000', desc:'Helles Gold mit blauen Akzenten.' },
+  { id:'trikot-keeper', name:'Torwart-Trikot 26/27', cat:'trikots', sport:'fußball', price:59.90, sizes:['M','L','XL'], rating:4.5, reviews:21, stock:true, color:'#2E4150', desc:'Atmungsaktiv, mit Polsterung an Ellbogen.' },
+  { id:'trainings-anzug', name:'Trainingsanzug Pro', cat:'trainingsanzug', sport:'fußball', price:99.00, sizes:['S','M','L','XL','XXL'], rating:4.8, reviews:87, stock:true, color:'#223E6D', desc:'Slim-Fit, Reflektorstreifen, Reißverschlusstaschen.' },
+  { id:'short-home', name:'Spielshort Heim', cat:'trikots', sport:'fußball', price:24.90, sizes:['S','M','L','XL'], rating:4.6, reviews:42, stock:true, color:'#052856', desc:'Leicht & atmungsaktiv.' },
+  { id:'stutzen', name:'Vereinsstutzen', cat:'trikots', sport:'fußball', price:14.90, sizes:['S','M','L'], rating:4.4, reviews:33, stock:true, color:'#FDE000', desc:'Gestrickt, hoher Tragekomfort.' },
+  { id:'hoodie-classic', name:'Hoodie "80 Jahre"', cat:'hoodies', sport:'general', price:54.90, sizes:['XS','S','M','L','XL','XXL'], rating:4.9, reviews:201, badge:'BESTSELLER', stock:true, color:'#052856', desc:'400g Premium-Baumwolle, gefüttert.' },
+  { id:'tee-classic', name:'T-Shirt Vereinslogo', cat:'hoodies', sport:'general', price:24.90, sizes:['S','M','L','XL'], rating:4.7, reviews:154, stock:true, color:'#FFFFFF', desc:'Weich, mit großem Print auf der Brust.' },
+  { id:'tee-vintage', name:'T-Shirt Vintage 1944', cat:'vintage', sport:'general', price:29.90, sizes:['S','M','L','XL'], rating:4.8, reviews:67, badge:'RETRO', stock:true, color:'#3B2A1A', desc:'Heritage-Print im 70er-Stil.' },
+  { id:'cap-classic', name:'Snapback Cap "SGH"', cat:'caps', sport:'general', price:24.90, sizes:['M','L'], rating:4.6, reviews:78, stock:true, color:'#052856', desc:'6-Panel Snapback, plastisch besticktes Logo.' },
+  { id:'cap-bucket', name:'Bucket Hat Sommer', cat:'caps', sport:'general', price:22.90, sizes:['M','L'], rating:4.3, reviews:18, new:true, stock:true, color:'#FDE000', desc:'Leicht, perfekt für die Auswärtsfahrt.' },
+  { id:'beanie', name:'Beanie Wintergold', cat:'caps', sport:'general', price:18.90, sizes:['M'], rating:4.5, reviews:44, stock:true, color:'#FDE000', desc:'Gestrickt, mit gewebtem Etikett.' },
+  { id:'schal-classic', name:'Schal "Hünstetten Forever"', cat:'schals', sport:'general', price:19.90, sizes:['M'], rating:4.9, reviews:212, badge:'BESTSELLER', stock:true, color:'#052856', desc:'Doppelseitig gewebt, 145cm.' },
+  { id:'flagge', name:'Vereinsflagge 150x90cm', cat:'schals', sport:'general', price:24.90, sizes:['M'], rating:4.8, reviews:36, stock:true, color:'#052856', desc:'Wetterfest, mit Ösen.' },
+  { id:'fan-banner', name:'Fan-Banner XXL', cat:'schals', sport:'fußball', price:39.90, sizes:['M'], rating:4.6, reviews:14, stock:true, color:'#052856', desc:'2x4m, für die Kurve.' },
+  { id:'tasche-sport', name:'Sporttasche 50L', cat:'taschen', sport:'general', price:49.90, sizes:['M'], rating:4.7, reviews:88, stock:true, color:'#1B1C1C', desc:'Wasserabweisend, Schuhfach.' },
+  { id:'rucksack', name:'Rucksack Athlete', cat:'taschen', sport:'general', price:59.90, sizes:['M'], rating:4.8, reviews:62, new:true, stock:true, color:'#052856', desc:'Laptopfach, Brustgurt, gepolstert.' },
+  { id:'gym-bag', name:'Gym-Bag Drawstring', cat:'taschen', sport:'pilates', price:14.90, sizes:['M'], rating:4.4, reviews:25, stock:true, color:'#FDE000', desc:'Leichter Beutel mit Kordelzug.' },
+  { id:'fußball', name:'Trainingsball Match', cat:'bälle', sport:'fußball', price:34.90, sizes:['M'], rating:4.6, reviews:54, stock:true, color:'#FFFFFF', desc:'Größe 5, FIFA Quality.' },
+  { id:'tt-schläger', name:'Tischtennis-Set Pro', cat:'bälle', sport:'tischtennis', price:44.90, sizes:['M'], rating:4.7, reviews:31, stock:true, color:'#BA1A1A', desc:'2 Schläger, 3 Bälle, Hülle.' },
+  { id:'badmi-set', name:'Badminton Starter-Set', cat:'bälle', sport:'badminton', price:39.90, sizes:['M'], rating:4.5, reviews:19, stock:false, color:'#FDE000', desc:'2 Schläger, 6 Federbälle, Tasche.' },
+  { id:'kids-trikot', name:'Kindertrikot Future Star', cat:'kids', sport:'fußball', price:34.90, sizes:['kids'], rating:4.8, reviews:46, badge:'KIDS', stock:true, color:'#052856', desc:'Größen 116-164, mit Wunschnamen.' },
+  { id:'kids-hoodie', name:'Kinder-Hoodie Mini-Star', cat:'kids', sport:'general', price:34.90, sizes:['kids'], rating:4.7, reviews:29, stock:true, color:'#FDE000', desc:'Kuschelig, mit großem Wappen.' },
+  { id:'kids-trinkflasche', name:'Trinkflasche Junior', cat:'kids', sport:'general', price:9.90, sizes:['M'], rating:4.6, reviews:71, stock:true, color:'#FDE000', desc:'500ml, BPA-frei, mit Sticker-Set.' },
+];
+
+const SPORT_ACCENTS = {
+  fußball:'#052856', leichtathletik:'#BA1A1A', badminton:'#2E7D32',
+  tischtennis:'#0a408a', pilates:'#FDE000', general:'#223E6D'
+};
+
+/* ===== State ===== */
+const state = {
+  cat:'all', sport:'all', size:'all',
+  maxPrice:120, onlyStock:false, onlyNew:false,
+  search:'', sort:'featured',
+  cart:{}, wishlist:new Set(),
+  shipping:4.90, member:false,
+  step:1
+};
+
+/* ===== Helpers ===== */
+const eur = n => n.toFixed(2).replace('.',',') + '€';
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+/* ===== Visual swatch SVG ===== */
+function swatchSVG(p) {
+  // Stylized representation per category
+  const c = p.color, accent = c==='#052856' ? '#FDE000' : '#052856';
+  if (p.cat==='trikots' || p.cat==='kids' && p.id==='kids-trikot') {
+    return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+      <path d="M40 50 L70 30 L130 30 L160 50 L180 70 L160 90 L150 90 L150 200 L50 200 L50 90 L40 90 L20 70 Z" fill="${c}"/>
+      <path d="M85 30 Q100 50 115 30" fill="${c==='#FFFFFF'?'#E4E2E1':'#000'}" opacity=".2"/>
+      <rect x="80" y="120" width="40" height="40" fill="${accent}" rx="4"/>
+      <text x="100" y="148" text-anchor="middle" fill="${c}" font-family="Lexend" font-weight="900" font-style="italic" font-size="22">SGH</text>
+      ${p.id==='trikot-home' ? `<rect x="50" y="180" width="100" height="6" fill="#FDE000"/>` : ''}
+    </svg>`;
+  }
+  if (p.cat==='hoodies' || p.cat==='vintage') {
+    return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+      <path d="M40 60 L70 30 L80 50 Q100 60 120 50 L130 30 L160 60 L185 90 L165 110 L155 100 L155 200 L45 200 L45 100 L35 110 L15 90 Z" fill="${c}"/>
+      <path d="M85 50 Q100 80 115 50 L115 90 L85 90 Z" fill="${c==='#FFFFFF'?'#E4E2E1':'#000'}" opacity=".25"/>
+      <text x="100" y="155" text-anchor="middle" fill="${accent}" font-family="Lexend" font-weight="900" font-style="italic" font-size="14">${p.id==='tee-vintage'?'EST.1944':'SG HÜNSTETTEN'}</text>
+    </svg>`;
+  }
+  if (p.cat==='caps') {
+    return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+      <ellipse cx="100" cy="130" rx="80" ry="20" fill="${c}" opacity=".4"/>
+      <path d="M30 130 Q30 70 100 60 Q170 70 170 130 Z" fill="${c}"/>
+      <ellipse cx="100" cy="130" rx="80" ry="14" fill="${c}"/>
+      <path d="M30 130 L185 130 Q185 145 100 145 Q15 145 30 130 Z" fill="${c}" opacity=".7"/>
+      <rect x="85" y="85" width="30" height="20" fill="${accent}" rx="3"/>
+      <text x="100" y="100" text-anchor="middle" fill="${c}" font-family="Lexend" font-weight="900" font-style="italic" font-size="13">SGH</text>
+    </svg>`;
+  }
+  if (p.cat==='schals') {
+    return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+      <rect x="20" y="40" width="160" height="160" fill="${c}" transform="rotate(-8 100 110)"/>
+      <rect x="20" y="60" width="160" height="6" fill="${accent}" transform="rotate(-8 100 110)"/>
+      <rect x="20" y="170" width="160" height="6" fill="${accent}" transform="rotate(-8 100 110)"/>
+      <text x="100" y="125" text-anchor="middle" fill="${accent}" font-family="Lexend" font-weight="900" font-style="italic" font-size="20" transform="rotate(-8 100 125)">SGH</text>
+    </svg>`;
+  }
+  if (p.cat==='taschen') {
+    return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+      <path d="M70 70 Q100 50 130 70 L130 80 L120 80 L120 75 Q100 65 80 75 L80 80 L70 80 Z" fill="${c}"/>
+      <rect x="30" y="80" width="140" height="100" rx="10" fill="${c}"/>
+      <rect x="30" y="120" width="140" height="6" fill="${accent}"/>
+      <circle cx="160" cy="105" r="3" fill="${accent}"/>
+    </svg>`;
+  }
+  if (p.cat==='bälle') {
+    if (p.sport==='fußball') {
+      return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+        <circle cx="100" cy="110" r="65" fill="#FFFFFF" stroke="#1B1C1C" stroke-width="2"/>
+        <polygon points="100,75 115,90 110,108 90,108 85,90" fill="#1B1C1C"/>
+        <polygon points="65,100 80,105 80,125 70,135 60,120" fill="#1B1C1C"/>
+        <polygon points="135,100 140,120 130,135 120,125 120,105" fill="#1B1C1C"/>
+        <polygon points="85,135 105,135 110,150 95,160 80,150" fill="#1B1C1C"/>
+      </svg>`;
+    }
+    return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+      <ellipse cx="80" cy="100" rx="55" ry="18" fill="${c}" transform="rotate(-25 80 100)"/>
+      <rect x="105" y="115" width="60" height="8" fill="#3B2A1A" transform="rotate(-25 135 119)"/>
+    </svg>`;
+  }
+  if (p.cat==='trainingsanzug') {
+    return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+      <path d="M55 40 L75 25 L125 25 L145 40 L155 70 L150 105 L130 105 L130 200 L70 200 L70 105 L50 105 L45 70 Z" fill="${c}"/>
+      <line x1="100" y1="40" x2="100" y2="105" stroke="${accent}" stroke-width="3"/>
+      <line x1="60" y1="50" x2="60" y2="95" stroke="${accent}" stroke-width="2"/>
+      <line x1="140" y1="50" x2="140" y2="95" stroke="${accent}" stroke-width="2"/>
+    </svg>`;
+  }
+  // kids fallback
+  return `<svg viewBox="0 0 200 220" class="w-full h-full"><rect width="200" height="220" fill="#F0EDED"/>
+    <circle cx="100" cy="110" r="60" fill="${c}"/>
+    <text x="100" y="118" text-anchor="middle" fill="${accent}" font-family="Lexend" font-weight="900" font-style="italic" font-size="32">SGH</text>
+  </svg>`;
+}
+
+/* ===== Render product card ===== */
+function productCard(p) {
+  const inWishlist = state.wishlist.has(p.id);
+  const accent = SPORT_ACCENTS[p.sport] || '#052856';
+  return `
+  <article class="product-card group bg-surface-container-lowest rounded-3xl overflow-hidden shadow-sm hover:shadow-2xl border border-outline-variant/30 flex flex-col" data-id="${p.id}">
+    <div class="relative aspect-[4/5] overflow-hidden bg-surface-container">
+      <div class="product-img absolute inset-0">${swatchSVG(p)}</div>
+      ${p.badge ? `<span class="absolute top-4 left-4 bg-secondary-container text-on-secondary-container px-3 py-1 rounded-full font-label font-black text-[10px] tracking-[0.25em] uppercase kinetic-rotate">${p.badge}</span>` : ''}
+      ${!p.stock ? `<span class="absolute top-4 left-4 bg-error text-white px-3 py-1 rounded-full font-label font-black text-[10px] tracking-[0.25em] uppercase">Ausverkauft</span>` : ''}
+      <button class="wishlist-btn absolute top-4 right-4 w-10 h-10 rounded-full bg-surface-container-lowest/90 backdrop-blur grid place-items-center hover:scale-110 transition-transform" data-id="${p.id}">
+        <span class="material-symbols-outlined text-on-surface ${inWishlist?'heart-active':''}">favorite</span>
+      </button>
+      <span class="absolute bottom-4 left-4 px-3 py-1 rounded-full text-white text-[10px] font-bold uppercase tracking-widest" style="background:${accent}">${p.sport==='general'?'Vereinsfans':p.sport}</span>
+    </div>
+    <div class="p-5 flex flex-col flex-1">
+      <h3 class="font-headline font-black italic text-primary text-lg leading-tight uppercase mb-1 line-clamp-2">${p.name}</h3>
+      <p class="text-xs text-on-surface-variant mb-3 line-clamp-2">${p.desc}</p>
+      <div class="flex items-center gap-2 text-xs text-on-surface-variant mb-3">
+        <span class="material-symbols-outlined text-secondary text-base" style="color:#FDE000;font-variation-settings:'FILL' 1">star</span>
+        <span class="font-bold">${p.rating}</span>
+        <span>·</span>
+        <span>${p.reviews} Reviews</span>
+      </div>
+      <div class="flex flex-wrap gap-1 mb-4">
+        ${p.sizes.map(s => `<span class="px-2 py-0.5 bg-surface-container rounded text-[10px] font-bold uppercase">${s==='kids'?'116-164':s}</span>`).join('')}
+      </div>
+      <div class="mt-auto flex items-end justify-between gap-3">
+        <div>
+          ${p.oldPrice ? `<div class="text-[11px] text-on-surface-variant line-through">${eur(p.oldPrice)}</div>`:''}
+          <div class="font-headline font-black italic text-2xl text-primary leading-none">${eur(p.price)}</div>
+        </div>
+        <button class="add-cart-btn flex items-center gap-1 bg-primary text-white px-4 py-2.5 rounded-xl font-headline font-black italic uppercase text-xs tracking-wider hover:bg-primary-container transition-colors disabled:opacity-40 disabled:cursor-not-allowed" data-id="${p.id}" ${!p.stock?'disabled':''}>
+          <span class="material-symbols-outlined text-base">add_shopping_cart</span>
+          ${p.stock?'In Bag':'Sold Out'}
+        </button>
+      </div>
+    </div>
+  </article>`;
+}
+
+/* ===== Filter / sort ===== */
+function filtered() {
+  let list = PRODUCTS.filter(p => {
+    if (state.cat !== 'all' && p.cat !== state.cat) return false;
+    if (state.sport !== 'all' && p.sport !== state.sport) return false;
+    if (state.size !== 'all' && !p.sizes.includes(state.size)) return false;
+    if (p.price > state.maxPrice) return false;
+    if (state.onlyStock && !p.stock) return false;
+    if (state.onlyNew && !p.new) return false;
+    if (state.search) {
+      const q = state.search.toLowerCase();
+      if (!p.name.toLowerCase().includes(q) && !p.desc.toLowerCase().includes(q) && !p.cat.includes(q)) return false;
+    }
+    return true;
+  });
+  switch (state.sort) {
+    case 'price-asc': list.sort((a,b)=>a.price-b.price); break;
+    case 'price-desc': list.sort((a,b)=>b.price-a.price); break;
+    case 'rating': list.sort((a,b)=>b.rating-a.rating); break;
+    case 'new': list.sort((a,b)=>(b.new?1:0)-(a.new?1:0)); break;
+  }
+  return list;
+}
+
+function renderGrid() {
+  const list = filtered();
+  $('#resultCount').textContent = list.length;
+  $('#productGrid').innerHTML = list.map(productCard).join('');
+  $('#noResults').classList.toggle('hidden', list.length>0);
+  $('#productGrid').classList.toggle('hidden', list.length===0);
+  bindCardEvents();
+}
+
+function bindCardEvents() {
+  $$('.add-cart-btn').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    addToCart(b.dataset.id);
+  }));
+  $$('.wishlist-btn').forEach(b => b.addEventListener('click', e => {
+    e.stopPropagation();
+    toggleWishlistItem(b.dataset.id);
+  }));
+}
+
+/* ===== Cart ===== */
+function addToCart(id) {
+  const p = PRODUCTS.find(x=>x.id===id); if (!p) return;
+  const key = id;
+  if (!state.cart[key]) state.cart[key] = { id, qty:0, size: p.sizes[0] };
+  state.cart[key].qty++;
+  showToast(`${p.name} im Warenkorb`);
+  updateCart();
+}
+function removeFromCart(id) { delete state.cart[id]; updateCart(); }
+function changeQty(id, d) {
+  if (!state.cart[id]) return;
+  state.cart[id].qty += d;
+  if (state.cart[id].qty<=0) delete state.cart[id];
+  updateCart();
+}
+
+function cartArr() { return Object.values(state.cart).map(c => ({...c, p: PRODUCTS.find(x=>x.id===c.id)})); }
+function cartSubtotal() { return cartArr().reduce((s,c)=>s+c.p.price*c.qty,0); }
+
+function updateCart() {
+  const items = cartArr();
+  const count = items.reduce((s,c)=>s+c.qty,0);
+  $('#cartBadge').textContent = count;
+  $('#cartItems').innerHTML = items.length === 0
+    ? `<div class="text-center py-16">
+         <span class="material-symbols-outlined text-6xl text-on-surface-variant/40">shopping_bag</span>
+         <h4 class="font-headline font-black italic uppercase text-primary text-xl mt-4">Noch leer</h4>
+         <p class="text-sm text-on-surface-variant mt-2">Stöber durch unsere Trikots, Hoodies und Fanartikel.</p>
+       </div>`
+    : items.map(c => `
+        <div class="flex gap-4 py-4 border-b border-outline-variant/30">
+          <div class="w-20 h-24 rounded-xl bg-surface-container overflow-hidden shrink-0">${swatchSVG(c.p)}</div>
+          <div class="flex-1 min-w-0">
+            <div class="flex justify-between items-start gap-2">
+              <h4 class="font-headline font-bold italic text-primary text-sm leading-tight uppercase">${c.p.name}</h4>
+              <button onclick="removeFromCart('${c.id}')" class="text-on-surface-variant hover:text-error"><span class="material-symbols-outlined text-base">close</span></button>
+            </div>
+            <div class="text-xs text-on-surface-variant mt-1">Größe ${c.size==='kids'?'116-164':c.size} · ${c.p.sport==='general'?'Vereinsfans':c.p.sport}</div>
+            <div class="flex items-center justify-between mt-3">
+              <div class="flex items-center gap-2 bg-surface-container rounded-lg">
+                <button onclick="changeQty('${c.id}',-1)" class="w-8 h-8 grid place-items-center font-bold">−</button>
+                <span class="font-headline font-bold text-sm">${c.qty}</span>
+                <button onclick="changeQty('${c.id}',1)" class="w-8 h-8 grid place-items-center font-bold">+</button>
+              </div>
+              <div class="font-headline font-black italic text-primary">${eur(c.p.price*c.qty)}</div>
+            </div>
+          </div>
+        </div>
+      `).join('');
+  const sub = cartSubtotal();
+  const ship = items.length===0 ? 0 : state.shipping;
+  const disc = state.member ? sub*0.1 : 0;
+  $('#cartSubtotal').textContent = eur(sub);
+  $('#cartShipping').textContent = eur(ship);
+  $('#cartDiscount').textContent = '−' + eur(disc);
+  $('#cartTotal').textContent = eur(Math.max(0, sub+ship-disc));
+  $('#cartBadge').classList.toggle('hidden', count===0);
+}
+
+/* ===== Wishlist ===== */
+function toggleWishlistItem(id) {
+  if (state.wishlist.has(id)) state.wishlist.delete(id);
+  else { state.wishlist.add(id); showToast('Auf Merkliste'); }
+  updateWishlist();
+  renderGrid();
+}
+function updateWishlist() {
+  const ids = [...state.wishlist];
+  $('#wishlistBadge').textContent = ids.length;
+  $('#wishlistBadge').classList.toggle('hidden', ids.length===0);
+  $('#wishlistItems').innerHTML = ids.length === 0
+    ? `<div class="text-center py-16">
+         <span class="material-symbols-outlined text-6xl text-on-surface-variant/40">favorite</span>
+         <h4 class="font-headline font-black italic uppercase text-primary text-xl mt-4">Keine Favoriten</h4>
+         <p class="text-sm text-on-surface-variant mt-2">Tippe auf das Herz, um Produkte zu speichern.</p>
+       </div>`
+    : ids.map(id => {
+        const p = PRODUCTS.find(x=>x.id===id);
+        return `<div class="flex gap-4 py-4 border-b border-outline-variant/30">
+          <div class="w-20 h-24 rounded-xl bg-surface-container overflow-hidden shrink-0">${swatchSVG(p)}</div>
+          <div class="flex-1 min-w-0">
+            <h4 class="font-headline font-bold italic text-primary text-sm leading-tight uppercase">${p.name}</h4>
+            <div class="text-xs text-on-surface-variant mt-1">${p.sport==='general'?'Vereinsfans':p.sport}</div>
+            <div class="font-headline font-black italic text-primary mt-2">${eur(p.price)}</div>
+            <div class="flex gap-2 mt-3">
+              <button onclick="addToCart('${p.id}')" class="bg-primary text-white px-3 py-1.5 rounded-lg font-headline font-black italic uppercase text-[10px] tracking-wider">In Bag</button>
+              <button onclick="toggleWishlistItem('${p.id}')" class="px-3 py-1.5 rounded-lg border border-outline-variant/40 text-[10px] font-bold uppercase">Entfernen</button>
+            </div>
+          </div>
+        </div>`;
+      }).join('');
+}
+
+/* ===== UI bindings ===== */
+$$('.cat-chip').forEach(b => b.addEventListener('click', () => {
+  $$('.cat-chip').forEach(x=>x.classList.remove('chip-active'));
+  b.classList.add('chip-active');
+  state.cat = b.dataset.cat; renderGrid();
+}));
+$$('.sport-chip').forEach(b => b.addEventListener('click', () => {
+  $$('.sport-chip').forEach(x=>x.classList.remove('chip-active'));
+  b.classList.add('chip-active');
+  state.sport = b.dataset.sport; renderGrid();
+}));
+$$('.size-chip').forEach(b => b.addEventListener('click', () => {
+  $$('.size-chip').forEach(x=>x.classList.remove('chip-active'));
+  b.classList.add('chip-active');
+  state.size = b.dataset.size; renderGrid();
+}));
+$('#priceRange').addEventListener('input', e => {
+  state.maxPrice = +e.target.value; $('#priceVal').textContent = state.maxPrice; renderGrid();
+});
+$('#onlyStock').addEventListener('change', e => { state.onlyStock = e.target.checked; renderGrid(); });
+$('#onlyNew').addEventListener('change', e => { state.onlyNew = e.target.checked; renderGrid(); });
+$('#sortSelect').addEventListener('change', e => { state.sort = e.target.value; renderGrid(); });
+$('#resetFilters').addEventListener('click', () => {
+  state.cat='all'; state.sport='all'; state.size='all'; state.maxPrice=120; state.onlyStock=false; state.onlyNew=false; state.search='';
+  $('#priceRange').value=120; $('#priceVal').textContent=120; $('#onlyStock').checked=false; $('#onlyNew').checked=false;
+  $$('.cat-chip').forEach(x=>x.classList.toggle('chip-active', x.dataset.cat==='all'));
+  $$('.sport-chip').forEach(x=>x.classList.toggle('chip-active', x.dataset.sport==='all'));
+  $$('.size-chip').forEach(x=>x.classList.toggle('chip-active', x.dataset.size==='all'));
+  renderGrid();
+});
+
+/* ===== Drawers ===== */
+function toggleCart(open) {
+  $('#cartDrawer').classList.toggle('open', open);
+  $('#cartBg').classList.toggle('open', open);
+  document.body.style.overflow = open?'hidden':'';
+}
+function toggleWishlist(open) {
+  $('#wishlistDrawer').classList.toggle('open', open);
+  $('#wishlistBg').classList.toggle('open', open);
+  document.body.style.overflow = open?'hidden':'';
+}
+$('#cartBtn').addEventListener('click', ()=>toggleCart(true));
+$('#wishlistBtn').addEventListener('click', ()=>toggleWishlist(true));
+
+/* ===== Search ===== */
+function toggleSearch(open) {
+  $('#searchOverlay').classList.toggle('hidden', !open);
+  if (open) setTimeout(()=>$('#searchInput').focus(), 50);
+}
+$('#searchBtn').addEventListener('click', ()=>toggleSearch(true));
+$('#searchBtnMobile')?.addEventListener('click', ()=>toggleSearch(true));
+$('#searchInput').addEventListener('input', e => {
+  const q = e.target.value.toLowerCase();
+  state.search = q;
+  const results = q ? PRODUCTS.filter(p=>p.name.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q)||p.cat.includes(q)) : PRODUCTS.slice(0,6);
+  $('#searchResults').innerHTML = results.length === 0 ? `<div class="p-8 text-center text-on-surface-variant">Keine Treffer für "${q}"</div>` :
+    results.slice(0,8).map(p => `
+      <button onclick="document.querySelector('[data-id=${p.id}]').scrollIntoView({behavior:'smooth',block:'center'}); toggleSearch(false);" class="w-full flex items-center gap-4 p-3 rounded-xl hover:bg-surface-container text-left">
+        <div class="w-14 h-14 rounded-lg bg-surface-container overflow-hidden">${swatchSVG(p)}</div>
+        <div class="flex-1">
+          <div class="font-headline font-bold italic text-primary text-sm uppercase">${p.name}</div>
+          <div class="text-xs text-on-surface-variant">${p.sport==='general'?'Vereinsfans':p.sport} · ${p.cat}</div>
+        </div>
+        <div class="font-headline font-black italic text-primary">${eur(p.price)}</div>
+      </button>`).join('');
+  renderGrid();
+});
+document.addEventListener('keydown', e => {
+  if ((e.metaKey||e.ctrlKey) && e.key==='k') { e.preventDefault(); toggleSearch(true); }
+  if (e.key==='Escape') { toggleSearch(false); }
+});
+
+/* ===== Checkout ===== */
+function openCheckout() {
+  if (cartArr().length===0) { showToast('Warenkorb ist leer'); return; }
+  $('#checkoutBg').classList.add('open');
+  toggleCart(false); document.body.style.overflow='hidden';
+  state.step = 1; renderCheckout();
+}
+function closeCheckout() {
+  $('#checkoutBg').classList.remove('open');
+  document.body.style.overflow='';
+}
+function resetCart() { state.cart={}; updateCart(); }
+$$('.ship-opt input').forEach(r => r.addEventListener('change', e => {
+  state.shipping = parseFloat(e.target.value);
+  $$('.ship-opt').forEach(o => o.classList.remove('border-primary','bg-primary/5'));
+  $$('.ship-opt').forEach(o => o.classList.add('border-outline-variant/40'));
+  e.target.closest('.ship-opt').classList.add('border-primary','bg-primary/5');
+  e.target.closest('.ship-opt').classList.remove('border-outline-variant/40');
+  renderCheckout();
+}));
+$$('.pay-opt input').forEach(r => r.addEventListener('change', () => {
+  $$('.pay-opt').forEach(o => o.classList.remove('border-primary','bg-primary/5'));
+  $$('.pay-opt').forEach(o => o.classList.add('border-outline-variant/40'));
+  r.closest('.pay-opt').classList.add('border-primary','bg-primary/5');
+  r.closest('.pay-opt').classList.remove('border-outline-variant/40');
+}));
+
+function renderCheckout() {
+  // step dots & labels
+  $$('.step-dot').forEach(d => {
+    const n = +d.dataset.step;
+    d.classList.remove('active','done');
+    if (n < state.step) d.classList.add('done');
+    else if (n === state.step) d.classList.add('active');
+  });
+  $$('[data-step-label]').forEach(l => {
+    const n = +l.dataset.stepLabel;
+    l.classList.toggle('text-primary', n<=state.step);
+    l.classList.toggle('text-on-surface-variant', n>state.step);
+  });
+  $$('.checkout-step').forEach(s => s.classList.toggle('hidden', +s.dataset.stepContent !== state.step));
+  $('#checkoutBack').style.visibility = state.step===1||state.step===4 ? 'hidden':'visible';
+  $('#checkoutNav').style.display = state.step===4 ? 'none':'flex';
+  $('#checkoutNext').textContent = state.step===3 ? 'Bestellung abschicken' : 'Weiter';
+
+  const items = cartArr();
+  $('#checkoutItems').innerHTML = items.map(c => `
+    <div class="flex gap-3 items-center text-sm">
+      <div class="w-12 h-14 rounded-lg bg-surface-container-lowest overflow-hidden shrink-0 border border-outline-variant/30">${swatchSVG(c.p)}</div>
+      <div class="flex-1 min-w-0">
+        <div class="font-bold text-primary truncate">${c.p.name}</div>
+        <div class="text-xs text-on-surface-variant">Größe ${c.size==='kids'?'116-164':c.size} · ${c.qty}x</div>
+      </div>
+      <div class="font-headline font-black italic text-primary">${eur(c.p.price*c.qty)}</div>
+    </div>`).join('');
+  const sub = cartSubtotal();
+  const disc = state.member ? sub*0.1 : 0;
+  $('#checkoutSubtotal').textContent = eur(sub);
+  $('#checkoutShipping').textContent = eur(state.shipping);
+  $('#checkoutDiscount').textContent = '−' + eur(disc);
+  $('#checkoutTotal').textContent = eur(Math.max(0, sub+state.shipping-disc));
+}
+$('#checkoutBack').addEventListener('click', () => { if (state.step>1) { state.step--; renderCheckout(); } });
+$('#checkoutNext').addEventListener('click', () => {
+  if (state.step<4) { state.step++; renderCheckout(); }
+});
+
+/* ===== Toast ===== */
+let toastTimer;
+function showToast(msg) {
+  $('#toastMsg').textContent = msg;
+  $('#toast').style.opacity='1';
+  $('#toast').style.transform = 'translate(-50%, 0)';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=> $('#toast').style.opacity='0', 1800);
+}
+
+/* ===== Boot ===== */
+renderGrid();
+updateCart();
+updateWishlist();
+</script>
+
+</body></html>

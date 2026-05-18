@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SG Hünstetten – Badminton</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script id="tailwind-config">
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      colors: {
+        "surface-variant": "#e4e2e1",
+        "surface": "#fbf9f8",
+        "primary": "#052856",
+        "on-secondary-fixed-variant": "#514700",
+        "tertiary-fixed": "#d1e5f8",
+        "secondary": "#6c5e00",
+        "on-surface": "#1b1c1c",
+        "on-secondary-fixed": "#211c00",
+        "primary-fixed-dim": "#acc7fe",
+        "on-primary": "#ffffff",
+        "error": "#ba1a1a",
+        "secondary-fixed-dim": "#e1c700",
+        "surface-container-highest": "#e4e2e1",
+        "secondary-fixed": "#ffe324",
+        "outline": "#747780",
+        "on-tertiary": "#ffffff",
+        "error-container": "#ffdad6",
+        "tertiary": "#182b39",
+        "surface-bright": "#fbf9f8",
+        "on-primary-fixed": "#001a40",
+        "on-tertiary-fixed": "#091d2b",
+        "background": "#fbf9f8",
+        "tertiary-fixed-dim": "#b5c9dc",
+        "surface-tint": "#445e8f",
+        "surface-dim": "#dcd9d9",
+        "on-primary-container": "#90aae0",
+        "on-secondary": "#ffffff",
+        "surface-container-high": "#eae8e7",
+        "surface-container": "#f0eded",
+        "on-error-container": "#93000a",
+        "on-error": "#ffffff",
+        "on-tertiary-container": "#99adbf",
+        "inverse-surface": "#303030",
+        "primary-fixed": "#d7e2ff",
+        "on-background": "#1b1c1c",
+        "primary-container": "#223e6d",
+        "on-primary-fixed-variant": "#2b4676",
+        "inverse-on-surface": "#f3f0f0",
+        "outline-variant": "#c4c6d0",
+        "secondary-container": "#fde000",
+        "surface-container-lowest": "#ffffff",
+        "on-surface-variant": "#44474f",
+        "tertiary-container": "#2e4150",
+        "surface-container-low": "#f6f3f2",
+        "on-tertiary-fixed-variant": "#364958",
+        "on-secondary-container": "#706300",
+        "inverse-primary": "#acc7fe"
+      },
+      fontFamily: {
+        "headline": ["Lexend"],
+        "body": ["Plus Jakarta Sans"],
+        "label": ["Plus Jakarta Sans"]
+      },
+      borderRadius: {
+        "DEFAULT": "0.25rem",
+        "lg": "0.5rem",
+        "xl": "0.75rem",
+        "full": "9999px"
+      }
+    }
+  }
+}
+</script>
+<style>
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined';
+}
+.fill-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+img.img-fallback {
+  background: repeating-linear-gradient(
+    45deg,
+    #223e6d 0px, #223e6d 2px,
+    #1a3260 2px, #1a3260 12px
+  );
+  object-fit: cover;
+}
+</style>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+</head>
+<body class="bg-surface font-body text-on-surface antialiased">
+
+<!-- Global image fallback -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img').forEach(function(img) {
+    img.addEventListener('error', function() {
+      this.classList.add('img-fallback');
+      this.src = 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="1" height="1"/>';
+    });
+  });
+});
+</script>
+
+<!-- TWEAKS ROOT -->
+<div id="tweaks-root"></div>
+
+<!-- ═══════════════════════════════════════
+     NAVIGATION
+════════════════════════════════════════ -->
+<nav id="navbar" class="fixed top-0 w-full z-50 bg-[#052856] bg-opacity-95 backdrop-blur-xl shadow-2xl shadow-black/20 transition-all duration-300">
+  <div class="flex justify-between items-center px-6 md:px-8 py-3 max-w-screen-2xl mx-auto">
+    <div class="flex items-center">
+      <span class="text-2xl font-black text-white italic tracking-tighter font-headline leading-none flex flex-col items-start">
+        <span class="text-[#fde000] text-3xl">SG</span>
+        <span class="text-xs font-bold tracking-widest uppercase opacity-80">Hünstetten</span>
+      </span>
+    </div>
+    <!-- Desktop nav -->
+    <div class="hidden md:flex items-center gap-8 font-headline font-bold tracking-tight uppercase text-sm">
+      <a class="text-[#fde000] border-b-4 border-[#fde000] pb-1 hover:scale-105 transition-all duration-300" href="#">Adult Teams</a>
+      <a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Youth Teams</a>
+      <a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Coaches</a>
+      <a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Partners</a>
+      <a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Trial Session</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="cta-nav" class="bg-[#fde000] text-[#052856] px-5 py-2 rounded-lg font-headline font-bold uppercase tracking-wider text-xs hover:scale-105 active:scale-95 transition-all duration-300">
+        Probetraining
+      </button>
+      <!-- Mobile hamburger -->
+      <button class="md:hidden text-white p-1" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <span class="material-symbols-outlined">menu</span>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-[#052856] border-t border-white/10 px-6 py-4">
+    <div class="flex flex-col gap-4 font-headline font-bold tracking-tight uppercase text-sm">
+      <a class="text-[#fde000]" href="#">Adult Teams</a>
+      <a class="text-white/80" href="#">Youth Teams</a>
+      <a class="text-white/80" href="#">Coaches</a>
+      <a class="text-white/80" href="#">Partners</a>
+      <a class="text-white/80" href="#">Trial Session</a>
+    </div>
+  </div>
+</nav>
+
+<main>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<header class="relative min-h-screen flex items-center overflow-hidden pt-20">
+  <div class="absolute inset-0 z-0">
+    <img
+      alt="Action shot – Badminton SG Hünstetten"
+      class="w-full h-full object-cover object-center scale-105"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEW12x43wlBcxUzb24JqvEESnUc6M0Noxf15GlwByQy7IwAodrihrKTteKlNKqzKt1L8QfBNQzu_eyaZt-_J9qmr4hqkDEZVl38j4gjjC-Hye62QWqyfxtMGNMddgv7QnphjHmGlAEpSo1ZKd5_WRNch5seVBuDKgY2fGZipOd5PaP_W1OO4u7zXh_7LHshtmc-ihtaFLcNX3D2oneac_8t5AxafQPiUmrf7n-oWM00r3wLF1IRvYGVQDqt7UxcISZG1Leo_FlXzM"
+    />
+    <div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent"></div>
+  </div>
+
+  <div class="relative z-10 max-w-7xl mx-auto px-6 w-full">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 bg-secondary-container text-on-secondary-container px-4 py-1.5 rounded-full font-label text-xs font-bold uppercase tracking-widest mb-8 shadow-lg">
+        <span class="material-symbols-outlined fill-icon text-sm">workspace_premium</span>
+        80 Years of Kinetic Heritage
+      </div>
+      <h1 id="hero-title" class="font-headline font-black text-white leading-[0.9] tracking-tighter mb-8 drop-shadow-2xl uppercase text-5xl md:text-7xl">
+        Badminton <br/> <span class="text-secondary-container">Speed &amp;</span> <br/> Tradition
+      </h1>
+      <p class="text-xl text-white/90 max-w-lg leading-relaxed font-medium mb-12 drop-shadow-md">
+        Wo Höchstleistung auf Gemeinschaft trifft. Erlebe die schnellste Racketsportart der Welt beim traditionsreichsten Verein im Taunus.
+      </p>
+
+      <!-- KlubHaus Data Chip: Nächstes Training -->
+      <div class="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md border border-white/20 px-5 py-3 rounded-2xl mb-10">
+        <span class="material-symbols-outlined fill-icon text-secondary-container">calendar_today</span>
+        <div>
+          <p class="text-white/60 text-[10px] font-bold uppercase tracking-widest">Nächstes Training</p>
+          <p class="text-white font-headline font-bold text-sm">Di., 29. Apr · 19:00 – 21:30 Uhr · Sporthalle Hünstetten</p>
+        </div>
+      </div>
+
+      <div class="flex flex-col sm:flex-row gap-6">
+        <button id="cta-hero" class="bg-secondary-container text-on-secondary-container px-10 py-5 rounded-xl font-headline font-extrabold text-xl shadow-2xl hover:-translate-y-1 transition-all flex items-center gap-3 group">
+          Probetraining vereinbaren
+          <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+        </button>
+        <button class="flex items-center gap-4 text-white/80 hover:text-white transition-colors">
+          <div class="w-12 h-12 rounded-full border-2 border-white/30 flex items-center justify-center hover:border-white transition-colors">
+            <span class="material-symbols-outlined fill-icon">play_arrow</span>
+          </div>
+          <span class="font-bold tracking-tight">Magazin Teaser ansehen</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating stat badge -->
+  <div class="absolute bottom-10 right-10 hidden lg:block z-20">
+    <div class="bg-surface-container-lowest p-8 rounded-3xl shadow-2xl max-w-xs border border-surface-variant/20 rotate-3">
+      <p class="text-4xl font-headline font-black text-primary mb-1">400+</p>
+      <p class="font-label text-sm font-bold text-outline uppercase tracking-tight">Km/h Smash Speed</p>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 hidden md:flex flex-col items-center gap-2 text-white/40 animate-bounce">
+    <span class="material-symbols-outlined text-sm">keyboard_arrow_down</span>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     NEWS & UPDATES
+════════════════════════════════════════ -->
+<section class="py-24 bg-surface">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex justify-between items-end mb-12 gap-6 flex-wrap">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-headline font-black tracking-tighter text-primary uppercase leading-[0.9]">
+          NEWS &amp; <br/><span class="text-secondary">UPDATES</span>
+        </h2>
+      </div>
+      <a class="bg-primary text-white px-6 py-3 rounded-xl font-headline font-bold uppercase tracking-wider text-xs hover:bg-primary-container transition-all flex items-center gap-2 shadow-lg" href="#">
+        Alle News <span class="material-symbols-outlined text-sm">open_in_new</span>
+      </a>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <!-- Card 1 -->
+      <div class="group relative aspect-square bg-surface-container rounded-3xl overflow-hidden cursor-pointer shadow-xl hover:-translate-y-2 transition-all duration-500">
+        <img alt="Badminton Championship Winners" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCHvVAleUYJuzPYEJLha9Mltwo3iwaT9oBgo3mEwObzsZoanwYaw01L-KbX3TIRuOVq2XwRtuklNU8uwJXsv5RNoKW9dPZN0F7C04pxnTGPE8SYCZkwBKG_R9oBuK_TI2umowvmVNXm9VU1QcN_B8DjxP2IVZcXRnOFd8UYxNtkHViFHXMn3b8yWMuuz1MHb317fpziGXFfGHZhunvvp2LLDw4QyMYSa-XRDsesuYe2QhSPbEC9kt8BZvZKddVlJ5vXPV8cojxLm8c"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+          <h4 class="text-white font-headline font-bold text-xl mb-2">Erfolg bei Bezirksmeisterschaft</h4>
+          <p class="text-white/80 text-xs font-bold mb-4 flex items-center gap-1">
+            <span class="material-symbols-outlined fill-icon text-xs">favorite</span> 84 Likes
+          </p>
+          <span class="text-secondary-container text-[10px] font-black uppercase tracking-widest bg-primary/40 backdrop-blur-sm px-3 py-1 rounded-full self-start">Spielbericht</span>
+        </div>
+        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md rounded-full p-2 text-white">
+          <span class="material-symbols-outlined text-sm">photo_library</span>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="group relative aspect-square bg-surface-container rounded-3xl overflow-hidden cursor-pointer shadow-xl hover:-translate-y-2 transition-all duration-500">
+        <img alt="Training Session" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDroGgypJqh_NjO26ER5fmmp56PlgowMJOWIjKMLS20CbTtiIvvdTTjCQPD5xtD_MUoRMSSf8h_9ZIVaVI4wVror7hxPPuNUX1KyTCgYEI6VChhP0klIMolspXmr74ZahILL0CrTKN2bkdDa3bdcpplic8sH8H6rwfww_DPytZQYFpXx8rqu61lgYgIYuF60sZBkCOYaGZ8It84tCZIESow35BN00zmMJoVridedgX9DiyPF3sSA2NA2HzayUsxJql5EvP360LmCog"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+          <h4 class="text-white font-headline font-bold text-xl mb-2">Power-Training am Dienstag</h4>
+          <p class="text-white/80 text-xs font-bold mb-4 flex items-center gap-1">
+            <span class="material-symbols-outlined fill-icon text-xs">favorite</span> 56 Reaktionen
+          </p>
+          <span class="text-secondary-container text-[10px] font-black uppercase tracking-widest bg-primary/40 backdrop-blur-sm px-3 py-1 rounded-full self-start">Training</span>
+        </div>
+        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md rounded-full p-2 text-white">
+          <span class="material-symbols-outlined text-sm">videocam</span>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="group relative aspect-square bg-surface-container rounded-3xl overflow-hidden cursor-pointer shadow-xl hover:-translate-y-2 transition-all duration-500">
+        <img alt="Club Event" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDPIYsb43XGuYJPaQPMsMkUxdP1MiQ-2FS6AfGfmI272VB6MSI11yEgJX0PyxIIqiBcy_AmskdhJwP_824zxujCJiqdAIBXlCVl3LT9cTQS31cJsVUnjQ4Hy402hjpa7VK8xfj12ihI3hJkQlDpw6JGah09c25k9erGCUErHwVhE0mVBdplggsrrhTrrfF1fY6yZYqLxUYkFVVioMYieixqVTHE9i2_MAe368jFMQzvu3bG4sTNCba8ZxQ02fLPn1lf-HOwt7TxHVc"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+          <h4 class="text-white font-headline font-bold text-xl mb-2">Sommerfest in der Halle</h4>
+          <p class="text-white/80 text-xs font-bold mb-4 flex items-center gap-1">
+            <span class="material-symbols-outlined fill-icon text-xs">favorite</span> 120 Zusagen
+          </p>
+          <span class="text-secondary-container text-[10px] font-black uppercase tracking-widest bg-primary/40 backdrop-blur-sm px-3 py-1 rounded-full self-start">Event</span>
+        </div>
+        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md rounded-full p-2 text-white">
+          <span class="material-symbols-outlined text-sm">image</span>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="group relative aspect-square bg-surface-container rounded-3xl overflow-hidden cursor-pointer shadow-xl hover:-translate-y-2 transition-all duration-500">
+        <img alt="Badminton Shuttlecock" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 img-fallback" src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1' height='1'/>" style="background:repeating-linear-gradient(45deg,#223e6d 0,#223e6d 2px,#1a3260 2px,#1a3260 12px)"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent p-8 flex flex-col justify-end">
+          <h4 class="text-white font-headline font-bold text-xl mb-2">Neue Bälle eingetroffen</h4>
+          <p class="text-white/80 text-xs font-bold mb-4 flex items-center gap-1">
+            <span class="material-symbols-outlined fill-icon text-xs">favorite</span> 45
+          </p>
+          <span class="text-secondary-container text-[10px] font-black uppercase tracking-widest bg-primary/40 backdrop-blur-sm px-3 py-1 rounded-full self-start">Update</span>
+        </div>
+        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md rounded-full p-2 text-white">
+          <span class="material-symbols-outlined text-sm">notifications</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-12 flex items-center justify-center gap-4 py-6 border-t border-outline-variant/20">
+      <span class="text-primary font-bold text-sm flex items-center gap-3">
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+        </svg>
+        Folge uns auf Instagram @SGHuenstetten_Badminton
+      </span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ADULT / ERWACHSENEN-ABTEILUNG
+════════════════════════════════════════ -->
+<section class="py-24 bg-primary text-on-primary overflow-hidden relative">
+  <div class="absolute top-0 right-0 w-1/3 h-full bg-primary-container/20 -skew-x-12 transform translate-x-1/2 pointer-events-none"></div>
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-8">
+      <div class="max-w-2xl">
+        <h2 class="font-headline font-black text-5xl md:text-6xl uppercase tracking-tighter mb-6 leading-[0.9]">
+          Erwachsenen-<br/><span class="text-secondary-container">Abteilung</span>
+        </h2>
+        <p class="text-on-primary-container text-xl leading-relaxed">
+          Vom Hobby-Spieler bis zum ambitionierten Mannschaftssportler – in der SG Hünstetten finden alle ihr passendes Spielfeld.
+        </p>
+      </div>
+      <div class="flex gap-4 mb-2 flex-wrap">
+        <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg flex items-center gap-3">
+          <span class="font-label text-[10px] font-bold uppercase tracking-widest text-secondary-container">Team Pate</span>
+          <span class="font-headline font-black text-lg tracking-tighter">HÜN-POWER</span>
+        </div>
+        <div class="bg-white/10 backdrop-blur-md px-4 py-2 rounded-lg flex items-center gap-3">
+          <span class="font-label text-[10px] font-bold uppercase tracking-widest text-secondary-container">Sponsor</span>
+          <span class="font-headline font-black text-lg tracking-tighter">LOGIS-X</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+      <!-- Coach Profile -->
+      <div class="lg:col-span-5 bg-primary-container rounded-3xl p-8 flex flex-col md:flex-row gap-8 items-center border border-on-primary-container/10">
+        <div class="w-44 h-44 rounded-2xl overflow-hidden shrink-0 shadow-xl ring-4 ring-secondary-container/20">
+          <img alt="Norman Eby Head Coach" class="w-full h-full object-cover object-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDomstO5bUWZjmH-vERSrc6mhmnoMrFH57IGOOhdj8_ovl1OD0gnDMJJy81TUArY0XQCqoAZFg_PVbR5SnMR7HsudcYDn7X1UNxq7YIORheIk5bWBGBMIX27-nRe8CjWEGVXoPc8Wd_-bGJfzmH4Jv6QPGmxI7qYrKjZiq4vBQIHJtup6zKtWMaRuKqKtQXAFZN3qEhg9VYjXPr3gMI4Iv5dagBmo549D2UF5fg1PHrGQAf71NHmFLEjIr8FbK-hOUejRFtbmGOmpk"/>
+        </div>
+        <div class="space-y-4">
+          <div>
+            <h3 class="font-headline font-extrabold text-3xl">Norman Eby</h3>
+            <p class="text-secondary-container font-bold font-label uppercase tracking-widest text-sm">Head Coach / Abteilungsleiter</p>
+          </div>
+          <p class="text-on-primary-container text-sm leading-relaxed">
+            Über 20 Jahre Erfahrung im Leistungssport. Norman koordiniert das Training für alle Leistungsklassen und steht für technische Präzision.
+          </p>
+          <div class="flex flex-col gap-2 pt-2">
+            <a class="text-on-primary hover:text-secondary-container transition-colors flex items-center gap-2 text-sm font-bold" href="mailto:eby@sg-huenstetten.de">
+              <span class="material-symbols-outlined text-lg">mail</span> Kontakt
+            </a>
+            <a class="text-secondary-container hover:text-white transition-colors flex items-center gap-2 text-sm font-extrabold font-headline uppercase tracking-tight" href="#">
+              Profil ansehen <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Team Photo -->
+      <div class="lg:col-span-7 relative group">
+        <div class="h-full rounded-3xl overflow-hidden shadow-2xl relative min-h-[360px]">
+          <img alt="Adult Badminton Team – SG Hünstetten" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDFtc6Jzwp1MPWCxerajMoIKQvXcLUOJ0piOTHdybw2waTH0ehQcScDNoJAGKr-TaYo9MDlBGx0BVtxzBLAiURPlYz9uxPNFGgDqhUu2tPtkB6XF2zqoe6QFnPdze7nwIyuqlS8ko6R7w5aJpVh6KHKWXioH5CjE3Gyxe9lRmzAguFcvObVmVp50_6FlLv_MPhpgcc_BwmlBOGj9z2k_Mea2vqmCZZcAaCFmXHOspFPLm5FTz0LJ0UYRu7bJD_5ApQYcmu6Hre-OX8"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-primary via-transparent to-transparent opacity-80"></div>
+          <div class="absolute bottom-8 left-8 right-8 text-center md:text-left">
+            <h4 class="font-headline font-black text-4xl uppercase tracking-tighter mb-2">Hobby &amp; Leistungsklasse</h4>
+            <p class="text-on-primary-container font-medium mb-6">Erfolgreich in der Bezirksliga und aktiv in der Hobbyrunde.</p>
+            <button class="bg-secondary-container text-on-secondary-container px-8 py-3.5 rounded-xl font-headline font-extrabold flex items-center gap-3 hover:brightness-110 transition-all mx-auto md:mx-0">
+              Auf Warteliste setzen <span class="material-symbols-outlined">how_to_reg</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     GALLERY / KINETIC MOMENTS
+════════════════════════════════════════ -->
+<section class="py-24 bg-surface overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-end mb-12 gap-6">
+      <div class="max-w-2xl">
+        <h2 class="font-headline font-black text-5xl md:text-6xl uppercase tracking-tighter text-primary mb-4 leading-[0.9]">
+          MOMENTS OF <br/><span class="text-secondary">KINETIC ENERGY</span>
+        </h2>
+      </div>
+      <button class="flex items-center gap-2 font-headline font-black text-primary hover:text-secondary transition-colors group">
+        Alle ansehen
+        <span class="material-symbols-outlined group-hover:translate-x-1 transition-all">grid_view</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-12 gap-6">
+      <div class="col-span-12 lg:col-span-8 h-[500px] rounded-[2.5rem] overflow-hidden relative shadow-2xl group">
+        <img alt="Youth Badminton Action" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDz_-CGCg6KQgHFwAOTiWiaSCNjz5I-dIQl0Uu3xZRVxtEBuirzHLtNFbJVPtazkpEVPBTHNcBGZU2CuADNPPMlnmt6RYrM6YnS_E764Q5lS_Bcaj__594AnTab2fCdiqWW3UU3WyJZxdtaD8FWSJphqfjA5Rzlp02hcSxCJOzHulc8JEvSbvQ879N4DyP3FS1MD-EhCqZlHodH_vOt-Kun_gYtGAZL6GD_fhgR0yRyDg4_7yoUySOeHCGIDdp8LGvAM2a42Y1z5Rw"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-primary/80 via-transparent to-transparent flex items-end p-10">
+          <p class="text-white font-headline font-bold text-2xl md:text-3xl">Zukunft des Vereins: Unsere U15 &amp; U19 Mannschaften</p>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-4 grid grid-rows-2 gap-6 h-[500px]">
+        <div class="rounded-[2rem] overflow-hidden shadow-xl group">
+          <img alt="Badminton Action" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA0eu2WXynXRpumODqHLbHa-1pENKrUBzrR1ChhdmmPJA2b0bIJ_VWBtlIBHtVrmePs-ip8CBQL8pG3ck466kZpBS5Xgbck7dzhzctA7Qw8dDtTzcsjBbwb8ooSS_HlWITIwkZpj9MeP1c_rXh0UHTVxlNEubFXXqZoGWJvVxhFamj-OsrZQyJf83_MeRPemdRCODESy9SZ1_d936EvGuJYAWFcYxq75qRZP0AY3iPn1V3dE0vQnw8F1eoQJZCJ0R2e1jjZOYg1zm0"/>
+        </div>
+        <div class="bg-primary-container rounded-[2rem] p-8 flex flex-col justify-center items-center text-center group cursor-pointer hover:bg-primary transition-colors">
+          <span class="material-symbols-outlined fill-icon text-secondary-container text-5xl mb-4 group-hover:scale-110 transition-transform">gallery_thumbnail</span>
+          <p class="text-on-primary-container font-headline font-black text-sm uppercase tracking-widest">Vereins-Galerie <br/>entdecken</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     YOUTH / JUGEND
+════════════════════════════════════════ -->
+<section class="pb-24 pt-12 bg-surface-container-low">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="text-center mb-20 max-w-3xl mx-auto">
+      <h2 class="font-headline font-black text-5xl md:text-6xl uppercase tracking-tighter text-primary mb-6 leading-[0.9]">
+        Jugend-<br/><span class="text-secondary">Entwicklung</span>
+      </h2>
+      <p class="text-on-surface-variant text-xl leading-relaxed">
+        Die Zukunft des Vereins liegt in der Jugend. Wir fördern Talente ab 8 Jahren mit altersgerechtem Training und viel Spaß an der Bewegung.
+      </p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <!-- Karsten Kever -->
+      <div class="bg-primary rounded-3xl p-8 flex flex-col md:flex-row gap-8 items-center border border-on-primary-container/10">
+        <div class="w-44 h-44 rounded-2xl overflow-hidden shrink-0 shadow-xl ring-4 ring-secondary-container/20">
+          <img alt="Karsten Kever Jugend-Koordinator" class="w-full h-full object-cover object-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBj9krQ7GOesjwPCYlW17PUtyQNKj1-WufIeZXqCfOlNdTcKMcn0gjvnYcjt7T2caVmWWAz-1dl20zW9SO6NK_2veH-xVM9ortsRoQTLGdo7LuCojfK3q1P4XD_rVxTQg1CKb7SbzuTd3USSwKev5bY-iA2J007W5a3rcijbr2zyuHF1wnv69OIXVCJcRjXozicW-MpU9fZq5P6xKAZdKMDdG7lZdSeVnAKTXlGco6jYv8YBkXynyMHTsb9yiTizpB4nu3H7iZVfe4"/>
+        </div>
+        <div class="space-y-4 text-white">
+          <div>
+            <h3 class="font-headline font-extrabold text-3xl">Karsten Kever</h3>
+            <p class="text-secondary-container font-bold font-label uppercase tracking-widest text-sm">Jugend-Koordinator</p>
+          </div>
+          <p class="text-on-primary-container text-sm leading-relaxed">Organisiert den Jugendbetrieb mit Herz und Seele. Karsten ist der erste Ansprechpartner für Eltern und Nachwuchstalente.</p>
+          <div class="flex flex-col gap-2 pt-2">
+            <a class="text-white hover:text-secondary-container transition-colors flex items-center gap-2 text-sm font-bold" href="#">
+              <span class="material-symbols-outlined text-lg">mail</span> Kontakt
+            </a>
+            <a class="text-secondary-container hover:text-white transition-colors flex items-center gap-2 text-sm font-extrabold font-headline uppercase tracking-tight" href="#">
+              Profil ansehen <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- Heike Schönharting -->
+      <div class="bg-primary rounded-3xl p-8 flex flex-col md:flex-row gap-8 items-center border border-on-primary-container/10">
+        <div class="w-44 h-44 rounded-2xl overflow-hidden shrink-0 shadow-xl ring-4 ring-secondary-container/20">
+          <img alt="Heike Schönharting Technik-Trainerin" class="w-full h-full object-cover object-top" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6ndHT1CJC5j7q6vRDB9Get0sk5Qx4am7HGUijlHsacqW8-sbUJxn7Pg3N9vcYiiiPmerVWOLWcumqNA5rBDMtC1MpUha40E95ZWu2RThHrg4tZhXxW09m5WfloiA_9iXFU9fGrDZEq2Ndit8iPTnJcwtFzwT-BU4GyaIR9T-GYmU_HOMvSjrNV8b4uPEQbrUu2o4RsdpxI7Su1DvFbkrNIdDYU7JLFgNmU-SDORclT6JruKtLWDrlNYB24i7-YSZXzDFYYQVdcv8"/>
+        </div>
+        <div class="space-y-4 text-white">
+          <div>
+            <h3 class="font-headline font-extrabold text-3xl">Heike Schönharting</h3>
+            <p class="text-secondary-container font-bold font-label uppercase tracking-widest text-sm">Technik-Trainerin</p>
+          </div>
+          <p class="text-on-primary-container text-sm leading-relaxed">Spezialistin für die perfekte Technik. Heike sorgt dafür, dass die Grundlagen von Anfang an spielerisch und sauber gelernt werden.</p>
+          <div class="flex flex-col gap-2 pt-2">
+            <a class="text-white hover:text-secondary-container transition-colors flex items-center gap-2 text-sm font-bold" href="#">
+              <span class="material-symbols-outlined text-lg">mail</span> Kontakt
+            </a>
+            <a class="text-secondary-container hover:text-white transition-colors flex items-center gap-2 text-sm font-extrabold font-headline uppercase tracking-tight" href="#">
+              Profil ansehen <span class="material-symbols-outlined text-sm">arrow_forward</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Youth hero image -->
+    <div class="relative rounded-3xl overflow-hidden shadow-2xl group h-[500px] mb-8">
+      <img alt="Youth Badminton Training" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCzV0esU5OXwlIvnne4z7dh7PYUEeA4qrLJN5yamDInga0SUnaEpjjClJCPYiqe1RbKZEizCr7elICW1KTVQ1s79-f-OpJI6lKkyi2yNmXxbvPNSJFu65iHZxpdjYqv-o7MpXtQun_H6VcJ_rjHNw8F6pPFo_nBVBJx8cTvTlHI4NqRsx2egpSBSXf2e8hPHO5I7_HTtOVQpgcWwZBQFUBI2wFTiaY5Y7RYUdvQdT4a81lLOY1jCQ3j7iFP3V8aWS66Asyheoffeh0"/>
+      <div class="absolute inset-0 bg-gradient-to-t from-primary/90 via-transparent to-transparent"></div>
+      <div class="absolute bottom-10 left-10">
+        <h4 class="font-headline font-black text-4xl text-white uppercase tracking-tighter mb-4">Pure Emotion &amp; Sport</h4>
+        <p class="text-on-primary-container max-w-sm mb-6">Eindrücke aus unseren wöchentlichen Trainingseinheiten und Jugendturnieren.</p>
+        <button class="bg-secondary-container text-on-secondary-container px-6 py-3 rounded-xl font-headline font-extrabold flex items-center gap-3 shadow-lg">
+          Video ansehen <span class="material-symbols-outlined">play_circle</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Youth CTA Banner -->
+    <div class="bg-primary-container rounded-3xl p-10 flex flex-col md:flex-row items-center justify-between gap-8 overflow-hidden relative">
+      <div class="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+        <span class="material-symbols-outlined fill-icon text-[120px] text-white">sports_tennis</span>
+      </div>
+      <div class="relative z-10 text-white">
+        <h3 class="font-headline font-extrabold text-3xl mb-2">Bereit für den ersten Aufschlag?</h3>
+        <p class="text-on-primary-container">Schnuppertraining für Kinder und Jugendliche (8–17 Jahre) jederzeit möglich.</p>
+      </div>
+      <button class="shrink-0 bg-secondary-container text-on-secondary-container px-10 py-5 rounded-2xl font-headline font-black text-xl uppercase tracking-tight hover:scale-105 active:scale-95 transition-all shadow-xl shadow-black/20 relative z-10">
+        Zum Probetraining (Youth)
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     ENGAGEMENT / TRAINER GESUCHT
+════════════════════════════════════════ -->
+<section class="py-20 max-w-7xl mx-auto px-6">
+  <div class="bg-surface-container-highest rounded-[3rem] p-12 md:p-20 relative overflow-hidden border border-outline-variant/10">
+    <div class="absolute -top-24 -right-24 w-64 h-64 bg-secondary-container rounded-full blur-[100px] opacity-20 pointer-events-none"></div>
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+      <div class="space-y-6">
+        <span class="bg-error text-on-error px-4 py-1 rounded-full font-label text-xs font-black uppercase tracking-widest">Dringend Gesucht</span>
+        <h2 class="font-headline font-black text-5xl md:text-6xl text-primary uppercase tracking-tighter leading-[0.9]">
+          Übungsleiter <br/>gesucht!
+        </h2>
+        <p class="text-on-surface-variant text-lg leading-relaxed">
+          Du liebst Badminton und arbeitest gerne mit Menschen? Wir suchen Verstärkung für unser Trainer-Team im Jugend- und Erwachsenenbereich. Auch Einsteiger ohne Lizenz sind willkommen – wir unterstützen dich bei der Ausbildung!
+        </p>
+        <div class="flex flex-col sm:flex-row gap-4 pt-4">
+          <button class="bg-primary text-on-primary px-8 py-4 rounded-xl font-headline font-extrabold flex items-center justify-center gap-3">
+            Jetzt bewerben <span class="material-symbols-outlined">campaign</span>
+          </button>
+          <button class="bg-surface-container-low text-primary px-8 py-4 rounded-xl font-headline font-extrabold border border-outline-variant/30 flex items-center justify-center gap-3">
+            Infos anfordern
+          </button>
+        </div>
+      </div>
+      <div class="relative flex justify-center">
+        <div class="w-full aspect-video rounded-3xl overflow-hidden shadow-2xl">
+          <img alt="Join the coaching team" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBxgrmvoOGnw_4i5EDL4rAywE3WZBKoN0w7hAikSnYhA5I1-D1lydZN9U7XJ6Fwms_833oYFoJ3ouZ8ndlF37OLREFRNTHlQsCqJry6JS2vVJ7JSu_CLq4REsbojKcbPxlSS6PrbetfvYzYjWPPKUXieNy1tWv3EWpPU1OKMn5BbPeSo_WF7sQGE0BSvnqXN9pirEsq9ui9N8KP3R9I5f9mTwlvSG8ov9EZqaFj22AIWlnO9OOeTMCFIbbg_6545jr9wF9JPJcp9nI"/>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FAN-SHOP
+════════════════════════════════════════ -->
+<section id="fanshop-section" class="py-24 bg-surface-container-low">
+  <div class="max-w-7xl mx-auto px-6">
+    <div class="flex flex-col md:flex-row justify-between items-center mb-16 gap-6">
+      <div>
+        <h2 class="text-4xl md:text-5xl font-headline font-black text-primary tracking-tighter uppercase leading-[0.9]">
+          SG Hünstetten <br/><span class="text-secondary">FAN-SHOP</span>
+        </h2>
+        <p class="text-on-surface-variant mt-4 text-lg italic">Zeig Flagge für deinen Verein.</p>
+      </div>
+      <button class="bg-primary text-white px-8 py-4 rounded-xl font-headline font-bold flex items-center gap-3 hover:bg-primary-container transition-all shadow-xl">
+        Alle Artikel <span class="material-symbols-outlined">shopping_bag</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Product 1 -->
+      <div class="bg-surface p-6 rounded-[2.5rem] group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500">
+        <div class="aspect-square rounded-3xl bg-surface-container overflow-hidden mb-6 relative">
+          <img alt="SG Hünstetten Club Jacket" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2V573FaaC-lVusVrI44uQ4b8GywIhs4Pv0YY4uVEcQjsfykdHlJ-3ZMSIeq3S64XdL0FCElOAV6zVUGd7s1jTe443LBiv2DLff75lhUr14QiT4FeN6Qh96s6W2wFEpZX3QhOiHyw48c3dtFldd14dli3cmS76ZXS5wW9IYsevyF1vFDiUo-YADYAW_s99PcHaRs7glmpNMEkTJiChfx1e2Rtrmh2rDCm23aZFYayg5B7mDjFyEGGbn4HVw8XEZdSK1LjID0ig-Tg"/>
+          <span class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container text-[10px] font-black px-4 py-1.5 rounded-full uppercase tracking-widest shadow-lg">Bestseller</span>
+        </div>
+        <h4 class="font-headline font-black text-primary text-xl">Allwetter-Jacke "Pro"</h4>
+        <p class="text-outline text-sm mt-2 font-medium">Deep Blue Legacy Design</p>
+        <div class="flex justify-between items-center mt-6">
+          <span class="text-2xl font-headline font-black text-primary">79,90 €</span>
+          <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center group-hover:bg-secondary-container transition-colors">
+            <span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+          </div>
+        </div>
+      </div>
+      <!-- Product 2 -->
+      <div class="bg-surface p-6 rounded-[2.5rem] group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500">
+        <div class="aspect-square rounded-3xl bg-surface-container overflow-hidden mb-6">
+          <img alt="Fan-Schal" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7Q0bbCYYA1o_fEJC1eE-OLtre38sf5ox-Bg7V6gWKq15a0uG4Yimd7dc7otaKOcYE1z0Re6QIyPMZxd1FIkNnJ-rAGWHi7sxUa_w9I60zy6XjW8fOVTx8WyM_UM4mdRV5MpDa2T2kQyGE7YzclOTBuk9wxzWFxW5tuSL2mzsp4Mes8pjXVEkNfJOp7gdMnGdy8xvUR_cL7c7OaLt0RL-1OdK-PWvwaS_j_G4LYcJVsjpmbKdQOss3Q0hSpHd3UyKMGhes1Ht4hLs"/>
+        </div>
+        <h4 class="font-headline font-black text-primary text-xl">Fan-Schal "Badminton"</h4>
+        <p class="text-outline text-sm mt-2 font-medium">100% Kinetic Tradition</p>
+        <div class="flex justify-between items-center mt-6">
+          <span class="text-2xl font-headline font-black text-primary">14,90 €</span>
+          <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center group-hover:bg-secondary-container transition-colors">
+            <span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+          </div>
+        </div>
+      </div>
+      <!-- Product 3 -->
+      <div class="bg-surface p-6 rounded-[2.5rem] group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500">
+        <div class="aspect-square rounded-3xl bg-surface-container overflow-hidden mb-6">
+          <img alt="Wintermütze" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_qcexn1QakqKyUiv8NnEoXBxrrrv1hwlj6hLy4s_vZRMVG85imVveu9LIO3pA9J-3--xC9TQh5Dwu8Bs4tIW-veoBLWATFFU-_h5FF3U1Z3ppoE9Fgl5K3khNTTOpEQrx7aNpcWd6rT95mZ8MkPqsejrODHpPsPPMgUYvfodbsONlxMlbH9KNxKXZxWqO32xsyPJCnd6JKAvCF9cKh2IhgoGRMEU03loYW3PDjXWCGJ56x1UUt8159dza99Z5DXkt_3rgmKeNiZo"/>
+        </div>
+        <h4 class="font-headline font-black text-primary text-xl">Wintermütze Classic</h4>
+        <p class="text-outline text-sm mt-2 font-medium">Kinetic Blue / Gold Logo</p>
+        <div class="flex justify-between items-center mt-6">
+          <span class="text-2xl font-headline font-black text-primary">19,90 €</span>
+          <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center group-hover:bg-secondary-container transition-colors">
+            <span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+          </div>
+        </div>
+      </div>
+      <!-- Product 4 -->
+      <div class="bg-surface p-6 rounded-[2.5rem] group cursor-pointer shadow-sm hover:shadow-2xl transition-all duration-500">
+        <div class="aspect-square rounded-3xl bg-surface-container overflow-hidden mb-6">
+          <img alt="Polo-Shirt Kinetic" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtv0I899I6DiERhzC4IisiBfNU5ZLu-IClwoxh8ARV2DAO1CCk9re4gyyv9mzxrw2wT_PwxspLBwvkUUn4wtmZbJieXKFZNaz6mWwAARsLfCl6mqwPDsCyDVWSNKxu0jXT7RR5Qbkj4WUvdpQVmclOWkOa8_zR-3ZyiZ2AkCvwnCocgrWzMe8d_3Um-Jfkc1mw0Oi3w54CvMdM61IekryK3sikL075v7rJdTdt2AIMcMnL9YPy2oUL_PCjUv4gJ9NRpaScXzgqd-8"/>
+        </div>
+        <h4 class="font-headline font-black text-primary text-xl">Polo-Shirt Kinetic</h4>
+        <p class="text-outline text-sm mt-2 font-medium">Premium Performance</p>
+        <div class="flex justify-between items-center mt-6">
+          <span class="text-2xl font-headline font-black text-primary">34,90 €</span>
+          <div class="w-12 h-12 rounded-2xl bg-surface-container flex items-center justify-center group-hover:bg-secondary-container transition-colors">
+            <span class="material-symbols-outlined text-primary">add_shopping_cart</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     SPONSORS
+════════════════════════════════════════ -->
+<section id="sponsors-section" class="bg-primary-container py-12 border-t border-white/5">
+  <div class="max-w-7xl mx-auto px-6">
+    <p class="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-10">Starke Partner für den Erfolg</p>
+    <div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-50 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+      <div class="font-headline font-black text-2xl text-white italic tracking-tighter">BIOGRUND</div>
+      <div class="font-headline font-black text-2xl text-white italic tracking-tighter">ROSENBAUM</div>
+      <div class="font-headline font-black text-2xl text-white italic tracking-tighter">VOLKSBANK</div>
+      <div class="font-headline font-black text-2xl text-white italic tracking-tighter">SPARKASSE</div>
+      <div class="font-headline font-black text-2xl text-white italic tracking-tighter">SPORT-ECKE</div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer class="bg-primary pt-24 pb-12 relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-6 relative z-10">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
+      <div class="space-y-8">
+        <div class="flex flex-col items-start">
+          <span class="text-[#fde000] font-headline font-black text-4xl leading-none">SG</span>
+          <span class="text-white font-headline font-bold text-sm tracking-widest uppercase">Hünstetten</span>
+          <span class="text-white/50 font-label text-[10px] tracking-widest uppercase">Badminton</span>
+        </div>
+        <p class="text-white/60 max-w-sm leading-relaxed">Seit über 80 Jahren die Heimat für Sportbegeisterte in der Region. Tradition trifft Dynamik.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-8">
+        <div>
+          <h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Verein</h4>
+          <ul class="space-y-4 text-white/70 font-bold text-sm">
+            <li><a class="hover:text-white transition-colors" href="#">Teams</a></li>
+            <li><a class="hover:text-white transition-colors" href="#">Vorstand</a></li>
+            <li><a class="hover:text-white transition-colors" href="#">Satzung</a></li>
+            <li><a class="hover:text-white transition-colors" href="#">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Rechtliches</h4>
+          <ul class="space-y-4 text-white/70 font-bold text-sm">
+            <li><a class="hover:text-white transition-colors" href="#">Impressum</a></li>
+            <li><a class="hover:text-white transition-colors" href="#">Datenschutz</a></li>
+            <li><a class="hover:text-white transition-colors" href="#">Mitgliedschaft</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Newsletter</h4>
+        <p class="text-white/60 text-sm mb-6">Erhalte die neuesten Infos direkt per Mail.</p>
+        <form class="flex gap-2" onsubmit="return false;">
+          <input
+            class="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm w-full focus:outline-none focus:border-secondary-container placeholder:text-white/30"
+            placeholder="Deine E-Mail"
+            type="email"
+          />
+          <button class="bg-secondary-container text-on-secondary-container px-4 py-3 rounded-lg font-bold text-sm hover:brightness-110 transition-all shrink-0">
+            <span class="material-symbols-outlined text-sm">send</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-white/40 text-xs font-bold">
+      <p>© 2025 SG Hünstetten e.V. – Badminton Abteilung</p>
+      <p class="flex items-center gap-2">Powered by <span class="text-secondary-container font-black tracking-tight">KlubHaus</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════
+     TWEAKS
+════════════════════════════════════════ -->
+<script type="text/babel">
+const { useState, useEffect } = React;
+
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#fde000",
+  "ctaText": "Probetraining vereinbaren",
+  "showFanshop": true,
+  "showSponsors": true,
+  "heroBadge": "80 Years of Kinetic Heritage",
+  "nextTraining": "Di., 29. Apr · 19:00 – 21:30 Uhr · Sporthalle Hünstetten"
+}/*EDITMODE-END*/;
+
+function TweaksApp() {
+  const [tweaks, setTweaks] = useTweaks(TWEAK_DEFAULTS);
+
+  // Apply tweaks live
+  useEffect(() => {
+    // Accent color
+    document.querySelectorAll('.bg-secondary-container').forEach(el => {
+      el.style.backgroundColor = tweaks.accentColor;
+    });
+    document.querySelectorAll('.text-secondary-container').forEach(el => {
+      el.style.color = tweaks.accentColor;
+    });
+    // CTA text
+    const ctaHero = document.getElementById('cta-hero');
+    if (ctaHero) ctaHero.childNodes[0].textContent = tweaks.ctaText + ' ';
+    const ctaNav = document.getElementById('cta-nav');
+    if (ctaNav) ctaNav.textContent = tweaks.ctaText.split(' ')[0];
+    // Fan-shop visibility
+    const fanshop = document.getElementById('fanshop-section');
+    if (fanshop) fanshop.style.display = tweaks.showFanshop ? '' : 'none';
+    // Sponsors visibility
+    const sponsors = document.getElementById('sponsors-section');
+    if (sponsors) sponsors.style.display = tweaks.showSponsors ? '' : 'none';
+  }, [tweaks]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection title="Branding">
+        <TweakColor
+          label="Akzentfarbe"
+          value={tweaks.accentColor}
+          onChange={v => setTweaks({ accentColor: v })}
+        />
+        <TweakText
+          label="Hero CTA"
+          value={tweaks.ctaText}
+          onChange={v => setTweaks({ ctaText: v })}
+        />
+        <TweakText
+          label="Hero Badge"
+          value={tweaks.heroBadge}
+          onChange={v => setTweaks({ heroBadge: v })}
+        />
+      </TweakSection>
+      <TweakSection title="KlubHaus Daten">
+        <TweakText
+          label="Nächstes Training"
+          value={tweaks.nextTraining}
+          onChange={v => setTweaks({ nextTraining: v })}
+        />
+      </TweakSection>
+      <TweakSection title="Sektionen">
+        <TweakToggle
+          label="Fan-Shop anzeigen"
+          value={tweaks.showFanshop}
+          onChange={v => setTweaks({ showFanshop: v })}
+        />
+        <TweakToggle
+          label="Sponsoren anzeigen"
+          value={tweaks.showSponsors}
+          onChange={v => setTweaks({ showSponsors: v })}
+        />
+      </TweakSection>
+    </TweaksPanel>
+  );
+}
+
+const tweaksContainer = document.getElementById('tweaks-root');
+ReactDOM.createRoot(tweaksContainer).render(<TweaksApp />);
+</script>
+
+</body>
+</html>

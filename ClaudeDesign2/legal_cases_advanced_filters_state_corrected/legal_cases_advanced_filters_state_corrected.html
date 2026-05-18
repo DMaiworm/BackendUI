@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Legal Cases – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Sans (Nimbus default typeface) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex cnds-product-expireon">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'legal_cases';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search legal cases...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+            <a href="#" class="hover:text-primary transition-colors">Legal</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <span class="fw-semibold text-on-surface">Legal Cases</span>
+          </nav>
+          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Legal Cases</h1>
+          <p class="text-muted mt-1 mb-0">Manage litigation matters, investigations, and associated data holds.</p>
+        </div>
+        <button class="btn btn-primary flex items-center gap-1">
+          <span class="material-symbols-outlined" style="font-size:18px">download</span>
+          Export Results
+        </button>
+      </div>
+
+      <!-- Search & Advanced Filters Card -->
+      <div class="card custom-shadow-l1">
+        <div class="card-body space-y-4">
+
+          <!-- Search Row -->
+          <div class="flex gap-3 items-center">
+            <div class="relative flex-1">
+              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">search</span>
+              </span>
+              <input class="cf-input-control w-full" style="padding-left:2.25rem" placeholder="Search legal cases..." type="text"/>
+            </div>
+            <button class="btn btn-secondary flex items-center gap-1">
+              <span class="material-symbols-outlined" style="font-size:18px">tune</span>
+              Advanced Filters
+            </button>
+          </div>
+
+          <!-- Advanced Filters Panel -->
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2 border-t border-outline-variant">
+            <!-- Case Status -->
+            <div class="cf-input-field">
+              <label class="cf-input-label">Case Status</label>
+              <div class="cf-input-wrapper">
+                <select class="cf-input-control w-full">
+                  <option value="">All Statuses</option>
+                  <option>Active</option>
+                  <option>Closed</option>
+                  <option>On Hold</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Assignee -->
+            <div class="cf-input-field">
+              <label class="cf-input-label">Assignee</label>
+              <div class="cf-input-wrapper">
+                <select class="cf-input-control w-full">
+                  <option value="">All Assignees</option>
+                  <option>Unassigned</option>
+                  <option>Admin</option>
+                  <option>Legal Team</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Date Range (spans 2 cols) -->
+            <div class="cf-input-field md:col-span-2">
+              <label class="cf-input-label">Date Range</label>
+              <div class="cf-input-wrapper">
+                <div class="flex items-center gap-2">
+                  <input class="cf-input-control flex-1" type="date"/>
+                  <span class="small text-muted">to</span>
+                  <input class="cf-input-control flex-1" type="date"/>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Row -->
+            <div class="md:col-span-4 flex items-center justify-end gap-3">
+              <button class="btn btn-link fw-semibold">Clear All Filters</button>
+              <button class="btn btn-primary">Apply Filter View</button>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Data Table Card -->
+      <div class="card custom-shadow-l1">
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th style="width:48px"><input class="form-check-input" type="checkbox"/></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Reference Id</th>
+                <th>Created</th>
+                <th>Legal Holds</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">One quick test</td>
+                <td class="small text-muted">—</td>
+                <td class="small text-muted">—</td>
+                <td class="small text-muted">Apr 28, 2025</td>
+                <td class="small text-muted">0</td>
+              </tr>
+              <!-- Row 2 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">ZESH_Latest</td>
+                <td class="small text-muted">—</td>
+                <td class="small text-muted">—</td>
+                <td class="small text-muted">Mar 12, 2025</td>
+                <td class="small text-muted">2</td>
+              </tr>
+              <!-- Row 3 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">Test Case #3</td>
+                <td class="small text-muted">Internal compliance review</td>
+                <td class="small text-muted">REF-2025-003</td>
+                <td class="small text-muted">Feb 05, 2025</td>
+                <td class="small text-muted">1</td>
+              </tr>
+              <!-- Row 4 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">Project Z Investigation (Chat)</td>
+                <td class="small text-muted">Litigation hold for Project Z communications</td>
+                <td class="small text-muted">REF-2024-091</td>
+                <td class="small text-muted">Nov 14, 2024</td>
+                <td class="small text-muted">5</td>
+              </tr>
+              <!-- Row 5 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">CF Test Case 2</td>
+                <td class="small text-muted">—</td>
+                <td class="small text-muted">REF-2024-055</td>
+                <td class="small text-muted">Aug 22, 2024</td>
+                <td class="small text-muted">0</td>
+              </tr>
+              <!-- Row 6 -->
+              <tr>
+                <td><input class="form-check-input" type="checkbox"/></td>
+                <td class="fw-semibold text-primary">Project Tempest</td>
+                <td class="small text-muted">Regulatory investigation – external counsel engaged</td>
+                <td class="small text-muted">REF-2024-018</td>
+                <td class="small text-muted">Mar 01, 2024</td>
+                <td class="small text-muted">8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex items-center justify-between">
+          <span class="small text-muted">0 selected / 53 total</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">first_page</span>
+                </a>
+              </li>
+              <li class="page-item disabled">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span>
+                </a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">5</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span>
+                </a>
+              </li>
+              <li class="page-item">
+                <a class="page-link" href="#">
+                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">last_page</span>
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

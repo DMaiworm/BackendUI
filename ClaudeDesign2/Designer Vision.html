@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="de" data-cnds-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Designer-Vision · Diskussion</title>
+
+  <script>
+    // Suppress harmless ResizeObserver warning from iframes
+    const _origError = console.error;
+    const _origWarn = console.warn;
+    console.error = function(...args) {
+      const s = String(args[0] || '');
+      if (s.includes('ResizeObserver')) return;
+      _origError.apply(console, args);
+    };
+    console.warn = function(...args) {
+      const s = String(args[0] || '');
+      if (s.includes('ResizeObserver')) return;
+      _origWarn.apply(console, args);
+    };
+    window.addEventListener('error', e => {
+      if (e.message && e.message.includes('ResizeObserver')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return true;
+      }
+    }, true);
+    window.onerror = function(msg) {
+      if (typeof msg === 'string' && msg.includes('ResizeObserver')) return true;
+    };
+  </script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --doc-bg: #faf9f7;
+      --doc-card: #ffffff;
+      --doc-border: #ebe9e4;
+      --doc-text: #1a1a1a;
+      --doc-mute: #6b6b6b;
+      --doc-accent: var(--cnds-product-expireon-blue-500, #4e45d6);
+      --doc-accent-soft: var(--cnds-product-expireon-blue-50, #efeefb);
+      --doc-success: #2d682f;
+      --doc-success-soft: #e6f4e7;
+      --doc-warn: #b85c01;
+      --doc-warn-soft: #fff5eb;
+      --doc-danger: #942700;
+      --doc-danger-soft: #ffe5da;
+      --doc-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-text); font-family: "Nunito Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { font-size: 15px; line-height: 1.55; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+    .doc { max-width: 1280px; margin: 0 auto; padding: 48px 32px 80px; }
+    .doc > * + * { margin-top: 44px; }
+
+    /* Hero */
+    .hero { padding-bottom: 28px; border-bottom: 1px solid var(--doc-border); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--doc-accent); padding: 6px 12px; background: var(--doc-accent-soft); border-radius: 999px; }
+    .hero h1 { font-size: 44px; line-height: 1.06; letter-spacing: -0.025em; margin: 16px 0 8px; font-weight: 800; }
+    .hero p.lead { font-size: 17px; line-height: 1.5; color: var(--doc-mute); max-width: 800px; margin: 0; }
+
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--doc-border); }
+    .sec-num { font-family: var(--doc-mono); font-size: 12px; font-weight: 600; color: var(--doc-accent); padding-top: 4px; }
+    .sec-head h2 { margin: 0; font-size: 26px; letter-spacing: -0.02em; font-weight: 700; }
+    .sec-head .tag { margin-left: auto; font-size: 12px; color: var(--doc-mute); }
+
+    /* Side-by-side */
+    .sxs { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .sxs-card { border: 1px solid var(--doc-border); border-radius: 12px; overflow: hidden; background: var(--doc-card); }
+    .sxs-card.designer { border-color: #d6c8a8; }
+    .sxs-card.current { border-color: var(--cnds-product-expireon-blue-100, #dbd9f7); }
+    .sxs-head {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--doc-border);
+      display: flex; align-items: center; gap: 10px;
+      font-size: 12.5px;
+    }
+    .sxs-card.designer .sxs-head { background: #fcf8ee; }
+    .sxs-card.current .sxs-head { background: var(--doc-accent-soft); }
+    .sxs-head .label { font-weight: 700; letter-spacing: 0.04em; text-transform: uppercase; font-size: 11px; }
+    .sxs-card.designer .sxs-head .label { color: #8a6d22; }
+    .sxs-card.current .sxs-head .label { color: var(--doc-accent); }
+    .sxs-head .title { font-weight: 600; }
+    .sxs-head a { margin-left: auto; font-size: 11.5px; font-weight: 600; color: inherit; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; opacity: 0.7; }
+    .sxs-head a:hover { opacity: 1; text-decoration: underline; }
+    .sxs-card img { display: block; width: 100%; height: auto; }
+    .sxs-card iframe { display: block; width: 100%; height: 640px; border: 0; background: #fff; }
+
+    /* Diff list */
+    .diff-list { display: grid; gap: 12px; }
+    .diff {
+      display: grid;
+      grid-template-columns: 64px 1fr 1fr 90px;
+      gap: 16px;
+      align-items: start;
+      padding: 16px 18px;
+      background: var(--doc-card);
+      border: 1px solid var(--doc-border);
+      border-radius: 12px;
+    }
+    .diff .num { font-family: var(--doc-mono); font-size: 11px; font-weight: 700; color: var(--doc-mute); padding-top: 2px; }
+    .diff .col h4 { margin: 0 0 4px; font-size: 13.5px; font-weight: 700; }
+    .diff .col p { margin: 0; font-size: 13px; color: var(--doc-mute); line-height: 1.45; }
+    .diff .col.designer h4 { color: #8a6d22; }
+    .diff .col.current h4 { color: var(--doc-accent); }
+    .diff .col code { font-family: var(--doc-mono); font-size: 11.5px; padding: 1px 5px; border-radius: 3px; background: rgba(0,0,0,0.04); }
+    .diff .impact {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 4px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 700;
+      letter-spacing: 0.04em; text-transform: uppercase;
+      align-self: start;
+      white-space: nowrap;
+    }
+    .imp-high { background: var(--doc-danger-soft); color: var(--doc-danger); }
+    .imp-med  { background: var(--doc-warn-soft); color: var(--doc-warn); }
+    .imp-low  { background: var(--doc-success-soft); color: var(--doc-success); }
+    .imp-strike { background: rgba(0,0,0,0.04); color: var(--doc-mute); }
+    .diff.struck .col h4 { text-decoration: line-through; opacity: 0.55; }
+    .diff.struck .col p { opacity: 0.55; }
+    .decision.struck { background: linear-gradient(135deg, #f7f5f0 0%, #f3f0e8 100%); opacity: 0.7; }
+    .decision.struck h3 s { color: var(--doc-mute); }
+
+    .diff.header {
+      background: transparent; border: 0; padding: 6px 18px 0;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--doc-mute);
+    }
+
+    /* Decisions */
+    .decisions { display: grid; gap: 14px; }
+    .decision {
+      padding: 22px 24px;
+      background: linear-gradient(135deg, var(--doc-card) 0%, #fbfafe 100%);
+      border: 1px solid var(--doc-border);
+      border-radius: 14px;
+    }
+    .decision h3 { margin: 0 0 6px; font-size: 18px; font-weight: 700; display: flex; align-items: center; gap: 10px; }
+    .decision h3 .q { font-family: var(--doc-mono); font-size: 12px; color: var(--doc-accent); padding: 3px 8px; background: var(--doc-accent-soft); border-radius: 6px; font-weight: 700; }
+    .decision > p { margin: 0 0 12px; font-size: 13.5px; color: var(--doc-mute); line-height: 1.5; }
+    .decision .opts { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .opts.three { grid-template-columns: 1fr 1fr 1fr; }
+    .opt {
+      padding: 12px 14px;
+      border: 1px solid var(--doc-border);
+      border-radius: 10px;
+      background: #fff;
+    }
+    .opt strong { display: block; font-size: 13px; font-weight: 700; margin-bottom: 4px; color: var(--doc-text); }
+    .opt p { margin: 0; font-size: 12.5px; color: var(--doc-mute); line-height: 1.45; }
+    .opt.recommended { border-color: var(--doc-accent); background: var(--doc-accent-soft); }
+    .opt.recommended strong { color: var(--doc-accent); }
+    .opt .pick {
+      display: inline-block; margin-top: 6px;
+      font-size: 10.5px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase;
+      color: var(--doc-accent);
+    }
+
+    /* My take callout */
+    .take {
+      padding: 22px 26px;
+      background: linear-gradient(135deg, var(--doc-accent) 0%, var(--cnds-product-expireon-blue-700, #241e89) 100%);
+      color: #fff;
+      border-radius: 14px;
+    }
+    .take h3 { margin: 0 0 8px; font-size: 18px; }
+    .take p { margin: 0; font-size: 14px; line-height: 1.55; opacity: 0.92; }
+    .take p + p { margin-top: 8px; }
+    .take strong { background: rgba(255,255,255,0.16); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+
+    @media (max-width: 1000px) {
+      .doc { padding: 32px 18px 60px; }
+      .sxs, .decision .opts { grid-template-columns: 1fr; }
+      .diff { grid-template-columns: 40px 1fr; }
+      .diff .col + .col { margin-top: 4px; }
+      .diff .impact { grid-column: 2; justify-self: start; }
+    }
+  </style>
+</head>
+<body>
+  <main class="doc">
+
+    <header class="hero" data-screen-label="00 Cover">
+      <span class="hero-eyebrow"><span class="material-symbols-outlined" style="font-size:14px">forum</span> Designer-Vision · zur Diskussion · v2</span>
+      <h1>Top-Nav verworfen.<br>Patterns bleiben&nbsp;auf&nbsp;dem Tisch.</h1>
+      <p class="lead">
+        <strong>Entscheidung aus dem ABP/Angular-Constraint:</strong> Top-Nav ist verworfen — der bestehende Stack macht das schwierig genug, um nicht dorthin zu gehen. Damit fallen die architektonischen Mocks weg, aber die <strong>Pattern-Updates</strong> (Always-On-Filter, Mega-KPIs, Caps-Eyebrow, Rows-per-page, Status als Text) stehen weiter zur Debatte. Hier die bereinigte Diskussion.
+      </p>
+    </header>
+
+    <!-- ─────────────────── SIDE BY SIDE ─────────────────── -->
+    <section data-screen-label="01 Side by Side">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2>Direkt nebeneinander</h2>
+        <span class="tag">Endpoints-Screen · gleicher Inhalt, andere Shell</span>
+      </div>
+
+      <div class="sxs">
+        <div class="sxs-card designer">
+          <div class="sxs-head">
+            <span class="label">Designer-Vision</span>
+            <span class="title">Endpoints</span>
+            <a href="scratch/designer-mockup.png" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Original
+            </a>
+          </div>
+          <img src="scratch/designer-mockup.png" alt="Designer mockup">
+        </div>
+
+        <div class="sxs-card current">
+          <div class="sxs-head">
+            <span class="label">Aktuell (P1)</span>
+            <span class="title">Endpoints</span>
+            <a href="endpoint_management_overview_focus/endpoint_management_overview_focus.html" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Vollbild
+            </a>
+          </div>
+          <iframe src="endpoint_management_overview_focus/endpoint_management_overview_focus.html" loading="lazy" title="Aktueller Endpoints"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── DIFFERENCES ─────────────────── -->
+    <section data-screen-label="02 Differences">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>Die 12 Unterschiede</h2>
+        <span class="tag">priorisiert nach Architektur-Impact</span>
+      </div>
+
+      <div class="diff header">
+        <span>#</span><span>Designer-Vision</span><span>Aktuell (mein P1)</span><span>Impact</span>
+      </div>
+
+      <div class="diff-list">
+        <div class="diff struck">
+          <span class="num">01</span>
+          <div class="col designer"><h4>Top-Nav primär</h4><p>Verworfen — ABP/Angular-Stack macht das zu aufwendig.</p></div>
+          <div class="col current"><h4>Linke Mega-Sidenav</h4><p>Bleibt: 240&nbsp;px, 3-Ebenen-Accordion.</p></div>
+          <span class="impact imp-strike">Verworfen</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">02</span>
+          <div class="col designer"><h4>Section-Strip statt Breadcrumb</h4><p>Schmaler Strip oben im Canvas: <code>ON-PREM | ENDPOINTS</code> in Caps mit Trenner. Funktioniert auch ohne Top-Nav — wir können das oberhalb des Page-Headers platzieren.</p></div>
+          <div class="col current"><h4>Breadcrumb im Canvas</h4><p>Home › OnPrem › Endpoints klassisch, mit Chevron-Trennern.</p></div>
+          <span class="impact imp-med">Pattern</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">03</span>
+          <div class="col designer"><h4>Sub-Nav: Full-Pill aktiv</h4><p>Aktives Item bekommt <strong>volles, gerundetes Background-Fill</strong> in Soft-Purple. Wirkt schwerer und klarer.</p></div>
+          <div class="col current"><h4>3-px Left-Accent-Bar</h4><p>Aktives Item: 3&nbsp;px-Streifen links + Soft-Purple-BG. Kommt aus den offiziellen Nimbus-Docs.</p></div>
+          <span class="impact imp-med">Pattern</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">04</span>
+          <div class="col designer"><h4>Keine H1 — Caps-Eyebrow</h4><p>Statt „Endpoints" als großes H1: <code>MONITOR AND MANAGE AGENT INSTALLATIONS…</code> in Caps. Der Titel kommt aus dem Section-Strip.</p></div>
+          <div class="col current"><h4>Großes H1 + Lead</h4><p>„Endpoints" als 28&nbsp;px H1, darunter ein normaler Lead-Paragraph.</p></div>
+          <span class="impact imp-med">Pattern</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">05</span>
+          <div class="col designer"><h4>KPI: Label oben, Mega-Zahl</h4><p>Label oben („Total Endpoints"), darunter die <strong>große Zahl (~48&nbsp;px)</strong>, darunter der Delta-Indikator. Mehr Padding, mehr Luft.</p></div>
+          <div class="col current"><h4>Label oben, Zahl unten</h4><p>Reihenfolge gleich, aber kompakter — Zahl ist 1.625&nbsp;rem, weniger Padding pro Card.</p></div>
+          <span class="impact imp-low">Spacing</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">06</span>
+          <div class="col designer"><h4>Toolbar: Filter immer sichtbar</h4><p>Search + <code>SEARCH</code>-Button + Filter-Icon · <code>Show: All ▼</code> · View-Toggle · <code>EXPORT AS ▼</code> · <code>NEW ENDPOINT</code>. Darunter Status/Region-Selects + Clear/Apply <strong>permanent</strong>.</p></div>
+          <div class="col current"><h4>Filters-Toggle (collapsed)</h4><p>Search + Filter-Chips · <code>Filters</code>-Button öffnet eine Panel-Zeile. Dropdowns sind nur sichtbar wenn explizit geöffnet.</p></div>
+          <span class="impact imp-high">UX</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">07</span>
+          <div class="col designer"><h4>Status als gefärbter Text</h4><p>„Active" (grün), „Disconnected" (rot/grau), „Stale" (orange) — <strong>plain colored text</strong> ohne Pill / Dot.</p></div>
+          <div class="col current"><h4>Status als badge-dot</h4><p><code>badge badge-dot badge-success</code> — Pill mit kleinem Dot davor, alle Nimbus-Komponenten.</p></div>
+          <span class="impact imp-med">Pattern</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">08</span>
+          <div class="col designer"><h4>Pagination: Rows-per-page</h4><p><code>Rows per page: [10 ▼]</code> + <code>1–10 of 100</code> + first/prev/next/last. <strong>Keine nummerierten Seiten</strong>.</p></div>
+          <div class="col current"><h4>Numbered Pagination</h4><p>First/Prev + <code>1 2 3 …</code> + Next/Last mit aktivem Seitenindex. Selection-Info auf der linken Seite.</p></div>
+          <span class="impact imp-low">Pattern</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">09</span>
+          <div class="col designer"><h4>View-Toggle: Table / Card</h4><p>Zwei Icons (Liste / Kachel-Grid) im Toolbar — wechselt Datatable und Card-Grid <strong>im selben Screen</strong>.</p></div>
+          <div class="col current"><h4>Density/Columns</h4><p>Icon-Buttons für Density &amp; Column-Visibility (noch ohne Card-Grid-Modus).</p></div>
+          <span class="impact imp-med">Feature</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">10</span>
+          <div class="col designer"><h4>Export-Dropdown</h4><p><code>EXPORT AS ▼</code> mit Format-Auswahl (CSV/Excel/PDF). Explizit, nicht versteckt.</p></div>
+          <div class="col current"><h4>Single Export-Button</h4><p>„Export" als secondary Button neben Primary-Action — ohne Format-Auswahl.</p></div>
+          <span class="impact imp-low">UX</span>
+        </div>
+
+        <div class="diff">
+          <span class="num">11</span>
+          <div class="col designer"><h4>Theme-Toggle in Top-Bar</h4><p>Sonne/Mond-Icon neben Notifications oben rechts. Hinweis: Dark-Mode wird offensichtlich vorgesehen.</p></div>
+          <div class="col current"><h4>Kein Theme-Toggle</h4><p>Light-only. Nimbus liefert aber bereits <code>dark.css</code> + <code>[data-cnds-theme="dark"]</code>.</p></div>
+          <span class="impact imp-med">Feature</span>
+        </div>
+
+        <div class="diff struck">
+          <span class="num">12</span>
+          <div class="col designer"><h4>Sub-Nav: nur 4 Items</h4><p>Mit Top-Nav verworfen — wir behalten die 3-Ebenen-Sidenav.</p></div>
+          <div class="col current"><h4>Nimbus-Sidenav: 3 Ebenen</h4><p>Bleibt: Top-Level → Sektion → Sub-Sektion für alle 40 Screens.</p></div>
+          <span class="impact imp-strike">Verworfen</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── MY TAKE ─────────────────── -->
+    <section data-screen-label="03 My Take">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2>Meine Einschätzung</h2>
+      </div>
+
+      <div class="take">
+        <h3>Mit der Top-Nav-Frage geklärt: die Pattern-Liste ist sehr stark.</h3>
+        <p>
+          Was bleibt, sind im Wesentlichen <strong>Density- und Hierarchie-Updates</strong> — kein architektonisches Risiko, sondern Polish. Always-On-Filter, größere KPIs, Status als Text, Caps-Eyebrow, Rows-per-page. Alles davon können wir <strong>ohne Sidenav anzufassen</strong> in <code>expireon-app.css</code> einbauen.
+        </p>
+        <p>
+          Zwei Patterns davon haben echte UX-Implikationen (Always-On-Filter, Status-Text); die anderen sind reines Visual-Tuning. Lass uns Q2–Q5 unten durchgehen.
+        </p>
+      </div>
+    </section>
+
+    <!-- ─────────────────── DECISIONS ─────────────────── -->
+    <section data-screen-label="04 Decisions">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <h2>Neun Entscheidungen, die wir treffen müssen</h2>
+        <span class="tag">je früher, desto weniger Rework · Q1 verworfen</span>
+      </div>
+
+      <div class="decisions">
+
+        <div class="decision struck">
+          <h3><span class="q">Q1</span> <s>Shell-Architektur</s> · <span style="color:#942700">verworfen</span></h3>
+          <p>Sidenav bleibt. ABP/Angular macht Top-Nav-Umbau zu aufwendig. Wir behalten die 240&nbsp;px-Sidenav mit 3-Ebenen-Accordion.</p>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q2</span> Toolbar-Filter: Always-On oder Collapsible?</h3>
+          <p>Designer zeigt Status/Region-Selects permanent unter der Suche. Mein P1 hat sie hinter einem „Filters"-Button.</p>
+          <div class="opts">
+            <div class="opt recommended">
+              <strong>A · Always-On (Designer)</strong>
+              <p>Direkter Zugriff. Mehr vertikaler Platz, aber Power-User-freundlich.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>B · Collapsible (aktuell)</strong>
+              <p>Cleaner default state. Erfordert einen Click bevor man filtern kann.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q3</span> Status-Indikator: Badge mit Dot oder gefärbter Text?</h3>
+          <p>Designer macht es ohne Pill, nur farbiger Text. Spart visuelle Last, verliert aber etwas „Affordance".</p>
+          <div class="opts three">
+            <div class="opt">
+              <strong>A · Designer (Text)</strong>
+              <p>Cleaner. Status sieht weniger wie „etwas das man klicken kann" aus.</p>
+            </div>
+            <div class="opt recommended">
+              <strong>B · Hybrid</strong>
+              <p>Dot + Text ohne Pill-Background. Beste Lesbarkeit + minimaler Footprint.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>C · Aktuell (Pill)</strong>
+              <p>Volle Pills mit Dot. Klarste Status-Markierung, aber visuell „lauter".</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q4</span> Section-Strip statt Breadcrumb?</h3>
+          <p>Statt „Home › OnPrem › Endpoints" zeigt der Designer einen schmalen Strip mit <code>ON-PREM | ENDPOINTS</code> in Caps. Funktioniert auch innerhalb unserer Sidenav-Welt.</p>
+          <div class="opts three">
+            <div class="opt">
+              <strong>A · Section-Strip</strong>
+              <p>Cleaner, premium-er Look. Aber: keine Klick-Pfade zurück zu Eltern-Ebenen.</p>
+            </div>
+            <div class="opt recommended">
+              <strong>B · Beides</strong>
+              <p>Caps-Strip oben (visuell), Breadcrumb-Pfad-Funktionalität in der Sidenav-Hierarchie. Sektion ist immer offen sichtbar.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>C · Aktuell (Breadcrumb)</strong>
+              <p>Funktional klar, vertraut. Wirkt weniger „designed".</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q5</span> Page-Headline: H1 oder Caps-Eyebrow?</h3>
+          <p>Designer ersetzt „Endpoints" als großes H1 durch <code>MONITOR AND MANAGE AGENT INSTALLATIONS…</code> in Caps. Premium, aber keine starke Page-Marker mehr.</p>
+          <div class="opts three">
+            <div class="opt">
+              <strong>A · Nur Caps-Eyebrow</strong>
+              <p>1:1 Designer. Sehr premium, aber Page-Identität schwächer.</p>
+            </div>
+            <div class="opt recommended">
+              <strong>B · H1 + Lead behalten, plus Section-Strip</strong>
+              <p>Section-Strip oben (Pos.), H1 mittig groß, Lead als Untertitel. Drei Hierarchie-Ebenen sauber.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>C · Aktuell (H1+Lead)</strong>
+              <p>Klassisch, klar. Weniger „SaaS-pro".</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q6</span> KPI-Cards: Mega-Zahl oder kompakt?</h3>
+          <p>Designer macht die Zahl ~48&nbsp;px, deutlich mehr Padding, Delta-Indikator als Icon-Text-Kombi mittig.</p>
+          <div class="opts">
+            <div class="opt recommended">
+              <strong>A · Mega (Designer)</strong>
+              <p>Sehr starker visueller Anker. Auf KPI-Screens (Endpoints, Users, Audit Logs) ein klares „Gibt's was zu sehen?".</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>B · Kompakt (aktuell)</strong>
+              <p>Spart Vertikal-Raum, lässt die Tabelle näher rücken.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q7</span> Pagination: Numbered oder Rows-per-page?</h3>
+          <p>Designer: <code>Rows per page: [10 ▼]</code> + <code>1–10 of 100</code> + first/prev/next/last. Mein P1: nummerierte Seiten 1/2/3/…</p>
+          <div class="opts three">
+            <div class="opt">
+              <strong>A · Rows-per-page (Designer)</strong>
+              <p>Premium. Aber: kein direkter Seitensprung zu „Seite 7".</p>
+            </div>
+            <div class="opt recommended">
+              <strong>B · Kombi</strong>
+              <p>Rows-per-page + Range-Anzeige + Arrows + zusätzlich nummerierte Seiten (max. 5 sichtbar mit Ellipsis). Beste aus beiden Welten.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>C · Numbered (aktuell)</strong>
+              <p>Schnellste Navigation bei vielen Seiten.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q8</span> View-Toggle: Table vs. Card?</h3>
+          <p>Designer zeigt zwei Icon-Buttons im Toolbar — Liste/Card-Grid umschaltbar im selben Screen. Wichtig für die P2-Familie (Custodians, Modules, Languages).</p>
+          <div class="opts">
+            <div class="opt recommended">
+              <strong>A · Einbauen</strong>
+              <p>Klar: P2-Familie kommt als nächstes. Toggle jetzt einplanen, dann ist's später nur Markup.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>B · Erst in P2</strong>
+              <p>P1 puristisch als Tabelle, Toggle nur dort wo es eine Karten-View gibt.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q9</span> Export: Single oder „Export as ▼"?</h3>
+          <p>Designer-Dropdown mit Format-Auswahl (CSV/Excel/PDF). Mein P1: einzelner „Export"-Button.</p>
+          <div class="opts">
+            <div class="opt recommended">
+              <strong>A · Dropdown</strong>
+              <p>Format-Auswahl ist tatsächlich relevant — Audit-Exports oft als CSV, Reports als PDF.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+            <div class="opt">
+              <strong>B · Single-Button</strong>
+              <p>Format könnte in einem Modal nach Klick gewählt werden.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="decision">
+          <h3><span class="q">Q10</span> Dark-Mode jetzt vorsehen?</h3>
+          <p>Designer zeigt ein Sonne/Mond-Toggle in der Top-Bar — Nimbus liefert <code>dark.css</code> bereits.</p>
+          <div class="opts">
+            <div class="opt">
+              <strong>A · Jetzt einbauen</strong>
+              <p>Toggle in TopNav, Persistenz via localStorage. ~1h Aufwand für die Shell, dann automatisch global.</p>
+            </div>
+            <div class="opt recommended">
+              <strong>B · Später</strong>
+              <p>Erst die finale Pattern-Sprache stabilisieren, dann Dark-Mode in einem Sweep. Verhindert doppeltes Visual-Tuning.</p>
+              <span class="pick">Mein Vorschlag</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ─────────────────── ALSO ASK DESIGNER ─────────────────── -->
+    <section data-screen-label="05 Ask Designer">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <h2>Was Du den Designer noch fragen kannst</h2>
+      </div>
+      <ul style="font-size:14.5px;line-height:1.7;color:#2b2b2b;max-width:820px;padding-left:1.2em;">
+        <li><strong>Card-Grid-View neben Datatable</strong> — gibt's einen Mockup, wie das für Custodians, Modules, Languages aussieht? Das ist genau die <strong>P2-Familie</strong>, die als Nächstes kommt.</li>
+        <li><strong>„Search"-Button neben dem Suchfeld</strong> — Pflicht oder fühlt sich Live-Filterung beim Tippen für ihn auch ok an? Sein Mockup zeigt explizit einen „SEARCH"-Button — ungewöhnlich heute.</li>
+        <li><strong>Caps-Eyebrow statt H1</strong> — meint er das als globalen Standard oder nur als Endpoints-Highlight?</li>
+        <li><strong>Status als gefärbter Text</strong> — ohne Dot/Pill verliert man visuelle Affordance. Hat er das bewusst so gewählt, oder ist es ein „cleaner first draft"?</li>
+        <li><strong>Mockups für tiefe Screens</strong> — Custodians (Ebene 3) oder Settings (Forms) gestaltet er auch so?</li>
+      </ul>
+    </section>
+
+    <!-- ─────────────────── NEXT ─────────────────── -->
+    <section data-screen-label="06 Next">
+      <div class="sec-head">
+        <span class="sec-num">06</span>
+        <h2>Vorgeschlagene nächste Schritte</h2>
+      </div>
+      <ol style="font-size:14.5px;line-height:1.7;color:#2b2b2b;max-width:820px;padding-left:1.4em;">
+        <li><strong>Du entscheidest Q2–Q10</strong> (Filter · Status · Section-Strip · Headline · KPI · Pagination · View-Toggle · Export · Dark-Mode).</li>
+        <li>Ich baue eine <strong>einzelne Pilot-Variante 2</strong> nach Deiner Entscheidung — wieder Endpoints, damit Du es direkt mit dem aktuellen P1 und dem Designer-Mockup vergleichen kannst.</li>
+        <li>Wenn die Pilot-Variante 2 sitzt, rollen wir die Patterns automatisch über alle 11 Datatable-Screens — denn alle bauen auf <code>_shared/expireon-app.css</code> und der gemeinsamen Sidenav/Topnav. <strong>Eine Änderung im CSS = 11 Screens aktualisiert</strong>.</li>
+        <li>Dann erst P2 (Karten-Familie) — mit dem dann finalen Pattern-Set.</li>
+      </ol>
+
+      <p style="margin-top:18px;font-size:14px;color:var(--doc-mute);max-width:820px;">
+        <strong>Tipp:</strong> Falls Du den Designer fragst und er sagt „1:1 wie im Mockup" — dann brauchen wir einen weiteren Mockup für einen Ebene-3-Screen (Custodians) bevor wir die Shell umbauen. Sonst raten wir.
+      </p>
+    </section>
+
+  </main>
+</body>
+</html>

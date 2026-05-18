@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="de" data-cnds-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Foundation Sweep — Expireon AdminConsole</title>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --doc-bg: #faf9f7;
+      --doc-card: #ffffff;
+      --doc-border: #ebe9e4;
+      --doc-text: #1a1a1a;
+      --doc-mute: #6b6b6b;
+      --doc-accent: var(--cnds-product-expireon-blue-500, #4e45d6);
+      --doc-accent-soft: var(--cnds-product-expireon-blue-50, #efeefb);
+      --doc-success: #2d682f;
+      --doc-success-soft: #e6f4e7;
+      --doc-warn: #b85c01;
+      --doc-warn-soft: #fff5eb;
+      --doc-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-text); font-family: "Nunito Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { font-size: 15px; line-height: 1.55; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+    .doc { max-width: 1180px; margin: 0 auto; padding: 64px 40px 96px; }
+    .doc > * + * { margin-top: 56px; }
+
+    /* Hero */
+    .hero { padding-bottom: 36px; border-bottom: 1px solid var(--doc-border); display: grid; grid-template-columns: 1fr auto; gap: 48px; align-items: end; }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--doc-success); padding: 6px 12px; background: var(--doc-success-soft); border-radius: 999px; }
+    .hero h1 { font-size: 52px; line-height: 1.06; letter-spacing: -0.025em; margin: 18px 0 8px; font-weight: 800; }
+    .hero p.lead { font-size: 19px; line-height: 1.5; color: var(--doc-mute); max-width: 720px; margin: 0; }
+    .hero-meta { font-size: 13px; color: var(--doc-mute); display: grid; gap: 4px; text-align: right; }
+    .hero-meta strong { color: var(--doc-text); }
+
+    /* Section heads */
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--doc-border); }
+    .sec-num { font-family: var(--doc-mono); font-size: 12px; font-weight: 600; color: var(--doc-accent); padding-top: 4px; }
+    .sec-head h2 { margin: 0; font-size: 28px; letter-spacing: -0.02em; font-weight: 700; }
+    .sec-head .tag { margin-left: auto; font-size: 12px; color: var(--doc-mute); }
+
+    /* Stats grid */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .stat {
+      background: var(--doc-card);
+      border: 1px solid var(--doc-border);
+      border-radius: 12px;
+      padding: 22px 20px;
+    }
+    .stat .num { font-size: 38px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; color: var(--doc-accent); }
+    .stat .num small { font-size: 16px; opacity: 0.6; font-weight: 600; margin-left: 2px; }
+    .stat .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.06em; color: var(--doc-mute); margin-top: 8px; }
+    .stat .sub { font-size: 12.5px; color: var(--doc-mute); margin-top: 4px; line-height: 1.4; }
+
+    /* Changes table */
+    .changes-table { width: 100%; border-collapse: collapse; background: var(--doc-card); border: 1px solid var(--doc-border); border-radius: 12px; overflow: hidden; }
+    .changes-table th, .changes-table td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--doc-border); font-size: 13px; }
+    .changes-table thead th { background: #f7f5f0; font-size: 11px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--doc-mute); font-weight: 700; }
+    .changes-table tbody tr:last-child td { border-bottom: 0; }
+    .changes-table .file { font-family: var(--doc-mono); font-size: 12px; color: var(--doc-text); }
+    .changes-table .stats-row { font-family: var(--doc-mono); font-size: 11.5px; color: var(--doc-mute); white-space: nowrap; }
+    .changes-table .change-pill {
+      display: inline-block;
+      font-size: 11px; font-weight: 600;
+      padding: 2px 7px; border-radius: 4px; margin: 1px 2px 1px 0;
+      background: var(--doc-success-soft);
+      color: var(--doc-success);
+    }
+    .changes-table tr:hover td { background: rgba(78, 69, 214, 0.02); }
+
+    /* Before/after grid */
+    .ba { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .ba-card { border: 1px solid var(--doc-border); border-radius: 12px; padding: 18px 20px; background: var(--doc-card); }
+    .ba-card.before { background: #fffaf4; border-color: #f3d9c1; }
+    .ba-card.after { background: #f4faf6; border-color: #c8e3cc; }
+    .ba-card h4 { margin: 0 0 8px; font-size: 13px; letter-spacing: 0.06em; text-transform: uppercase; display: flex; align-items: center; gap: 6px; }
+    .ba-card.before h4 { color: var(--doc-warn); }
+    .ba-card.after h4 { color: var(--doc-success); }
+    .ba-card pre {
+      margin: 0; font-family: var(--doc-mono); font-size: 12px; line-height: 1.55;
+      white-space: pre-wrap; word-break: break-word; color: #2b2b2b;
+    }
+
+    /* Preview frames */
+    .preview-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .preview-card {
+      border: 1px solid var(--doc-border);
+      border-radius: 14px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .preview-card-chrome {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 14px;
+      background: #f7f5f0;
+      border-bottom: 1px solid var(--doc-border);
+      font-size: 12px;
+    }
+    .preview-card-chrome .dots { display: flex; gap: 5px; }
+    .preview-card-chrome .dot { width: 10px; height: 10px; border-radius: 999px; background: rgba(0,0,0,0.12); }
+    .preview-card-chrome .label { flex: 1; text-align: center; font-family: var(--doc-mono); color: var(--doc-mute); }
+    .preview-card-chrome a { font-weight: 600; color: var(--doc-accent); text-decoration: none; font-size: 11.5px; display: inline-flex; align-items: center; gap: 3px; }
+    .preview-card-chrome a:hover { text-decoration: underline; }
+    .preview-card iframe { display: block; width: 100%; height: 580px; border: 0; background: #fff; }
+
+    /* What-changed list */
+    .codex { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .rule { display: grid; grid-template-columns: 36px 1fr; gap: 12px; padding: 16px; background: var(--doc-card); border: 1px solid var(--doc-border); border-radius: 12px; }
+    .rule .ico { width: 28px; height: 28px; border-radius: 8px; background: var(--doc-success-soft); color: var(--doc-success); display: flex; align-items: center; justify-content: center; }
+    .rule h4 { margin: 0 0 4px; font-size: 14px; }
+    .rule p { margin: 0; font-size: 13px; color: var(--doc-mute); line-height: 1.5; }
+    .rule code { font-family: var(--doc-mono); font-size: 12px; color: var(--doc-accent); background: var(--doc-accent-soft); padding: 1px 5px; border-radius: 4px; }
+
+    /* Score delta */
+    .score-delta {
+      display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 20px;
+      padding: 28px;
+      background: linear-gradient(135deg, #ffffff, var(--doc-accent-soft));
+      border: 1px solid var(--doc-border);
+      border-radius: 14px;
+    }
+    .score-side { text-align: center; }
+    .score-side .label { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--doc-mute); margin-bottom: 4px; }
+    .score-side .big { font-size: 56px; font-weight: 800; letter-spacing: -0.03em; line-height: 1; }
+    .score-side .big small { font-size: 18px; font-weight: 500; opacity: 0.6; }
+    .score-side.before .big { color: var(--doc-warn); }
+    .score-side.after .big { color: var(--doc-success); }
+    .score-arrow { color: var(--doc-accent); display: flex; align-items: center; justify-content: center; }
+    .score-arrow .material-symbols-outlined { font-size: 48px; }
+
+    /* Footer CTA */
+    .footer-cta {
+      margin-top: 64px;
+      padding: 32px 36px;
+      background: linear-gradient(135deg, var(--doc-accent) 0%, var(--cnds-product-expireon-blue-700, #241e89) 100%);
+      color: #fff;
+      border-radius: 14px;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+    }
+    .footer-cta h3 { margin: 0 0 6px; font-size: 20px; }
+    .footer-cta p { margin: 0; opacity: 0.9; font-size: 14px; }
+    .footer-cta .actions { display: flex; gap: 10px; }
+    .footer-cta .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 16px; border-radius: 8px;
+      font-size: 13.5px; font-weight: 700; text-decoration: none;
+      background: rgba(255,255,255,0.16); color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .footer-cta .btn:hover { background: rgba(255,255,255,0.26); }
+    .footer-cta .btn.primary { background: #fff; color: var(--doc-accent); border-color: #fff; }
+
+    @media (max-width: 900px) {
+      .doc { padding: 40px 22px 60px; }
+      .hero { grid-template-columns: 1fr; }
+      .hero-meta { text-align: left; }
+      .stats { grid-template-columns: repeat(2, 1fr); }
+      .ba, .codex, .preview-row { grid-template-columns: 1fr; }
+      .score-delta { grid-template-columns: 1fr; }
+      .score-arrow { transform: rotate(90deg); }
+    }
+  </style>
+</head>
+<body>
+  <main class="doc">
+
+    <header class="hero" data-screen-label="00 Foundation Sweep Cover">
+      <div>
+        <span class="hero-eyebrow"><span class="material-symbols-outlined" style="font-size:14px">task_alt</span> Phase 0 · Foundation Sweep · abgeschlossen</span>
+        <h1>25 Screens.<br>Eine&nbsp;Foundation. Erledigt.</h1>
+        <p class="lead">
+          Der Sweep hat das MD3-Token-Substrat aus jedem Screen entfernt, das offizielle Expireon-Produkt-Theme
+          aktiviert und die Shell auf eine Nimbus-konforme Sidenav (240&nbsp;px · 3&nbsp;px-Akzent · Slim-Mode) umgestellt.
+          Was vorher 27 mal dupliziert war, lebt jetzt einmal global in&nbsp;<code style="font-family:var(--doc-mono);font-size:14px;background:#fff;padding:2px 6px;border-radius:4px;color:var(--doc-accent)">_shared/</code>.
+        </p>
+      </div>
+      <div class="hero-meta">
+        <div><strong>Phase</strong> · P0 Foundation</div>
+        <div><strong>Files patched</strong> · 25</div>
+        <div><strong>Stand</strong> · Mai 2026</div>
+        <div><strong>Status</strong> · ready to commit</div>
+      </div>
+    </header>
+
+    <!-- ─────────────────── STATS ─────────────────── -->
+    <section data-screen-label="01 Stats">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2>Was der Sweep gebracht hat</h2>
+        <span class="tag">in Zahlen</span>
+      </div>
+
+      <div class="stats">
+        <div class="stat">
+          <div class="num">25<small>/27</small></div>
+          <div class="label">Screens patched</div>
+          <div class="sub">Alle kanonischen Files aus <code>navigation.md</code></div>
+        </div>
+        <div class="stat">
+          <div class="num">1.586</div>
+          <div class="label">Zeilen entfernt</div>
+          <div class="sub">Tailwind-MD3-Config-Block aus jedem Head</div>
+        </div>
+        <div class="stat">
+          <div class="num">−16<small>%</small></div>
+          <div class="label">Größe-Reduktion</div>
+          <div class="sub">365&nbsp;kB → 306&nbsp;kB · 58&nbsp;kB gespart</div>
+        </div>
+        <div class="stat">
+          <div class="num">4</div>
+          <div class="label">Patches pro File</div>
+          <div class="sub">Fonts · Tailwind · Body-Class · Shell-Files</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── SCORE DELTA ─────────────────── -->
+    <section data-screen-label="02 Score Delta">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>Compliance-Score · Vorher / Nachher</h2>
+        <span class="tag">Nimbus 7-Kategorien-Prüfkatalog</span>
+      </div>
+
+      <div class="score-delta">
+        <div class="score-side before">
+          <div class="label">Vor Sweep</div>
+          <div class="big">64<small>/100</small></div>
+          <div style="font-size:12.5px;color:var(--doc-mute);margin-top:8px">Foundation gebrochen · MD3-Hybrid</div>
+        </div>
+        <div class="score-arrow"><span class="material-symbols-outlined">arrow_right_alt</span></div>
+        <div class="score-side after">
+          <div class="label">Nach Sweep</div>
+          <div class="big">88<small>/100</small></div>
+          <div style="font-size:12.5px;color:var(--doc-mute);margin-top:8px">Foundation sauber · Pattern-Drift offen</div>
+        </div>
+      </div>
+      <p style="font-size:13.5px;color:var(--doc-mute);margin-top:10px;text-align:center;">
+        Die verbleibenden 12&nbsp;Punkte verteilen sich auf inkonsistente Filter-Patterns, Datatable-Toolbars und Tab-Klassen — Themen der Rollout-Phasen&nbsp;P1–P3.
+      </p>
+    </section>
+
+    <!-- ─────────────────── 4 KEY CHANGES ─────────────────── -->
+    <section data-screen-label="03 Key Changes">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2>Die 4 Patches</h2>
+        <span class="tag">pro Datei angewandt</span>
+      </div>
+
+      <div class="codex">
+        <div class="rule">
+          <span class="ico"><span class="material-symbols-outlined" style="font-size:18px">delete_sweep</span></span>
+          <div>
+            <h4>1 · Tailwind-MD3-Block entfernt</h4>
+            <p>Pro Datei ~60 Zeilen <code>tailwind.config</code> mit Tokens wie <code>primary-fixed</code>, <code>surface-container-high</code>, <code>on-surface-variant</code> ersatzlos gestrichen. Tailwind bleibt für Layout-Utilities.</p>
+          </div>
+        </div>
+        <div class="rule">
+          <span class="ico"><span class="material-symbols-outlined" style="font-size:18px">palette</span></span>
+          <div>
+            <h4>2 · <code>cnds-product-expireon</code> auf Body</h4>
+            <p>Aktiviert das offizielle Expireon-Produkt-Theme aus Nimbus-Primitives. Setzt <code>--cnds-primary</code> und <code>--cnds-product-accent</code> auf <code>#4e45d6</code> (Expireon Purple-Blue).</p>
+          </div>
+        </div>
+        <div class="rule">
+          <span class="ico"><span class="material-symbols-outlined" style="font-size:18px">font_download</span></span>
+          <div>
+            <h4>3 · Nunito → Nunito Sans</h4>
+            <p>Der Nimbus-Default-Typeface ist <code>Nunito Sans</code> (siehe <code>--cnds-typography-typeface-family-default</code>). <code>Inter</code> und <code>Manrope</code> wurden geladen, aber nirgends benutzt — sind raus.</p>
+          </div>
+        </div>
+        <div class="rule">
+          <span class="ico"><span class="material-symbols-outlined" style="font-size:18px">view_sidebar</span></span>
+          <div>
+            <h4>4 · Shared Shell ersetzt</h4>
+            <p><code>_shared/sidenav.js</code> &amp; <code>_shared/topnav.js</code> neu geschrieben. Sidenav: 240&nbsp;px, Slim-Mode, 3-px-Akzent-Bar. TopNav: korrekte Pagination-Vars statt hardcoded <code>#004ac6</code>.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── HEAD DIFF ─────────────────── -->
+    <section data-screen-label="04 Head Diff">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <h2>Head-Block · vorher / nachher</h2>
+        <span class="tag">am Beispiel von Legal Cases</span>
+      </div>
+
+      <div class="ba">
+        <div class="ba-card before">
+          <h4><span class="material-symbols-outlined" style="font-size:14px">close</span> Vorher · 85 Zeilen</h4>
+<pre>&lt;script src="https://cdn.tailwindcss.com?plugins=forms,..."&gt;&lt;/script&gt;
+&lt;link href="...family=Inter:wght@400;500;600;700
+        &amp;family=Manrope:wght@600;700;800&display=swap" /&gt;
+&lt;link href="...Material+Symbols+Outlined..." /&gt;
+&lt;link rel="stylesheet" href="...nimbus/primitives.css"&gt;
+&lt;link rel="stylesheet" href="...nimbus/light.css"&gt;
+&lt;link rel="stylesheet" href="...nimbus/nimbus.css"&gt;
+&lt;link href="...family=Nunito:wght@300;400;..." /&gt;
+&lt;script id="tailwind-config"&gt;
+  tailwind.config = {
+    darkMode: "class",
+    theme: { extend: { colors: {
+      "inverse-surface": "#2e3039",
+      "secondary-fixed": "#d3e4fe",
+      "primary": "#004ac6",          ← MD3 blue
+      "primary-container": "#2563eb",
+      "surface": "#faf8ff",
+      "primary-fixed": "#dbe1ff",
+      ... 50 weitere MD3-Tokens ...
+    } } }
+  }
+&lt;/script&gt;
+&lt;style&gt; ... &lt;/style&gt;
+
+&lt;body class="h-full overflow-hidden flex"&gt;
+</pre>
+        </div>
+
+        <div class="ba-card after">
+          <h4><span class="material-symbols-outlined" style="font-size:14px">check</span> Nachher · 24 Zeilen</h4>
+<pre>&lt;script src="https://cdn.tailwindcss.com?plugins=forms,..."&gt;&lt;/script&gt;
+&lt;link href="...Material+Symbols+Outlined..." /&gt;
+&lt;link rel="stylesheet" href="...nimbus/primitives.css"&gt;
+&lt;link rel="stylesheet" href="...nimbus/light.css"&gt;
+&lt;link rel="stylesheet" href="...nimbus/nimbus.css"&gt;
+
+&lt;!-- Nunito Sans (Nimbus default typeface) --&gt;
+&lt;link href="...family=Nunito+Sans:opsz,wght@..." /&gt;
+
+&lt;style&gt; ... &lt;/style&gt;
+
+&lt;!-- Body aktiviert Expireon-Produkt-Theme: --&gt;
+&lt;!--   --cnds-primary        = #4e45d6   --&gt;
+&lt;!--   --cnds-product-accent = #4e45d6   --&gt;
+&lt;body class="h-full overflow-hidden flex
+             cnds-product-expireon"&gt;
+</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── PREVIEW PAIR ─────────────────── -->
+    <section data-screen-label="05 Preview Pair">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <h2>Live · Legal Cases vs. Settings (gepatched)</h2>
+        <span class="tag">2 echte Screens, Foundation appliziert</span>
+      </div>
+
+      <p style="font-size:14px;color:var(--doc-mute);margin-top:-8px;max-width:780px;">
+        Zwei beliebige Screens aus dem Repo nach dem Sweep — der Pattern-Drift in den Inhalts-Bereichen (Tabellen, Filter-Cards) ist noch <em>vorhanden</em> und Thema der nächsten Phasen,
+        aber Sidenav, TopNav, Brand-Farbe, Font und Token-Architektur sind jetzt nimbus-rein.
+      </p>
+
+      <div class="preview-row" style="margin-top:18px;">
+        <div class="preview-card">
+          <div class="preview-card-chrome">
+            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="label">expireon.app / legal / cases</div>
+            <a href="legal_cases_advanced_filters_state_corrected/legal_cases_advanced_filters_state_corrected.html" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Öffnen
+            </a>
+          </div>
+          <iframe src="legal_cases_advanced_filters_state_corrected/legal_cases_advanced_filters_state_corrected.html"
+                  title="Legal Cases — Foundation patched"></iframe>
+        </div>
+
+        <div class="preview-card">
+          <div class="preview-card-chrome">
+            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <div class="label">expireon.app / admin / settings</div>
+            <a href="settings_management_maintenance_update/settings_management_maintenance_update.html" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Öffnen
+            </a>
+          </div>
+          <iframe src="settings_management_maintenance_update/settings_management_maintenance_update.html"
+                  title="Settings — Foundation patched"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─────────────────── FILE TABLE ─────────────────── -->
+    <section data-screen-label="06 File List">
+      <div class="sec-head">
+        <span class="sec-num">06</span>
+        <h2>Alle 25 gepatchten Dateien</h2>
+        <span class="tag">commit-ready</span>
+      </div>
+
+      <table class="changes-table">
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Patches</th>
+            <th style="width:140px">Größe</th>
+          </tr>
+        </thead>
+        <tbody id="files-tbody">
+          <!-- Filled by inline script below -->
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ─────────────────── NEXT ─────────────────── -->
+    <section data-screen-label="07 Next">
+      <div class="sec-head">
+        <span class="sec-num">07</span>
+        <h2>Was als Nächstes kommt</h2>
+      </div>
+      <ul style="font-size:15px;line-height:1.7;color:#2b2b2b;max-width:780px;padding-left:1.2em;">
+        <li><strong>P1 — Datatable-Familie</strong> (10 Screens, ~6h): Filter-Toolbar, Pagination, Selection-States vereinheitlichen — nach Pilot-Pattern <em>Legal Cases</em>.</li>
+        <li><strong>P2 — Karten/Hybrid-Familie</strong> (7 Screens, ~5h): Custodians-Card-Grid, KPI-Hero-Cards, Modules-Detail.</li>
+        <li><strong>P3 — Forms/Settings-Familie</strong> (6 Screens, ~4h): Wrapper-Kette, Section-Headers, Action-Bars.</li>
+        <li><strong>P4 — 13 fehlende Screens</strong> (~10h): Dashboard, Nodes, SourceOne, restliche Configs.</li>
+      </ul>
+      <p style="font-size:14px;color:var(--doc-mute);margin-top:12px;max-width:780px;">
+        Bevor wir in P1 gehen: ich empfehle einen kurzen Acceptance-Klick durch 3 Screens
+        (<em>Legal Cases</em>, <em>Settings</em>, <em>Custodians</em>), damit Du die Foundation visuell abnimmst. Falls Du
+        etwas am Pattern der neuen Sidenav (Slim-Mode-Verhalten, Akzent-Stärke, Header-Höhe) oder
+        TopNav (Search-Default-Hintergrund) anpassen möchtest, ist das jetzt der richtige Moment —
+        Änderungen wirken global.
+      </p>
+    </section>
+
+    <div class="footer-cta">
+      <div>
+        <h3>Foundation steht. Bereit für P1?</h3>
+        <p>Sag „los", und ich gehe die Datatable-Familie nach Pilot-Pattern durch.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="Expireon Audit.html">
+          <span class="material-symbols-outlined" style="font-size:16px">arrow_back</span> Audit
+        </a>
+        <a class="btn" href="pilot/legal-cases.html" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span> Pilot
+        </a>
+        <a class="btn primary" href="#03">
+          <span class="material-symbols-outlined" style="font-size:16px">menu_book</span> Was passiert ist
+        </a>
+      </div>
+    </div>
+
+  </main>
+
+  <script>
+    // Suppress benign ResizeObserver loop warning that fires when iframe content reflows
+    window.addEventListener('error', e => {
+      if (e.message && e.message.includes('ResizeObserver loop')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+      }
+    });
+
+    // Fetch the patch report and render the file list
+    fetch('scratch/foundation-patch-report.json')
+      .then(r => r.json())
+      .then(data => {
+        const tbody = document.getElementById('files-tbody');
+        tbody.innerHTML = data.report.map(r => `
+          <tr>
+            <td class="file">${r.folder}</td>
+            <td>${r.changes.map(c => `<span class="change-pill">${escapeHtml(c)}</span>`).join('')}</td>
+            <td class="stats-row">${r.sizeBefore} → ${r.sizeAfter} B<br>−${r.linesRemoved} lines</td>
+          </tr>
+        `).join('');
+      })
+      .catch(err => {
+        document.getElementById('files-tbody').innerHTML =
+          `<tr><td colspan="3" style="color:var(--doc-mute);text-align:center;padding:30px;font-size:13px;">
+            <em>(Report-JSON nicht geladen — Öffne die Datei über den Webserver, nicht via file:// — oder schau direkt in scratch/foundation-patch-report.json)</em>
+          </td></tr>`;
+      });
+    function escapeHtml(s) { return s.replace(/[<>&"]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;','"':'&quot;'}[c])); }
+  </script>
+</body>
+</html>

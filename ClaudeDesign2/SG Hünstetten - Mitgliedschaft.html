@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Mitgliedschaft | SG HÜNSTETTEN</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "secondary-container": "#FDE000",
+                    "surface-container-high": "#EAE8E7",
+                    "surface-dim": "#DCD9D9",
+                    "surface-variant": "#E4E2E1",
+                    "on-tertiary-fixed": "#091D2B",
+                    "surface-tint": "#052856",
+                    "surface-container-lowest": "#FFFFFF",
+                    "on-tertiary-fixed-variant": "#364958",
+                    "on-error": "#FFFFFF",
+                    "surface-container-low": "#F6F3F2",
+                    "secondary": "#6C5E00",
+                    "tertiary-container": "#2E4150",
+                    "primary": "#052856",
+                    "on-primary": "#FFFFFF",
+                    "on-background": "#1B1C1C",
+                    "outline": "#747780",
+                    "surface-container-highest": "#E4E2E1",
+                    "background": "#FBF9F8",
+                    "inverse-surface": "#303030",
+                    "primary-fixed-dim": "#ACC7FE",
+                    "on-primary-fixed-variant": "#2B4676",
+                    "on-secondary-fixed": "#211C00",
+                    "tertiary-fixed": "#D1E5F8",
+                    "tertiary-fixed-dim": "#B5C9DC",
+                    "primary-container": "#223E6D",
+                    "inverse-on-surface": "#F3F0F0",
+                    "inverse-primary": "#ACC7FE",
+                    "surface-bright": "#FBF9F8",
+                    "on-secondary": "#FFFFFF",
+                    "on-primary-container": "#90AAE0",
+                    "error": "#BA1A1A",
+                    "on-primary-fixed": "#001A40",
+                    "tertiary": "#182B39",
+                    "on-surface": "#1B1C1C",
+                    "on-secondary-fixed-variant": "#514700",
+                    "on-error-container": "#93000A",
+                    "on-secondary-container": "#052856",
+                    "surface-container": "#F0EDED",
+                    "primary-fixed": "#D7E2FF",
+                    "on-tertiary-container": "#99ADBF",
+                    "surface": "#FBF9F8",
+                    "secondary-fixed-dim": "#E1C700",
+                    "secondary-fixed": "#FFE324",
+                    "error-container": "#FFDAD6",
+                    "on-tertiary": "#FFFFFF",
+                    "outline-variant": "#C4C6D0",
+                    "on-surface-variant": "#44474F"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "display": ["Lexend"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .kinetic-slant {
+            transform: skewX(-12deg);
+        }
+        .kinetic-rotate {
+            transform: rotate(-2deg);
+        }
+        .vanguard-gradient {
+            background: linear-gradient(135deg, #052856 0%, #0a408a 100%);
+        }
+    </style>
+</head>
+<body class="bg-surface font-body text-on-surface">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img').forEach(function(img) {
+    img.addEventListener('error', function() {
+      this.style.background = 'repeating-linear-gradient(45deg,#1a3260 0,#1a3260 2px,#223e6d 2px,#223e6d 14px)';
+      this.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    });
+  });
+});
+</script>
+
+<!-- TopNavBar -->
+<nav class="fixed top-0 left-0 right-0 z-50 bg-[#052856] dark:bg-[#052856] backdrop-blur-xl bg-opacity-90 shadow-lg">
+<div class="flex justify-between items-center w-full px-8 py-4 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-black italic text-[#FDE000] tracking-widest font-headline">SG HÜNSTETTEN</div>
+<div class="hidden md:flex items-center gap-8 font-headline font-black italic tracking-tighter uppercase">
+<a class="text-white opacity-80 hover:opacity-100 hover:skew-x-[-12deg] transition-transform duration-200" href="#">Benefits</a>
+<a class="text-white opacity-80 hover:opacity-100 hover:skew-x-[-12deg] transition-transform duration-200" href="#">Fees</a>
+<a class="text-[#FDE000] border-b-4 border-[#FDE000] pb-1 hover:skew-x-[-12deg] transition-transform duration-200" href="#">Join Us</a>
+<a class="text-white opacity-80 hover:opacity-100 hover:skew-x-[-12deg] transition-transform duration-200" href="#">Downloads</a>
+<a class="text-white opacity-80 hover:opacity-100 hover:skew-x-[-12deg] transition-transform duration-200" href="#">History</a>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-xl font-headline font-bold italic uppercase tracking-wider hover:scale-105 active:scale-95 transition-all">
+                APPLY NOW
+            </button>
+</div>
+</nav>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[819px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover" alt="A high-action, high-contrast sports photograph of a runner sprinting on a track at dusk" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDAn5eHc-tdLD8FR4hafp4dUgBQHaU3ftpl7RHpEFcFR8bBzVzfsX8oGXoAoZByEwg08VOUt-KpCRM6HqfPdRWKcxtQcsTCO_rDrKX2t2zGW957xiNaHmHVGglGW_IT6CUkEJOF6p2Eq9bcb8gMOpS8wBBlx3eOX_yTkHoiXiRfuVbyIiR6uvxzSZ9NNDoWoImz1GJA9VLqqcj6geROsRVrXjbuAccP1uTlo-LEj8gwpgBSwKnWoAIMki07_qfQ7vfziQoa4v7rmyw"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary via-primary/60 to-transparent"></div>
+</div>
+<div class="container mx-auto px-8 relative z-10">
+<div class="max-w-4xl">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label font-bold text-xs tracking-[0.2em] uppercase mb-6 kinetic-rotate">80 YEARS OF EXCELLENCE</span>
+<h1 class="text-5xl md:text-7xl font-headline font-black italic text-white uppercase leading-[0.9] tracking-tight mb-8">
+                        Werde Teil der <br/><span class="text-secondary-container">Bewegung</span>
+</h1>
+<p class="text-xl text-white/90 max-w-2xl mb-10 leading-relaxed font-medium">
+                        Werde Teil einer lebendigen Gemeinschaft, die seit über 80 Jahren Tradition und sportliche Exzellenz in Hünstetten vereint. Entdecke deine Leidenschaft.
+                    </p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-headline font-bold italic uppercase text-lg shadow-2xl hover:translate-x-2 transition-transform">
+                            Mitgliedsantrag Online
+                        </button>
+<button class="bg-white/10 backdrop-blur-md border border-white/20 text-white px-8 py-4 rounded-xl font-headline font-bold italic uppercase text-lg hover:bg-white/20 transition-all">
+                            Vorteile Entdecken
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Benefits Section -->
+<section class="py-24 bg-surface">
+<div class="container mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div class="max-w-2xl">
+<span class="text-primary font-label font-bold text-xs tracking-[0.3em] uppercase">Vorteile als Mitglied</span>
+<h2 class="text-4xl md:text-5xl font-headline font-black italic text-primary uppercase mt-4">Warum SG Hünstetten?</h2>
+</div>
+<div class="h-1 w-32 bg-secondary-container mb-2"></div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Benefit Card 1 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-lg border-b-8 border-primary hover:-translate-y-2 transition-transform">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 kinetic-rotate">
+<span class="material-symbols-outlined text-secondary-container text-3xl">groups</span>
+</div>
+<h3 class="text-2xl font-headline font-black italic text-primary uppercase mb-4">Gemeinschaft</h3>
+<p class="text-on-surface-variant leading-relaxed">Erlebe den Zusammenhalt in einem Verein, der Generationen verbindet und soziale Werte lebt.</p>
+</div>
+<!-- Benefit Card 2 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-lg border-b-8 border-secondary-container hover:-translate-y-2 transition-transform">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 kinetic-rotate">
+<span class="material-symbols-outlined text-secondary-container text-3xl">sports_and_outdoors</span>
+</div>
+<h3 class="text-2xl font-headline font-black italic text-primary uppercase mb-4">Professionalität</h3>
+<p class="text-on-surface-variant leading-relaxed">Zugang zu qualifizierten Trainern und modernen Sportanlagen für alle Altersgruppen.</p>
+</div>
+<!-- Benefit Card 3 -->
+<div class="bg-surface-container-lowest p-8 rounded-3xl shadow-lg border-b-8 border-primary hover:-translate-y-2 transition-transform">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 kinetic-rotate">
+<span class="material-symbols-outlined text-secondary-container text-3xl">diversity_1</span>
+</div>
+<h3 class="text-2xl font-headline font-black italic text-primary uppercase mb-4">Vielfalt</h3>
+<p class="text-on-surface-variant leading-relaxed">Vom Breitensport bis zum Leistungssport – wir bieten die passende Plattform für jeden.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Membership Types & Fees -->
+<section class="py-24 vanguard-gradient text-white overflow-hidden relative">
+<div class="absolute right-0 top-0 opacity-10 font-headline font-black italic text-[20rem] translate-x-1/2 -translate-y-1/2 select-none">SG</div>
+<div class="container mx-auto px-8 relative z-10">
+<div class="text-center mb-20">
+<h2 class="text-4xl md:text-5xl font-headline font-black italic uppercase tracking-tight text-secondary-container">Mitgliedschaft &amp; Beiträge</h2>
+<p class="text-white/70 mt-4 max-w-xl mx-auto">Wählen Sie das passende Modell für Ihre individuellen Bedürfnisse.</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Standard -->
+<div class="bg-white/5 backdrop-blur-xl rounded-3xl p-10 border border-white/10 flex flex-col items-center text-center">
+<h3 class="text-xl font-label font-bold tracking-widest uppercase mb-6">Standard</h3>
+<div class="text-5xl font-headline font-black italic text-secondary-container mb-4">120€<span class="text-lg text-white/60 not-italic">/Jahr</span></div>
+<p class="text-white/70 mb-8">Voller Zugang zu allen Sportabteilungen und Kursangeboten für Einzelpersonen.</p>
+<div class="mt-auto w-full">
+<button class="w-full py-3 rounded-xl border border-white/30 font-headline font-bold italic uppercase hover:bg-white/10 transition-all">Auswählen</button>
+</div>
+</div>
+<!-- Family -->
+<div class="bg-white/10 backdrop-blur-2xl rounded-3xl p-10 border-2 border-secondary-container flex flex-col items-center text-center relative scale-105 shadow-2xl">
+<div class="absolute -top-4 left-1/2 -translate-x-1/2 bg-secondary-container text-on-secondary-container px-6 py-1 rounded-full font-label font-black text-[10px] uppercase tracking-[0.2em]">Bestseller</div>
+<h3 class="text-xl font-label font-bold tracking-widest uppercase mb-6">Familie</h3>
+<div class="text-5xl font-headline font-black italic text-secondary-container mb-4">240€<span class="text-lg text-white/60 not-italic">/Jahr</span></div>
+<p class="text-white/90 mb-8">Umfassender Schutz und Training für die gesamte Familie (Eltern + Kinder).</p>
+<div class="mt-auto w-full">
+<button class="w-full py-3 rounded-xl bg-secondary-container text-on-secondary-container font-headline font-bold italic uppercase hover:scale-105 active:scale-95 transition-all">Jetzt Anmelden</button>
+</div>
+</div>
+<!-- Supporting -->
+<div class="bg-white/5 backdrop-blur-xl rounded-3xl p-10 border border-white/10 flex flex-col items-center text-center">
+<h3 class="text-xl font-label font-bold tracking-widest uppercase mb-6">Förderer</h3>
+<div class="text-5xl font-headline font-black italic text-secondary-container mb-4">60€<span class="text-lg text-white/60 not-italic">/Jahr</span></div>
+<p class="text-white/70 mb-8">Unterstützen Sie die Vereinsarbeit und profitieren Sie von exklusiven Event-Einladungen.</p>
+<div class="mt-auto w-full">
+<button class="w-full py-3 rounded-xl border border-white/30 font-headline font-bold italic uppercase hover:bg-white/10 transition-all">Unterstützen</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Application & Downloads (Bento Grid) -->
+<section class="py-24 bg-surface-container-low">
+<div class="container mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+<!-- Application Block -->
+<div class="lg:col-span-2 bg-primary rounded-3xl p-12 text-white flex flex-col justify-between overflow-hidden relative">
+<div class="relative z-10">
+<h2 class="text-4xl font-headline font-black italic uppercase leading-none mb-6">Bereit für den <span class="text-secondary-container">Start?</span></h2>
+<p class="text-xl text-white/80 max-w-md mb-8">Der schnellste Weg in unser Team. Füllen Sie Ihren Antrag direkt online aus – einfach, sicher und papierlos.</p>
+<button class="bg-secondary-container text-on-secondary-container px-10 py-5 rounded-xl font-headline font-black italic uppercase text-xl shadow-xl hover:translate-x-4 transition-transform group">
+                                Jetzt Online Anmelden
+                                <span class="material-symbols-outlined align-middle ml-2 group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+</div>
+<div class="absolute right-0 bottom-0 w-1/2 opacity-20 transform translate-x-10 translate-y-10">
+<span class="material-symbols-outlined text-[20rem]">edit_note</span>
+</div>
+</div>
+<!-- Downloads Block -->
+<div class="bg-surface-container-lowest rounded-3xl p-8 shadow-lg">
+<h3 class="text-2xl font-headline font-black italic text-primary uppercase mb-8">Downloads</h3>
+<div class="space-y-4">
+<a class="flex items-center justify-between p-4 bg-surface hover:bg-surface-container-high rounded-xl transition-colors group" href="#">
+<div class="flex flex-col">
+<span class="font-bold text-primary italic">Mitgliedsantrag (PDF)</span>
+<span class="text-xs text-on-surface-variant italic font-medium">Offizielles Formular für die Anmeldung auf Papier</span>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:translate-y-1 transition-transform">download</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-surface hover:bg-surface-container-high rounded-xl transition-colors group" href="#">
+<div class="flex flex-col">
+<span class="font-bold text-primary italic">Einverständniserklärung</span>
+<span class="text-xs text-on-surface-variant italic font-medium">Zustimmung für Minderjährige und Datennutzung</span>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:translate-y-1 transition-transform">download</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-surface hover:bg-surface-container-high rounded-xl transition-colors group" href="#">
+<div class="flex flex-col">
+<span class="font-bold text-primary italic">Vereinssatzung</span>
+<span class="text-xs text-on-surface-variant italic font-medium">Grundregeln und rechtlicher Rahmen des Vereins</span>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:translate-y-1 transition-transform">download</span>
+</a>
+<a class="flex items-center justify-between p-4 bg-surface hover:bg-surface-container-high rounded-xl transition-colors group" href="#">
+<div class="flex flex-col">
+<span class="font-bold text-primary italic">Datenschutzordnung</span>
+<span class="text-xs text-on-surface-variant italic font-medium">Informationen zum Umgang mit Ihren Daten</span>
+</div>
+<span class="material-symbols-outlined text-primary group-hover:translate-y-1 transition-transform">download</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Milestones Section -->
+<section class="py-24 bg-surface overflow-hidden">
+<div class="container mx-auto px-8">
+<div class="text-center mb-16">
+<span class="text-primary font-label font-bold text-xs tracking-[0.3em] uppercase">Ehrenabteilung</span>
+<h2 class="text-4xl font-headline font-black italic text-primary uppercase mt-4">Mitgliedsjubiläen</h2>
+</div>
+<div class="flex flex-col md:flex-row gap-8 items-center justify-center">
+<div class="bg-surface-container-high p-8 rounded-3xl text-center kinetic-rotate w-full md:w-64 hover:scale-110 transition-transform shadow-lg">
+<div class="text-primary font-headline font-black italic text-5xl mb-2">50</div>
+<div class="text-primary font-label font-bold text-sm tracking-widest uppercase">JAHRE</div>
+<div class="mt-4 h-1 w-12 bg-secondary-container mx-auto"></div>
+<p class="mt-4 text-on-surface-variant font-bold italic">Goldene Ehrennadel</p>
+<div class="mt-4 space-y-1 text-xs text-on-surface-variant/70 font-medium italic">
+<p>Hans Müller (Januar 1974)</p>
+<p>Ingrid Bauer (April 1974)</p>
+</div>
+</div>
+<div class="bg-primary p-10 rounded-3xl text-center -rotate-2 w-full md:w-72 hover:scale-110 transition-transform shadow-2xl">
+<div class="text-secondary-container font-headline font-black italic text-6xl mb-2">40</div>
+<div class="text-white font-label font-bold text-sm tracking-widest uppercase">JAHRE</div>
+<div class="mt-4 h-1 w-12 bg-secondary-container mx-auto"></div>
+<p class="mt-4 text-white font-bold italic">Silberne Ehrennadel</p>
+<div class="mt-4 space-y-1 text-xs text-white/70 font-medium italic">
+<p>Petra Schmidt (März 1984)</p>
+<p>Wolfgang Klein (Juli 1984)</p>
+<p>Thomas Meyer (Oktober 1984)</p>
+</div>
+</div>
+<div class="bg-surface-container-high p-8 rounded-3xl text-center kinetic-rotate w-full md:w-64 hover:scale-110 transition-transform shadow-lg">
+<div class="text-primary font-headline font-black italic text-5xl mb-2">25</div>
+<div class="text-primary font-label font-bold text-sm tracking-widest uppercase">JAHRE</div>
+<div class="mt-4 h-1 w-12 bg-secondary-container mx-auto"></div>
+<p class="mt-4 text-on-surface-variant font-bold italic">Ehrenurkunde</p>
+<div class="mt-4 space-y-1 text-xs text-on-surface-variant/70 font-medium italic">
+<p>Lukas Weber (Juni 1999)</p>
+<p>Sarah Wagner (September 1999)</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact & Admin -->
+<section class="py-24 bg-white border-t-8 border-secondary-container">
+<div class="container mx-auto px-8">
+<div class="flex flex-col lg:flex-row gap-16 items-center">
+<div class="lg:w-1/2">
+<h2 class="text-4xl font-headline font-black italic text-primary uppercase mb-8">Kontakt &amp; Verwaltung</h2>
+<div class="space-y-8">
+<div class="flex gap-6 items-start">
+<div class="w-12 h-12 bg-primary flex items-center justify-center rounded-xl shrink-0">
+<span class="material-symbols-outlined text-secondary-container">person</span>
+</div>
+<div>
+<h4 class="font-headline font-black italic text-primary uppercase text-lg">Steffi Specht</h4>
+<p class="text-on-surface-variant">Leitung Mitgliederverwaltung</p>
+<a class="text-primary font-bold hover:underline decoration-secondary-container decoration-4" href="mailto:mitgliederverwaltung@sg-huenstetten.de">mitgliederverwaltung@sg-huenstetten.de</a>
+</div>
+</div>
+<div class="flex gap-6 items-start">
+<div class="w-12 h-12 bg-primary flex items-center justify-center rounded-xl shrink-0">
+<span class="material-symbols-outlined text-secondary-container">location_on</span>
+</div>
+<div>
+<h4 class="font-headline font-black italic text-primary uppercase text-lg">Vereinsanschrift</h4>
+<p class="text-on-surface-variant">SG Hünstetten e.V.</p>
+<p class="text-on-surface-variant">Poststrasse 1, 65510 Hünstetten – Görsroth</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:w-1/2 w-full h-[400px] rounded-3xl overflow-hidden shadow-2xl relative">
+<img class="w-full h-full object-cover" alt="Aerial view of a modern sports complex nestled in a green German landscape." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAtPLx1IuNGfHSvHkiS-Inpf5dmWIWSPweI0I1BonMgOGL5GvSSq41FFssbVu40NRXqD22TD6dZE6-g0OS7njKad3VcL0zk6U_caN4tVIpFMIztEX_Q3NhOfyCDWO_SoU3NDy-3D7sjJXbc1FNYHVBnBGS5dyJNEulHOUR-WSVPTauOGzSojpKPAxKiCK8lZNmCWapHAJJHxP_-_akzuJakXob_BDyW_a80dqN6oMPcKLIRG8p8Qhv7hrqW6-kEhGIjzGIfjYiBHCk"/>
+<div class="absolute inset-0 bg-primary/20 hover:bg-transparent transition-colors"></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#052856] w-full flex flex-col items-center gap-8 p-12 mt-auto">
+<div class="container mx-auto flex flex-col items-center gap-10">
+<!-- Sponsor Banner -->
+<div class="w-full py-8 border-y border-white/10 flex flex-wrap justify-center gap-12 opacity-60">
+<div class="font-headline font-black italic text-white/50 text-2xl uppercase">Sponsor One</div>
+<div class="font-headline font-black italic text-white/50 text-2xl uppercase">Elite Partner</div>
+<div class="font-headline font-black italic text-white/50 text-2xl uppercase">Kinetic Labs</div>
+<div class="font-headline font-black italic text-white/50 text-2xl uppercase">Victory Wear</div>
+</div>
+<div class="flex flex-col md:flex-row justify-between items-center w-full gap-8">
+<div class="font-['Lexend'] font-black italic text-[#FDE000] text-3xl">SG HÜNSTETTEN</div>
+<div class="flex gap-8 font-['Plus_Jakarta_Sans'] text-xs uppercase tracking-[0.1em] text-white/60">
+<a class="hover:text-[#FDE000] transition-colors" href="#">Club Statutes</a>
+<a class="hover:text-[#FDE000] transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-[#FDE000] transition-colors" href="#">Imprint</a>
+<a class="hover:text-[#FDE000] transition-colors" href="#">Contact</a>
+</div>
+<div class="flex gap-4">
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-secondary-container hover:text-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined">share</span>
+</div>
+<div class="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white hover:bg-secondary-container hover:text-primary transition-all cursor-pointer">
+<span class="material-symbols-outlined">mail</span>
+</div>
+</div>
+</div>
+<div class="text-white/40 text-center font-['Plus_Jakarta_Sans'] text-[10px] uppercase tracking-[0.2em]">
+                © 2024 SG HÜNSTETTEN. 80 YEARS OF EXCELLENCE.
+            </div>
+</div>
+</footer>
+</body></html>

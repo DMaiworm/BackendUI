@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html class="h-full light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Texts – Expireon</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<!-- Nimbus Design System -->
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+<!-- Nunito Sans (Nimbus default typeface) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+<style>
+  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { background: #f1f5f9; }
+  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+</style>
+</head>
+<body class="h-full overflow-hidden flex cnds-product-expireon">
+
+<!-- Shared Sidenav -->
+<script>const ACTIVE_NAV = 'admin_texts';</script>
+<script src="../_shared/sidenav.js"></script>
+
+<!-- Main Content Area -->
+<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+
+  <!-- Top Navigation Bar -->
+  <script>const TOPNAV_SEARCH = 'Search texts...';</script>
+  <script src="../_shared/topnav.js"></script>
+
+  <!-- Content Canvas -->
+  <main class="flex-1 overflow-y-auto p-8">
+    <div class="max-w-[1440px] mx-auto space-y-6">
+
+      <!-- Breadcrumb & Page Title -->
+      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
+        <div>
+          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
+            <a href="#" class="hover:text-primary transition-colors">Administration</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <a href="#" class="hover:text-primary transition-colors">Language Management</a>
+            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
+            <span class="fw-semibold text-on-surface">Texts</span>
+          </nav>
+          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Texts</h1>
+          <p class="text-muted mt-1 mb-0">Manage localization keys and translation values across all resource files.</p>
+        </div>
+        <button class="btn btn-primary flex items-center gap-1">
+          <span class="material-symbols-outlined" style="font-size:18px">add</span>
+          New Text
+        </button>
+      </div>
+
+      <!-- KPI Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <p class="small text-muted text-uppercase fw-semibold mb-2">Total Keys</p>
+            <div class="flex items-end justify-between">
+              <span class="fw-bold" style="font-size:2rem">4.821</span>
+              <span class="badge badge-secondary flex items-center gap-1">
+                <span class="material-symbols-outlined" style="font-size:14px">translate</span> Texts
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <p class="small text-muted text-uppercase fw-semibold mb-2">Translated</p>
+            <div class="flex items-end justify-between">
+              <span class="fw-bold" style="font-size:2rem">94%</span>
+              <span class="small text-muted flex items-center gap-1">
+                <span class="material-symbols-outlined text-success" style="font-size:16px">check_circle</span> Ready
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <p class="small text-muted text-uppercase fw-semibold mb-2">Progress</p>
+            <div class="flex items-end justify-between gap-3">
+              <span class="fw-bold" style="font-size:2rem">94%</span>
+              <div class="progress flex-1 mb-2" style="height:6px">
+                <div class="progress-bar" role="progressbar" style="width:94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <p class="small text-muted text-uppercase fw-semibold mb-2">Last Update</p>
+            <div class="flex items-end justify-between">
+              <span class="fw-bold" style="font-size:2rem">Today</span>
+              <span class="small text-muted">2:20 PM</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Table Card -->
+      <div class="card custom-shadow-l1">
+        <!-- Filters -->
+        <div class="card-body border-bottom bg-surface-container-low" style="border-bottom:1px solid var(--outline-variant, #c3c6d7)">
+          <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
+            <div>
+              <label class="cf-input-label">Base Language</label>
+              <select class="cf-input-control w-full">
+                <option>English</option>
+                <option>German</option>
+              </select>
+            </div>
+            <div>
+              <label class="cf-input-label">Target Language</label>
+              <select class="cf-input-control w-full">
+                <option>German</option>
+                <option>French</option>
+              </select>
+            </div>
+            <div>
+              <label class="cf-input-label">Resource Name</label>
+              <select class="cf-input-control w-full">
+                <option>ValidationResources</option>
+                <option>CommonResources</option>
+              </select>
+            </div>
+            <div>
+              <label class="cf-input-label">Target Value</label>
+              <select class="cf-input-control w-full">
+                <option>All</option>
+                <option>Empty</option>
+              </select>
+            </div>
+            <div>
+              <label class="cf-input-label">Search</label>
+              <div class="relative">
+                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
+                  <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">search</span>
+                </span>
+                <input class="cf-input-control w-full" style="padding-left:2.25rem" type="text" placeholder="Search..."/>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Table -->
+        <div class="table-responsive w-full">
+          <table class="table table-hover mb-0 w-full">
+            <thead>
+              <tr>
+                <th>Key</th>
+                <th>Base Value</th>
+                <th>Value</th>
+                <th>Resource</th>
+                <th class="text-end">Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="fw-semibold small">ComparePropertiesNotMatch</td>
+                <td class="small text-muted">'{0}' and '{1}' do not match.</td>
+                <td class="small">'{0}' und '{1}' stimmen nicht überein.</td>
+                <td class="small text-muted">ValidationResources</td>
+                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold small">CreditCardAttribute_Invalid</td>
+                <td class="small text-muted">The {0} field is not a valid credit card number.</td>
+                <td class="small">Das Feld '{0}' ist keine gültige Kreditkartennummer.</td>
+                <td class="small text-muted">ValidationResources</td>
+                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold small">CustomValidationAttribute_ValidationError</td>
+                <td class="small text-muted">{0} is not valid.</td>
+                <td class="small">{0} ist ungültig.</td>
+                <td class="small text-muted">ValidationResources</td>
+                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold small">DataTypeAttribute_EmptyDataTypeString</td>
+                <td class="small text-muted">The custom DataType string cannot be null or empty.</td>
+                <td class="small">Die benutzerdefinierte DataType-Zeichenfolge darf nicht null oder leer sein.</td>
+                <td class="small text-muted">ValidationResources</td>
+                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
+              </tr>
+              <tr>
+                <td class="fw-semibold small">EmailAddressAttribute_Invalid</td>
+                <td class="small text-muted">The {0} field is not a valid e-mail address.</td>
+                <td class="small">Das Feld '{0}' ist keine gültige E-Mail-Adresse.</td>
+                <td class="small text-muted">ValidationResources</td>
+                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Pagination Footer -->
+        <div class="card-footer flex items-center justify-between">
+          <span class="small text-muted">Showing 1 to 5 of 4,821 texts</span>
+          <nav>
+            <ul class="pagination pagination-sm mb-0">
+              <li class="page-item disabled">
+                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span></a>
+              </li>
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item">
+                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span></a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+
+      <!-- Footer Info Cards -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="alert alert-info flex items-start gap-3 mb-0">
+          <span class="material-symbols-outlined flex-shrink-0" style="font-size:22px;margin-top:2px;font-variation-settings:'FILL' 1">info</span>
+          <div>
+            <div class="fw-semibold mb-1">Export Texts</div>
+            <p class="small mb-0">You can export all texts as .resx or .json files to translate them externally.</p>
+          </div>
+        </div>
+        <div class="card custom-shadow-l1 mb-0">
+          <div class="card-body">
+            <div class="fw-semibold mb-1">Text Documentation</div>
+            <p class="small text-muted mb-2">Learn more about placeholders like {0} and {1} in translations.</p>
+            <a href="#" class="btn btn-link p-0 small fw-semibold flex items-center gap-1">
+              Read Documentation <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

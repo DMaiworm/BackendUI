@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="de" data-cnds-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>P1 v2 · Datatables — Designer-aligned</title>
+
+  <script>
+    const _origError = console.error;
+    const _origWarn = console.warn;
+    console.error = function(...args) {
+      const s = String(args[0] || '');
+      if (s.includes('ResizeObserver')) return;
+      _origError.apply(console, args);
+    };
+    console.warn = function(...args) {
+      const s = String(args[0] || '');
+      if (s.includes('ResizeObserver')) return;
+      _origWarn.apply(console, args);
+    };
+    window.addEventListener('error', e => {
+      if (e.message && e.message.includes('ResizeObserver')) {
+        e.stopImmediatePropagation();
+        e.preventDefault();
+        return true;
+      }
+    }, true);
+    window.onerror = function(msg) {
+      if (typeof msg === 'string' && msg.includes('ResizeObserver')) return true;
+    };
+  </script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --doc-bg: #faf9f7;
+      --doc-card: #ffffff;
+      --doc-border: #ebe9e4;
+      --doc-text: #1a1a1a;
+      --doc-mute: #6b6b6b;
+      --doc-accent: var(--cnds-product-expireon-blue-500, #4e45d6);
+      --doc-accent-soft: var(--cnds-product-expireon-blue-50, #efeefb);
+      --doc-success: #2d682f;
+      --doc-success-soft: #e6f4e7;
+      --doc-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-text); font-family: "Nunito Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { font-size: 15px; line-height: 1.55; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+    .doc { max-width: 1280px; margin: 0 auto; padding: 48px 32px 80px; }
+    .doc > * + * { margin-top: 44px; }
+
+    .hero { padding-bottom: 28px; border-bottom: 1px solid var(--doc-border); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--doc-success); padding: 6px 12px; background: var(--doc-success-soft); border-radius: 999px; }
+    .hero h1 { font-size: 44px; line-height: 1.06; letter-spacing: -0.025em; margin: 16px 0 8px; font-weight: 800; }
+    .hero p.lead { font-size: 17px; line-height: 1.5; color: var(--doc-mute); max-width: 800px; margin: 0; }
+
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 18px; padding-bottom: 12px; border-bottom: 1px solid var(--doc-border); }
+    .sec-num { font-family: var(--doc-mono); font-size: 12px; font-weight: 600; color: var(--doc-accent); padding-top: 4px; }
+    .sec-head h2 { margin: 0; font-size: 26px; letter-spacing: -0.02em; font-weight: 700; }
+    .sec-head .tag { margin-left: auto; font-size: 12px; color: var(--doc-mute); }
+
+    /* Decisions applied */
+    .applied { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+    .applied-row {
+      display: grid; grid-template-columns: 30px 1fr 90px;
+      align-items: center; gap: 10px;
+      padding: 10px 12px;
+      background: var(--doc-card);
+      border: 1px solid var(--doc-border);
+      border-radius: 8px;
+      font-size: 13px;
+    }
+    .applied-row .q {
+      font-family: var(--doc-mono); font-size: 10.5px; font-weight: 700;
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      padding: 3px 7px; border-radius: 4px; text-align: center;
+    }
+    .applied-row .topic { font-weight: 600; }
+    .applied-row .choice {
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--doc-success); background: var(--doc-success-soft);
+      padding: 3px 8px; border-radius: 4px; text-align: center;
+    }
+    .applied-row.struck { opacity: 0.45; }
+    .applied-row.struck .choice {
+      color: var(--doc-mute); background: rgba(0,0,0,0.04);
+    }
+    .applied-row.struck .topic { text-decoration: line-through; }
+
+    /* Preview cards */
+    .preview-stack { display: grid; gap: 22px; }
+    .preview-card {
+      border: 1px solid var(--doc-border); border-radius: 14px; overflow: hidden;
+      background: #fff; box-shadow: 0 1px 2px rgba(0,0,0,0.03);
+    }
+    .preview-card.featured {
+      box-shadow: 0 4px 24px rgba(78, 69, 214, 0.08);
+      border-color: var(--cnds-product-expireon-blue-100, #dbd9f7);
+    }
+    .preview-chrome {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 14px; background: #f7f5f0;
+      border-bottom: 1px solid var(--doc-border);
+      font-size: 12.5px;
+    }
+    .preview-chrome .dots { display: flex; gap: 5px; }
+    .preview-chrome .dot { width: 11px; height: 11px; border-radius: 999px; background: rgba(0,0,0,0.12); }
+    .preview-chrome .number { font-family: var(--doc-mono); font-size: 11px; color: var(--doc-mute); padding: 2px 8px; background: rgba(0,0,0,0.04); border-radius: 4px; margin-right: 6px; }
+    .preview-chrome .url { flex: 1; text-align: center; font-family: var(--doc-mono); color: var(--doc-mute); background: rgba(0,0,0,0.04); padding: 4px 12px; border-radius: 6px; max-width: 480px; margin: 0 auto; }
+    .preview-chrome a { font-size: 12.5px; font-weight: 600; color: var(--doc-accent); text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+    .preview-chrome a:hover { text-decoration: underline; }
+    .preview-meta {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 18px; border-bottom: 1px solid var(--doc-border);
+      background: linear-gradient(to bottom, #fbfaf8, #fff);
+    }
+    .preview-meta h3 { margin: 0; font-size: 16px; font-weight: 700; }
+    .preview-meta p { margin: 2px 0 0; font-size: 12.5px; color: var(--doc-mute); }
+    .preview-card iframe { display: block; width: 100%; height: 820px; border: 0; background: #fff; }
+    .preview-card.compact iframe { height: 680px; }
+
+    /* Compact link tile (instead of iframe) for the other 10 */
+    .tile-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
+    .tile {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px;
+      background: var(--doc-card);
+      border: 1px solid var(--doc-border);
+      border-radius: 12px;
+      text-decoration: none; color: inherit;
+      transition: border-color .15s, box-shadow .15s, transform .15s;
+    }
+    .tile:hover {
+      border-color: var(--doc-accent);
+      box-shadow: 0 4px 16px rgba(78, 69, 214, 0.10);
+      transform: translateY(-1px);
+    }
+    .tile .tile-num {
+      font-family: var(--doc-mono); font-size: 11px; font-weight: 700;
+      color: var(--doc-mute); background: rgba(0,0,0,0.04);
+      padding: 4px 8px; border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .tile .tile-body { flex: 1; min-width: 0; }
+    .tile h4 { margin: 0 0 3px; font-size: 15px; font-weight: 700; }
+    .tile p { margin: 0; font-size: 12.5px; color: var(--doc-mute); line-height: 1.4; }
+    .tile .arrow { color: var(--doc-accent); flex-shrink: 0; }
+    .tile .arrow .material-symbols-outlined { font-size: 22px; }
+
+    /* CTA */
+    .footer-cta {
+      margin-top: 56px;
+      padding: 32px 36px;
+      background: linear-gradient(135deg, var(--doc-accent) 0%, var(--cnds-product-expireon-blue-700, #241e89) 100%);
+      color: #fff; border-radius: 14px;
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px;
+    }
+    .footer-cta h3 { margin: 0 0 6px; font-size: 20px; }
+    .footer-cta p { margin: 0; opacity: 0.9; font-size: 14px; }
+    .footer-cta .actions { display: flex; gap: 10px; }
+    .footer-cta .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 16px; border-radius: 8px;
+      font-size: 13.5px; font-weight: 700; text-decoration: none;
+      background: rgba(255,255,255,0.16); color: #fff;
+      border: 1px solid rgba(255,255,255,0.22);
+    }
+    .footer-cta .btn:hover { background: rgba(255,255,255,0.26); }
+    .footer-cta .btn.primary { background: #fff; color: var(--doc-accent); border-color: #fff; }
+
+    @media (max-width: 1000px) {
+      .doc { padding: 32px 18px 60px; }
+      .applied { grid-template-columns: 1fr; }
+      .preview-card iframe { height: 600px; }
+      .tile-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="doc">
+
+    <header class="hero" data-screen-label="00 P1 v2 Cover">
+      <span class="hero-eyebrow"><span class="material-symbols-outlined" style="font-size:14px">auto_awesome</span> P1 · Datatable Family · v2 · designer-aligned</span>
+      <h1>Alle 11 Screens.<br>Designer-aligned.</h1>
+      <p class="lead">
+        Q2–Q10 entschieden, neun Patterns angewandt, Top-Nav verworfen — Sidenav bleibt. Sechs strukturelle
+        Markup-Änderungen + ein paar CSS-Tokens reichen, um den Look des Designers über alle 11&nbsp;Screens
+        zu rollen. Eine Quelle (<code style="font-family:var(--doc-mono);font-size:14px;background:rgba(0,0,0,0.04);padding:1px 6px;border-radius:4px">expireon-app.css</code>), elf Screens.
+      </p>
+    </header>
+
+    <section data-screen-label="01 Decisions Applied">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2>Deine 9 Entscheidungen · angewandt</h2>
+        <span class="tag">A überall, außer Q3 (B) und Q10 (später)</span>
+      </div>
+
+      <div class="applied">
+        <div class="applied-row struck">
+          <span class="q">Q1</span>
+          <span><span class="topic">Shell-Architektur</span></span>
+          <span class="choice">verworfen</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q2</span>
+          <span><span class="topic">Filter-Toolbar</span> · always-on Row</span>
+          <span class="choice">A · An</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q3</span>
+          <span><span class="topic">Status</span> · Dot + Text, kein Pill</span>
+          <span class="choice">B · Hybrid</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q4</span>
+          <span><span class="topic">Section-Strip</span> · ON-PREM | ENDPOINTS</span>
+          <span class="choice">A · Caps</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q5</span>
+          <span><span class="topic">Headline</span> · Caps-Eyebrow statt H1</span>
+          <span class="choice">A · Caps</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q6</span>
+          <span><span class="topic">KPIs</span> · Mega-Zahl 56 px zentriert</span>
+          <span class="choice">A · Mega</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q7</span>
+          <span><span class="topic">Pagination</span> · Rows-per-page only</span>
+          <span class="choice">A · Rpp</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q8</span>
+          <span><span class="topic">View-Toggle</span> · Table/Card-Icons</span>
+          <span class="choice">A · An</span>
+        </div>
+        <div class="applied-row">
+          <span class="q">Q9</span>
+          <span><span class="topic">Export</span> · „Export as ▼" Dropdown</span>
+          <span class="choice">A · Dropdown</span>
+        </div>
+        <div class="applied-row struck">
+          <span class="q">Q10</span>
+          <span><span class="topic">Dark-Mode</span> · später</span>
+          <span class="choice">B · Später</span>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="02 Live Previews">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>Endpoints · der Referenz-Screen</h2>
+        <span class="tag">direkt vergleichbar mit Designer-Mockup</span>
+      </div>
+
+      <div class="preview-stack">
+        <div class="preview-card featured">
+          <div class="preview-chrome">
+            <div class="dots"><span class="dot"></span><span class="dot"></span><span class="dot"></span></div>
+            <span class="number">01</span>
+            <div class="url">expireon.app / on-prem / endpoints</div>
+            <a href="endpoint_management_overview_focus/endpoint_management_overview_focus.html" target="_blank" rel="noopener">
+              <span class="material-symbols-outlined" style="font-size:14px">open_in_new</span> Vollbild
+            </a>
+          </div>
+          <div class="preview-meta">
+            <div>
+              <h3>Endpoints (v2)</h3>
+              <p>Section-Strip · Caps-Eyebrow · Mega-KPIs · Always-on Filter · Rows-per-page · View-Toggle · Export-as</p>
+            </div>
+          </div>
+          <iframe loading="lazy" src="endpoint_management_overview_focus/endpoint_management_overview_focus.html" title="Endpoints v2"></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="03 All 10 Others">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2>Die anderen 10 · alle v2</h2>
+        <span class="tag">selber Pattern, andere Daten · click zum Öffnen</span>
+      </div>
+
+      <div class="tile-grid">
+
+        <a class="tile" href="users_design_sync/users_design_sync.html" target="_blank" rel="noopener">
+          <span class="tile-num">02</span>
+          <div class="tile-body"><h4>Users</h4><p>4 KPIs · Avatar-Bubbles · Roles-Badges · 2FA Status</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="audit_logs_sidebar_fixed/audit_logs_sidebar_fixed.html" target="_blank" rel="noopener">
+          <span class="tile-num">03</span>
+          <div class="tile-body"><h4>Audit Logs</h4><p>4 KPIs · HTTP-Method-Badges · Latency-Tracking</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="appliance_management_unified_table_style/appliance_management_unified_table_style.html" target="_blank" rel="noopener">
+          <span class="tile-num">04</span>
+          <div class="tile-body"><h4>Appliances</h4><p>Hardware/VM · DNS + IP mono · Status-Text</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="roles_design_sync/roles_design_sync.html" target="_blank" rel="noopener">
+          <span class="tile-num">05</span>
+          <div class="tile-body"><h4>Roles</h4><p>Permission-Sets · Scope-Badges · No-Select</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="security_logs_design_sync/security_logs_design_sync.html" target="_blank" rel="noopener">
+          <span class="tile-num">06</span>
+          <div class="tile-body"><h4>Security Log</h4><p>Auth-Events &amp; Permission-Denials · No-Select</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="domains_management_list_view_sidebar_sync/domains_management_list_view_sidebar_sync.html" target="_blank" rel="noopener">
+          <span class="tile-num">07</span>
+          <div class="tile-body"><h4>Domains</h4><p>AD-Forests · LDAP mono · Mode-Level-Badges</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="ev_directories_footer_sync_1_1/ev_directories_footer_sync_1_1.html" target="_blank" rel="noopener">
+          <span class="tile-num">08</span>
+          <div class="tile-body"><h4>EV Directories</h4><p>Enterprise-Vault · Schema-Version-Badges</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="ev_vault_stores_overview/ev_vault_stores_overview.html" target="_blank" rel="noopener">
+          <span class="tile-num">09</span>
+          <div class="tile-body"><h4>Vault Stores</h4><p>EV-DBs · Healthy/Degraded-Status</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="storage_buckets_content_sync/storage_buckets_content_sync.html" target="_blank" rel="noopener">
+          <span class="tile-num">10</span>
+          <div class="tile-body"><h4>Storage Buckets</h4><p>Cloud/On-prem · Compress/WORM-Capabilities</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+        <a class="tile" href="storage_partitions_layout_correction/storage_partitions_layout_correction.html" target="_blank" rel="noopener">
+          <span class="tile-num">11</span>
+          <div class="tile-body"><h4>Storage Partitions</h4><p>Sealed/WORM/Open · Lock-Icons</p></div>
+          <span class="arrow"><span class="material-symbols-outlined">arrow_forward</span></span>
+        </a>
+
+      </div>
+    </section>
+
+    <div class="footer-cta">
+      <div>
+        <h3>11 Screens aligned. P2 (Karten-Familie) wartet.</h3>
+        <p>Klick durch, gib Feedback zum neuen Pattern, oder sag „P2" und ich gehe die Karten-Familie an.</p>
+      </div>
+      <div class="actions">
+        <a class="btn" href="Designer Vision.html">
+          <span class="material-symbols-outlined" style="font-size:16px">forum</span> Diskussion
+        </a>
+        <a class="btn" href="P1 Datatables.html">
+          <span class="material-symbols-outlined" style="font-size:16px">history</span> P1 v1
+        </a>
+        <a class="btn primary" href="endpoint_management_overview_focus/endpoint_management_overview_focus.html" target="_blank" rel="noopener">
+          <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span> Endpoints öffnen
+        </a>
+      </div>
+    </div>
+
+  </main>
+</body>
+</html>

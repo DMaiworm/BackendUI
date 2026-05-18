@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@700;900&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#93000A",
+                    "surface": "#FBF9F8",
+                    "secondary-fixed-dim": "#E1C700",
+                    "on-surface": "#1B1C1C",
+                    "on-secondary-container": "#052856",
+                    "surface-container-low": "#F6F3F2",
+                    "surface-bright": "#FBF9F8",
+                    "primary": "#052856",
+                    "on-secondary": "#FFFFFF",
+                    "on-secondary-fixed-variant": "#514700",
+                    "on-primary-fixed-variant": "#2B4676",
+                    "surface-container-high": "#EAE8E7",
+                    "on-tertiary-container": "#99ADBF",
+                    "error-container": "#FFDAD6",
+                    "primary-fixed": "#D7E2FF",
+                    "on-primary-container": "#90AAE0",
+                    "on-background": "#1B1C1C",
+                    "on-tertiary-fixed-variant": "#364958",
+                    "surface-variant": "#E4E2E1",
+                    "primary-container": "#223E6D",
+                    "secondary-container": "#FDE000",
+                    "surface-container": "#F0EDED",
+                    "inverse-on-surface": "#F3F0F0",
+                    "tertiary-fixed-dim": "#B5C9DC",
+                    "on-secondary-fixed": "#211C00",
+                    "secondary": "#6C5E00",
+                    "outline": "#747780",
+                    "primary-fixed-dim": "#ACC7FE",
+                    "surface-container-highest": "#E4E2E1",
+                    "secondary-fixed": "#FFE324",
+                    "on-primary-fixed": "#001A40",
+                    "tertiary": "#182B39",
+                    "tertiary-container": "#2E4150",
+                    "surface-dim": "#DCD9D9",
+                    "on-primary": "#FFFFFF",
+                    "surface-container-lowest": "#FFFFFF",
+                    "on-tertiary-fixed": "#091D2B",
+                    "background": "#FBF9F8",
+                    "inverse-surface": "#303030",
+                    "on-tertiary": "#FFFFFF",
+                    "tertiary-fixed": "#D1E5F8",
+                    "on-error": "#FFFFFF",
+                    "on-surface-variant": "#44474F",
+                    "inverse-primary": "#ACC7FE",
+                    "outline-variant": "#C4C6D0",
+                    "error": "#BA1A1A",
+                    "surface-tint": "#052856"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "2xl": "1rem",
+                    "3xl": "1.5rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Lexend"],
+                    "display": ["Lexend"],
+                    "body": ["Plus Jakarta Sans"],
+                    "label": ["Plus Jakarta Sans"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .kinetic-slant { transform: rotate(-2deg); }
+        .vanguard-gradient { background: linear-gradient(135deg, #052856 0%, #0a408a 100%); }
+        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img').forEach(function(img) {
+    img.addEventListener('error', function() {
+      this.style.background = 'repeating-linear-gradient(45deg,#1a3260 0,#1a3260 2px,#223e6d 2px,#223e6d 14px)';
+      this.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    });
+  });
+});
+</script>
+
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 right-0 z-50 bg-[#052856]/90 backdrop-blur-xl shadow-lg">
+<nav class="flex justify-between items-center w-full px-8 py-4 max-w-full mx-auto">
+<div class="text-2xl font-black italic text-[#FDE000] uppercase tracking-tighter font-headline">
+                SG HÜNSTETTEN
+            </div>
+<div class="hidden md:flex items-center gap-8 font-headline italic font-bold">
+<a class="text-white/80 hover:text-white transition-all duration-300" href="#">Club</a>
+<a class="text-white/80 hover:text-white transition-all duration-300" href="#">Teams</a>
+<a class="text-white/80 hover:text-white transition-all duration-300" href="#">Heritage</a>
+<a class="text-white/80 hover:text-white transition-all duration-300" href="#">Members</a>
+<a class="text-white/80 hover:text-white transition-all duration-300" href="#">Contact</a>
+</div>
+<button class="bg-secondary-container text-on-secondary-container px-6 py-2 rounded-xl font-headline font-bold italic transition-all duration-300 hover:scale-105 active:scale-95">
+                Join Now
+            </button>
+</nav>
+</header>
+<main class="pt-20">
+<!-- Hero Section -->
+<section class="relative h-[819px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img class="w-full h-full object-cover grayscale brightness-50" alt="A dynamic and emotional scene of a diverse group of sports club members standing in a close-knit circle with their arms around each other's shoulders." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCh1pf0PSe1OH69Y5mYNCALr2HDz_5Drd4CCchPUP3owl6nV3zzMXR3DWEkooLDG2BHaqGReOSBAoJMKHqqWxE_kt9DUC4AvDqucOOW6HZltS52J2bbotldlH81cUruU6FJJPCBnblrHnpF77bRTrZCkqnmnrD8NoEudmMO6lb0wvVQZHAK1UsHL8qccqh3AGY9lMmZev8WqP7vp8Y5ZE8IE9bVc8GnQgMc_1ZnHlDegQYqrghmvXOfSlsscqnULQyTcMFjtqkty_A"/>
+<div class="absolute inset-0 vanguard-gradient opacity-40 mix-blend-multiply"></div>
+</div>
+<div class="relative z-10 px-8 md:px-16 lg:px-24 max-w-5xl">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full font-label text-xs font-bold uppercase tracking-widest mb-6 kinetic-slant">
+                    80 YEARS OF EXCELLENCE
+                </span>
+<h1 class="font-headline font-black italic text-5xl md:text-7xl text-white leading-[0.9] tracking-tight mb-6">
+                    GEMEINSAM FÜR <br/> <span class="text-secondary-container">HÜNSTETTEN</span>
+</h1>
+<p class="font-body text-lg md:text-xl text-white/90 max-w-2xl leading-relaxed">
+                    Seit 1944 schlägt das Herz unseres Vereins durch die unermüdliche Kraft des Ehrenamts. Wir feiern die Menschen, die hinter den Kulissen die Zukunft unserer Gemeinschaft gestalten.
+                </p>
+</div>
+</section>
+<!-- The Board (Der Vorstand) -->
+<section class="py-24 px-8 md:px-16 lg:px-24 bg-surface">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-6">
+<div>
+<h2 class="font-headline font-black italic text-4xl md:text-5xl text-primary tracking-tight uppercase">
+                        Der Vorstand
+                    </h2>
+<div class="h-2 w-32 bg-secondary-container mt-4"></div>
+</div>
+<p class="font-body text-on-surface-variant max-w-md">
+                    Das strategische Rückgrat unseres Vereins. Mit Leidenschaft und Weitblick führen sie die SG Hünstetten in das nächste Jahrzehnt.
+                </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-5 gap-8">
+<!-- Board Members -->
+<div class="group">
+<div class="relative rounded-3xl overflow-hidden shadow-lg mb-4 aspect-[4/5]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Professional portrait of Marcus Wagner, 1. Vorsitzender" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAM_aOS3_GNeGuXmimMJ5jaP-mcFOcHc0HAcuraoC5-ym8lOv7ZBWcWIOolhpn-gi8ZOT3-qV9BlIsNDdP4AI6Sac_UxJ27AfEHEuZHNcHO2cfZzscv88JwN4tz1NlDECEBTDQeKUPwVLkUBFcchB2-fvXwurBVTNxT2M1kbXBwcFnI8j-uFsTYzbUfIxEHveQR8UhK8RPf4sUhgOPwOUJNTvC0r_xL83cFHbg1sNDUerHqKoRjYaOlXPn7Qff1vzntzTQPpmI4rhg"/>
+</div>
+<h3 class="font-headline font-bold text-xl italic text-primary">Marcus Wagner</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">1. Vorsitzender</p>
+</div>
+<div class="group">
+<div class="relative rounded-3xl overflow-hidden shadow-lg mb-4 aspect-[4/5]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Portrait of Lena Schmidt, 2. Vorsitzende" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAh0OAw0HDWKYd3bX36_v9UC1YmuDJ72zYBIEW4pzFWDyb5NLvqtvvBOlpy1Yi7cSWqAWqssCeXvKRXIHx3k7yZrU1fjjeYNYI3IDvThKDJTo78fYA5zGRTrHSqaaSIj_hyLHKaT14Hmu7IUKvzE6tmGj8oIBAnSPKV8RN_MXy3T1wRT_Ii3Xtgs1kNVrOkyFyFs-a3o5cTLqpUBzjTRAAGHDJhojNBr75lozQuj8B56IB892EP3fzW6x40KeCEO7Qbt6I4kidzh6w"/>
+</div>
+<h3 class="font-headline font-bold text-xl italic text-primary">Lena Schmidt</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">2. Vorsitzende</p>
+</div>
+<div class="group">
+<div class="relative rounded-3xl overflow-hidden shadow-lg mb-4 aspect-[4/5]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Portrait of Thomas Meyer, Kassierer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDdTXsXats0_eoLQ-nA4qvewNcsnF27DVni-9-V6yXKAjaDFksLxcLnZ5cuMHoZyAlJmnk8w89ru1Np3aaT1NodAz-HQzq0dDq0TpRlNO2_5mieoaFJet8wukIQmYhk3bLJ323Rrq8kY1DUeSoWYFhS8b1nXEAw5k8-OwLUKyn6mi8dTUsDR0fIEW2GtBkwAqsF0iDkXeUDI5-eqVjIINcIn-sV-g07VVLU2qGI_qRnwDkkkwGA9Z5E85NcAUOQuPe4w-KahtZhqNc"/>
+</div>
+<h3 class="font-headline font-bold text-xl italic text-primary">Thomas Meyer</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Kassierer</p>
+</div>
+<div class="group">
+<div class="relative rounded-3xl overflow-hidden shadow-lg mb-4 aspect-[4/5]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Portrait of Julia Weber, Schriftführerin" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBFHic0h5j-33UQs26VJMnjBosG4q1Sp0St5q0p3uzVJnkOjiYRMBYmE6yw_yMn8kkh8bU-6CoOSfnRC1PwYSYN_NA6j5WUmc7e4F7rwE4tKf0SSSWPVWltOC_XE2hA0dhD7jyHkp_BUZXuGgBBSkzNGIBtHGPIfV5YesDEqeEZUMkOfrK4w1Hq9d1TDTmhDOE3hg4_9fNKwA8k1wqRVxEdxWIhyV3r5UU4stxWpQsqnz0ybib92faXMmgqkNzSbyb_dKnrzlUhkvI"/>
+</div>
+<h3 class="font-headline font-bold text-xl italic text-primary">Julia Weber</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Schriftführerin</p>
+</div>
+<div class="group">
+<div class="relative rounded-3xl overflow-hidden shadow-lg mb-4 aspect-[4/5]">
+<img class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" alt="Portrait of Hans-Peter Keller, Beisitzer" src="https://lh3.googleusercontent.com/aida-public/AB6AXuASBrt3GBJkZnyQRDnKu0nakLpIS3QUpsmXfKDonacnb541c2z3JwBdTjVVq4G-fh2mPPFxG5Dg21kzXC8xuhhbXBq01bbhwdFFpESKTDDvVc3x1uO0zHazuBLt6jrl6x76JA5WAPhjPksG75KNgOJqnkXoYFTx6p8g5ZdjnbKpGeBXRmGgK-99ajI0FLsB36OJnEYbMTIMyctpGXbgThcrIi9qowDeHdqepxoq7WhJJJI59bJv33-1y1FYDcMB8OAF3PAEuHluKtQ"/>
+</div>
+<h3 class="font-headline font-bold text-xl italic text-primary">Hans-Peter Keller</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-on-surface-variant">Beisitzer</p>
+</div>
+</div>
+</section>
+<!-- Department Leaders (Abteilungsleiter) -->
+<section class="py-24 px-8 md:px-16 lg:px-24 bg-surface-container-low">
+<div class="text-center mb-16">
+<span class="font-label text-xs font-bold uppercase tracking-[0.2em] text-primary mb-4 block">Kompetenz am Spielfeldrand</span>
+<h2 class="font-headline font-black italic text-4xl md:text-5xl text-primary tracking-tight uppercase">Unsere Abteilungsleiter</h2>
+</div>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
+<!-- Football -->
+<div class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-outline-variant/10 group">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">sports_soccer</span>
+</div>
+<h3 class="font-headline font-bold text-lg italic text-primary mb-1">Christian Wolf</h3>
+<p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Fußball</p>
+</div>
+<!-- Tennis -->
+<div class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-outline-variant/10 group">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">sports_tennis</span>
+</div>
+<h3 class="font-headline font-bold text-lg italic text-primary mb-1">Anja Fischer</h3>
+<p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Tennis</p>
+</div>
+<!-- Gymnastics -->
+<div class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-outline-variant/10 group">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">fitness_center</span>
+</div>
+<h3 class="font-headline font-bold text-lg italic text-primary mb-1">Sandra Bäcker</h3>
+<p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Turnen</p>
+</div>
+<!-- Athletics -->
+<div class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-outline-variant/10 group">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">directions_run</span>
+</div>
+<h3 class="font-headline font-bold text-lg italic text-primary mb-1">Lukas Hoffmann</h3>
+<p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Leichtathletik</p>
+</div>
+<!-- Table Tennis -->
+<div class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-outline-variant/10 group">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">sports_kabaddi</span>
+</div>
+<h3 class="font-headline font-bold text-lg italic text-primary mb-1">Bernd Zorn</h3>
+<p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Tischtennis</p>
+</div>
+<!-- Fitness -->
+<div class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-outline-variant/10 group">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">monitor_heart</span>
+</div>
+<h3 class="font-headline font-bold text-lg italic text-primary mb-1">Heike Klein</h3>
+<p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Fitness</p>
+</div>
+<!-- Badminton -->
+<div class="bg-white p-6 rounded-3xl shadow-sm hover:shadow-xl transition-all duration-300 border border-outline-variant/10 group">
+<div class="w-16 h-16 bg-primary-container rounded-2xl flex items-center justify-center mb-6 text-secondary-container group-hover:scale-110 transition-transform">
+<span class="material-symbols-outlined text-3xl">badminton</span>
+</div>
+<h3 class="font-headline font-bold text-lg italic text-primary mb-1">Markus Reuter</h3>
+<p class="font-label text-[10px] font-bold uppercase tracking-widest text-on-surface-variant">Badminton</p>
+</div>
+</div>
+</section>
+<!-- The Silent Heroes (Die Stillen Helfer) -->
+<section class="py-24 px-8 md:px-16 lg:px-24 bg-primary text-white overflow-hidden relative">
+<div class="absolute top-0 right-0 opacity-10 font-headline font-black italic text-[15rem] leading-none select-none kinetic-slant pointer-events-none translate-x-20">
+                HEROES
+            </div>
+<div class="relative z-10">
+<div class="max-w-3xl mb-16">
+<h2 class="font-headline font-black italic text-4xl md:text-5xl text-secondary-container tracking-tight uppercase mb-6">Die Stillen Helfer</h2>
+<p class="font-body text-xl text-white/80 leading-relaxed">
+                        Abseits des Scheinwerferlichts sorgen sie für einen reibungslosen Ablauf. Ohne ihre Expertise in Verwaltung, Betreuung und Technik wäre unser Vereinsleben nicht denkbar.
+                    </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+<!-- Silent Hero 1 -->
+<div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-secondary-container text-4xl mb-6">groups</span>
+<h3 class="font-headline font-bold text-2xl italic mb-2">Monika Lang</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-secondary-container mb-4">Mitgliederverwaltung</p>
+<p class="text-white/70 font-body text-sm">Behält seit 15 Jahren den Überblick über unsere wachsende Gemeinschaft und ist die erste Stimme am Telefon.</p>
+</div>
+<!-- Silent Hero 2 -->
+<div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-secondary-container text-4xl mb-6">child_care</span>
+<h3 class="font-headline font-bold text-2xl italic mb-2">Dieter Fuchs</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-secondary-container mb-4">Jugendwohl</p>
+<p class="text-white/70 font-body text-sm">Setzt sich leidenschaftlich für die Sicherheit und Förderung unserer jüngsten Talente ein.</p>
+</div>
+<!-- Silent Hero 3 -->
+<div class="bg-white/5 backdrop-blur-md p-8 rounded-3xl border border-white/10 hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-secondary-container text-4xl mb-6">terminal</span>
+<h3 class="font-headline font-bold text-2xl italic mb-2">Erik Baum</h3>
+<p class="font-label text-xs font-bold uppercase tracking-widest text-secondary-container mb-4">IT-Support</p>
+<p class="text-white/70 font-body text-sm">Digitalisiert die SG Hünstetten und sorgt dafür, dass unsere Webseite und Systeme stabil laufen.</p>
+</div>
+</div>
+<div class="mt-16 flex flex-wrap gap-4 items-center">
+<span class="font-label text-xs font-bold uppercase tracking-widest text-white/50">Danke auch an:</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/10">Platzwarte</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/10">Kiosk-Team</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/10">Trikot-Wäsche</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/10">Fahrer</span>
+<span class="px-4 py-2 bg-white/5 rounded-full text-xs font-bold border border-white/10">Events-Orga</span>
+</div>
+</div>
+</section>
+<!-- Join the Team CTA -->
+<section class="py-24 px-8 md:px-16 lg:px-24">
+<div class="max-w-6xl mx-auto rounded-[3rem] overflow-hidden bg-surface-container-lowest shadow-2xl flex flex-col md:flex-row border border-outline-variant/10">
+<div class="md:w-1/2 relative h-64 md:h-auto">
+<img class="w-full h-full object-cover" alt="A diverse group of energetic young and adult volunteers collaborating around a large table in a modern, sunlit club room." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDTj99VrofU-niv9ncVZ5WtsSc8Ud-lByqrOOgSlp-Wzbh0h76AkncNLW6HfVbeoS3m6vojiTWAnrpBHfx2pxCJrVfe05GhGFSjZdJ4hxWitCgf6wzEx3LfrORjecFgFdakJOGOzn9c7LJOYJadW8l1aMYU4A7hS1Cj9fCMor_j4arPxlzSS6CpJvslns3zU6JPqvHm4O_r4kOLPP7wFwLzxPL0DeZ9qFQ1v4tzzT4SV7n1crweyIEnYby_do_R2AgxYCS8rVXgKBY"/>
+<div class="absolute inset-0 bg-primary/20"></div>
+</div>
+<div class="md:w-1/2 p-12 md:p-20 flex flex-col justify-center">
+<h2 class="font-headline font-black italic text-4xl md:text-5xl text-primary tracking-tight uppercase mb-6 leading-none">Werde Teil <br/> des Teams</h2>
+<p class="font-body text-lg text-on-surface-variant mb-10">
+                        Jede helfende Hand macht einen Unterschied. Ob als Trainer, Helfer bei Festen oder in der Organisation – bei uns findest du deinen Platz.
+                    </p>
+<div class="flex flex-col sm:flex-row gap-4">
+<button class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-headline font-black italic uppercase tracking-wider shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95">
+                            Jetzt Kontaktieren
+                        </button>
+<button class="bg-primary-container text-white px-8 py-4 rounded-xl font-headline font-black italic uppercase tracking-wider shadow-lg hover:shadow-xl transition-all hover:scale-105 active:scale-95">
+                            Offene Stellen
+                        </button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#052856] text-white">
+<div class="flex flex-col md:flex-row justify-between items-center w-full px-12 py-12 gap-6">
+<div class="text-lg font-black italic text-[#FDE000] uppercase font-headline">
+                SG HÜNSTETTEN
+            </div>
+<div class="flex flex-wrap justify-center gap-8">
+<a class="font-['Lexend'] font-bold text-xs uppercase tracking-widest text-white/60 hover:text-[#FDE000] transition-colors" href="#">Privacy Policy</a>
+<a class="font-['Lexend'] font-bold text-xs uppercase tracking-widest text-white/60 hover:text-[#FDE000] transition-colors" href="#">Imprint</a>
+<a class="font-['Lexend'] font-bold text-xs uppercase tracking-widest text-white/60 hover:text-[#FDE000] transition-colors" href="#">Club Statutes</a>
+<a class="font-['Lexend'] font-bold text-xs uppercase tracking-widest text-white/60 hover:text-[#FDE000] transition-colors" href="#">Sponsors</a>
+</div>
+<div class="font-['Lexend'] font-bold text-xs uppercase tracking-widest text-white/60">
+                © 2024 SG HÜNSTETTEN. 80 YEARS OF EXCELLENCE.
+            </div>
+</div>
+</footer>
+</body></html>

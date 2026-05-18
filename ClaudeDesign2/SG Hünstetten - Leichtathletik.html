@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="de" class="scroll-smooth">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>SG Hünstetten – Leichtathletik</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        navy:       "#052856",
+        "navy-mid": "#223e6d",
+        gold:       "#fde000",
+        "gold-dim": "#e1c700",
+        ink:        "#0d1117",
+        "ink-soft": "#1b1c1c",
+        mist:       "#f5f4f2",
+        "mist-mid": "#eae8e7",
+        wire:       "#c4c6d0",
+        chalk:      "#ffffff",
+      },
+      fontFamily: {
+        display: ["Lexend","sans-serif"],
+        body:    ["Plus Jakarta Sans","sans-serif"],
+      },
+    }
+  }
+}
+</script>
+<style>
+:root { --gold: #fde000; --navy: #052856; }
+
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+  font-family: 'Material Symbols Outlined';
+  vertical-align: middle;
+}
+.fill-icon { font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
+
+.display-giant {
+  font-family: 'Lexend', sans-serif;
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.88;
+  text-transform: uppercase;
+}
+.label-cap {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.sec-num {
+  font-family: 'Lexend', sans-serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  opacity: 0.35;
+}
+.text-outline-chalk {
+  -webkit-text-stroke: 1px rgba(255,255,255,0.2);
+  color: transparent;
+}
+.text-outline-navy {
+  -webkit-text-stroke: 1.5px #052856;
+  color: transparent;
+}
+.noise::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  opacity: 0.4;
+  mix-blend-mode: overlay;
+}
+.img-zoom { overflow: hidden; }
+.img-zoom img { transition: transform 0.8s cubic-bezier(0.16,1,0.3,1); }
+.img-zoom:hover img { transform: scale(1.05); }
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.anim-up   { animation: fadeUp 0.9s cubic-bezier(0.16,1,0.3,1) both; }
+.anim-up-2 { animation: fadeUp 0.9s 0.12s cubic-bezier(0.16,1,0.3,1) both; }
+.anim-up-3 { animation: fadeUp 0.9s 0.26s cubic-bezier(0.16,1,0.3,1) both; }
+
+/* broken image stripe */
+img.broken {
+  background: repeating-linear-gradient(45deg,#1a3260 0,#1a3260 2px,#223e6d 2px,#223e6d 14px);
+}
+</style>
+<script type="text/babel" src="tweaks-panel.jsx"></script>
+</head>
+
+<body class="bg-mist font-body text-ink-soft antialiased">
+
+<div id="tweaks-root"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img').forEach(function(img) {
+    img.addEventListener('error', function() {
+      this.classList.add('broken');
+      this.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    });
+  });
+});
+</script>
+
+<!-- ══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<nav class="fixed top-0 w-full z-50 bg-navy/95 backdrop-blur-xl border-b border-white/8">
+  <div class="flex items-center justify-between px-6 md:px-10 h-14 max-w-screen-2xl mx-auto">
+    <a href="#" class="flex items-baseline gap-2 no-underline">
+      <span class="font-display font-black text-gold text-xl" style="letter-spacing:-0.05em; line-height:1;">SG</span>
+      <span class="font-display font-bold text-chalk text-sm" style="letter-spacing:-0.02em;">HÜNSTETTEN</span>
+      <span class="font-body text-chalk/30 text-[10px] tracking-widest uppercase hidden sm:inline ml-1">Leichtathletik</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a class="label-cap text-gold border-b border-gold pb-0.5 hover:opacity-80 transition-opacity" href="#kila">KiLa Kids</a>
+      <a class="label-cap text-chalk/60 hover:text-chalk transition-colors" href="#lauftreff">Lauftreff</a>
+      <a class="label-cap text-chalk/60 hover:text-chalk transition-colors" href="#lauftreff">Early Birds</a>
+      <a class="label-cap text-chalk/60 hover:text-chalk transition-colors" href="#">News</a>
+      <a class="label-cap text-chalk/60 hover:text-chalk transition-colors" href="#">Fan-Shop</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="cta-nav" class="label-cap text-navy bg-gold px-5 py-2 rounded-sm hover:bg-gold-dim active:scale-95 transition-all">
+        Probetraining
+      </button>
+      <button class="md:hidden text-chalk/70 p-1" onclick="document.getElementById('mobile-menu').classList.toggle('hidden')">
+        <span class="material-symbols-outlined text-xl">menu</span>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-navy border-t border-white/10 px-6 py-5 flex flex-col gap-4">
+    <a class="label-cap text-gold" href="#kila">KiLa Kids</a>
+    <a class="label-cap text-chalk/60" href="#lauftreff">Lauftreff</a>
+    <a class="label-cap text-chalk/60" href="#lauftreff">Early Birds</a>
+    <a class="label-cap text-chalk/60" href="#">News</a>
+    <a class="label-cap text-chalk/60" href="#">Fan-Shop</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ══════════════════════════════════════════
+     HERO
+═══════════════════════════════════════════ -->
+<header class="relative h-screen min-h-[600px] flex flex-col justify-end overflow-hidden bg-navy noise">
+  <div class="absolute inset-0 z-0">
+    <img
+      alt="Leichtathletik – SG Hünstetten"
+      class="w-full h-full object-cover object-center"
+      src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8_vjhjlyMmKmB0SNINyUArRLwwqgVeS5N0hAcpuwKqaTc-abwJjK5KMah6SpWNwk7QjD5CHYOSOFDTBapqB1Y91ChZhU_ra_A0mgcBPQNIOcYfHwcE1rLOEfgZFvEjIv-vel2-x__ocTw0GCp4EaSxCmbsWOrOhnaFOla3_h2zVGgb5QdRJT-ow7ExY9_twMEWAn_PQPIIAd1VuoyxSeWKeITDO_CQj4yeDtmBS5UGG6QUW3RQgMS6FfN_BjcRUmC3KmSJVtifkE"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-navy via-navy/50 to-transparent"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-navy/80 via-navy/20 to-transparent"></div>
+  </div>
+
+  <!-- Ghost word -->
+  <div class="absolute inset-0 z-0 flex items-center justify-end pointer-events-none pr-4 md:pr-12 overflow-hidden">
+    <span class="text-outline-chalk font-display font-black uppercase leading-none select-none"
+          style="font-size: clamp(70px, 16vw, 240px); letter-spacing: -0.04em; opacity: 0.25; white-space:nowrap;">ATHLETIK</span>
+  </div>
+
+  <div class="relative z-10 max-w-screen-xl mx-auto w-full px-6 md:px-10 pb-0">
+    <div class="anim-up mb-6">
+      <span class="inline-flex items-center gap-2 border border-gold/40 text-gold label-cap px-3 py-1.5 rounded-sm">
+        <span class="w-1.5 h-1.5 rounded-full bg-gold inline-block"></span>
+        80 Jahre Kinetic Heritage
+      </span>
+    </div>
+
+    <h1 class="anim-up-2 display-giant text-chalk mb-8"
+        style="font-size: clamp(52px, 9vw, 140px);">
+      Dynamik<br/>
+      <span class="text-outline-chalk" style="-webkit-text-stroke: 2px #fde000; color: transparent;">&amp;</span>
+      <span class="text-gold"> Gemeinschaft</span>
+    </h1>
+
+    <!-- Quick-nav strip + CTA -->
+    <div class="anim-up-3 border-t border-white/15 grid grid-cols-2 md:grid-cols-4 divide-x divide-white/15 mt-2">
+      <!-- KiLa -->
+      <a href="#kila" class="py-5 pr-4 group hover:bg-white/5 transition-colors px-4">
+        <p class="label-cap text-gold mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined fill-icon text-sm">child_care</span>KiLa Kids
+        </p>
+        <p class="text-chalk font-display font-semibold text-sm" style="letter-spacing:-0.02em;">U8 bis U14</p>
+      </a>
+      <!-- Lauftreff -->
+      <a href="#lauftreff" class="py-5 px-4 group hover:bg-white/5 transition-colors hidden md:block">
+        <p class="label-cap text-gold mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined fill-icon text-sm">directions_run</span>Lauftreff
+        </p>
+        <p class="text-chalk font-display font-semibold text-sm" style="letter-spacing:-0.02em;">Do. 18:30 Uhr</p>
+      </a>
+      <!-- Early Birds -->
+      <a href="#lauftreff" class="py-5 px-4 group hover:bg-white/5 transition-colors hidden md:block">
+        <p class="label-cap text-gold mb-2 flex items-center gap-2">
+          <span class="material-symbols-outlined fill-icon text-sm">wb_sunny</span>Early Birds
+        </p>
+        <p class="text-chalk font-display font-semibold text-sm" style="letter-spacing:-0.02em;">Di. 06:00 Uhr</p>
+      </a>
+      <!-- CTA -->
+      <div class="py-5 pl-4 flex items-center">
+        <button id="cta-hero" class="group flex items-center gap-3 bg-gold text-navy font-display font-bold label-cap px-6 py-3 rounded-sm hover:bg-gold-dim active:scale-95 transition-all w-full justify-center md:w-auto">
+          Probetraining
+          <span class="material-symbols-outlined text-base group-hover:translate-x-1 transition-transform">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══════════════════════════════════════════
+     KILA — KINDER LEICHTATHLETIK
+═══════════════════════════════════════════ -->
+<section class="py-20 bg-chalk" id="kila">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+
+    <div class="mb-14">
+      <p class="sec-num mb-3">01 — Kinder-Leichtathletik</p>
+      <div class="flex items-end gap-8 flex-wrap">
+        <h2 class="display-giant text-navy" style="font-size: clamp(36px, 5.5vw, 88px);">
+          KiLa <span class="text-gold">Kids</span>
+        </h2>
+        <p class="text-ink-soft/50 text-sm max-w-sm leading-relaxed mb-2">
+          Vom spielerischen Einstieg bis zum gezielten Leistungstraining — wir fördern Talente mit Herz.
+        </p>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-stretch">
+
+      <!-- Photo -->
+      <div class="img-zoom relative rounded-lg overflow-hidden min-h-[360px]">
+        <img alt="KiLa Kids Training" class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBSZwcMYmNoEevX_qsM07zHf19Wt7TL0Dp6Y8n8tWwnkunbOQPsONRlMl3tZY_xxVHa13oa14ZS_FryV25I_j3QNA76m7swG5EFakJ7GcANgrjMIprPRMfaRNwKpBUhxfqQftjjup4cl7o3eLHhqr0jmuVeoOJ7JJd-iAmtC8DkHdIIwF1Sk81YM7htuzJu7GFjXV9PGKpKW7oZqUeQU_FcT94-QT5fdhQR6k8oWWSCoYo0YAW2EpRotLP40Sk7y7yBYrNA-HzK40c"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent flex flex-col justify-end p-8">
+          <div class="inline-flex items-center gap-2 mb-3">
+            <span class="material-symbols-outlined fill-icon text-gold text-sm">star</span>
+            <span class="label-cap text-gold">Sponsored by Biogrund</span>
+          </div>
+          <p class="text-chalk/70 text-sm max-w-xs leading-relaxed">
+            Spielerisches Laufen, Springen und Werfen. Kinder werden hier zu Athleten.
+          </p>
+        </div>
+      </div>
+
+      <!-- Age group cards -->
+      <div class="grid grid-cols-2 gap-4">
+        <div class="bg-navy rounded-lg p-7 text-chalk hover:-translate-y-1 transition-transform cursor-default">
+          <p class="font-display font-black text-gold mb-1" style="font-size:2.5rem; letter-spacing:-0.04em; line-height:1;">U8</p>
+          <p class="label-cap text-chalk/40 mb-3">Die Minis</p>
+          <p class="text-chalk/60 text-xs leading-relaxed">Spielerischer Einstieg in die Welt des Laufens, Springens und Werfens.</p>
+        </div>
+        <div class="bg-navy rounded-lg p-7 text-chalk hover:-translate-y-1 transition-transform cursor-default">
+          <p class="font-display font-black text-gold mb-1" style="font-size:2.5rem; letter-spacing:-0.04em; line-height:1;">U10</p>
+          <p class="label-cap text-chalk/40 mb-3">Die Starter</p>
+          <p class="text-chalk/60 text-xs leading-relaxed">Erste koordinative Grundlagen und vielseitige Entdeckungen im Sport.</p>
+        </div>
+        <div class="bg-navy rounded-lg p-7 text-chalk hover:-translate-y-1 transition-transform cursor-default">
+          <p class="font-display font-black text-gold mb-1" style="font-size:2.5rem; letter-spacing:-0.04em; line-height:1;">U12</p>
+          <p class="label-cap text-chalk/40 mb-3">Die Talente</p>
+          <p class="text-chalk/60 text-xs leading-relaxed">Vielseitigkeitstraining und Vorbereitung auf erste Wettkämpfe.</p>
+        </div>
+        <div class="bg-mist-mid border border-dashed border-navy/20 rounded-lg p-7 hover:-translate-y-1 transition-transform cursor-default">
+          <p class="font-display font-black text-navy mb-1" style="font-size:2.5rem; letter-spacing:-0.04em; line-height:1;">U14</p>
+          <p class="label-cap text-navy/40 mb-3">Aufbauphase</p>
+          <p class="text-ink-soft/50 text-xs leading-relaxed">Spezialisierung und gezielte Leistungsförderung. Werde Teil des Teams!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     NEWS
+═══════════════════════════════════════════ -->
+<section class="py-20 bg-navy noise relative overflow-hidden">
+  <!-- Ghost bg word -->
+  <div class="absolute top-0 left-0 pointer-events-none overflow-hidden w-full">
+    <span class="text-outline-chalk font-display font-black uppercase leading-none select-none block"
+          style="font-size:clamp(60px,14vw,200px); letter-spacing:-0.04em; opacity:0.05; margin-top:-0.1em; white-space:nowrap;">NEWS</span>
+  </div>
+
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">
+    <div class="flex items-end justify-between mb-12 gap-6 flex-wrap">
+      <div>
+        <p class="sec-num text-chalk/40 mb-3">02 — Aktuelles</p>
+        <h2 class="display-giant text-chalk" style="font-size: clamp(36px,5vw,72px);">
+          News &amp; <span class="text-gold">Updates</span>
+        </h2>
+      </div>
+      <a href="#" class="label-cap text-chalk/40 hover:text-chalk transition-colors flex items-center gap-2">
+        Alle News <span class="material-symbols-outlined text-sm">arrow_forward</span>
+      </a>
+    </div>
+
+    <!-- Editorial 3+1 grid -->
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-4">
+      <div class="lg:col-span-3 img-zoom relative rounded-lg overflow-hidden cursor-pointer" style="aspect-ratio:4/3;">
+        <img alt="Stadtwaldlauf" class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwdaRMnVCm4SoGM5pd2i2-ByBhgbjpKoA9grMx7emDzVA4XoYnQt7xhtENonpt7NvMY_uynJ7GaX46kKpf6epqz8FBeJsO8077PCfXTejbPEZ4_wDNjinSzQhjOskhnrkOLi3IHzzOH59E6JzfImjepWaw5sCBaLUrN81v5LbHnzvwEul4NVrGCxGWWl0MGfcu1ZXYm6ZOIV9krafAJOm3iP59_-Mm79GCFTvtFWw2A5NL15Renxd_HfJ95cZ_RFI_kDnHEJopIIY"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent flex flex-col justify-end p-8">
+          <span class="label-cap text-gold mb-3">Wettkampf</span>
+          <h3 class="font-display font-black text-chalk text-2xl md:text-3xl leading-tight" style="letter-spacing:-0.03em;">Erfolg beim Stadtwaldlauf 2025</h3>
+          <p class="label-cap text-chalk/40 mt-3 flex items-center gap-2">
+            <span class="material-symbols-outlined fill-icon text-xs">favorite</span> 84 Likes
+          </p>
+        </div>
+      </div>
+
+      <div class="lg:col-span-2 flex flex-col gap-4">
+        <div class="img-zoom relative rounded-lg overflow-hidden cursor-pointer flex-1" style="min-height:130px;">
+          <img alt="KiLa Sommerfest" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtPUJv_zozKMS-2LFk_keuuVUPqXup-ol7l1unriWokZ096F6UqnIyJBlvCvV7U3pQm4n_0DrfnWHmDkpbR14V-SBpWOTN7MYZD_xq2oZ2CmQD3pzGQOnr3Spdbx38AK_hP48ctBBuPLVlqDKxasHBAcnXrumBNDPm0UnxNNWIiFrC7zwEJSQqIYf6DcxSJIgPEF1eAISgXegEhW-QHn5TxIyJkrzxuFfaqsfATZhoBwxdoPgOHWhuVDxfpKXOhtsOUuhMR2T3taI"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent flex flex-col justify-end p-5">
+            <span class="label-cap text-gold mb-1.5">Team</span>
+            <h4 class="font-display font-bold text-chalk text-base" style="letter-spacing:-0.02em;">KiLa Sommerfest 2025</h4>
+          </div>
+        </div>
+        <div class="img-zoom relative rounded-lg overflow-hidden cursor-pointer flex-1" style="min-height:130px;">
+          <img alt="Neue Ausrüstung" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuDjA0lrFWe5f5V9MmsokEgcCvZehu-zttrvha4K1qZXsXBDuCYv3e_LnktJVL1aWSU2AxCIJU9fCmZzjFbHjF-EL-fI6dceQOYNFDDGC9fasb3-assvvTdnUUa68Ex_K34HSYlA8djme2kTU7JSdhyBozYojLordp4NmDCh2L8Q0M5CQXLrVM5cEocVjp0lTCXdMZuo5tGUFYuqWLcEt46mrhI6w_ixy9LLdjjbwCr3Nr6lCrNrknl-EdZiM8w2iGqlHdHc9Xg_nM8"/>
+          <div class="absolute inset-0 bg-gradient-to-t from-ink/70 to-transparent flex flex-col justify-end p-5">
+            <span class="label-cap text-gold mb-1.5">Update</span>
+            <h4 class="font-display font-bold text-chalk text-base" style="letter-spacing:-0.02em;">Neue Ausrüstung eingetroffen</h4>
+          </div>
+        </div>
+        <div class="bg-navy-mid/60 border border-white/10 rounded-lg p-5 flex items-center gap-4 cursor-pointer hover:bg-navy-mid transition-colors flex-1" style="min-height:130px;">
+          <svg class="w-5 h-5 text-chalk/30 shrink-0" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+          <div>
+            <p class="label-cap text-chalk/30 mb-1">Instagram</p>
+            <p class="font-display font-semibold text-chalk text-sm" style="letter-spacing:-0.02em;">@sgh_leichtathletik</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     STAFF / TRAINER
+═══════════════════════════════════════════ -->
+<section class="py-20 bg-chalk">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+
+    <div class="mb-14">
+      <p class="sec-num mb-3">03 — Trainer &amp; Experten</p>
+      <h2 class="display-giant text-navy" style="font-size: clamp(32px,5vw,72px);">
+        Das Team <span class="text-outline-navy">hinter</span><br/>dem Team
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+
+      <!-- Markus Schmidt -->
+      <div class="group cursor-default">
+        <div class="img-zoom aspect-[3/4] rounded-lg overflow-hidden mb-4 grayscale hover:grayscale-0 transition-all duration-700">
+          <img alt="Markus Schmidt" class="w-full h-full object-cover object-top"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuB6XYrSZqjKoYZ1_WKUV13tmVbCoYlVmbArMEj_-EFN9fv1t-znsE5E-6OKsTYBY1_1bf_8yT1wUDqH5jY0k8oFVjKZ7qXt95rY6teimJL85XHhxPsNKR7EpFfZSPVmSmP69z8vN9ICsCGGt4m7IKD4_hAzxvMj_8NXQkfuajWFLtcy0AyJboNCiHTeFPDQz9_KtZ2qHeZTLNGnoIAdu2s0cz1tQhy888pSaloFci9D0RGARRfVJ1bKLcEqaRRLQL5Yow5T2YQewsA"/>
+        </div>
+        <p class="label-cap text-gold mb-1">Cheftrainer</p>
+        <h4 class="font-display font-black text-navy text-lg" style="letter-spacing:-0.03em;">Markus Schmidt</h4>
+        <a href="#" class="label-cap text-ink-soft/30 hover:text-navy transition-colors flex items-center gap-1 mt-2">
+          <span class="material-symbols-outlined text-sm">mail</span> Kontakt
+        </a>
+      </div>
+
+      <!-- Julia Weber -->
+      <div class="group cursor-default">
+        <div class="img-zoom aspect-[3/4] rounded-lg overflow-hidden mb-4 grayscale hover:grayscale-0 transition-all duration-700">
+          <img alt="Julia Weber" class="w-full h-full object-cover object-top"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCszTmGrl5xB7R1IDm8wZkjXZwF_-XrrWrwjIVLj86P1546xlAGA2L42aLNKwgrU22m40iz9hgz30ylqtcWEwA5DyZXqaiV6Qxe5DM5PDAAcu971fhEPXozYdgfQT12AutwXJ8T3Zsl5Det5q7fONrzFqQb71bfm2w8NaIRuqnHxSdva1K_lBChHqPsSXEVvLdrdtudljemZkzAG_Y5simpoX7ylLz6kR80HaO7nHSJo9hkIqEm8847xOfEOz-Gy9l0OjQjnlY3H6I"/>
+        </div>
+        <p class="label-cap text-gold mb-1">U14 Leistungssport</p>
+        <h4 class="font-display font-black text-navy text-lg" style="letter-spacing:-0.03em;">Julia Weber</h4>
+        <a href="#" class="label-cap text-ink-soft/30 hover:text-navy transition-colors flex items-center gap-1 mt-2">
+          <span class="material-symbols-outlined text-sm">mail</span> Kontakt
+        </a>
+      </div>
+
+      <!-- Thomas Wagner -->
+      <div class="group cursor-default">
+        <div class="img-zoom aspect-[3/4] rounded-lg overflow-hidden mb-4 grayscale hover:grayscale-0 transition-all duration-700">
+          <img alt="Thomas Wagner" class="w-full h-full object-cover object-top"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBbiGdY0BFFv1wLFbFoZurSk9G6n41_j-Etq2kZmLQkeoVuw8nof84PUhcWqlVErtQW40-mxhypm5R_UbmSJx1VqnYbwBmbtfljSbIzrP-iLdLM2G5hZPwI6dhFRn52ia4iCkhPs6GzQc6ggRs0qadyPoT51orPlXZxxAlVZirXu20sFbjeKXQxYeRMPjXCCAm9rMCJU4S1xzkFBa9gq4_nzPKACZq9DKQz2CqTw7IJtTGXbigJpBAWxI0QxYmW5KyOb0YclToQYZk"/>
+        </div>
+        <p class="label-cap text-gold mb-1">Lauftreff Leitung</p>
+        <h4 class="font-display font-black text-navy text-lg" style="letter-spacing:-0.03em;">Thomas Wagner</h4>
+        <a href="#" class="label-cap text-ink-soft/30 hover:text-navy transition-colors flex items-center gap-1 mt-2">
+          <span class="material-symbols-outlined text-sm">mail</span> Kontakt
+        </a>
+      </div>
+
+      <!-- Recruiting -->
+      <div class="border border-dashed border-navy/20 rounded-lg aspect-[3/4] flex flex-col items-center justify-center text-center p-6 hover:bg-mist-mid transition-colors cursor-pointer group mb-4">
+        <div class="w-14 h-14 rounded-full bg-navy/5 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+          <span class="material-symbols-outlined text-navy text-3xl">add_circle</span>
+        </div>
+        <p class="font-display font-black text-navy text-base mb-1" style="letter-spacing:-0.03em; line-height:1.1;">Werde Teil<br/>des Teams</p>
+        <p class="label-cap text-navy/40 mt-2">Wir suchen Trainer</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     GALLERY
+═══════════════════════════════════════════ -->
+<section class="py-20 bg-mist">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+
+    <div class="flex items-end justify-between mb-10 gap-6 flex-wrap">
+      <div>
+        <p class="sec-num mb-3">04 — Galerie</p>
+        <h2 class="display-giant text-navy" style="font-size: clamp(32px,5vw,72px);">
+          Wettkampf-<span class="text-outline-navy">Momente</span>
+        </h2>
+      </div>
+      <button class="label-cap text-navy/50 hover:text-navy transition-colors flex items-center gap-2">
+        Alle ansehen <span class="material-symbols-outlined text-sm">grid_view</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-12 gap-4">
+      <div class="col-span-12 lg:col-span-8 img-zoom rounded-lg overflow-hidden relative" style="height:460px;">
+        <img alt="Sprint-Wettkampf" class="w-full h-full object-cover"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDDxhW_ew0aQrdh_eW92O77N1NoEjcxplYW71KiGWXGmmy95Y1GXs63gsEmyF2AbgYxehFDVrukQFeOUJER4R-YVI9Ef_e1MIeUos3S8ap16zn4OzghVPF_RJkN3_m4r6OqL5VeIfaSCIvns0aXx5SXzQ3E90TkLleDs2-N1sCNWAO4CPsqwM3efM5mLMCyew3ofD_YrHyhbIdkF170ME0bMT4R5TpAiFu6rRwOVmdultukKmDYCn4moLHbskSU_m4chnEtCWhT1ko"/>
+        <div style="margin-top:-460px; height:460px; background:linear-gradient(to top, rgba(5,40,86,0.85) 0%, transparent 50%); display:flex; align-items:flex-end; padding:2rem; position:relative; pointer-events:none;">
+          <p class="font-display font-bold text-chalk text-xl" style="letter-spacing:-0.03em;">Saisonauftakt: Voller Fokus auf die Ziellinie</p>
+        </div>
+      </div>
+      <div class="col-span-12 lg:col-span-4 flex flex-col gap-4" style="height:460px;">
+        <div class="img-zoom rounded-lg overflow-hidden flex-1 grayscale hover:grayscale-0 transition-all duration-700">
+          <img alt="Hochsprung" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMHvAtR_RAfLgnPHhlSuHl52tHFQZzk7tE1kGBr5XuUCEbb8HkrZt4EqFt4042XFjDD-3gZwudwZ3-NXFxaZPcOucgWgGW1ZxOvmScuMFoioJMEjmXFD_YBs6jdsqrRW-TZiNlAo4y1rRioCd5G2-zgN-mxOhC1O9-63Hbye0yBR4ngIo-4GqtgUuGIJMrnA6reyu0nMZn9EIjzUq6bxVLPIE4m4be5nVU4G2dqEp2s8A0vzw9oAY9fI24WUcFqcENnDiq1cdJAuI"/>
+        </div>
+        <div class="bg-navy rounded-lg flex-1 flex flex-col items-center justify-center gap-3 cursor-pointer hover:bg-navy-mid transition-colors group p-6">
+          <span class="material-symbols-outlined fill-icon text-gold text-4xl group-hover:scale-110 transition-transform">gallery_thumbnail</span>
+          <p class="label-cap text-chalk/60 text-center">Vereins-Galerie<br/>entdecken</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     LAUFTREFF & EARLY BIRDS
+═══════════════════════════════════════════ -->
+<section class="py-20 bg-navy noise relative overflow-hidden" id="lauftreff">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10 relative z-10">
+
+    <div class="mb-14">
+      <p class="sec-num text-chalk/40 mb-3">05 — Laufgruppen</p>
+      <h2 class="display-giant text-chalk" style="font-size: clamp(32px,5vw,72px);">
+        Gemeinsam <span class="text-gold">Laufen</span>
+      </h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+      <!-- Lauftreff -->
+      <div class="group relative rounded-lg overflow-hidden min-h-[480px] flex flex-col justify-end">
+        <img alt="Lauftreff Hünstetten" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2s]"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBEr4POvA7MLnJ9APJ970nR1rwt-CsILsu8jA7nikNSeL3WtRPurKnpv-n20CeipI18w3ixYT4OfxDV0q6QCZeDVJT0lFYC8PrlGtBilUJYaZs1cmQaMi9uFGuHl2EukjZeI3CrTDr2TYAVA5a4g9II33X_Gtw9US2yJGbYpuUuJ-MhO4HFn3CmTYszsV9qPxKLrREJDAFlT1lr7ur1IAiC-FiEumm1w9marGpeR82WTjFgaT9KUWWxRg1zSoHY0SvcUZmLo0JdvY"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div>
+        <div class="relative z-10 p-8 md:p-10">
+          <span class="label-cap text-gold border border-gold/40 px-3 py-1.5 rounded-sm inline-block mb-5">Jeden Donnerstag · 18:30</span>
+          <h3 class="display-giant text-chalk mb-4" style="font-size: clamp(28px,4vw,52px);">Lauftreff<br/>Hünstetten</h3>
+          <p class="text-chalk/60 text-sm max-w-xs leading-relaxed mb-7">
+            Gemeinsam durch Wald und Flur. Verschiedene Tempogruppen bei jedem Wetter.
+          </p>
+          <button class="bg-chalk text-navy label-cap px-7 py-3 rounded-sm hover:bg-gold active:scale-95 transition-all flex items-center gap-2">
+            Jetzt Mitmachen <span class="material-symbols-outlined text-sm">chevron_right</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Early Birds -->
+      <div class="group relative rounded-lg overflow-hidden min-h-[480px] flex flex-col justify-end">
+        <img alt="Early Birds Run" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-[2s]"
+          src="https://lh3.googleusercontent.com/aida-public/AB6AXuCYN8TEPs02fKnHIPVKmMPycrSqTaFh98DOUDcTYl3aTfYSZoxj9MgIXiDTUnovy2vuIV-MxwKMf-4p-ZcRHnEM9dIfMUJZTz0rp92RtkJNx3sNqOmxhiykihlpaELUEJhpjzIJo5ETn92dBnmKNdBMeOYIyLqIQCV-ScQKQcUN2aZVUc4egxOT72P3pHBKVW2j88mq9DWkfhKUOW8cQrpUilpPik7Q2bPyZP_OdUZS_99A6c_2qYVNAzecnZ0D0mFjDcHjO2Oa4lI"/>
+        <div class="absolute inset-0 bg-gradient-to-t from-ink via-ink/30 to-transparent"></div>
+        <div class="relative z-10 p-8 md:p-10">
+          <span class="label-cap text-gold border border-gold/40 px-3 py-1.5 rounded-sm inline-block mb-5">Jeden Dienstag · 06:00</span>
+          <h3 class="display-giant text-chalk mb-4" style="font-size: clamp(28px,4vw,52px);">Early Birds<br/>Run</h3>
+          <p class="text-chalk/60 text-sm max-w-xs leading-relaxed mb-7">
+            Für alle, die den Tag mit Energie beginnen wollen. Ein kraftvoller Start in den Morgen.
+          </p>
+          <button class="bg-chalk text-navy label-cap px-7 py-3 rounded-sm hover:bg-gold active:scale-95 transition-all flex items-center gap-2">
+            Jetzt Mitmachen <span class="material-symbols-outlined text-sm">chevron_right</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FAN-SHOP
+═══════════════════════════════════════════ -->
+<section id="fanshop-section" class="py-20 bg-chalk">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+
+    <div class="flex items-end justify-between mb-12 gap-6 flex-wrap">
+      <div>
+        <p class="sec-num mb-3">06 — Fan-Shop</p>
+        <h2 class="display-giant text-navy" style="font-size: clamp(32px,5vw,72px);">
+          SG Hünstetten <span class="text-gold">Shop</span>
+        </h2>
+      </div>
+      <button class="label-cap text-navy border border-navy px-5 py-2.5 rounded-sm hover:bg-navy hover:text-chalk transition-all flex items-center gap-2">
+        Alle Artikel <span class="material-symbols-outlined text-sm">shopping_bag</span>
+      </button>
+    </div>
+
+    <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="group cursor-pointer">
+        <div class="img-zoom aspect-square rounded-md overflow-hidden mb-4 relative bg-mist-mid">
+          <img alt="Team-Trainingsjacke" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUPH2RHEgwO8DlixCFn8gsIpQR5Oa4CpApu7gR__IK7OjlRJMApQA9eNa26JHTS04U-5P9R_Hz6K8Ho8WbJA4YK9snYqjdSDz5NMmjf3XiEfl_J7KlFznOVrPb2TVMYjfK8sdBKrSmmvBcgob49HDmARvCoxMRlLK20WcbYzdkWsTe4JFTLyFx9lWuyf3_PBNw3JajOwynzDrB3gVD5ZhAWajL69scO6Lch4i0-zRZjnvJZrj0RSK0wYJUVQLt4zAa2m8pUregsgg"/>
+          <span class="absolute top-3 left-3 label-cap text-navy bg-gold px-2.5 py-1 rounded-sm">Premium</span>
+        </div>
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h4 class="font-display font-bold text-navy text-base" style="letter-spacing:-0.02em;">Team-Trainingsjacke</h4>
+            <p class="label-cap text-ink-soft/30 mt-0.5">Offizielle Kollektion</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-display font-black text-navy text-lg" style="letter-spacing:-0.04em;">59 €</p>
+            <button class="mt-1 w-8 h-8 rounded-sm bg-mist-mid flex items-center justify-center group-hover:bg-gold transition-colors ml-auto">
+              <span class="material-symbols-outlined text-base text-navy">add_shopping_cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="img-zoom aspect-square rounded-md overflow-hidden mb-4 relative bg-mist-mid">
+          <img alt="Fan-Schal" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC5Z5lobJo4YXLPO3ZD_NpYBCY3_m8SacseDXBUT629ybiPqQq1PkIVNJPW7eCsf-hct0nT663dwRPfiUpYoBgic9E-oZ0F2jsUOIuM53CQtavlggR2H7yZWM6110e5pJXMXbiNYDEaQpzDefp2hWr0XaPitcoHBdYIp_T2nI-b_8Q-8yaNkNbs5oRXWyoa3Ncu_wKNSuOr5FKf2w4WdqQggrOdMab3QoWiWK-f87i4ewsd47kH39vJDCaBGvMwQ8bXatI-E5GgA8U"/>
+          <span class="absolute top-3 left-3 label-cap text-navy bg-gold px-2.5 py-1 rounded-sm">Bestseller</span>
+        </div>
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h4 class="font-display font-bold text-navy text-base" style="letter-spacing:-0.02em;">Fan-Schal "Traditional"</h4>
+            <p class="label-cap text-ink-soft/30 mt-0.5">Kinetic Tradition</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-display font-black text-navy text-lg" style="letter-spacing:-0.04em;">15 €</p>
+            <button class="mt-1 w-8 h-8 rounded-sm bg-mist-mid flex items-center justify-center group-hover:bg-gold transition-colors ml-auto">
+              <span class="material-symbols-outlined text-base text-navy">add_shopping_cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="img-zoom aspect-square rounded-md overflow-hidden mb-4 bg-mist-mid">
+          <img alt="Club Beanie" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuC_uOxMMD-QsuxiN6EUZ7BPlvMT1ZTCSG82ZZVeFC3bke10Qrb0OZsm6jXY2ViWokrvCK2SshcojZbMSTmFCYvGTTtJSpVemZ6rISwHO4BsEIMgJZd7Ei79iB4lbVy9aPv7zN9zgCyqbNIifEAJMwUYBSheklHfS1wnsbvT_CC5FQuMhIXD7k5Ac8XloTM0xa6QJ5DrSJEa1mjOaWUZu3ItCG1_u9syKyTu29vrbUS_jgk89R4cCJmvX3hxqmypn4JhzJg1j9vngiA"/>
+        </div>
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h4 class="font-display font-bold text-navy text-base" style="letter-spacing:-0.02em;">Club Beanie</h4>
+            <p class="label-cap text-ink-soft/30 mt-0.5">Kinetic Blue / Gold</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-display font-black text-navy text-lg" style="letter-spacing:-0.04em;">19 €</p>
+            <button class="mt-1 w-8 h-8 rounded-sm bg-mist-mid flex items-center justify-center group-hover:bg-gold transition-colors ml-auto">
+              <span class="material-symbols-outlined text-base text-navy">add_shopping_cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="group cursor-pointer">
+        <div class="img-zoom aspect-square rounded-md overflow-hidden mb-4 bg-mist-mid">
+          <img alt="Polo-Shirt Kinetic" class="w-full h-full object-cover"
+            src="https://lh3.googleusercontent.com/aida-public/AB6AXuCfQNN6jYJHUubYw0nhgGfvG931u63ao_8vgPJzK4R9_YLx9GCqp_jEgjolWoRnsduLvSzSMUtWKruA_qpdM1shVBjq73HoPGm_GB2qViS-pfVhXg_MIbEulKR6IxVy54gdgDy4MYgPhKmtBzIgMdN4VwsL13Dqn6Qq6t_k3v10wL9zGunyDtwnzaisMaIgDG-8I_xGkfo7gagXW4d0Qn5B2mFgn8C6VfxPIMknQQggY6XDs5xrbeeO4avJXDGRAx5ihpixfz1SPBE"/>
+        </div>
+        <div class="flex items-start justify-between gap-2">
+          <div>
+            <h4 class="font-display font-bold text-navy text-base" style="letter-spacing:-0.02em;">Polo-Shirt Kinetic</h4>
+            <p class="label-cap text-ink-soft/30 mt-0.5">Premium Performance</p>
+          </div>
+          <div class="text-right shrink-0">
+            <p class="font-display font-black text-navy text-lg" style="letter-spacing:-0.04em;">34,90 €</p>
+            <button class="mt-1 w-8 h-8 rounded-sm bg-mist-mid flex items-center justify-center group-hover:bg-gold transition-colors ml-auto">
+              <span class="material-symbols-outlined text-base text-navy">add_shopping_cart</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     SPONSORS
+═══════════════════════════════════════════ -->
+<section id="sponsors-section" class="bg-navy py-14 border-t border-white/5">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+    <p class="label-cap text-chalk/25 text-center mb-8">Starke Partner für den Erfolg</p>
+    <div class="flex flex-wrap justify-center items-center gap-10 md:gap-16 opacity-35 hover:opacity-80 transition-all duration-700">
+      <span class="font-display font-black text-xl text-chalk" style="letter-spacing:-0.03em;">BIOGRUND</span>
+      <span class="font-display font-black text-xl text-chalk" style="letter-spacing:-0.03em;">ROSENBAUM</span>
+      <span class="font-display font-black text-xl text-chalk" style="letter-spacing:-0.03em;">VOLKSBANK</span>
+      <span class="font-display font-black text-xl text-chalk" style="letter-spacing:-0.03em;">SPARKASSE</span>
+      <span class="font-display font-black text-xl text-chalk" style="letter-spacing:-0.03em;">SPORT-ECKE</span>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<footer class="bg-ink py-16">
+  <div class="max-w-screen-xl mx-auto px-6 md:px-10">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12 pb-12 border-b border-white/8">
+      <div>
+        <div class="flex items-baseline gap-2 mb-5">
+          <span class="font-display font-black text-gold text-2xl" style="letter-spacing:-0.05em;">SG</span>
+          <span class="font-display font-bold text-chalk text-base" style="letter-spacing:-0.02em;">HÜNSTETTEN</span>
+        </div>
+        <p class="text-chalk/30 text-sm leading-relaxed max-w-xs">Seit über 80 Jahren die Heimat für Sportbegeisterte in der Region Taunus.</p>
+      </div>
+      <div class="grid grid-cols-2 gap-8">
+        <div>
+          <p class="label-cap text-chalk/25 mb-5">Verein</p>
+          <ul class="space-y-3 text-chalk/50 text-sm">
+            <li><a class="hover:text-chalk transition-colors" href="#">Teams</a></li>
+            <li><a class="hover:text-chalk transition-colors" href="#">Vorstand</a></li>
+            <li><a class="hover:text-chalk transition-colors" href="#">Satzung</a></li>
+            <li><a class="hover:text-chalk transition-colors" href="#">Kontakt</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="label-cap text-chalk/25 mb-5">Rechtliches</p>
+          <ul class="space-y-3 text-chalk/50 text-sm">
+            <li><a class="hover:text-chalk transition-colors" href="#">Impressum</a></li>
+            <li><a class="hover:text-chalk transition-colors" href="#">Datenschutz</a></li>
+            <li><a class="hover:text-chalk transition-colors" href="#">Mitgliedschaft</a></li>
+          </ul>
+        </div>
+      </div>
+      <div>
+        <p class="label-cap text-chalk/25 mb-5">Newsletter</p>
+        <form class="flex gap-2" onsubmit="return false;">
+          <input class="bg-white/5 border border-white/10 rounded-sm px-4 py-2.5 text-chalk text-sm w-full focus:outline-none focus:border-gold/50 placeholder:text-chalk/20"
+            placeholder="Deine E-Mail" type="email"/>
+          <button class="bg-gold text-navy px-4 py-2.5 rounded-sm hover:bg-gold-dim transition-all shrink-0">
+            <span class="material-symbols-outlined text-sm">send</span>
+          </button>
+        </form>
+      </div>
+    </div>
+    <div class="flex flex-col md:flex-row justify-between items-center gap-3">
+      <p class="label-cap text-chalk/20">© 2025 SG Hünstetten e.V. – Leichtathletik</p>
+      <p class="label-cap text-chalk/20">Powered by <span class="text-gold">KlubHaus</span></p>
+    </div>
+  </div>
+</footer>
+
+<!-- Tweaks -->
+<script type="text/babel">
+const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+  "accentColor": "#fde000",
+  "ctaText": "Probetraining",
+  "showFanshop": true,
+  "showSponsors": true,
+  "nextKila": "Mi., 30. Apr · 16:30 – 18:00 · Sportplatz Hünstetten",
+  "nextLauftreff": "Do., 01. Mai · 18:30 · Treffpunkt Sportheim"
+}/*EDITMODE-END*/;
+
+function TweaksApp() {
+  const [tweaks, setTweaks] = useTweaks(TWEAK_DEFAULTS);
+
+  React.useEffect(() => {
+    document.documentElement.style.setProperty('--gold', tweaks.accentColor);
+    ['cta-nav','cta-hero'].forEach(id => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      const t = el.childNodes[0];
+      if (t && t.nodeType === 3) t.textContent = tweaks.ctaText + ' ';
+    });
+    const fanshop = document.getElementById('fanshop-section');
+    if (fanshop) fanshop.style.display = tweaks.showFanshop ? '' : 'none';
+    const sponsors = document.getElementById('sponsors-section');
+    if (sponsors) sponsors.style.display = tweaks.showSponsors ? '' : 'none';
+  }, [tweaks]);
+
+  return (
+    <TweaksPanel title="Tweaks">
+      <TweakSection title="Branding">
+        <TweakColor label="Akzentfarbe" value={tweaks.accentColor}
+          onChange={v => setTweaks({ accentColor: v })} />
+        <TweakText label="CTA Text" value={tweaks.ctaText}
+          onChange={v => setTweaks({ ctaText: v })} />
+      </TweakSection>
+      <TweakSection title="KlubHaus Daten">
+        <TweakText label="Nächstes KiLa Training" value={tweaks.nextKila}
+          onChange={v => setTweaks({ nextKila: v })} />
+        <TweakText label="Nächster Lauftreff" value={tweaks.nextLauftreff}
+          onChange={v => setTweaks({ nextLauftreff: v })} />
+      </TweakSection>
+      <TweakSection title="Sektionen">
+        <TweakToggle label="Fan-Shop" value={tweaks.showFanshop}
+          onChange={v => setTweaks({ showFanshop: v })} />
+        <TweakToggle label="Sponsoren" value={tweaks.showSponsors}
+          onChange={v => setTweaks({ showSponsors: v })} />
+      </TweakSection>
+    </TweaksPanel>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('tweaks-root')).render(<TweaksApp />);
+</script>
+
+</body>
+</html>

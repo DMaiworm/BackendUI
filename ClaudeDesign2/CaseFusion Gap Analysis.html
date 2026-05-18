@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en" data-cnds-theme="light">
+<head>
+  <script>
+    window.addEventListener('error', e => {
+      if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }
+    }, true);
+    const _origError = console.error;
+    console.error = function(...args) {
+      if (args[0] && String(args[0]).includes('ResizeObserver')) return;
+      _origError.apply(console, args);
+    };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CaseFusion · Gap Analysis</title>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --doc-bg: #faf9f7;
+      --doc-card: #ffffff;
+      --doc-border: #ebe9e4;
+      --doc-text: #1a1a1a;
+      --doc-mute: #6b6b6b;
+      --doc-accent: var(--cnds-product-casefusion-green-700, #2e892a);
+      --doc-accent-soft: var(--cnds-product-casefusion-green-50, #f0faef);
+      --doc-expireon: var(--cnds-product-expireon-blue-500, #4e45d6);
+      --doc-success: #2d682f;
+      --doc-success-soft: #e6f4e7;
+      --doc-warn: #b85c01;
+      --doc-warn-soft: #fff5eb;
+      --doc-danger: #942700;
+      --doc-danger-soft: #ffe5da;
+      --doc-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--doc-bg); color: var(--doc-text); font-family: "Nunito Sans", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+    body { font-size: 15px; line-height: 1.55; }
+    .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
+
+    .doc { max-width: 1180px; margin: 0 auto; padding: 56px 32px 80px; }
+    .doc > * + * { margin-top: 52px; }
+
+    .hero { padding-bottom: 30px; border-bottom: 1px solid var(--doc-border); }
+    .hero-eyebrow { display: inline-flex; align-items: center; gap: 8px; font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--doc-accent); padding: 6px 12px; background: var(--doc-accent-soft); border-radius: 999px; }
+    .hero h1 { font-size: 46px; line-height: 1.05; letter-spacing: -0.025em; margin: 16px 0 10px; font-weight: 800; }
+    .hero p.lead { font-size: 17.5px; line-height: 1.55; color: var(--doc-mute); max-width: 780px; margin: 0; }
+
+    .sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 22px; padding-bottom: 12px; border-bottom: 1px solid var(--doc-border); }
+    .sec-num { font-family: var(--doc-mono); font-size: 12px; font-weight: 600; color: var(--doc-accent); padding-top: 4px; }
+    .sec-head h2 { margin: 0; font-size: 28px; letter-spacing: -0.02em; font-weight: 700; }
+    .sec-head .tag { margin-left: auto; font-size: 12px; color: var(--doc-mute); }
+
+    /* Source reference strip */
+    .sources { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 32px; }
+    .source {
+      border: 1px solid var(--doc-border); border-radius: 10px; overflow: hidden;
+      background: var(--doc-card);
+    }
+    .source img { display: block; width: 100%; height: auto; }
+    .source .cap {
+      padding: 8px 12px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--doc-mute);
+      border-top: 1px solid var(--doc-border);
+      background: #fbfaf8;
+    }
+
+    /* Score */
+    .score-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; margin-bottom: 24px; }
+    .score-card { padding: 22px 24px; background: var(--doc-card); border: 1px solid var(--doc-border); border-radius: 12px; }
+    .score-card .num { font-size: 44px; line-height: 1; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; }
+    .score-card.new .num { color: var(--doc-accent); }
+    .score-card.variant .num { color: var(--doc-warn); }
+    .score-card.tiny .num { color: var(--doc-expireon); }
+    .score-card .label { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--doc-mute); }
+    .score-card .sub { font-size: 13.5px; color: var(--doc-mute); margin-top: 4px; line-height: 1.4; }
+
+    /* Gap items */
+    .gap-list { display: grid; gap: 14px; }
+    .gap {
+      display: grid;
+      grid-template-columns: 56px 1fr 130px;
+      gap: 18px;
+      padding: 20px 22px;
+      background: var(--doc-card);
+      border: 1px solid var(--doc-border);
+      border-radius: 12px;
+      align-items: start;
+    }
+    .gap .num {
+      width: 36px; height: 36px;
+      border-radius: 999px;
+      background: var(--doc-accent-soft);
+      color: var(--doc-accent);
+      display: flex; align-items: center; justify-content: center;
+      font-family: var(--doc-mono); font-size: 12.5px; font-weight: 700;
+    }
+    .gap.variant .num { background: var(--doc-warn-soft); color: var(--doc-warn); }
+    .gap.tiny .num { background: rgba(78, 69, 214, 0.08); color: var(--doc-expireon); }
+    .gap .body h3 { margin: 0 0 6px; font-size: 16px; font-weight: 700; }
+    .gap .body .blurb { margin: 0 0 10px; font-size: 14px; line-height: 1.5; color: #2b2b2b; }
+    .gap .body .blurb code { font-family: var(--doc-mono); font-size: 12.5px; padding: 1px 5px; border-radius: 3px; background: rgba(0,0,0,0.04); color: var(--doc-accent); }
+    .gap .body .where {
+      display: inline-flex; align-items: center; gap: 4px;
+      font-size: 11.5px; color: var(--doc-mute);
+      margin-top: 4px;
+    }
+    .gap .body .where .material-symbols-outlined { font-size: 14px; }
+    .gap .severity {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 6px 10px; border-radius: 6px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase;
+      align-self: start;
+      white-space: nowrap;
+    }
+    .sev-new { background: var(--doc-accent-soft); color: var(--doc-accent); }
+    .sev-variant { background: var(--doc-warn-soft); color: var(--doc-warn); }
+    .sev-tiny { background: rgba(78, 69, 214, 0.08); color: var(--doc-expireon); }
+
+    /* Take */
+    .take {
+      padding: 24px 28px;
+      background: linear-gradient(135deg, var(--doc-accent) 0%, var(--cnds-product-casefusion-green-800, #1d5a1d) 100%);
+      color: #fff;
+      border-radius: 14px;
+    }
+    .take h3 { margin: 0 0 8px; font-size: 19px; }
+    .take p { margin: 0; font-size: 14.5px; line-height: 1.55; opacity: 0.92; }
+    .take p + p { margin-top: 10px; }
+    .take strong { background: rgba(255,255,255,0.16); padding: 1px 6px; border-radius: 4px; font-weight: 600; }
+
+    @media (max-width: 900px) {
+      .doc { padding: 36px 18px 60px; }
+      .gap { grid-template-columns: 40px 1fr; }
+      .gap .severity { grid-column: 2; justify-self: start; }
+      .sources, .score-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <main class="doc">
+
+    <header class="hero" data-screen-label="00 Cover">
+      <span class="hero-eyebrow"><span class="material-symbols-outlined" style="font-size:14px">layers</span> CaseFusion · Gap Analysis</span>
+      <h1>Patterns CaseFusion shows<br>that nobody has defined&nbsp;yet.</h1>
+      <p class="lead">
+        From the three CaseFusion screens, I'm filtering only what is <strong>not already covered</strong> by
+        (a) Nimbus on GitHub, (b) our existing <code style="font-family:var(--doc-mono);font-size:14px;background:rgba(0,0,0,0.04);padding:1px 6px;border-radius:4px">_shared/expireon-app.css</code>, or (c) the previous Designer-Mockup gap-analysis.
+        Everything else stays Nimbus-default. Below: 16&nbsp;genuinely&nbsp;new patterns and variants
+        — organized so they can land in either Nimbus v2 or the shared Cloudficient app layer.
+      </p>
+    </header>
+
+    <!-- ───────────── SOURCES ───────────── -->
+    <section data-screen-label="01 Sources">
+      <div class="sec-head">
+        <span class="sec-num">01</span>
+        <h2>The three reference screens</h2>
+        <span class="tag">CaseFusion · production</span>
+      </div>
+      <div class="sources">
+        <div class="source">
+          <img src="scratch/casefusion-overview.png" alt="CaseFusion Overview">
+          <div class="cap">01 · Case Overview</div>
+        </div>
+        <div class="source">
+          <img src="scratch/casefusion-custodians.png" alt="CaseFusion Custodians">
+          <div class="cap">02 · Custodians list</div>
+        </div>
+        <div class="source">
+          <img src="scratch/casefusion-collect.png" alt="CaseFusion Collect">
+          <div class="cap">03 · Collect / Sub-tabs</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── SUMMARY ───────────── -->
+    <section data-screen-label="02 Summary">
+      <div class="sec-head">
+        <span class="sec-num">02</span>
+        <h2>At a glance</h2>
+        <span class="tag">16 new findings in 3 categories</span>
+      </div>
+
+      <div class="score-row">
+        <div class="score-card new">
+          <div class="num">8</div>
+          <div class="label">Genuinely new patterns</div>
+          <div class="sub">Components we'd need to build from scratch — neither in Nimbus nor in our current Expireon layer.</div>
+        </div>
+        <div class="score-card variant">
+          <div class="num">5</div>
+          <div class="label">Variants of existing patterns</div>
+          <div class="sub">We have an equivalent, but CaseFusion does it visually quite differently. Decision needed: align or branch.</div>
+        </div>
+        <div class="score-card tiny">
+          <div class="num">3</div>
+          <div class="label">Tiny but recurring</div>
+          <div class="sub">Small UI atoms that appear in every screen of every product — easy wins for the shared layer.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ───────────── NEW PATTERNS ───────────── -->
+    <section data-screen-label="03 New">
+      <div class="sec-head">
+        <span class="sec-num">03</span>
+        <h2>Genuinely new patterns</h2>
+        <span class="tag">not in Nimbus, not in our app-css, not in the designer mockup</span>
+      </div>
+
+      <div class="gap-list">
+
+        <div class="gap">
+          <span class="num">N1</span>
+          <div class="body">
+            <h3>Top-Bar Shell · brand + context + utilities</h3>
+            <p class="blurb">CaseFusion's header is a full-width white bar with brand top-left, a <strong>context indicator</strong> ("Tenant/Case Portal" with a small ring icon), notification bell, theme toggle, and avatar+name. No search field — search lives further down in the page header. Different from Expireon's TopNav (search-centric) and very different from the designer's mockup.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>visible in all three screenshots, top edge</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">N2</span>
+          <div class="body">
+            <h3>Record-Context Tab Bar</h3>
+            <p class="blurb">Within a single case, CaseFusion uses a <strong>horizontal tab strip</strong> for context-internal sections (OVERVIEW · CUSTODIANS · LEGAL HOLDS · SURVEYS · INTERVIEWS · TIMELINE · DATA MAP · COLLECT · PRESERVE). The active tab has a green underline (~3 px) plus bolder text. This is the entire "second-level nav" inside a case — totally different from Expireon's sidenav-only model.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshots 01–03, below the page title</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">N3</span>
+          <div class="body">
+            <h3>Back-Arrow + All-Caps Page Title</h3>
+            <p class="blurb">A blue circular back-arrow icon button + the page title in <strong>all-caps with very wide letter-spacing</strong>: "IN&nbsp;RE&nbsp;ACME&nbsp;PRODUCTS&nbsp;LITIGATION". Way more prominent than a breadcrumb, and serves as the record identifier across all sub-tabs.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>top of every case screen</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">N4</span>
+          <div class="body">
+            <h3>Page-Level Search Bar + "NEW ▼"</h3>
+            <p class="blurb">A wide search field directly below the page title, with "Advanced Search" toggle next to it and a <strong>solid primary "NEW ▼" CTA</strong> in the far right. This is page-level, not toolbar-level — it searches across the whole record. The Expireon designer put search inside a data toolbar; CaseFusion lifts it to the page chrome.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshots 01 and 03</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">N5</span>
+          <div class="body">
+            <h3>Two-Column "Detail + Sidecard" Overview</h3>
+            <p class="blurb">Below the KPI strip, the Overview lays out as two cards side by side: a <strong>main detail card</strong> (Reference ID, Primary Counsel, counts, Created-by) and a <strong>sidecard</strong> (Case Users with a numeric badge). Each has a footer with text-link actions (CLOSE CASE / EDIT CASE · ADD USER). New compound pattern — not in our datatable-only layer.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshot 01</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">N6</span>
+          <div class="body">
+            <h3>People-Row List View</h3>
+            <p class="blurb">Each custodian renders as a <strong>soft-gray rounded row-card</strong>: circular profile photo (with green status ring), name + title left, key/value attribute grid in the middle (Work Location / Employment / Team / Manager / Legal Hold), VIEW + REMOVE text-link actions vertically stacked on the far right. This is a fundamentally different layout from a datatable — it's "people as cards in a list" and is the future P2 (Custodians / Modules / Languages).</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshot 02</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">N7</span>
+          <div class="body">
+            <h3>Sub-Tab Pill Strip</h3>
+            <p class="blurb">Within the COLLECT tab, a secondary tab strip (INFORMATION REQUESTS · COLLECTION REQUESTS · COLLECTIONS) renders as a <strong>large soft-green pill background</strong> spanning the active item's full width, with the other items as plain text. Different from both Nimbus <code>.nav-tabs</code> and our pill-style sub-tabs — visually heavier, more "section-banner" than nav.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshot 03</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+        <div class="gap">
+          <span class="num">N8</span>
+          <div class="body">
+            <h3>Tenant/Case Context Switcher</h3>
+            <p class="blurb">In the top-bar, a tiny "Tenant/Case Portal" indicator with a small ring icon. Likely a <strong>context switcher</strong> — clicking it changes which tenant or case you're viewing. Not the same as a workspace switcher in Nimbus; this is a record-scope selector. Completely undocumented.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>top bar, every screen</span>
+          </div>
+          <span class="severity sev-new">New</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ───────────── VARIANTS ───────────── -->
+    <section data-screen-label="04 Variants">
+      <div class="sec-head">
+        <span class="sec-num">04</span>
+        <h2>Variants of patterns we already have</h2>
+        <span class="tag">decision needed: align across products or branch?</span>
+      </div>
+
+      <div class="gap-list">
+
+        <div class="gap variant">
+          <span class="num">V1</span>
+          <div class="body">
+            <h3>KPI Strip · divider-separated, no card borders</h3>
+            <p class="blurb">CaseFusion's KPI strip is one wide rounded container with <strong>thin vertical dividers</strong> separating each metric. No per-card borders or shadows. Label above, big number below — same vertical order as ours, but the visual treatment is "one bar, five readings". <strong>Cleaner and more enterprise</strong> than five separate cards.</p>
+            <p class="blurb"><strong>Ours:</strong> five separate rounded cards with borders. <strong>CaseFusion:</strong> one container, internal dividers, no per-cell border.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshot 01, top section</span>
+          </div>
+          <span class="severity sev-variant">Variant</span>
+        </div>
+
+        <div class="gap variant">
+          <span class="num">V2</span>
+          <div class="body">
+            <h3>Toolbar · "Sort by [Field] [↑ ASC]" pattern</h3>
+            <p class="blurb">Instead of clickable column headers (datatable style) or a "Show: All ▼" dropdown (Expireon Designer-Mockup), CaseFusion uses an <strong>explicit Sort-by control</strong> with the field as one dropdown and the direction as a separate toggle (ASC/DSC). Makes sort discoverable when the view isn't a tabular grid — perfect for the people-row list.</p>
+            <p class="blurb"><strong>Decision:</strong> probably ours when in card/people-row view, datatable-headers when in table view. The view-toggle (Q8) drives which one.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshots 02 and 03, toolbar row</span>
+          </div>
+          <span class="severity sev-variant">Variant</span>
+        </div>
+
+        <div class="gap variant">
+          <span class="num">V3</span>
+          <div class="body">
+            <h3>Primary CTA · "+ NEW ▼" with caret</h3>
+            <p class="blurb">CaseFusion's primary always reads "+ NEW ▼" — a verb + entity-type-dropdown pattern. <strong>One slot, many possible record types</strong>. Different from our explicit "New Endpoint / New User / New Role" buttons. Saves toolbar real-estate and works well when a record can spawn multiple child types.</p>
+            <p class="blurb"><strong>Open question:</strong> always-dropdown ("NEW") or context-specific ("NEW ENDPOINT")? CaseFusion-style is more compact; Expireon-style is more discoverable.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>top-right of every screen</span>
+          </div>
+          <span class="severity sev-variant">Variant</span>
+        </div>
+
+        <div class="gap variant">
+          <span class="num">V4</span>
+          <div class="body">
+            <h3>Card-Footer Actions · text-links in primary color</h3>
+            <p class="blurb">Card footers in CaseFusion use <strong>uppercase text-links in the brand-primary color</strong> (CLOSE CASE · EDIT CASE · ADD USER · VIEW · REMOVE). No buttons, no borders. Pure typographic action-cluster. We currently use solid/outline buttons in card-footers — this is much lighter visually.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshots 01 and 02, right side of every card</span>
+          </div>
+          <span class="severity sev-variant">Variant</span>
+        </div>
+
+        <div class="gap variant">
+          <span class="num">V5</span>
+          <div class="body">
+            <h3>Status Indicator · "✓ Running" mini-chip</h3>
+            <p class="blurb">A small green checkmark + label ("Running", "Active", "Done") appears <em>inside</em> rows and cards as a status reading. Not a badge with background, not a dot+text — just <strong>icon + colored label inline</strong>. Tighter than our <code>.status</code> dot-pattern.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshot 03, inside the Collection request card</span>
+          </div>
+          <span class="severity sev-variant">Variant</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ───────────── TINY ───────────── -->
+    <section data-screen-label="05 Tiny">
+      <div class="sec-head">
+        <span class="sec-num">05</span>
+        <h2>Tiny but recurring</h2>
+        <span class="tag">small atoms that show up in every screen, every product</span>
+      </div>
+
+      <div class="gap-list">
+
+        <div class="gap tiny">
+          <span class="num">T1</span>
+          <div class="body">
+            <h3>Theme Toggle (sun/moon)</h3>
+            <p class="blurb">A standalone sun-icon button in the top bar, presumably toggling light/dark. Nimbus has <code>data-cnds-theme</code> + a full <code>dark.css</code>, but no documented UI for the toggle itself. Both products need it.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>top bar, between bell and avatar</span>
+          </div>
+          <span class="severity sev-tiny">Tiny</span>
+        </div>
+
+        <div class="gap tiny">
+          <span class="num">T2</span>
+          <div class="body">
+            <h3>Avatar with Status Ring</h3>
+            <p class="blurb">Profile photos rendered with a <strong>green outer ring</strong> indicating active/online state. Adds presence-info without a separate dot. Same primitive in Expireon Audit Logs (we use plain bubbles), CaseFusion uses ringed photos. Worth defining as a shared variant.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshot 02, every custodian row</span>
+          </div>
+          <span class="severity sev-tiny">Tiny</span>
+        </div>
+
+        <div class="gap tiny">
+          <span class="num">T3</span>
+          <div class="body">
+            <h3>VIP / Tag-Chip with leading icon</h3>
+            <p class="blurb">In the Custodians list, "VIP" appears as a <strong>chip with a leading globe-icon</strong>. Small, neutral background, slightly rounded. This is a domain-tag pattern (VIP, Confidential, Pinned, Featured…) that recurs across admin UIs. Not the same as a status badge — it's a soft labelling primitive.</p>
+            <span class="where"><span class="material-symbols-outlined">image</span>screenshot 02, under Mark Armstrong's name</span>
+          </div>
+          <span class="severity sev-tiny">Tiny</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ───────────── MY TAKE ───────────── -->
+    <section data-screen-label="06 Take">
+      <div class="sec-head">
+        <span class="sec-num">06</span>
+        <h2>What this means</h2>
+      </div>
+
+      <div class="take">
+        <h3>Cloudficient already has a <em>real</em> application-pattern vocabulary — it just lives in product code, not in Nimbus.</h3>
+        <p>
+          Between the Expireon Designer-Mockup (14 gaps) and the CaseFusion screens (16 findings), there are
+          now <strong>~30 application-layer patterns</strong> that two production products clearly need, that the
+          official Nimbus DS does not document. The good news: every one of them is real, working code somewhere.
+        </p>
+        <p>
+          The interesting question is not "<em>which is right?</em>" — it's "<em>which should be the cross-product standard?</em>".
+          The KPI-strip-with-dividers (V1), text-link card-footers (V4), and record-context tabs (N2) feel like
+          patterns Expireon should adopt from CaseFusion. The mega-KPI cards (Expireon designer) and the
+          rows-per-page pager (also Expireon designer) feel like patterns CaseFusion should consider.
+        </p>
+        <p>
+          <strong>Practical next step:</strong> when we go into <strong>P2 (Custodians + the card-view family)</strong>,
+          we should explicitly use the CaseFusion <strong>People-Row Card Pattern (N6)</strong> rather than invent a new one.
+          That alone aligns Expireon with the design CaseFusion is already shipping.
+        </p>
+      </div>
+    </section>
+
+    <!-- ───────────── PROPOSAL ───────────── -->
+    <section data-screen-label="07 Proposal">
+      <div class="sec-head">
+        <span class="sec-num">07</span>
+        <h2>Proposal · what to do now</h2>
+      </div>
+      <ol style="font-size:15px;line-height:1.7;color:#2b2b2b;max-width:780px;padding-left:1.4em;">
+        <li><strong>P2 Custodians screen</strong> adopts <strong>N6 People-Row Card</strong> 1:1 from CaseFusion. Saves us from inventing. Validates cross-product consistency.</li>
+        <li><strong>P2 Overview-style screens</strong> (single-record details like Endpoints-Detail or Case-Overview-style) get <strong>N5 Two-Column Detail+Sidecard</strong> with <strong>V4 text-link footers</strong>.</li>
+        <li><strong>Add a shared "case-context shell" variant</strong> to the app-css: <strong>N2 Record-Context Tabs + N3 All-Caps Title</strong>. We probably don't need this immediately for the 11 datatable screens, but the moment we hit a record-detail screen, we'll need it.</li>
+        <li><strong>Park</strong> N1 Top-Bar Shell &amp; N4 Page-Level Search for now — Expireon already chose a search-in-toolbar TopNav. Revisit if/when the products consolidate.</li>
+        <li><strong>Tiny ones (T1–T3)</strong> are 30-minute additions to <code>expireon-app.css</code> whenever they're first needed. Don't pre-build.</li>
+      </ol>
+    </section>
+
+  </main>
+</body>
+</html>

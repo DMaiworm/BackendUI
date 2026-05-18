@@ -1,0 +1,332 @@
+{
+  "totalFiles": 25,
+  "totalBytesBefore": 364721,
+  "totalBytesAfter": 306174,
+  "totalLinesRemoved": 1586,
+  "bytesSaved": 58547,
+  "generatedAt": "2026-05-15T22:28:19.615Z",
+  "report": [
+    {
+      "file": "appliance_management_unified_table_style/appliance_management_unified_table_style.html",
+      "folder": "appliance_management_unified_table_style",
+      "sizeBefore": 12779,
+      "sizeAfter": 9086,
+      "linesRemoved": 96,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Removed Tailwind MD3 config block (95 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "archive_mappings_page_title_sync/archive_mappings_page_title_sync.html",
+      "folder": "archive_mappings_page_title_sync",
+      "sizeBefore": 16160,
+      "sizeAfter": 12471,
+      "linesRemoved": 96,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Removed Tailwind MD3 config block (95 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "audit_logs_sidebar_fixed/audit_logs_sidebar_fixed.html",
+      "folder": "audit_logs_sidebar_fixed",
+      "sizeBefore": 15256,
+      "sizeAfter": 13098,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "collaboration_links_design_sync/collaboration_links_design_sync.html",
+      "folder": "collaboration_links_design_sync",
+      "sizeBefore": 9682,
+      "sizeAfter": 7524,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "containers_design_sync/containers_design_sync.html",
+      "folder": "containers_design_sync",
+      "sizeBefore": 17018,
+      "sizeAfter": 14860,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "custodians_management_hybrid_view_cards_in_list_layout/custodians_management_hybrid_view_cards_in_list_layout.html",
+      "folder": "custodians_management_hybrid_view_cards_in_list_layout",
+      "sizeBefore": 24043,
+      "sizeAfter": 20354,
+      "linesRemoved": 96,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Removed Tailwind MD3 config block (95 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "domains_management_list_view_sidebar_sync/domains_management_list_view_sidebar_sync.html",
+      "folder": "domains_management_list_view_sidebar_sync",
+      "sizeBefore": 11283,
+      "sizeAfter": 9125,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "endpoint_management_overview_focus/endpoint_management_overview_focus.html",
+      "folder": "endpoint_management_overview_focus",
+      "sizeBefore": 14996,
+      "sizeAfter": 12838,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "ev_directories_footer_sync_1_1/ev_directories_footer_sync_1_1.html",
+      "folder": "ev_directories_footer_sync_1_1",
+      "sizeBefore": 16143,
+      "sizeAfter": 13985,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "ev_vault_stores_overview/ev_vault_stores_overview.html",
+      "folder": "ev_vault_stores_overview",
+      "sizeBefore": 18035,
+      "sizeAfter": 15877,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "internal_domains_design_sync/internal_domains_design_sync.html",
+      "folder": "internal_domains_design_sync",
+      "sizeBefore": 10002,
+      "sizeAfter": 7844,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "journal_mappings_content_sync/journal_mappings_content_sync.html",
+      "folder": "journal_mappings_content_sync",
+      "sizeBefore": 13955,
+      "sizeAfter": 11797,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "languages_improved_readability_card_view/languages_improved_readability_card_view.html",
+      "folder": "languages_improved_readability_card_view",
+      "sizeBefore": 19720,
+      "sizeAfter": 17562,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "languages_texte/languages_texte.html",
+      "folder": "languages_texte",
+      "sizeBefore": 14060,
+      "sizeAfter": 11902,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "legal_cases_advanced_filters_state_corrected/legal_cases_advanced_filters_state_corrected.html",
+      "folder": "legal_cases_advanced_filters_state_corrected",
+      "sizeBefore": 12898,
+      "sizeAfter": 10740,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "modules_management_card_view_layout/modules_management_card_view_layout.html",
+      "folder": "modules_management_card_view_layout",
+      "sizeBefore": 17949,
+      "sizeAfter": 15791,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "retention_categories_design_sync/retention_categories_design_sync.html",
+      "folder": "retention_categories_design_sync",
+      "sizeBefore": 9181,
+      "sizeAfter": 7023,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "roles_design_sync/roles_design_sync.html",
+      "folder": "roles_design_sync",
+      "sizeBefore": 9649,
+      "sizeAfter": 7491,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "security_logs_design_sync/security_logs_design_sync.html",
+      "folder": "security_logs_design_sync",
+      "sizeBefore": 12460,
+      "sizeAfter": 10302,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "settings_management_maintenance_update/settings_management_maintenance_update.html",
+      "folder": "settings_management_maintenance_update",
+      "sizeBefore": 12832,
+      "sizeAfter": 10674,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "storage_buckets_content_sync/storage_buckets_content_sync.html",
+      "folder": "storage_buckets_content_sync",
+      "sizeBefore": 19153,
+      "sizeAfter": 16995,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "storage_partitions_layout_correction/storage_partitions_layout_correction.html",
+      "folder": "storage_partitions_layout_correction",
+      "sizeBefore": 12692,
+      "sizeAfter": 10534,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "text_templates_localization_sync/text_templates_localization_sync.html",
+      "folder": "text_templates_localization_sync",
+      "sizeBefore": 12257,
+      "sizeAfter": 10099,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "unresolved_custodians_header_sync/unresolved_custodians_header_sync.html",
+      "folder": "unresolved_custodians_header_sync",
+      "sizeBefore": 15542,
+      "sizeAfter": 13384,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    },
+    {
+      "file": "users_design_sync/users_design_sync.html",
+      "folder": "users_design_sync",
+      "sizeBefore": 16976,
+      "sizeAfter": 14818,
+      "linesRemoved": 59,
+      "changes": [
+        "Removed unused Inter + Manrope fonts",
+        "Nunito → Nunito Sans (Nimbus default)",
+        "Removed Tailwind MD3 config block (58 lines)",
+        "+ body class=\"cnds-product-expireon\""
+      ]
+    }
+  ]
+}

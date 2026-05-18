@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+
+<html class="light" lang="de"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tischtennis Abteilung | SG Hünstetten</title>
+<link href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;600;700;800;900&amp;family=Plus+Jakarta+Sans:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "primary-container": "#223e6d",
+              "surface-dim": "#dcd9d9",
+              "tertiary-container": "#2e4150",
+              "error": "#ba1a1a",
+              "tertiary": "#182b39",
+              "secondary-container": "#fde000",
+              "surface": "#fbf9f8",
+              "on-error-container": "#93000a",
+              "inverse-on-surface": "#f3f0f0",
+              "primary-fixed-dim": "#acc7fe",
+              "on-tertiary-fixed": "#091d2b",
+              "surface-container-lowest": "#ffffff",
+              "surface-container": "#f0eded",
+              "on-tertiary": "#ffffff",
+              "surface-bright": "#fbf9f8",
+              "surface-variant": "#e4e2e1",
+              "on-tertiary-fixed-variant": "#364958",
+              "error-container": "#ffdad6",
+              "on-surface": "#1b1c1c",
+              "on-background": "#1b1c1c",
+              "on-secondary-fixed-variant": "#514700",
+              "surface-container-low": "#f6f3f2",
+              "primary": "#052856",
+              "surface-tint": "#445e8f",
+              "surface-container-high": "#eae8e7",
+              "secondary-fixed-dim": "#e1c700",
+              "on-error": "#ffffff",
+              "secondary-fixed": "#ffe324",
+              "on-primary-fixed-variant": "#2b4676",
+              "on-surface-variant": "#44474f",
+              "background": "#fbf9f8",
+              "on-secondary-fixed": "#211c00",
+              "outline": "#747780",
+              "tertiary-fixed": "#d1e5f8",
+              "on-primary-container": "#90aae0",
+              "inverse-primary": "#acc7fe",
+              "primary-fixed": "#d7e2ff",
+              "inverse-surface": "#303030",
+              "on-tertiary-container": "#99adbf",
+              "tertiary-fixed-dim": "#b5c9dc",
+              "on-primary": "#ffffff",
+              "on-secondary": "#ffffff",
+              "surface-container-highest": "#e4e2e1",
+              "on-primary-fixed": "#001a40",
+              "on-secondary-container": "#706300",
+              "secondary": "#6c5e00",
+              "outline-variant": "#c4c6d0"
+            },
+            fontFamily: {
+              "headline": ["Lexend"],
+              "body": ["Plus Jakarta Sans"],
+              "label": ["Plus Jakarta Sans"]
+            },
+            borderRadius: {"DEFAULT": "0.5rem", "lg": "1rem", "xl": "1.5rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .text-glow-primary {
+            text-shadow: 0 0 20px rgba(5, 40, 86, 0.2);
+        }
+        .kinetic-gradient {
+            background: radial-gradient(circle at top right, #223e6d 0%, #052856 100%);
+        }
+</style>
+</head>
+<body class="bg-surface text-on-surface font-body selection:bg-secondary-container selection:text-on-secondary-container">
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('img').forEach(function(img) {
+    img.addEventListener('error', function() {
+      this.style.background = 'repeating-linear-gradient(45deg,#1a3260 0,#1a3260 2px,#223e6d 2px,#223e6d 14px)';
+      this.src = 'data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7';
+    });
+  });
+});
+</script>
+
+<!-- TopAppBar (Shared Component) -->
+<nav class="fixed top-0 w-full z-50 bg-[#052856]/90 dark:bg-[#052856]/90 backdrop-blur-xl shadow-2xl shadow-black/20">
+<div class="flex justify-between items-center px-8 py-4 max-w-screen-2xl mx-auto w-full">
+<div class="text-2xl font-black text-white italic tracking-tighter font-headline uppercase"><div class="flex items-center gap-4">
+<span class="text-white font-headline font-black text-2xl tracking-tighter uppercase flex items-baseline gap-2">
+  <span class="text-[#fde000]">SG</span> Hünstetten
+</span>
+</div></div>
+<div class="hidden md:flex items-center gap-8 font-headline font-bold tracking-tight uppercase text-sm">
+<a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Fußball</a>
+<a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Turnen</a>
+<a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Leichtathletik</a>
+<a class="text-white/80 hover:text-white transition-colors hover:scale-105 duration-300" href="#">Fan-Shop</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-[#fde000] text-[#052856] px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-wider text-xs hover:scale-105 active:scale-95 transition-all duration-300">
+                    Probetraining
+                </button>
+<div class="flex gap-2 text-white/80">
+<span class="material-symbols-outlined cursor-pointer hover:text-white transition-colors">shopping_cart</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-white transition-colors">account_circle</span>
+</div>
+</div>
+</div>
+<div class="bg-gradient-to-r from-blue-900/10 to-transparent h-[1px] w-full absolute bottom-0"></div>
+</nav>
+<main class="pt-16">
+<!-- Hero Section - Constrained Height -->
+<header class="relative h-[65vh] min-h-[500px] flex items-center overflow-hidden">
+<div class="absolute inset-0 z-0">
+<img alt="Professional table tennis player mid-stroke" class="w-full h-full object-cover object-center scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAfW7XVb14seI6O6Sra1jRcp8yoONHk7t9ArFhKbOBVr9AYe-rjig3eae0cadQhdesDXroTyaVeOOKs_AxTqzQxCMwF_kxv8sD_H3yUYBb78Nn-nxWMtPj5oO1qzFxBOzI0igxBBEBZ0TNsK7gppNV50OkmntpyEqsqrjc6hNRVm6KqaXLKVdE6CZoPtx3ClpTMKXU9himoBTqKvWid2sraywBTIOnHaaJwaV0iEieCObC-anYAL0HbRDGIoQPQ51k_84jA8tuoZ1E"/>
+<div class="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/40 to-transparent"></div>
+</div>
+<div class="relative z-10 max-w-[1440px] mx-auto px-8 w-full">
+<div class="max-w-3xl">
+<span class="inline-block bg-secondary-container text-on-secondary-container px-4 py-1 rounded-full text-sm font-bold tracking-widest uppercase mb-6 animate-pulse">Sektion Tischtennis</span>
+<h1 class="font-headline font-black text-white leading-[0.9] tracking-tighter mb-8 drop-shadow-2xl text-5xl md:text-7xl lg:text-8xl">
+                        Tischtennis <br/> <span class="text-secondary-container italic">in seiner ganzen</span> <br/> Pracht.
+                    </h1>
+<div class="flex flex-col sm:flex-row gap-6 mt-12">
+<button class="bg-secondary-container text-on-secondary-container px-10 py-5 rounded-xl font-headline font-extrabold text-xl shadow-2xl hover:translate-y-[-4px] transition-all flex items-center gap-3 group">
+                            Auf Warteliste setzen
+                            <span class="material-symbols-outlined group-hover:translate-x-2 transition-transform">arrow_forward</span>
+</button>
+<div class="flex items-center gap-4 text-white/80 cursor-pointer">
+<div class="w-12 h-12 rounded-full border-2 border-white/20 flex items-center justify-center">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">play_arrow</span>
+</div>
+<span class="font-bold tracking-tight">Magazin Teaser ansehen</span>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- News Section (Instagram Feed Style) -->
+<section class="py-16 bg-surface">
+<div class="max-w-screen-2xl mx-auto px-8">
+<div class="flex justify-between items-center mb-8">
+<h2 class="text-4xl font-headline font-black tracking-tighter text-primary uppercase">NEWS</h2>
+<a class="bg-primary text-white px-6 py-2 rounded-lg font-headline font-bold uppercase tracking-wider text-xs hover:bg-primary-container transition-all flex items-center gap-2" href="#">
+                        Zur News-Übersicht <span class="material-symbols-outlined text-sm">open_in_new</span>
+</a>
+</div>
+<div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+<!-- News Card 1 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img alt="Training action" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwcwyWIfVBNfEWGcTRBkPfs4ns9FGgfUnHHxHeQsBSFt3l3LkLdVQGQaFe5gyhXETm4L43a0OFc_MhHuppCcCY8K2Wy3O4VnqqUP3VGLkFZxl_vZ5YBScxlfofyqUM8au_JcdWpSENP-5KRqtGc4D7FMxzv1fr0-AadJoAa37IsseqgplXSWicB6AjV5pe_y1R3pZZH-MkG9xzZuy7cLXxLusPGfLn1T3kmNAlKBmDtzrzm7iQjRoF1MCaW1sqayKMSnDF9LkHIJ0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Technik-Fokus</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 45 Likes</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Post ansehen</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">photo_library</span>
+</div>
+</div>
+<!-- News Card 2 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img alt="Team cheering" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANC1Jmb3-v_58mdtC_yLYsU6xzUSAZQGkiwLgqDu8Hyrfmd2ul6sH4nMs3Om1Mn5E-YRMYTYO_JKoIQc6OPac9M01CXjEl2-doWkaPzDnhDjW56qB7ZRkZvas8ET29T_O__avPysestctDj9wTlwW6AUtW05GDt6qL27DhLTMcX16YCTbh-IxaBbxVO9W3RBi3HXC3Wbju2YR8V5gIDdO-jXAeL3-aEXRHRiPS190KysCJmAQAZxrvsgLhR44zStI57xAzieXcQg4"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Turniersieg!</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 112 Likes</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Highlights</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">videocam</span>
+</div>
+</div>
+<!-- News Card 3 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img alt="New gear" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5fiQCX0Vakkx-dhVwUsqe9ZQx7GpMt22uu_nR8o9jEWxQjR4EONB0gwvTaVGR4viWDTPcGvmPSg106oh1-konSs5bSv26AYJIbLpN6yoTUkoszw2bHNuHAIz_bpZr8fjAUVT-42GfBWo_C92vJfiw2FUkn3BH8G8p4_9qfnVTp5IvO9cAP4EElvhGUHnAVCX9eFzGJc3leJPwvsuQCE8gilbD2re9qE8P3uMA8EVWtOn8Gs2BIQuoa-X4Nf68IPWlSKFgpl3K4V0"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Ausrüster-Update</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 38 Likes</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Equipment</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">image</span>
+</div>
+</div>
+<!-- News Card 4 -->
+<div class="group relative aspect-square bg-surface-container rounded-2xl overflow-hidden cursor-pointer shadow-md hover:shadow-xl transition-all">
+<img alt="Coach meeting" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBArG4D8ysCxcAk9yPN8Enxi61_lY7_rQH5QYnJNHyt-ZQCPutC-JQr353FsJxvMi-O7yqsCsHIDykNYNktlHLt-yQwHgZsR4CbPLRwoBR5glzNBpUTNJSM0SWijINQS3upP3I-jGdoCYVDQ2QVg_gpEH54SrHPUx9_C9Zh5pbFgWCbQHQgfxc_-4UJBxlO-hsW9efDoN6UQFoC7Dr_zylKajFMRxroh-n1SnYRXugKiQ102r-xlZm20Ee9rhKYwZY1BtyWVw8eyNo"/>
+<div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+<h4 class="text-white font-headline font-bold text-lg mb-2">Staff Meeting</h4>
+<p class="text-white/80 text-xs font-bold mb-3 flex items-center gap-1"><span class="material-symbols-outlined text-xs">favorite</span> 52 Likes</p>
+<span class="text-secondary-container text-[10px] font-black uppercase tracking-widest">Hinter den Kulissen</span>
+</div>
+<div class="absolute top-4 right-4 bg-white/20 backdrop-blur-md rounded-full p-1.5 text-white">
+<span class="material-symbols-outlined text-sm">notifications</span>
+</div>
+</div>
+</div>
+<div class="mt-8 flex items-center justify-center gap-4 py-4 border-t border-outline-variant/30">
+<span class="text-primary font-bold text-xs flex items-center gap-2">
+<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                        Folge uns auf Instagram @SGHuenstetten_Tischtennis
+                    </span>
+</div>
+</div>
+</section>
+<!-- Trainer Section -->
+<section class="bg-surface-container-low py-20">
+<div class="max-w-5xl mx-auto px-8">
+<div class="flex flex-col md:flex-row items-center md:items-start gap-12 bg-white p-8 md:p-12 rounded-[2rem] shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="w-48 h-48 md:w-64 md:h-64 flex-shrink-0 relative">
+<div class="absolute inset-0 bg-secondary-container/10 rounded-2xl rotate-3"></div>
+<img alt="Marcus Weber, professional trainer" class="relative z-10 w-full h-full object-cover rounded-2xl shadow-md border-4 border-white" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBA6HvaCTqvbgaP0-GS6XU22Zgn9ZyuM56IaajABQjdZRi7modIcx7INu7wiRFyXP9JuDeJnC2nHjGLWr8DBVUWbxgyVlwlZeX7bLvPqDlftNpY6_qOyeTvgSn_pM_vEGRL-QqDTQ13cit45QiXMWM3wT_2rbqubJKv-W7ubwYE5eX_nF4GyRajkWzsN-yZu-wYx4psQgoRxcLbgWGV4M52jKnduUvkB1QPbukutX_3ZvFy1PUPNPuGV7z7o1jUSg__xjEqW6wYC80"/>
+</div>
+<div class="flex-1">
+<div class="flex flex-wrap items-center gap-4 mb-4">
+<h2 class="text-3xl font-headline font-black text-primary uppercase">Marcus Weber</h2>
+<span class="bg-primary-container text-primary-fixed px-3 py-1 rounded text-xs font-bold tracking-wider uppercase">B-Lizenz Trainer</span>
+</div>
+<h3 class="text-xl font-bold text-on-surface mb-6 leading-tight">
+                            Kompetente Betreuung <span class="text-primary/60">für jeden Spielertyp.</span>
+</h3>
+<p class="text-on-surface-variant leading-relaxed mb-8 max-w-2xl font-medium">
+                            Marcus ist der sportliche Leiter unserer Tischtennis-Sektion. Mit über 15 Jahren Erfahrung als lizensierter Trainer begleitet er sowohl unsere Jugend als auch die Seniorenteams mit fachlicher Expertise und Leidenschaft für den Vereinssport.
+                        </p>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-semibold text-sm text-on-surface">Technik-Training</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-semibold text-sm text-on-surface">Taktik-Analyse</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-semibold text-sm text-on-surface">Jugendförderung</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-primary text-xl" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-semibold text-sm text-on-surface">Wettkampf-Coaching</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Emotional Section: Unsere Senioren I -->
+<section class="py-32 bg-primary text-white relative">
+<div class="absolute top-0 right-0 w-1/3 h-full bg-primary-container opacity-30 transform skew-x-12"></div>
+<div class="max-w-[1440px] mx-auto px-8 relative z-10">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div>
+<h2 class="text-5xl md:text-7xl font-headline font-black leading-none mb-4 text-white uppercase tracking-tighter">Unsere Senioren I</h2>
+<p class="text-xl text-white opacity-90 font-medium max-w-xl">Erfahrung trifft Leidenschaft. Mehr als nur ein Team – eine Gemeinschaft, die seit Jahrzehnten zusammenhält.</p>
+</div>
+<div class="text-right">
+<span class="text-8xl font-headline font-black text-secondary-container italic">#1</span>
+</div>
+</div>
+<div class="relative rounded-[3rem] overflow-hidden group shadow-2xl">
+<img alt="Seniors team photo" class="w-full aspect-[21/9] object-cover group-hover:scale-105 transition-transform duration-1000" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDCUUGbyb0MLFOOByEPT1Dhn2ZaFxjP3Ql_dWFSaBGMLF6gj9WHXQ2Nqw5WCDl5-O686ZDOAFeHrxnBF0QW3zNFTwHhYp8_tRbCYjaZfveFmr2CsprMAXIZRYX1iem5s2quopDHG2Dosqb5req5p_bXAt7SHCpo4YFdRKuVeH31_E45GQAJsND27iMgvf9F6Ffq2VATdaBFsTW7vvrt185uP9pZ9Q1XO2Hmo6rUFotQLFY3Rm2VaD-e9QI7xfqm1Zakp0Bz5Pwcl4A"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent flex items-end p-12">
+<div class="flex flex-wrap items-center gap-6">
+<div class="flex -space-x-4">
+<div class="w-16 h-16 rounded-full border-4 border-white overflow-hidden shadow-lg"><img alt="Member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATiTZMefLXC8urVTYGJvTCs-qht4PLlaDpYJbuQRiFKy4NQ6tG-wy1y_vPi4AdoWxegyBklhonrC6eN_0WU3qeLquLijI7MOOLN5-5izxKPcUju_Kesf9tk-cYPcPzdIsTC-CgEOMeco_Ui6uW4LVIbCd87rESRBvcofgAbxWB08LomWomEkwVqfqRucQGfaMcPt6PFGhNNjYVxAPuFdScNzNkQTIgN4yzG6kt6GWLYabBuCB0iPDixPFf0b9oBp81u4jYdnXibeo"/></div>
+<div class="w-16 h-16 rounded-full border-4 border-white overflow-hidden shadow-lg"><img alt="Member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAMaGKixG2Ae8bYHEq2AMpOmlBP-_lX5KLPhFczQrm0Rum1BvUVPFazRFImZuLHRXoA-ZqpfAGiiinLGeCTH3f142HKv0pA4IvfCJc1R200vw62Z6668sTYi27HveeAMucJUTjY3y96HDCkLyYos6PE7O3qLHaMYgHub9y5qeC6uoXaUC3Z8XBPM4_rRvVkKHtGUMmk3aFDnlDgwwtbtcPchLk6dN8nXA1kkDXpRFw2qma0L_NJee4mOpRfW0WSDulkE4BcbjruN0"/></div>
+<div class="w-16 h-16 rounded-full border-4 border-white overflow-hidden shadow-lg"><img alt="Member" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCjsnVvngskWpomqABnIgqf9GLbDRixIZxEjM8hiFNltGqd6b7AeUATuYKCnHWe3-6OriHoqxBZh7Tutlplnz7agXhKUTMkBxmLUC5ciax7fPF_1P0VUG7Pvya7k6siyTibqcCHL9vjg9t3BhMmIIB-53b_f6UyR7YhSC6Z2Gn87AxIXsB_42sefr4-zoPoV5MRC01D4qgGQld0ETF_60K7QXAPktqzvU3FUYRYcRb2ir6pHkez5YRFo-ctV_VLnC9BinkiuOizUw"/></div>
+</div>
+<p class="text-lg font-bold text-white">12 Aktive Mitglieder &amp; Wachsend</p>
+<div class="flex items-center gap-4 ml-8 border-l border-white/20 pl-8">
+<div class="flex flex-col gap-2">
+<span class="text-[10px] font-black uppercase tracking-widest text-secondary-container/80">Mannschaftspaten &amp; Partner</span>
+<div class="flex gap-3">
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-2 shadow-lg">
+<span class="text-[8px] font-black text-primary text-center leading-tight">LOGO SPONSOR 1</span>
+</div>
+<div class="w-12 h-12 bg-white rounded-lg flex items-center justify-center p-2 shadow-lg">
+<span class="text-[8px] font-black text-primary text-center leading-tight">LOGO SPONSOR 2</span>
+</div>
+<div class="w-12 h-12 bg-white/10 border border-white/20 rounded-lg flex items-center justify-center p-2 backdrop-blur-sm">
+<span class="text-[8px] font-black text-white text-center leading-tight uppercase">Support</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Asymmetric Gallery -->
+<section class="py-32 bg-surface">
+<div class="max-w-[1440px] mx-auto px-8">
+<h2 class="text-4xl font-headline font-black text-primary mb-16 uppercase tracking-widest text-center">Momentaufnahmen</h2>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="md:col-span-2 md:row-span-2 rounded-2xl overflow-hidden shadow-lg group">
+<img alt="Team celebration" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANC1Jmb3-v_58mdtC_yLYsU6xzUSAZQGkiwLgqDu8Hyrfmd2ul6sH4nMs3Om1Mn5E-YRMYTYO_JKoIQc6OPac9M01CXjEl2-doWkaPzDnhDjW56qB7ZRkZvas8ET29T_O__avPysestctDj9wTlwW6AUtW05GDt6qL27DhLTMcX16YCTbh-IxaBbxVO9W3RBi3HXC3Wbju2YR8V5gIDdO-jXAeL3-aEXRHRiPS190KysCJmAQAZxrvsgLhR44zStI57xAzieXcQg4"/>
+</div>
+<div class="rounded-2xl overflow-hidden shadow-lg group">
+<img alt="Concentrated player" class="w-full h-[300px] object-cover group-hover:scale-110 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAwcwyWIfVBNfEWGcTRBkPfs4ns9FGgfUnHHxHeQsBSFt3l3LkLdVQGQaFe5gyhXETm4L43a0OFc_MhHuppCcCY8K2Wy3O4VnqqUP3VGLkFZxl_vZ5YBScxlfofyqUM8au_JcdWpSENP-5KRqtGc4D7FMxzv1fr0-AadJoAa37IsseqgplXSWicB6AjV5pe_y1R3pZZH-MkG9xzZuy7cLXxLusPGfLn1T3kmNAlKBmDtzrzm7iQjRoF1MCaW1sqayKMSnDF9LkHIJ0"/>
+</div>
+<div class="rounded-2xl overflow-hidden shadow-lg group">
+<img alt="Fast movement" class="w-full h-[300px] object-cover group-hover:scale-110 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB5fiQCX0Vakkx-dhVwUsqe9ZQx7GpMt22uu_nR8o9jEWxQjR4EONB0gwvTaVGR4viWDTPcGvmPSg106oh1-konSs5bSv26AYJIbLpN6yoTUkoszw2bHNuHAIz_bpZr8fjAUVT-42GfBWo_C92vJfiw2FUkn3BH8G8p4_9qfnVTp5IvO9cAP4EElvhGUHnAVCX9eFzGJc3leJPwvsuQCE8gilbD2re9qE8P3uMA8EVWtOn8Gs2BIQuoa-X4Nf68IPWlSKFgpl3K4V0"/>
+</div>
+<div class="md:col-span-2 rounded-2xl overflow-hidden shadow-lg h-[400px] group relative">
+<img alt="Training hall" class="w-full h-full object-cover group-hover:scale-110 transition-all duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDeWSlKVwKt1cCMQPdqXFEwCFRol5_tLAXFrEmUTTfge071ua6DXltEOUHT9V-7_IIZMYCeByJ5Yg6XppVHblbIlqzRZZ3Z7e8b7WLUBVtnPd4KmYtTe_WM3lLbcdIYoi45tF0FqPit-haZjBao9yVkxurDCr8KAmYprAKdS3UjUIE6_nIZOAGMVIj1PGKLFdh-FDOCZ3nFtccYk9RKYPYHTple1_s_EnONwobwSFqsmM2sWautlyKciWQRuNjRCksqHbnXvw40WdE"/>
+<div class="absolute inset-0 bg-primary/20 group-hover:bg-transparent transition-colors"></div>
+</div>
+</div>
+</div>
+</section>
+<!-- Call to Action Overlay -->
+<section class="py-20 relative px-8">
+<div class="max-w-[1200px] mx-auto relative rounded-[3rem] overflow-hidden min-h-[600px] flex items-center shadow-2xl">
+<img alt="Coaching youth" class="absolute inset-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBtKhbowifKsn7oqE6E8TSJakwD7NAMLP08mHEhH2jbSpPXwzFHK8uYbs2N16Pzb7MlkoYqUTKUYISSaXa15bznoEF-8iLsYOJT432ZORNgjjSDrXUiD9knE7VZk2i9jNtHO_LcMhMWxfYvD2p44ciAI5ngTn8Em6ZhrEQo7DL8_Z8vjVabUpw2JdMbUNldql9YUZCTPhIFGH-djL5OiCi7XxbvDgVXWQspI3709WZVnPn5GnRv52ztvyWw6yc-NSYMjCj5fV3z5zQ"/>
+<div class="absolute inset-0 bg-primary/70 backdrop-blur-[2px]"></div>
+<div class="relative z-10 p-12 md:p-24 text-white max-w-3xl">
+<div class="bg-secondary-container text-on-secondary-container w-16 h-16 flex items-center justify-center rounded-full mb-8">
+<span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">volunteer_activism</span>
+</div>
+<h2 class="text-5xl md:text-6xl font-headline font-black mb-6 leading-[1.1] tracking-tighter uppercase">Gib dein Wissen weiter. <br/> <span class="text-secondary-container italic">Übungsleiter gesucht!</span></h2>
+<p class="text-xl opacity-90 mb-10 leading-relaxed font-medium">Wir suchen motivierte Köpfe, die unsere Jugend- und Erwachsenenteams mit frischen Impulsen voranbringen. Du liebst den Sport und arbeitest gerne mit Menschen? Dann bist du bei uns genau richtig.</p>
+<div class="flex flex-wrap gap-4">
+<button class="bg-white text-primary px-8 py-4 rounded-xl font-headline font-bold hover:bg-secondary-container hover:text-on-secondary-container transition-all uppercase tracking-widest shadow-lg">
+                            Jetzt bewerben
+                        </button>
+<button class="border-2 border-white/40 hover:border-white text-white px-8 py-4 rounded-xl font-headline font-bold transition-all uppercase tracking-widest">
+                            Anforderungsprofil
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Fan-Shop Section -->
+<section class="py-24 bg-surface-container-low">
+<div class="max-w-[1440px] mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-center mb-16">
+<div>
+<h2 class="text-5xl font-headline font-black text-primary tracking-tighter uppercase">SG Hünstetten Fan-Shop</h2>
+<p class="text-on-surface-variant mt-2 text-lg italic">Zeig Flagge für deinen Verein.</p>
+</div>
+<button class="mt-6 md:mt-0 px-8 py-4 bg-primary text-white rounded-xl font-headline font-bold flex items-center gap-3 hover:bg-primary-container transition-all uppercase tracking-widest shadow-md">
+                        Alle Artikel <span class="material-symbols-outlined">shopping_bag</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+<!-- Product 1 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img alt="Allwetter-Jacke" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2V573FaaC-lVusVrI44uQ4b8GywIhs4Pv0YY4uVEcQjsfykdHlJ-3ZMSIeq3S64XdL0FCElOAV6zVUGd7s1jTe443LBiv2DLff75lhUr14QiT4FeN6Qh96s6W2wFEpZX3QhOiHyw48c3dtFldd14dli3cmS76ZXS5wW9IYsevyF1vFDiUo-YADYAW_s99PcHaRs7glmpNMEkTJiChfx1e2Rtrmh2rDCm23aZFYayg5B7mDjFyEGGbn4HVw8XEZdSK1LjID0ig-Tg"/>
+<span class="absolute top-4 right-4 bg-secondary-container text-on-secondary-container text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-widest">Bestseller</span>
+</div>
+<h4 class="font-bold text-primary text-xl font-headline uppercase tracking-tighter">Allwetter-Jacke "Pro"</h4>
+<p class="text-outline text-sm mt-1 font-medium">Deep Blue Legacy Design</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">79,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+<!-- Product 2 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img alt="Fan-Schal" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB7Q0bbCYYA1o_fEJC1eE-OLtre38sf5ox-Bg7V6gWKq15a0uG4Yimd7dc7otaKOcYE1z0Re6QIyPMZxd1FIkNnJ-rAGWHi7sxUa_w9I60zy6XjW8fOVTx8WyM_UM4mdRV5MpDa2T2kQyGE7YzclOTBuk9wxzWFxW5tuSL2mzsp4Mes8pjXVEkNfJOp7gdMnGdy8xvUR_cL7c7OaLt0RL-1OdK-PWvwaS_j_G4LYcJVsjpmbKdQOss3Q0hSpHd3UyKMGhes1Ht4hLs"/>
+</div>
+<h4 class="font-bold text-primary text-xl font-headline uppercase tracking-tighter">Fan-Schal "Hünstetten"</h4>
+<p class="text-outline text-sm mt-1 font-medium">100% Tradition</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">14,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+<!-- Product 3 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img alt="Wintermütze" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_qcexn1QakqKyUiv8NnEoXBxrrrv1hwlj6hLy4s_vZRMVG85imVveu9LIO3pA9J-3--xC9TQh5Dwu8Bs4tIW-veoBLWATFFU-_h5FF3U1Z3ppoE9Fgl5K3khNTTOpEQrx7aNpcWd6rT95mZ8MkPqsejrODHpPsPPMgUYvfodbsONlxMlbH9KNxKXZxWqO32xsyPJCnd6JKAvCF9cKh2IhgoGRMEU03loYW3PDjXWCGJ56x1UUt8159dza99Z5DXkt_3rgmKeNiZo"/>
+</div>
+<h4 class="font-bold text-primary text-xl font-headline uppercase tracking-tighter">Wintermütze Classic</h4>
+<p class="text-outline text-sm mt-1 font-medium">Hält den Kopf warm</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">19,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+<!-- Product 4 -->
+<div class="bg-white p-6 rounded-[2rem] group cursor-pointer shadow-sm hover:shadow-xl transition-all duration-500">
+<div class="aspect-square rounded-2xl bg-surface-container overflow-hidden mb-6 relative">
+<img alt="Polo-Shirt" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDtv0I899I6DiERhzC4IisiBfNU5ZLu-IClwoxh8ARV2DAO1CCk9re4gyyv9mzxrw2wT_PwxspLBwvkUUn4wtmZbJieXKFZNaz6mWwAARsLfCl6mqwPDsCyDVWSNKxu0jXT7RR5Qbkj4WUvdpQVmclOWkOa8_zR-3ZyiZ2AkCvwnCocgrWzMe8d_3Um-Jfkc1mw0Oi3w54CvMdM61IekryK3sikL075v7rJdTdt2AIMcMnL9YPy2oUL_PCjUv4gJ9NRpaScXzgqd-8"/>
+</div>
+<h4 class="font-bold text-primary text-xl font-headline uppercase tracking-tighter">Polo-Shirt Vereinsliebe</h4>
+<p class="text-outline text-sm mt-1 font-medium">Pikée-Qualität</p>
+<div class="flex justify-between items-center mt-6">
+<span class="text-2xl font-black text-primary">34,90 €</span>
+<div class="w-10 h-10 rounded-full bg-surface-container flex items-center justify-center hover:bg-secondary-container transition-colors shadow-sm">
+<span class="material-symbols-outlined text-primary text-sm">add_shopping_cart</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Sponsors Banner -->
+<section class="bg-primary-container py-12 border-t border-white/5">
+<div class="max-w-7xl mx-auto px-6">
+<p class="text-center text-[10px] font-bold uppercase tracking-[0.3em] text-white/40 mb-10">Starke Partner für den Erfolg</p>
+<div class="flex flex-wrap justify-center items-center gap-12 md:gap-20 opacity-40 grayscale hover:opacity-100 hover:grayscale-0 transition-all duration-700">
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">BIOGRUND</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">ROSENBAUM</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">VOLKSBANK</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">SPARKASSE</div>
+<div class="h-8 font-headline font-black text-2xl text-white italic tracking-tighter">SPORT-ECKE</div>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="bg-primary pt-24 pb-12 overflow-hidden relative">
+<div class="max-w-7xl mx-auto px-6 relative z-10">
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-16 mb-20">
+<div class="space-y-8">
+<div class="flex items-baseline gap-2 mb-4">
+  <span class="text-[#fde000] font-headline font-black text-4xl leading-none" style="letter-spacing:-0.05em;">SG</span>
+  <span class="text-white font-headline font-bold text-xl" style="letter-spacing:-0.02em;">HÜNSTETTEN</span>
+</div>
+<p class="text-white/60 max-w-sm leading-relaxed">Seit über 80 Jahren die Heimat für Sportbegeisterte in der Region. Tradition trifft Dynamik.</p>
+</div>
+<div class="grid grid-cols-2 gap-8">
+<div>
+<h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Verein</h4>
+<ul class="space-y-4 text-white/70 font-bold text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Fußball</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Turnen</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Leichtathletik</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Vorstand</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Satzung</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Kontakt</a></li>
+</ul>
+</div>
+<div>
+<h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Rechtliches</h4>
+<ul class="space-y-4 text-white/70 font-bold text-sm">
+<li><a class="hover:text-white transition-colors" href="#">Impressum</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Datenschutz</a></li>
+<li><a class="hover:text-white transition-colors" href="#">Mitgliedschaft</a></li>
+</ul>
+</div>
+</div>
+<div>
+<h4 class="text-secondary-container font-headline font-black uppercase italic tracking-widest text-sm mb-6">Newsletter</h4>
+<p class="text-white/60 text-sm mb-6">Erhalte die neuesten Infos direkt per Mail.</p>
+<div class="flex gap-2">
+<input class="bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white text-sm w-full focus:outline-none focus:border-secondary-container" placeholder="Deine E-Mail" type="email"/>
+<button class="bg-secondary-container text-primary p-3 rounded-lg hover:scale-105 transition-transform">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</div>
+<div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
+<p class="text-white/40 text-[10px] font-bold uppercase tracking-[0.2em]">© 2025 SG Hünstetten – Tischtennis · Powered by <span class="text-[#fde000]">KlubHaus</span></p>
+</div>
+</div>
+</footer>
+</body></html>
