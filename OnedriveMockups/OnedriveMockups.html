@@ -43,6 +43,52 @@
 <style data-purpose="forensic-ui-elements">
   .histogram-bar { width: 8px; background-color: #22c55e; border-radius: 1px; transition: height 0.2s; }
   .hex-view { font-family: 'Courier New', Courier, monospace; font-size: 12px; line-height: 1.2; }
+
+  /* Right Pane Tabs */
+  .rp-tab {
+    background: transparent; border: 0; border-bottom: 2px solid transparent;
+    padding: 6px 10px 8px; font-size: 12px; font-weight: 600; color: #64748b;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+    margin-bottom: -1px; transition: color 0.15s, border-color 0.15s;
+  }
+  .rp-tab:hover { color: #2563eb; }
+  .rp-tab.rp-tab-active { color: #2563eb; border-bottom-color: #2563eb; }
+
+  /* Version history icon buttons */
+  .vh-icon-btn {
+    background: transparent; border: 0; padding: 2px; cursor: pointer;
+    display: inline-flex; align-items: center; border-radius: 4px;
+  }
+  .vh-icon-btn:hover { background: #f1f5f9; }
+
+  /* Contributor count badge */
+  .contrib-wrap { position: relative; display: inline-flex; }
+  .contrib-count {
+    position: absolute; top: -5px; right: -7px;
+    background: #2563eb; color: #fff; border-radius: 9999px;
+    font-size: 9px; font-weight: 700; min-width: 14px; height: 14px;
+    display: flex; align-items: center; justify-content: center;
+    line-height: 1; padding: 0 2px;
+  }
+
+  /* Floating Tooltip */
+  #rp-tooltip {
+    position: fixed; z-index: 9999; display: none;
+    background: #1e293b; color: #f8fafc;
+    border-radius: 6px; padding: 10px 12px;
+    font-size: 11px; line-height: 1.6; max-width: 260px; min-width: 180px;
+    pointer-events: none; box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  }
+  #rp-tooltip .tt-channel {
+    display: flex; align-items: center; gap: 5px;
+    font-weight: 700; font-size: 12px; margin-bottom: 2px;
+  }
+  #rp-tooltip .tt-meta { color: #94a3b8; }
+  #rp-tooltip .tt-link { color: #7dd3fc; margin-top: 4px; display: block; }
+  #rp-tooltip .tt-section {
+    margin-top: 8px; padding-top: 8px;
+    border-top: 1px solid rgba(255,255,255,0.15);
+  }
 </style>
 </head>
 
@@ -372,23 +418,37 @@
   </section>
   <!-- END: ContentArea -->
 
-  <!-- BEGIN: PropertiesPane (PDF Preview) -->
-  <aside class="w-[450px] bg-white border-l border-border shrink-0 flex flex-col">
-    <!-- Document Header -->
-    <div class="flex items-center justify-between p-4 border-b border-border bg-slate-50/50">
-      <div>
-        <h2 class="fw-bold mb-0" style="font-size:0.875rem;color:#1e293b">Northwind Traders Proposal.pdf</h2>
-        <div class="flex gap-3 text-muted mt-0.5" style="font-size:11px">
-          <span>1.2 MB</span>
-          <span>Modified: 10/12/2023 14:20</span>
+  <!-- BEGIN: PropertiesPane (Preview + Version History) -->
+  <aside class="w-[450px] bg-white border-l border-border shrink-0 flex flex-col" id="right-pane">
+
+    <!-- Header: file info + tab toggle -->
+    <div class="border-b border-border bg-slate-50/50">
+      <div class="flex items-center justify-between px-4 pt-3 pb-2">
+        <div class="flex-1 min-w-0 pr-2">
+          <h2 class="fw-bold mb-0 truncate" style="font-size:0.875rem;color:#1e293b">Northwind Traders Proposal.pdf</h2>
+          <div class="flex gap-3 text-muted mt-0.5" style="font-size:11px">
+            <span>1.2 MB</span>
+            <span>Modified: 10/12/2023 14:20</span>
+          </div>
         </div>
+        <button class="btn btn-link p-1">
+          <span class="material-symbols-outlined text-slate-500" style="font-size:20px">close</span>
+        </button>
       </div>
-      <button class="btn btn-link p-1">
-        <span class="material-symbols-outlined text-slate-500" style="font-size:20px">close</span>
-      </button>
+      <div class="flex px-3">
+        <button id="tab-preview-btn" class="rp-tab rp-tab-active" onclick="switchRightTab('preview')">
+          <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">visibility</span>
+          Preview
+        </button>
+        <button id="tab-versions-btn" class="rp-tab" onclick="switchRightTab('versions')">
+          <span class="material-symbols-outlined" style="font-size:14px;vertical-align:middle">history</span>
+          Version History
+        </button>
+      </div>
     </div>
-    <!-- Document Body -->
-    <div class="flex-1 overflow-y-auto p-6 bg-slate-100/50">
+
+    <!-- PANE: Preview (PDF) -->
+    <div id="pane-preview" class="flex-1 overflow-y-auto p-6 bg-slate-100/50">
       <div class="bg-white shadow-sm border border-slate-200 p-8 min-h-full">
         <h3 class="fw-bold mb-4" style="font-size:1.125rem;color:#1e293b">4. COST BREAKDOWN</h3>
         <table class="table w-full mb-8">
@@ -440,8 +500,162 @@
         </div>
       </div>
     </div>
-    <!-- Bottom Toolbar (dark bg — inline styles, no btn classes on dark background) -->
-    <div class="h-12 bg-slate-800 text-white flex items-center justify-between px-4 shrink-0">
+
+    <!-- PANE: Version History -->
+    <div id="pane-versions" class="flex-1 overflow-y-auto flex flex-col" style="display:none">
+
+      <!-- Mini-toolbar -->
+      <div class="flex items-center justify-between px-3 py-2 border-b border-slate-200 bg-slate-50/50 shrink-0">
+        <span class="small fw-semibold text-muted">5 versions</span>
+        <div class="flex items-center gap-1">
+          <button class="btn btn-link p-1" title="Filter versions">
+            <span class="material-symbols-outlined text-slate-400" style="font-size:18px">filter_list</span>
+          </button>
+          <button class="btn btn-link p-1" title="Export list">
+            <span class="material-symbols-outlined text-slate-400" style="font-size:18px">download</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Versions table -->
+      <div class="table-responsive w-full flex-1 overflow-y-auto">
+        <table class="table table-hover mb-0 w-full" style="font-size:0.75rem">
+          <thead class="sticky top-0 bg-slate-50 z-10">
+            <tr class="text-muted" style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em">
+              <th style="max-width:130px">Filename</th>
+              <th style="white-space:nowrap">Date / Time</th>
+              <th>Version</th>
+              <th>Saved By</th>
+              <th class="text-center" style="width:34px" title="Sent">
+                <span class="material-symbols-outlined" style="font-size:13px;vertical-align:middle">send</span>
+              </th>
+              <th class="text-center" style="width:34px" title="Contributors">
+                <span class="material-symbols-outlined" style="font-size:13px;vertical-align:middle">group</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+
+            <!-- v1.4 — current, sent Mail + Teams, 4 contributors -->
+            <tr class="table-active">
+              <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                <span class="fw-semibold text-primary" title="Northwind Traders Proposal.pdf">Northwind Traders Proposal.pdf</span>
+              </td>
+              <td class="text-muted" style="white-space:nowrap">10.12.2023 14:20</td>
+              <td><span class="badge badge-pill badge-primary">v1.4</span></td>
+              <td class="text-muted" style="white-space:nowrap">Sarah Chen</td>
+              <td class="text-center">
+                <button class="vh-icon-btn"
+                  data-tt-type="send"
+                  data-tt-sends='[{"channel":"mail","label":"E-Mail","time":"10.12.2023, 15:02","to":"j.doe@northwind.com","link":"#mail-001"},{"channel":"teams","label":"Teams","time":"10.12.2023, 15:15","to":"Deal Review (Channel)","link":"#teams-001"}]'>
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#2563eb">send</span>
+                </button>
+              </td>
+              <td class="text-center">
+                <button class="vh-icon-btn"
+                  data-tt-type="contributors"
+                  data-tt-users='["Sarah Chen","Marcus Reid","Lisa Park","Tom Weber"]'>
+                  <span class="contrib-wrap">
+                    <span class="material-symbols-outlined" style="font-size:18px;color:#64748b">group</span>
+                    <span class="contrib-count">4</span>
+                  </span>
+                </button>
+              </td>
+            </tr>
+
+            <!-- v1.3 — sent Teams, 2 contributors -->
+            <tr>
+              <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                <span class="text-muted" title="Northwind Traders Proposal.pdf">Northwind Traders Proposal.pdf</span>
+              </td>
+              <td class="text-muted" style="white-space:nowrap">08.12.2023 09:15</td>
+              <td><span class="badge badge-pill badge-secondary">v1.3</span></td>
+              <td class="text-muted" style="white-space:nowrap">Marcus Reid</td>
+              <td class="text-center">
+                <button class="vh-icon-btn"
+                  data-tt-type="send"
+                  data-tt-sends='[{"channel":"teams","label":"Teams","time":"08.12.2023, 11:30","to":"Legal Review (Channel)","link":"#teams-002"}]'>
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#2563eb">send</span>
+                </button>
+              </td>
+              <td class="text-center">
+                <button class="vh-icon-btn"
+                  data-tt-type="contributors"
+                  data-tt-users='["Marcus Reid","Sarah Chen"]'>
+                  <span class="contrib-wrap">
+                    <span class="material-symbols-outlined" style="font-size:18px;color:#64748b">group</span>
+                    <span class="contrib-count">2</span>
+                  </span>
+                </button>
+              </td>
+            </tr>
+
+            <!-- v1.2 — not sent, only author -->
+            <tr>
+              <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                <span class="text-muted" title="Northwind Traders Proposal.pdf">Northwind Traders Proposal.pdf</span>
+              </td>
+              <td class="text-muted" style="white-space:nowrap">05.12.2023 17:42</td>
+              <td><span class="badge badge-pill badge-secondary">v1.2</span></td>
+              <td class="text-muted" style="white-space:nowrap">Sarah Chen</td>
+              <td class="text-center">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#cbd5e1" title="Not sent">send</span>
+              </td>
+              <td class="text-center">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#cbd5e1" title="Only author">person</span>
+              </td>
+            </tr>
+
+            <!-- v1.1 — sent Mail, 3 contributors -->
+            <tr>
+              <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                <span class="text-muted" title="Northwind Traders Proposal.pdf">Northwind Traders Proposal.pdf</span>
+              </td>
+              <td class="text-muted" style="white-space:nowrap">02.12.2023 11:30</td>
+              <td><span class="badge badge-pill badge-secondary">v1.1</span></td>
+              <td class="text-muted" style="white-space:nowrap">Michael Torres</td>
+              <td class="text-center">
+                <button class="vh-icon-btn"
+                  data-tt-type="send"
+                  data-tt-sends='[{"channel":"mail","label":"E-Mail","time":"02.12.2023, 14:05","to":"m.torres@cloudficient.com","link":"#mail-002"}]'>
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#2563eb">send</span>
+                </button>
+              </td>
+              <td class="text-center">
+                <button class="vh-icon-btn"
+                  data-tt-type="contributors"
+                  data-tt-users='["Michael Torres","Sarah Chen","Marcus Reid"]'>
+                  <span class="contrib-wrap">
+                    <span class="material-symbols-outlined" style="font-size:18px;color:#64748b">group</span>
+                    <span class="contrib-count">3</span>
+                  </span>
+                </button>
+              </td>
+            </tr>
+
+            <!-- v1.0 — not sent, only author -->
+            <tr>
+              <td style="max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap">
+                <span class="text-muted" title="Northwind Traders Proposal.pdf">Northwind Traders Proposal.pdf</span>
+              </td>
+              <td class="text-muted" style="white-space:nowrap">28.11.2023 08:55</td>
+              <td><span class="badge badge-pill badge-secondary">v1.0</span></td>
+              <td class="text-muted" style="white-space:nowrap">Sarah Chen</td>
+              <td class="text-center">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#cbd5e1" title="Not sent">send</span>
+              </td>
+              <td class="text-center">
+                <span class="material-symbols-outlined" style="font-size:18px;color:#cbd5e1" title="Only author">person</span>
+              </td>
+            </tr>
+
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Bottom Toolbar (PDF only — hidden when Version History active) -->
+    <div id="pdf-toolbar" class="h-12 bg-slate-800 text-white flex items-center justify-between px-4 shrink-0">
       <div class="flex items-center gap-3">
         <button style="background:transparent;border:0;color:#fff;padding:4px;border-radius:4px;cursor:pointer;display:inline-flex;align-items:center" onmouseenter="this.style.background='rgba(255,255,255,0.1)'" onmouseleave="this.style.background='transparent'">
           <span class="material-symbols-outlined" style="font-size:20px">rotate_right</span>
@@ -465,6 +679,7 @@
         </button>
       </div>
     </div>
+
   </aside>
   <!-- END: PropertiesPane -->
 
@@ -479,6 +694,64 @@
   <div class="text-muted" style="font-size:10px">Expireon Forensic Suite v2.4.0</div>
 </footer>
 <!-- END: Footer -->
+
+<!-- Floating tooltip (shared for send + contributor icons) -->
+<div id="rp-tooltip"></div>
+
+<script>
+// Right pane tab switcher
+function switchRightTab(tab) {
+  const isPreview = tab === 'preview';
+  document.getElementById('pane-preview').style.display  = isPreview ? ''     : 'none';
+  document.getElementById('pane-versions').style.display = isPreview ? 'none' : '';
+  document.getElementById('pdf-toolbar').style.display   = isPreview ? ''     : 'none';
+  document.getElementById('tab-preview-btn').classList.toggle('rp-tab-active',  isPreview);
+  document.getElementById('tab-versions-btn').classList.toggle('rp-tab-active', !isPreview);
+}
+
+// Floating tooltip for version history icons
+const rpTooltip = document.getElementById('rp-tooltip');
+
+function positionTooltip(e) {
+  const tw = rpTooltip.offsetWidth  || 200;
+  const th = rpTooltip.offsetHeight || 80;
+  let x = e.clientX + 14, y = e.clientY - 10;
+  if (x + tw > window.innerWidth  - 12) x = e.clientX - tw - 14;
+  if (y + th > window.innerHeight - 12) y = window.innerHeight - th - 12;
+  rpTooltip.style.left = x + 'px';
+  rpTooltip.style.top  = y + 'px';
+}
+
+document.querySelectorAll('[data-tt-type]').forEach(btn => {
+  btn.addEventListener('mouseenter', e => {
+    const type = btn.dataset.ttType;
+    let html = '';
+
+    if (type === 'send') {
+      const sends = JSON.parse(btn.dataset.ttSends);
+      sends.forEach((s, i) => {
+        const icon = s.channel === 'mail' ? 'mail' : 'group';
+        html += i > 0 ? '<div class="tt-section">' : '<div>';
+        html += `<div class="tt-channel"><span class="material-symbols-outlined" style="font-size:14px">${icon}</span>${s.label}</div>`;
+        html += `<div class="tt-meta">${s.time}</div>`;
+        html += `<div class="tt-meta">${s.to}</div>`;
+        html += `<a class="tt-link" href="${s.link}">→ Open in ${s.label}</a>`;
+        html += '</div>';
+      });
+    } else if (type === 'contributors') {
+      const users = JSON.parse(btn.dataset.ttUsers);
+      html += `<div class="tt-channel"><span class="material-symbols-outlined" style="font-size:14px">group</span>${users.length} Contributors</div>`;
+      users.forEach(u => { html += `<div class="tt-meta" style="padding-left:4px">• ${u}</div>`; });
+    }
+
+    rpTooltip.innerHTML = html;
+    rpTooltip.style.display = 'block';
+    positionTooltip(e);
+  });
+  btn.addEventListener('mousemove',  positionTooltip);
+  btn.addEventListener('mouseleave', () => { rpTooltip.style.display = 'none'; });
+});
+</script>
 
 </body>
 </html>
