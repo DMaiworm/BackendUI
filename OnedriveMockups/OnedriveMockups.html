@@ -106,12 +106,16 @@
   .pp-tab:hover { color: #2563eb; }
   .pp-tab.pp-tab-active { color: #2563eb; border-bottom-color: #2563eb; }
 
+  /* ── Unified 12px data font for file table + properties ────────────── */
+  #file-table td,
+  #file-table th { font-size: 12px !important; }
+
   /* ── Prop table rows ─────────────────────────────────────────────────── */
   .prop-row td:first-child {
-    width: 7rem; padding: 5px 8px; font-size: 0.7rem; font-weight: 600;
+    width: 7rem; padding: 5px 8px; font-size: 12px; font-weight: 600;
     color: #64748b; background: #f8fafc; white-space: nowrap;
   }
-  .prop-row td:last-child { padding: 5px 8px; font-size: 0.75rem; }
+  .prop-row td:last-child { padding: 5px 8px; font-size: 12px; }
   .prop-row { border-bottom: 1px solid #f1f5f9; }
   .prop-row:hover td { background: #f8fafc; }
   .prop-section-hdr td {
