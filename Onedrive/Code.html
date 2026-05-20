@@ -1,0 +1,463 @@
+<!DOCTYPE html><html class="h-full bg-[#faf8ff]" lang="en" style=""><head>
+<meta charset="utf-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>Expireon Evidence Reader</title>
+<!-- Tailwind CSS v3 CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Google Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet">
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: '#2563EB',
+            surface: '#faf8ff',
+            sidebar: '#ffffff',
+            border: '#e2e8f0',
+          },
+          borderRadius: {
+            '8px': '8px',
+          }
+        }
+      }
+    }
+  </script>
+<style data-purpose="custom-scroll">
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+    .tree-item-active {
+      background-color: #eff6ff;
+      border-left: 3px solid #2563EB;
+    }
+  </style>
+<style data-purpose="forensic-ui-elements">
+    .histogram-bar {
+      width: 8px;
+      background-color: #22c55e;
+      border-radius: 1px;
+      transition: height 0.2s;
+    }
+    .hex-view {
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 12px;
+      line-height: 1.2;
+    }
+  </style>
+</head>
+<body class="h-full flex flex-col text-slate-700">
+<!-- BEGIN: MainHeader -->
+<header class="h-14 bg-white border-b border-border flex items-center justify-between px-4 z-20 shrink-0">
+<div class="flex items-center gap-8">
+<img alt="Expireon Logo" class="h-6 object-contain" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAda8N1arW_cggHSloPQDiCvrwK9q3rCVfSrRrvdCm-Wh7DWCIbrl1TnH94Nt9V9Ssi_nm3-MjEsJ2n16hUwNGhO8KbyWUa6kwNPGnEASNrs_3v4Cwg_m7eACDc9NRNbN9L3s3CmIc3_vOCKVxdXvFmwMUOXoXMTIbURlSJlmaMsER8pLxaRf7H1Z_UsIOpqCPqMoMYdvVukULPZzIjkesdiCdJJqsvtCUG3nWymQ41s_CtMGZfCvKeKW3pVGtUl4J4M77kfCFDF0M">
+<nav class="flex items-center gap-4">
+<button class="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">dashboard</span> Dashboard
+        </button>
+<button class="flex items-center gap-2 text-sm font-semibold text-primary border-b-2 border-primary h-14">
+<span class="material-symbols-outlined text-[20px]">fingerprint</span> Artifacts
+        </button>
+<button class="flex items-center gap-2 text-sm font-medium text-slate-500 hover:text-primary">
+<span class="material-symbols-outlined text-[20px]">storage</span> OnPrem
+        </button>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3 flex items-center text-slate-400">
+<span class="material-symbols-outlined text-[18px]">search</span>
+</span>
+<input class="pl-10 pr-4 py-1.5 bg-slate-50 border-none rounded-8px text-sm w-64 focus:ring-1 focus:ring-primary" placeholder="Search evidence..." type="text">
+</div>
+<div class="flex items-center gap-2 pl-4 border-l border-border">
+<div class="w-8 h-8 rounded-full bg-slate-200 flex items-center justify-center text-xs font-bold text-slate-600">JD</div>
+<span class="material-symbols-outlined text-slate-400">expand_more</span>
+</div>
+</div>
+</header>
+<!-- END: MainHeader -->
+<main class="flex-1 flex overflow-hidden">
+<!-- BEGIN: ArtifactsSidebar -->
+<aside class="w-72 bg-white border-r border-border flex flex-col shrink-0">
+<div class="flex border-b border-border">
+<button class="flex-1 py-3 text-xs font-bold border-b-2 border-primary text-primary">STRUCTURE</button>
+<button class="flex-1 py-3 text-xs font-bold text-slate-400">OVERVIEW</button>
+</div>
+<div class="flex-1 overflow-y-auto p-2">
+<div class="space-y-1 font-sans">
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[18px] text-amber-500">folder</span>
+<span class="text-sm text-slate-700">Samples.E01 <span class="text-slate-400 text-sm">(2832)</span></span>
+</div>
+<div class="pl-6 space-y-1">
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">database</span>
+<span class="text-sm text-slate-700">Manifest.db <span class="text-slate-400 text-sm">(721)</span></span>
+</div>
+<div class="pl-6 space-y-1">
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">volume_up</span>
+<span class="text-sm text-slate-700">Audios <span class="text-slate-400 text-sm">(2)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">chat_bubble</span>
+<span class="text-sm text-slate-700">Chats <span class="text-slate-400 text-sm">(58)</span></span>
+</div>
+<div class="pl-6 space-y-1">
+<div class="flex items-center gap-1 p-1 tree-item-active rounded cursor-pointer">
+<input checked="" class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="truncate text-sm text-slate-700">WhatsApp <span class="text-slate-400 text-sm">(17)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">account_circle</span>
+<span class="truncate text-sm text-slate-700">Vipole <span class="text-slate-400 text-sm">(41)</span></span>
+</div>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">description</span>
+<span class="text-sm text-slate-700">Documents <span class="text-slate-400 text-sm">(5)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">apps</span>
+<span class="text-sm text-slate-700">Installed applications <span class="text-slate-400 text-sm">(130)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">smartphone</span>
+<span class="text-sm text-slate-700">iPhone 6S (13.0) <span class="text-slate-400 text-sm">(42)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">mail</span>
+<span class="text-sm text-slate-700">Mails <span class="text-slate-400 text-sm">(19)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">app_shortcut</span>
+<span class="text-sm text-slate-700">Mobile applications <span class="text-slate-400 text-sm">(84)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">draft</span>
+<span class="text-sm text-slate-700">Other files <span class="text-slate-400 text-sm">(1)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">image</span>
+<span class="text-sm text-slate-700">Pictures <span class="text-slate-400 text-sm">(103)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">settings</span>
+<span class="text-sm text-slate-700">System files <span class="text-slate-400 text-sm">(188)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">collections</span>
+<span class="text-sm text-slate-700">Thumbnails <span class="text-slate-400 text-sm">(5)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">play_circle</span>
+<span class="text-sm text-slate-700">Videos <span class="text-slate-400 text-sm">(9)</span></span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_right</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">description</span>
+<span class="text-sm text-slate-700">pagefile.sys <span class="text-slate-400 text-sm">(7)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">hard_drive</span>
+<span class="text-sm text-slate-700">Volume <span class="text-slate-400 text-sm">(2104)</span></span>
+</div>
+<div class="pl-6 space-y-1">
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="material-symbols-outlined text-[18px] text-slate-400">arrow_drop_down</span>
+<span class="material-symbols-outlined text-[18px] text-slate-400">search</span>
+<span class="text-sm text-slate-700">[NTFS] (Allocated space) <span class="text-slate-400 text-sm">(2104)</span></span>
+</div>
+<div class="pl-6 space-y-1">
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="text-sm text-slate-700">Browsers <span class="text-slate-400 text-sm">(502)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="text-sm text-slate-700">Documents <span class="text-slate-400 text-sm">(46)</span></span>
+</div>
+<div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
+<input class="rounded border-slate-300 text-primary focus:ring-primary w-3.5 h-3.5 mr-1" type="checkbox">
+<span class="text-sm text-slate-700">Installed applications <span class="text-slate-400 text-sm">(431)</span></span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</aside>
+<!-- END: ArtifactsSidebar -->
+<!-- BEGIN: ContentArea -->
+<section class="flex-1 flex flex-col min-w-0 bg-slate-50 p-4 gap-4 overflow-hidden">
+<!-- Center Column Content -->
+<div class="flex-1 flex flex-col min-h-0 bg-white border border-border rounded-8px overflow-hidden shadow-sm">
+<!-- File List Section -->
+<div class="flex flex-col flex-1 min-h-0">
+<div class="p-2 border-b border-slate-200 flex items-center justify-between gap-4 bg-white">
+<div class="flex items-center gap-2 overflow-hidden text-sm bg-slate-50 border border-slate-200 px-3 py-1.5 rounded flex-1">
+<button class="p-1 hover:bg-slate-200 rounded shrink-0">
+<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m11 17-5-5 5-5m7 10-5-5 5-5"></path></svg>
+</button>
+<div class="flex items-center gap-1 whitespace-nowrap overflow-hidden">
+<span class="text-slate-500">Files found on Local Disk (E:)</span>
+<svg class="w-3 h-3 text-slate-300 shrink-0" fill="none" stroke="currentColor" stroke-width="3" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m9 18 6-6-6-6"></path></svg>
+<span class="font-medium">All files</span>
+</div>
+</div>
+<div class="relative w-1/3">
+<input class="w-full pl-3 pr-10 py-1.5 text-sm border-slate-200 rounded focus:ring-primary focus:border-primary" placeholder="Enter search term here" type="text">
+<button class="absolute right-0 top-0 h-full px-3 bg-slate-100 border-l border-slate-200 rounded-r hover:bg-slate-200 transition-colors">
+<svg class="w-4 h-4 text-slate-600" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="8"></circle><path d="m21 21-4.3-4.3"></path></svg>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-auto relative bg-white min-h-[200px]">
+<table class="w-full text-left text-sm border-collapse" id="file-table">
+<thead class="sticky top-0 bg-slate-50 border-b border-slate-200 z-10">
+<tr class="text-slate-500 uppercase text-[10px] font-bold tracking-wider">
+<th class="p-3 w-10 text-center"><input class="rounded border-slate-300" type="checkbox"></th>
+<th class="p-3 border-r border-slate-200">Name</th>
+<th class="p-3 border-r border-slate-200">Date Modified</th>
+<th class="p-3 border-r border-slate-200">Type</th>
+<th class="p-3">Size</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-amber-400">folder</span><span class="">$Extend</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">Folder</td><td class="p-3 text-right tabular-nums">16 MB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-amber-400">folder</span><span class="">Documents</span></td><td class="p-3 text-slate-500">01.09.2023 19:40:49</td><td class="p-3 text-slate-500">Folder</td><td class="p-3 text-right tabular-nums">22 MB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-amber-400">folder</span><span class="">Music</span></td><td class="p-3 text-slate-500">01.09.2023 19:40:49</td><td class="p-3 text-slate-500">Folder</td><td class="p-3 text-right tabular-nums">0 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-amber-400">folder</span><span class="">Photos</span></td><td class="p-3 text-slate-500">21.09.2023 21:32:54</td><td class="p-3 text-slate-500">Folder</td><td class="p-3 text-right tabular-nums">4.5 GB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-amber-400">folder</span><span class="">Pictures</span></td><td class="p-3 text-slate-500">22.09.2023 17:29:38</td><td class="p-3 text-slate-500">Folder</td><td class="p-3 text-right tabular-nums">5.6 GB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-amber-400">folder</span><span class="">System Volume Information</span></td><td class="p-3 text-slate-500">21.09.2023 16:30:54</td><td class="p-3 text-slate-500">Folder</td><td class="p-3 text-right tabular-nums">0 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-amber-400">folder</span><span class="">Videos</span></td><td class="p-3 text-slate-500">01.09.2023 19:45:22</td><td class="p-3 text-slate-500">Folder</td><td class="p-3 text-right tabular-nums">220 MB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$AttrDef</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">2 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$BadClus</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">0 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$Bitmap</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">462 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$Boot</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">8 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$LogFile</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">21 MB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$MFT</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">16 MB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$MFTMirr</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">4 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$Secure</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">0 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$UpCase</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">128 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-slate-400">description</span><span class="">$Volume</span></td><td class="p-3 text-slate-500">21.09.2023 16:29:57</td><td class="p-3 text-slate-500">File</td><td class="p-3 text-right tabular-nums">0 KB</td></tr>
+<tr class="hover:bg-blue-50 transition-colors"><td class="p-3 text-center"><input class="rounded border-slate-300" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-sky-400">description</span><span class="">Configuration.txt</span></td><td class="p-3 text-slate-500">01.09.2023 19:40:44</td><td class="p-3 text-slate-500">Document</td><td class="p-3 text-right tabular-nums">2 KB</td></tr>
+<tr class="bg-blue-50/50 ring-1 ring-inset ring-primary/20"><td class="p-3 text-center"><input checked="" class="rounded border-slate-300 text-primary focus:ring-primary" type="checkbox"></td><td class="p-3 flex items-center gap-2"><span class="material-symbols-outlined text-indigo-400">image</span><span class="font-medium text-primary border border-primary/30 px-1 rounded bg-white">wallpaper1920.jpg</span></td><td class="p-3 text-slate-500">15.03.2022 13:19:54</td><td class="p-3 text-slate-500">Picture</td><td class="p-3 text-right tabular-nums">276 KB</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Properties (Eigenschaften) Section - Persistent below file list -->
+<div class="h-[300px] border-t-4 border-slate-200 flex flex-col bg-white">
+<div class="flex items-center justify-between p-3 border-b border-border bg-slate-50">
+<div class="flex items-center gap-2 text-primary font-bold text-sm">
+<span class="material-symbols-outlined text-[20px]">list</span> Properties (Eigenschaften)
+        </div>
+<div class="flex gap-2">
+<button class="p-1 hover:bg-slate-200 rounded text-slate-400">
+<span class="material-symbols-outlined text-[18px]">push_pin</span>
+</button>
+<button class="p-1 hover:bg-slate-200 rounded text-slate-400">
+<span class="material-symbols-outlined text-[18px]">expand_more</span>
+</button>
+</div>
+</div>
+<div class="flex-1 overflow-y-auto">
+<!-- Collapsible Section -->
+<div class="bg-slate-50/50 px-3 py-1.5 flex justify-between items-center text-[10px] uppercase tracking-wider font-bold text-slate-500 border-b border-border">
+<span class="">General</span>
+<span class="material-symbols-outlined text-[16px] text-slate-400">expand_less</span>
+</div>
+<table class="w-full text-xs">
+<tbody>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30">Direction</td>
+<td class="p-2 text-slate-900">Incoming</td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30">From</td>
+<td class="p-2 text-slate-900 break-all">79112820734@s.whatsapp.net</td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30">From (nick)</td>
+<td class="p-2 text-slate-900 font-semibold">Justice Wargrave</td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30">To</td>
+<td class="p-2 text-slate-900 break-all">79112820734-1564573314@g.us</td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30">Time (UTC)</td>
+<td class="p-2 text-slate-900">7/31/2019 11:41:54 AM</td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30 align-top">Message</td>
+<td class="p-2 text-slate-900 italic">
+                [GROUP CHAT CREATED] header - 79112820734-1564573314@g.us created by - 79112820734@s.whatsapp.net
+              </td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30 align-top">Participants</td>
+<td class="p-2 text-slate-900">
+                Professor, [GROUP CHAT] name: Crime Group, Justice Wargrave
+              </td>
+</tr>
+<tr class="border-b border-border/50 hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30">Delivery status</td>
+<td class="p-2 text-slate-900">Delivered</td>
+</tr>
+<tr class="hover:bg-slate-50/30">
+<td class="w-32 p-2 text-slate-500 font-medium bg-slate-50/30">Is deleted</td>
+<td class="p-2 text-slate-900">No</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</section>
+<!-- END: ContentArea -->
+<!-- BEGIN: PropertiesPane (Wide PDF Preview) -->
+<aside class="w-[450px] bg-white border-l border-border shrink-0 flex flex-col">
+<!-- Document Header -->
+<div class="flex items-center justify-between p-4 border-b border-border bg-slate-50/50">
+<div>
+<h2 class="text-sm font-bold text-slate-800">Northwind Traders Proposal.pdf</h2>
+<div class="flex gap-3 text-[11px] text-slate-500 mt-0.5">
+<span class="">1.2 MB</span>
+<span class="">Modified: 10/12/2023 14:20</span>
+</div>
+</div>
+<button class="p-1.5 hover:bg-slate-200 rounded text-slate-500">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<!-- Document Body -->
+<div class="flex-1 overflow-y-auto p-6 bg-slate-100/50">
+<div class="bg-white shadow-sm border border-slate-200 p-8 min-h-full">
+<h3 class="text-lg font-bold text-slate-800 mb-6">4. COST BREAKDOWN</h3>
+<table class="w-full text-sm mb-8">
+<thead>
+<tr class="border-b-2 border-slate-200 text-slate-500 text-left">
+<th class="py-2">Phase</th>
+<th class="py-2">Description</th>
+<th class="py-2 text-right">Cost (USD)</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-slate-100">
+<tr>
+<td class="py-3 font-medium">Infrastructure</td>
+<td class="py-3 text-slate-600">Cloud setup &amp; networking</td>
+<td class="py-3 text-right">$45,000</td>
+</tr>
+<tr>
+<td class="py-3 font-medium">Implementation</td>
+<td class="py-3 text-slate-600">Development &amp; integration</td>
+<td class="py-3 text-right">$120,500</td>
+</tr>
+<tr>
+<td class="py-3 font-medium">QA &amp; Testing</td>
+<td class="py-3 text-slate-600">Security &amp; load testing</td>
+<td class="py-3 text-right">$35,000</td>
+</tr>
+<tr class="font-bold text-slate-800">
+<td class="py-3" colspan="2">Total</td>
+<td class="py-3 text-right">$200,500</td>
+</tr>
+</tbody>
+</table>
+<div class="flex flex-col items-center">
+<p class="text-xs font-bold text-slate-500 uppercase tracking-wider mb-4">Budget Allocation</p>
+<div class="relative w-48 h-48 rounded-full overflow-hidden">
+<!-- Simple Pie Chart Mockup -->
+<svg class="w-full h-full transform -rotate-90 rounded-full" viewBox="0 0 32 32">
+<circle cx="16" cy="16" fill="#f1f5f9" r="16"></circle>
+<circle cx="16" cy="16" fill="transparent" r="16" stroke="#2563eb" stroke-dasharray="60 100" stroke-width="32"></circle>
+<circle cx="16" cy="16" fill="transparent" r="16" stroke="#10b981" stroke-dasharray="25 100" stroke-dashoffset="-60" stroke-width="32"></circle>
+<circle cx="16" cy="16" fill="transparent" r="16" stroke="#f59e0b" stroke-dasharray="15 100" stroke-dashoffset="-85" stroke-width="32"></circle>
+</svg>
+</div>
+<div class="flex gap-4 mt-6 text-[11px]">
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-primary"></span> Dev</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span> Infra</div>
+<div class="flex items-center gap-1.5"><span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span> QA</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Toolbar -->
+<div class="h-12 bg-slate-800 text-white flex items-center justify-between px-4 shrink-0">
+<div class="flex items-center gap-3">
+<button class="hover:bg-slate-700 p-1 rounded"><span class="material-symbols-outlined text-[20px]">rotate_right</span></button>
+<div class="w-px h-6 bg-slate-600"></div>
+<button class="hover:bg-slate-700 p-1 rounded"><span class="material-symbols-outlined text-[20px]">zoom_out</span></button>
+<span class="text-xs px-2">125%</span>
+<button class="hover:bg-slate-700 p-1 rounded"><span class="material-symbols-outlined text-[20px]">zoom_in</span></button>
+</div>
+<div class="flex items-center gap-2">
+<button class="hover:bg-slate-700 p-1 rounded"><span class="material-symbols-outlined text-[20px]">navigate_before</span></button>
+<span class="text-xs">Page 4 of 12</span>
+<button class="hover:bg-slate-700 p-1 rounded"><span class="material-symbols-outlined text-[20px]">navigate_next</span></button>
+</div>
+</div>
+</aside>
+<!-- END: PropertiesPane -->
+</main>
+<!-- BEGIN: Footer -->
+<footer class="h-8 bg-slate-100 border-t border-border flex items-center px-4 justify-between text-[10px] text-slate-500 z-20 shrink-0">
+<div class="flex gap-4">
+<span class="">Loaded Case: Forensic_Alpha_01</span>
+<span class="">System Status: <span class="text-green-600 font-bold">READY</span></span>
+</div>
+<div class="">Expireon Forensic Suite v2.4.0</div>
+</footer>
+<!-- END: Footer -->
+
+
+</body></html>
