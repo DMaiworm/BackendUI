@@ -71,7 +71,64 @@
     line-height: 1; padding: 0 2px;
   }
 
-  /* Floating Tooltip */
+  /* ── Left Panel Mode Buttons ───────────────────────────────────────── */
+  .lp-mode-btn {
+    flex: 1; background: transparent; border: 0;
+    border-bottom: 2px solid transparent;
+    padding: 8px 4px 7px;
+    font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
+    color: #64748b; cursor: pointer; text-transform: uppercase;
+    display: flex; flex-direction: column; align-items: center; gap: 3px;
+    transition: color 0.15s, border-color 0.15s;
+  }
+  .lp-mode-btn:hover { color: #2563eb; }
+  .lp-mode-btn.lp-mode-active { color: #2563eb; border-bottom-color: #2563eb; }
+
+  /* ── Types Panel ────────────────────────────────────────────────────── */
+  .type-cat-row {
+    display: flex; align-items: center; gap: 5px;
+    padding: 5px 6px; border-radius: 4px;
+    cursor: pointer; user-select: none;
+  }
+  .type-cat-row:hover { background: #f1f5f9; }
+  .type-sub-row {
+    display: flex; align-items: center; gap: 5px;
+    padding: 3px 6px 3px 22px; border-radius: 4px;
+    cursor: pointer; font-size: 12px; color: #475569;
+  }
+  .type-sub-row:hover { background: #f1f5f9; }
+  .type-sub-row.type-active { background: #eff6ff; color: #2563eb; font-weight: 600; }
+  .type-count { margin-left: auto; font-size: 11px; color: #94a3b8; font-weight: 400; padding-left: 4px; }
+
+  /* ── Review Panel ───────────────────────────────────────────────────── */
+  .rv-section { border-bottom: 1px solid #e2e8f0; }
+  .rv-section-hdr {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 6px 8px; background: #f8fafc;
+    font-size: 10px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; color: #64748b;
+    cursor: pointer; user-select: none;
+  }
+  .rv-section-hdr:hover { background: #f1f5f9; }
+  .rv-item {
+    display: flex; align-items: center; gap: 7px;
+    padding: 5px 10px; font-size: 12px; color: #475569; cursor: pointer;
+  }
+  .rv-item:hover { background: #f8fafc; }
+  .rv-item.rv-active { background: #eff6ff; color: #2563eb; font-weight: 600; }
+  .rv-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .rv-count { margin-left: auto; font-size: 11px; color: #94a3b8; }
+  .rv-tag-chip {
+    display: inline-flex; align-items: center; gap: 4px;
+    background: #f1f5f9; border: 1px solid #e2e8f0;
+    border-radius: 9999px; padding: 1px 8px;
+    font-size: 11px; font-weight: 600; color: #475569;
+    cursor: pointer;
+  }
+  .rv-tag-chip:hover { background: #e0e7ff; border-color: #c7d2fe; color: #3730a3; }
+  .rv-tag-chip.rv-tag-active { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
+
+  /* ── Floating Tooltip */
   #rp-tooltip {
     position: fixed; z-index: 9999; display: none;
     background: #1e293b; color: #f8fafc;
@@ -131,15 +188,22 @@
 
   <!-- BEGIN: ArtifactsSidebar -->
   <aside class="w-72 bg-white border-r border-border flex flex-col shrink-0">
-    <ul class="nav nav-tabs mb-0 flex">
-      <li class="nav-item flex-1 text-center">
-        <a href="#" class="nav-link active w-full" style="font-size:0.75rem;font-weight:700;letter-spacing:0.05em">STRUCTURE</a>
-      </li>
-      <li class="nav-item flex-1 text-center">
-        <a href="#" class="nav-link w-full" style="font-size:0.75rem;font-weight:700;letter-spacing:0.05em">OVERVIEW</a>
-      </li>
-    </ul>
-    <div class="flex-1 overflow-y-auto p-2">
+
+    <!-- Mode switcher -->
+    <div class="flex shrink-0" style="border-bottom:1px solid #e2e8f0">
+      <button id="sb-btn-structure" class="lp-mode-btn lp-mode-active" onclick="switchSidebarMode('structure')">
+        <span class="material-symbols-outlined" style="font-size:18px">account_tree</span>Structure
+      </button>
+      <button id="sb-btn-types" class="lp-mode-btn" onclick="switchSidebarMode('types')">
+        <span class="material-symbols-outlined" style="font-size:18px">category</span>Types
+      </button>
+      <button id="sb-btn-review" class="lp-mode-btn" onclick="switchSidebarMode('review')">
+        <span class="material-symbols-outlined" style="font-size:18px">label</span>Review
+      </button>
+    </div>
+
+    <!-- ── PANEL: Structure (source → folder tree) ──────────────────── -->
+    <div id="sb-structure" class="flex-1 overflow-y-auto p-2">
       <div class="space-y-1">
 
         <div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
@@ -148,7 +212,6 @@
           <span class="material-symbols-outlined text-amber-500" style="font-size:18px">folder</span>
           <span class="small text-slate-700">Samples.E01 <span class="text-muted">(2832)</span></span>
         </div>
-
         <div class="pl-6 space-y-1">
           <div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
             <input class="form-check-input shrink-0" style="width:14px;height:14px;margin-right:4px" type="checkbox">
@@ -242,7 +305,6 @@
             </div>
           </div>
         </div>
-
         <div class="flex items-center gap-1 p-1 hover:bg-slate-50 rounded cursor-pointer">
           <input class="form-check-input shrink-0" style="width:14px;height:14px;margin-right:4px" type="checkbox">
           <span class="material-symbols-outlined text-slate-400" style="font-size:18px">arrow_right</span>
@@ -280,6 +342,323 @@
 
       </div>
     </div>
+
+    <!-- ── PANEL: Types (file-type taxonomy) ────────────────────────── -->
+    <div id="sb-types" class="flex-1 overflow-y-auto p-2 space-y-1" style="display:none">
+
+      <!-- Communications -->
+      <div>
+        <div class="type-cat-row">
+          <span class="material-symbols-outlined" style="font-size:16px;color:#3b82f6">forum</span>
+          <span class="flex-1 fw-bold" style="font-size:12px;color:#1e293b">Communications</span>
+          <span class="type-count">77</span>
+          <span class="material-symbols-outlined text-slate-400 type-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div class="space-y-0.5 mt-0.5">
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#3b82f6">mail</span>
+            <span class="flex-1">Emails</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:33%;background:#3b82f6;border-radius:2px"></div>
+            </div>
+            <span class="type-count">19</span>
+          </div>
+          <div class="type-sub-row type-active">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#2563eb">chat_bubble</span>
+            <span class="flex-1">Chats</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:100%;background:#2563eb;border-radius:2px"></div>
+            </div>
+            <span class="type-count">58</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Documents -->
+      <div>
+        <div class="type-cat-row">
+          <span class="material-symbols-outlined" style="font-size:16px;color:#10b981">description</span>
+          <span class="flex-1 fw-bold" style="font-size:12px;color:#1e293b">Documents</span>
+          <span class="type-count">51</span>
+          <span class="material-symbols-outlined text-slate-400 type-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div class="space-y-0.5 mt-0.5">
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#10b981">picture_as_pdf</span>
+            <span class="flex-1">PDF</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:11%;background:#10b981;border-radius:2px"></div>
+            </div>
+            <span class="type-count">5</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#10b981">article</span>
+            <span class="flex-1">Office Docs</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:100%;background:#10b981;border-radius:2px"></div>
+            </div>
+            <span class="type-count">46</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#6ee7b7">text_snippet</span>
+            <span class="flex-1">Text &amp; Other</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:6%;background:#6ee7b7;border-radius:2px"></div>
+            </div>
+            <span class="type-count">3</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Media -->
+      <div>
+        <div class="type-cat-row">
+          <span class="material-symbols-outlined" style="font-size:16px;color:#8b5cf6">perm_media</span>
+          <span class="flex-1 fw-bold" style="font-size:12px;color:#1e293b">Media</span>
+          <span class="type-count">119</span>
+          <span class="material-symbols-outlined text-slate-400 type-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div class="space-y-0.5 mt-0.5">
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#8b5cf6">image</span>
+            <span class="flex-1">Images</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:100%;background:#8b5cf6;border-radius:2px"></div>
+            </div>
+            <span class="type-count">103</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#8b5cf6">play_circle</span>
+            <span class="flex-1">Videos</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:9%;background:#8b5cf6;border-radius:2px"></div>
+            </div>
+            <span class="type-count">9</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#c4b5fd">volume_up</span>
+            <span class="flex-1">Audio</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:2%;background:#c4b5fd;border-radius:2px"></div>
+            </div>
+            <span class="type-count">2</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#c4b5fd">collections</span>
+            <span class="flex-1">Thumbnails</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:5%;background:#c4b5fd;border-radius:2px"></div>
+            </div>
+            <span class="type-count">5</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- System & Apps -->
+      <div>
+        <div class="type-cat-row">
+          <span class="material-symbols-outlined" style="font-size:16px;color:#f59e0b">dns</span>
+          <span class="flex-1 fw-bold" style="font-size:12px;color:#1e293b">System &amp; Apps</span>
+          <span class="type-count">1228</span>
+          <span class="material-symbols-outlined text-slate-400 type-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div class="space-y-0.5 mt-0.5">
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#f59e0b">apps</span>
+            <span class="flex-1">Installed Apps</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:100%;background:#f59e0b;border-radius:2px"></div>
+            </div>
+            <span class="type-count">561</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#f59e0b">language</span>
+            <span class="flex-1">Browser Data</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:89%;background:#f59e0b;border-radius:2px"></div>
+            </div>
+            <span class="type-count">502</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#fcd34d">settings</span>
+            <span class="flex-1">System Files</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:34%;background:#fcd34d;border-radius:2px"></div>
+            </div>
+            <span class="type-count">188</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#fcd34d">app_shortcut</span>
+            <span class="flex-1">Mobile App Data</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:22%;background:#fcd34d;border-radius:2px"></div>
+            </div>
+            <span class="type-count">126</span>
+          </div>
+          <div class="type-sub-row">
+            <span class="material-symbols-outlined" style="font-size:15px;color:#d1d5db">draft</span>
+            <span class="flex-1">Other</span>
+            <div style="width:44px;height:3px;background:#e2e8f0;border-radius:2px;align-self:center;flex-shrink:0">
+              <div style="height:100%;width:1%;background:#d1d5db;border-radius:2px"></div>
+            </div>
+            <span class="type-count">8</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ── PANEL: Review (tags, status, custodians) ──────────────────── -->
+    <div id="sb-review" class="flex-1 overflow-y-auto" style="display:none">
+
+      <!-- Review Status -->
+      <div class="rv-section">
+        <div class="rv-section-hdr">
+          <span>Review Status</span>
+          <span class="material-symbols-outlined rv-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div>
+          <div class="rv-item rv-active">
+            <span class="rv-dot" style="background:#ef4444"></span>
+            <span class="flex-1">Not Reviewed</span>
+            <span class="rv-count">234</span>
+          </div>
+          <div style="height:3px;background:#e2e8f0;margin:0 10px 4px">
+            <div style="height:100%;width:64%;background:#ef4444;border-radius:2px"></div>
+          </div>
+          <div class="rv-item">
+            <span class="rv-dot" style="background:#f59e0b"></span>
+            <span class="flex-1">In Progress</span>
+            <span class="rv-count">45</span>
+          </div>
+          <div style="height:3px;background:#e2e8f0;margin:0 10px 4px">
+            <div style="height:100%;width:12%;background:#f59e0b;border-radius:2px"></div>
+          </div>
+          <div class="rv-item">
+            <span class="rv-dot" style="background:#22c55e"></span>
+            <span class="flex-1">Reviewed</span>
+            <span class="rv-count">89</span>
+          </div>
+          <div style="height:3px;background:#e2e8f0;margin:0 10px 8px">
+            <div style="height:100%;width:24%;background:#22c55e;border-radius:2px"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Relevance -->
+      <div class="rv-section">
+        <div class="rv-section-hdr">
+          <span>Relevance</span>
+          <span class="material-symbols-outlined rv-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div>
+          <div class="rv-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#2563eb">check_circle</span>
+            <span class="flex-1">Responsive</span>
+            <span class="rv-count">67</span>
+          </div>
+          <div class="rv-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#94a3b8">cancel</span>
+            <span class="flex-1">Non-Responsive</span>
+            <span class="rv-count">22</span>
+          </div>
+          <div class="rv-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#f59e0b">lock</span>
+            <span class="flex-1">Privileged</span>
+            <span class="rv-count">8</span>
+          </div>
+          <div class="rv-item" style="padding-bottom:8px">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#cbd5e1">radio_button_unchecked</span>
+            <span class="flex-1">Unclassified</span>
+            <span class="rv-count">271</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Custodians -->
+      <div class="rv-section">
+        <div class="rv-section-hdr">
+          <span>Custodians</span>
+          <span class="material-symbols-outlined rv-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div>
+          <div class="rv-item">
+            <div class="w-5 h-5 rounded-full bg-blue-100 flex items-center justify-center fw-bold" style="font-size:9px;color:#2563eb;flex-shrink:0">JD</div>
+            <span class="flex-1">John Doe</span>
+            <span class="rv-count">145</span>
+          </div>
+          <div class="rv-item">
+            <div class="w-5 h-5 rounded-full bg-emerald-100 flex items-center justify-center fw-bold" style="font-size:9px;color:#059669;flex-shrink:0">JS</div>
+            <span class="flex-1">Jane Smith</span>
+            <span class="rv-count">98</span>
+          </div>
+          <div class="rv-item">
+            <div class="w-5 h-5 rounded-full bg-amber-100 flex items-center justify-center fw-bold" style="font-size:9px;color:#d97706;flex-shrink:0">MT</div>
+            <span class="flex-1">M. Torres</span>
+            <span class="rv-count">67</span>
+          </div>
+          <div class="rv-item" style="padding-bottom:8px">
+            <div class="w-5 h-5 rounded-full bg-violet-100 flex items-center justify-center fw-bold" style="font-size:9px;color:#7c3aed;flex-shrink:0">SC</div>
+            <span class="flex-1">Sarah Chen</span>
+            <span class="rv-count">58</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tags -->
+      <div class="rv-section">
+        <div class="rv-section-hdr">
+          <span>Tags &amp; Bookmarks</span>
+          <span class="material-symbols-outlined rv-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div class="p-2 flex flex-wrap gap-1.5">
+          <span class="rv-tag-chip rv-tag-active">
+            <span class="material-symbols-outlined" style="font-size:12px">bookmark</span>Key Document <span style="color:#94a3b8;font-weight:400">23</span>
+          </span>
+          <span class="rv-tag-chip">
+            <span class="material-symbols-outlined" style="font-size:12px">local_fire_department</span>Hot Doc <span style="color:#94a3b8;font-weight:400">8</span>
+          </span>
+          <span class="rv-tag-chip">
+            <span class="material-symbols-outlined" style="font-size:12px">lock</span>Confidential <span style="color:#94a3b8;font-weight:400">31</span>
+          </span>
+          <span class="rv-tag-chip">
+            <span class="material-symbols-outlined" style="font-size:12px">star</span>Bookmarked <span style="color:#94a3b8;font-weight:400">14</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Date Range -->
+      <div class="rv-section">
+        <div class="rv-section-hdr">
+          <span>Date Range</span>
+          <span class="material-symbols-outlined rv-toggle-icon" style="font-size:16px">expand_less</span>
+        </div>
+        <div>
+          <div class="rv-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#94a3b8">schedule</span>
+            <span class="flex-1">Last 7 days</span>
+            <span class="rv-count">12</span>
+          </div>
+          <div class="rv-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#94a3b8">calendar_month</span>
+            <span class="flex-1">Last 30 days</span>
+            <span class="rv-count">45</span>
+          </div>
+          <div class="rv-item">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#94a3b8">date_range</span>
+            <span class="flex-1">Last 90 days</span>
+            <span class="rv-count">89</span>
+          </div>
+          <div class="rv-item" style="padding-bottom:8px">
+            <span class="material-symbols-outlined" style="font-size:14px;color:#cbd5e1">history</span>
+            <span class="flex-1">Older</span>
+            <span class="rv-count">222</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </aside>
   <!-- END: ArtifactsSidebar -->
 
@@ -750,6 +1129,37 @@ document.querySelectorAll('[data-tt-type]').forEach(btn => {
   });
   btn.addEventListener('mousemove',  positionTooltip);
   btn.addEventListener('mouseleave', () => { rpTooltip.style.display = 'none'; });
+});
+
+// ── Sidebar mode switcher ─────────────────────────────────────────────
+function switchSidebarMode(mode) {
+  ['structure', 'types', 'review'].forEach(m => {
+    document.getElementById('sb-' + m).style.display = m === mode ? '' : 'none';
+    document.getElementById('sb-btn-' + m).classList.toggle('lp-mode-active', m === mode);
+  });
+}
+
+// ── Review panel accordion ────────────────────────────────────────────
+document.querySelectorAll('.rv-section-hdr').forEach(hdr => {
+  hdr.addEventListener('click', () => {
+    const body = hdr.nextElementSibling;
+    const icon = hdr.querySelector('.rv-toggle-icon');
+    const isOpen = body.style.display !== 'none';
+    body.style.display = isOpen ? 'none' : '';
+    if (icon) icon.textContent = isOpen ? 'expand_more' : 'expand_less';
+  });
+});
+
+// ── Types panel category accordion ───────────────────────────────────
+document.querySelectorAll('.type-cat-row').forEach(hdr => {
+  hdr.addEventListener('click', () => {
+    const body = hdr.nextElementSibling;
+    if (!body) return;
+    const icon = hdr.querySelector('.type-toggle-icon');
+    const isOpen = body.style.display !== 'none';
+    body.style.display = isOpen ? 'none' : '';
+    if (icon) icon.textContent = isOpen ? 'expand_more' : 'expand_less';
+  });
 });
 </script>
 
