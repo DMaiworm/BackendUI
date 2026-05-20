@@ -76,13 +76,49 @@
     flex: 1; background: transparent; border: 0;
     border-bottom: 2px solid transparent;
     padding: 8px 4px 7px;
-    font-size: 10px; font-weight: 700; letter-spacing: 0.05em;
+    font-size: 10px !important; font-weight: 700; letter-spacing: 0.04em;
     color: #64748b; cursor: pointer; text-transform: uppercase;
     display: flex; flex-direction: column; align-items: center; gap: 3px;
-    transition: color 0.15s, border-color 0.15s;
+    transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+    line-height: 1.2;
   }
   .lp-mode-btn:hover { color: #2563eb; }
   .lp-mode-btn.lp-mode-active { color: #2563eb; border-bottom-color: #2563eb; }
+
+  /* ── Source filter chips (Types panel) ──────────────────────────────── */
+  .src-chip {
+    background: transparent; border: 1px solid #e2e8f0;
+    border-radius: 9999px; padding: 1px 9px;
+    font-size: 10px; font-weight: 700; color: #64748b;
+    cursor: pointer; white-space: nowrap; letter-spacing: 0.03em;
+    transition: all 0.15s; display: inline-flex; align-items: center; gap: 3px;
+  }
+  .src-chip:hover { border-color: #2563eb; color: #2563eb; }
+  .src-chip.src-active { background: #eff6ff; border-color: #2563eb; color: #2563eb; }
+
+  /* ── Properties pane tabs ───────────────────────────────────────────── */
+  .pp-tab {
+    background: transparent; border: 0; border-bottom: 2px solid transparent;
+    padding: 5px 10px 6px; font-size: 11px; font-weight: 600; color: #64748b;
+    cursor: pointer; display: inline-flex; align-items: center; gap: 4px;
+    margin-bottom: -1px; transition: color 0.15s, border-color 0.15s; white-space: nowrap;
+  }
+  .pp-tab:hover { color: #2563eb; }
+  .pp-tab.pp-tab-active { color: #2563eb; border-bottom-color: #2563eb; }
+
+  /* ── Prop table rows ─────────────────────────────────────────────────── */
+  .prop-row td:first-child {
+    width: 7rem; padding: 5px 8px; font-size: 0.7rem; font-weight: 600;
+    color: #64748b; background: #f8fafc; white-space: nowrap;
+  }
+  .prop-row td:last-child { padding: 5px 8px; font-size: 0.75rem; }
+  .prop-row { border-bottom: 1px solid #f1f5f9; }
+  .prop-row:hover td { background: #f8fafc; }
+  .prop-section-hdr td {
+    padding: 4px 8px; font-size: 10px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: #94a3b8; background: #f1f5f9 !important; border-bottom: 1px solid #e2e8f0;
+  }
 
   /* ── Types Panel ────────────────────────────────────────────────────── */
   .type-cat-row {
@@ -344,7 +380,25 @@
     </div>
 
     <!-- ── PANEL: Types (file-type taxonomy) ────────────────────────── -->
-    <div id="sb-types" class="flex-1 overflow-y-auto p-2 space-y-1" style="display:none">
+    <div id="sb-types" class="flex-1 flex flex-col overflow-hidden" style="display:none">
+
+      <!-- Source filter strip -->
+      <div class="shrink-0 flex items-center gap-1.5 px-2 py-2 border-b border-slate-100 flex-wrap">
+        <span style="font-size:10px;font-weight:700;color:#94a3b8;text-transform:uppercase;letter-spacing:0.04em;flex-shrink:0">Source:</span>
+        <button class="src-chip src-active" onclick="toggleSrcChip(this)">All</button>
+        <button class="src-chip" onclick="toggleSrcChip(this)">
+          <span class="material-symbols-outlined" style="font-size:11px">groups</span>Teams
+        </button>
+        <button class="src-chip" onclick="toggleSrcChip(this)">
+          <span class="material-symbols-outlined" style="font-size:11px">mail</span>Mail
+        </button>
+        <button class="src-chip" onclick="toggleSrcChip(this)">
+          <span class="material-symbols-outlined" style="font-size:11px">hard_drive</span>File System
+        </button>
+      </div>
+
+      <!-- Scrollable categories -->
+      <div class="flex-1 overflow-y-auto p-2 space-y-1">
 
       <!-- Communications -->
       <div>
@@ -506,6 +560,7 @@
         </div>
       </div>
 
+      </div><!-- end scrollable categories -->
     </div>
 
     <!-- ── PANEL: Review (tags, status, custodians) ──────────────────── -->
@@ -728,69 +783,102 @@
         </div>
       </div>
 
-      <!-- Properties (Eigenschaften) Section -->
+      <!-- Properties Section — 3 tabs -->
       <div class="h-[300px] border-t-4 border-slate-200 flex flex-col bg-white">
-        <div class="flex items-center justify-between p-3 border-b border-border bg-slate-50">
-          <div class="flex items-center gap-2 text-primary fw-bold small">
-            <span class="material-symbols-outlined" style="font-size:20px">list</span> Properties (Eigenschaften)
+
+        <!-- Tab header row -->
+        <div class="flex items-center justify-between border-b border-border bg-slate-50/50 shrink-0">
+          <div class="flex">
+            <button id="pp-tab-content-btn" class="pp-tab pp-tab-active" onclick="switchPropTab('content')">
+              <span class="material-symbols-outlined" style="font-size:13px">article</span>Content
+            </button>
+            <button id="pp-tab-file-btn" class="pp-tab" onclick="switchPropTab('file')">
+              <span class="material-symbols-outlined" style="font-size:13px">draft</span>File
+            </button>
+            <button id="pp-tab-source-btn" class="pp-tab" onclick="switchPropTab('source')">
+              <span class="material-symbols-outlined" style="font-size:13px">link</span>Source
+            </button>
           </div>
-          <div class="flex gap-1">
+          <div class="flex gap-1 pr-2">
             <button class="btn btn-link p-1">
-              <span class="material-symbols-outlined text-slate-400" style="font-size:18px">push_pin</span>
+              <span class="material-symbols-outlined text-slate-400" style="font-size:16px">push_pin</span>
             </button>
             <button class="btn btn-link p-1">
-              <span class="material-symbols-outlined text-slate-400" style="font-size:18px">expand_more</span>
+              <span class="material-symbols-outlined text-slate-400" style="font-size:16px">expand_more</span>
             </button>
           </div>
         </div>
-        <div class="flex-1 overflow-y-auto">
-          <div class="bg-slate-50/50 px-3 py-1.5 flex justify-between items-center border-b border-border text-muted fw-bold" style="font-size:10px;text-transform:uppercase;letter-spacing:0.08em">
-            <span>General</span>
-            <span class="material-symbols-outlined text-slate-400" style="font-size:16px">expand_less</span>
-          </div>
-          <table class="w-full" style="font-size:0.75rem">
+
+        <!-- TAB: Content Properties (file-internal / embedded metadata) -->
+        <div id="pp-content" class="flex-1 overflow-y-auto">
+          <table class="w-full">
             <tbody>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30">Direction</td>
-                <td class="p-2">Incoming</td>
-              </tr>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30">From</td>
-                <td class="p-2 break-all">79112820734@s.whatsapp.net</td>
-              </tr>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30">From (nick)</td>
-                <td class="p-2 fw-semibold">Justice Wargrave</td>
-              </tr>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30">To</td>
-                <td class="p-2 break-all">79112820734-1564573314@g.us</td>
-              </tr>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30">Time (UTC)</td>
-                <td class="p-2">7/31/2019 11:41:54 AM</td>
-              </tr>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30 align-top">Message</td>
-                <td class="p-2 fst-italic">
-                  [GROUP CHAT CREATED] header - 79112820734-1564573314@g.us created by - 79112820734@s.whatsapp.net
-                </td>
-              </tr>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30 align-top">Participants</td>
-                <td class="p-2">Professor, [GROUP CHAT] name: Crime Group, Justice Wargrave</td>
-              </tr>
-              <tr class="border-b border-border/50 hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30">Delivery status</td>
-                <td class="p-2">Delivered</td>
-              </tr>
-              <tr class="hover:bg-slate-50/30">
-                <td class="w-32 p-2 text-muted fw-semibold bg-slate-50/30">Is deleted</td>
-                <td class="p-2">No</td>
-              </tr>
+              <tr class="prop-section-hdr"><td colspan="2">EXIF / Image Metadata</td></tr>
+              <tr class="prop-row"><td>Image Title</td><td>Evening Landscape</td></tr>
+              <tr class="prop-row"><td>Artist</td><td>Michael Torres</td></tr>
+              <tr class="prop-row"><td>Camera Make</td><td>Apple</td></tr>
+              <tr class="prop-row"><td>Camera Model</td><td>iPhone 14 Pro</td></tr>
+              <tr class="prop-row"><td>Resolution</td><td>1920 × 1080 px · 72 dpi</td></tr>
+              <tr class="prop-row"><td>Color Space</td><td>sRGB</td></tr>
+              <tr class="prop-row"><td>Date Taken</td><td>15.03.2022 13:19:54</td></tr>
+              <tr class="prop-section-hdr"><td colspan="2">GPS</td></tr>
+              <tr class="prop-row"><td>Latitude</td><td>48.8566° N</td></tr>
+              <tr class="prop-row"><td>Longitude</td><td>2.3522° E</td></tr>
+              <tr class="prop-row"><td>Altitude</td><td>35 m</td></tr>
+              <tr class="prop-section-hdr"><td colspan="2">Copyright</td></tr>
+              <tr class="prop-row"><td>Copyright</td><td>© 2022 Michael Torres</td></tr>
+              <tr class="prop-row"><td>Software</td><td>iPhone OS 16.3.1</td></tr>
             </tbody>
           </table>
         </div>
+
+        <!-- TAB: File Properties (filesystem metadata) -->
+        <div id="pp-file" class="flex-1 overflow-y-auto" style="display:none">
+          <table class="w-full">
+            <tbody>
+              <tr class="prop-section-hdr"><td colspan="2">Identity</td></tr>
+              <tr class="prop-row"><td>File Name</td><td>wallpaper1920.jpg</td></tr>
+              <tr class="prop-row"><td>Extension</td><td>.jpg — JPEG Image</td></tr>
+              <tr class="prop-row"><td>Size</td><td>276 KB (282,624 bytes)</td></tr>
+              <tr class="prop-row"><td>Full Path</td><td class="break-all" style="word-break:break-all">/Volume/NTFS/Photos/wallpaper1920.jpg</td></tr>
+              <tr class="prop-section-hdr"><td colspan="2">Timestamps</td></tr>
+              <tr class="prop-row"><td>Created</td><td>15.03.2022 13:19:54 UTC</td></tr>
+              <tr class="prop-row"><td>Modified</td><td>15.03.2022 13:19:54 UTC</td></tr>
+              <tr class="prop-row"><td>Accessed</td><td>21.09.2023 16:30:01 UTC</td></tr>
+              <tr class="prop-section-hdr"><td colspan="2">Integrity</td></tr>
+              <tr class="prop-row"><td>MD5</td><td class="break-all" style="font-family:monospace;font-size:0.7rem">a3f4b2c1d09e4f87c12d3a4e5f6b7c8d</td></tr>
+              <tr class="prop-row"><td>SHA-256</td><td class="break-all" style="font-family:monospace;font-size:0.7rem">3a7b8c9d...e94f1a2b</td></tr>
+              <tr class="prop-section-hdr"><td colspan="2">Permissions</td></tr>
+              <tr class="prop-row"><td>Owner</td><td>Justice Wargrave</td></tr>
+              <tr class="prop-row"><td>Permissions</td><td style="font-family:monospace">-rw-r--r--</td></tr>
+              <tr class="prop-row"><td>MFT Entry</td><td>#8142</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- TAB: Source Properties (acquisition / chain-of-custody context) -->
+        <div id="pp-source" class="flex-1 overflow-y-auto" style="display:none">
+          <table class="w-full">
+            <tbody>
+              <tr class="prop-section-hdr"><td colspan="2">Message Context (WhatsApp)</td></tr>
+              <tr class="prop-row"><td>Direction</td><td>Incoming</td></tr>
+              <tr class="prop-row"><td>From</td><td class="break-all">79112820734@s.whatsapp.net</td></tr>
+              <tr class="prop-row"><td>From (nick)</td><td class="fw-semibold">Justice Wargrave</td></tr>
+              <tr class="prop-row"><td>To</td><td class="break-all">79112820734-1564573314@g.us</td></tr>
+              <tr class="prop-row"><td>Sent (UTC)</td><td>7/31/2019 11:41:54 AM</td></tr>
+              <tr class="prop-row"><td>Message</td><td class="fst-italic">[GROUP CHAT CREATED] created by 79112820734@s.whatsapp.net</td></tr>
+              <tr class="prop-row"><td>Participants</td><td>Professor · Crime Group · Justice Wargrave</td></tr>
+              <tr class="prop-row"><td>Delivery</td><td>Delivered</td></tr>
+              <tr class="prop-row"><td>Is deleted</td><td>No</td></tr>
+              <tr class="prop-section-hdr"><td colspan="2">Acquisition</td></tr>
+              <tr class="prop-row"><td>Source Image</td><td>Samples.E01 / Manifest.db</td></tr>
+              <tr class="prop-row"><td>Partition</td><td>NTFS (Allocated)</td></tr>
+              <tr class="prop-row"><td>Evidence ID</td><td>EVD-2023-0041</td></tr>
+              <tr class="prop-row"><td>Acquired by</td><td>J. Doe · 21.09.2023</td></tr>
+            </tbody>
+          </table>
+        </div>
+
       </div>
 
     </div>
@@ -1161,6 +1249,21 @@ document.querySelectorAll('.type-cat-row').forEach(hdr => {
     if (icon) icon.textContent = isOpen ? 'expand_more' : 'expand_less';
   });
 });
+
+// ── Types panel source filter chips ───────────────────────────────────
+function toggleSrcChip(clicked) {
+  const chips = clicked.closest('.flex').querySelectorAll('.src-chip');
+  chips.forEach(c => c.classList.remove('src-active'));
+  clicked.classList.add('src-active');
+}
+
+// ── Properties pane tab switcher ──────────────────────────────────────
+function switchPropTab(tab) {
+  ['content', 'file', 'source'].forEach(t => {
+    document.getElementById('pp-' + t).style.display = t === tab ? '' : 'none';
+    document.getElementById('pp-tab-' + t + '-btn').classList.toggle('pp-tab-active', t === tab);
+  });
+}
 </script>
 
 </body>
