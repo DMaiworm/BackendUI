@@ -1,153 +1,387 @@
 /**
- * Shared TopNav v2 — Expireon AdminConsole (Nimbus 100% compliant)
+ * Shared TopNav v4 — Nimbus cnds-header compliant (full header system)
  *
- * Improvements over v1:
- *   • No hardcoded #004ac6 — uses --cnds-product-accent (Expireon purple #4e45d6)
- *   • Pagination active-state uses CSS vars, not inline color overrides
- *   • Uses Nimbus tokens
+ * Renders THREE pieces matching the Nimbus screenshot:
+ *   1. Utility bar    — light-gray strip with brand logo (left) + theme toggle + user avatar (right)
+ *   2. Main nav bar   — rounded gray pill container with tab items
+ *   3. ca-title-bar   — back-arrow + ALL-CAPS section + ALL-CAPS sub-section + horizontal accent line
  *
- * Usage (unchanged from v1):
- *   <script>const TOPNAV_SEARCH = 'Search legal cases...';</script>
+ * Usage (per page) — all optional, smart defaults are built in:
+ *   <script>const ACTIVE_NAV = 'modules';</script>          ← already required by sidenav, drives active tab
+ *   <script>const TOPNAV_USER    = { name: 'Daniel Maiworm', initials: 'DM' };</script>
+ *   <script>const TOPNAV_TITLE   = 'Modules';</script>       ← optional title bar text
+ *   <script>const TOPNAV_SECTION = 'On-Prem';</script>       ← optional section label
+ *   <script>const TOPNAV_BACK    = '#';</script>             ← optional back URL; '' to hide
+ *   <script>const TOPNAV_TABS    = [...];</script>           ← override default tabs if needed
  *   <script src="../_shared/topnav.js"></script>
  */
 (function () {
-  const placeholder = (typeof TOPNAV_SEARCH !== 'undefined') ? TOPNAV_SEARCH : 'Search...';
-  const active = (typeof TOPNAV_ACTIVE !== 'undefined') ? TOPNAV_ACTIVE : '';
+  const user    = (typeof TOPNAV_USER    !== 'undefined') ? TOPNAV_USER    : { name: 'Daniel Maiworm', initials: 'DM' };
+  const title   = (typeof TOPNAV_TITLE   !== 'undefined') ? TOPNAV_TITLE   : '';
+  const section = (typeof TOPNAV_SECTION !== 'undefined') ? TOPNAV_SECTION : '';
+  const back    = (typeof TOPNAV_BACK    !== 'undefined') ? TOPNAV_BACK    : '';
+  const activeNav = (typeof ACTIVE_NAV !== 'undefined') ? ACTIVE_NAV : '';
 
-  function navLink(href, key, label) {
-    const isActive = active === key;
-    return `<a href="${href}" class="topnav-link ${isActive ? 'active' : ''}">${label}</a>`;
-  }
+  // Map ACTIVE_NAV values to top-level tab keys
+  const navToTab = {
+    'dashboard':             'dashboard',
+    'endpoints':             'onprem',
+    'appliances':            'onprem',
+    'nodes':                 'onprem',
+    'modules':               'onprem',
+    'ad_custodians':         'environments',
+    'ad_domains':            'environments',
+    'ad_unresolved':         'environments',
+    'ev_directories':        'environments',
+    'ev_vault_stores':       'environments',
+    'ev_archives':           'environments',
+    'so_archive_connections':'environments',
+    'so_business_folders':   'environments',
+    'so_endpoints':          'environments',
+    'ev_mail_mappings':      'mappings',
+    'ev_journal_mappings':   'mappings',
+    'native_folder_mappings':'mappings',
+    'file_archive_mappings': 'mappings',
+    'onedrive_mappings':     'mappings',
+    'smtp_mappings':         'mappings',
+    'sharepoint_mappings':   'mappings',
+    'sourceone_mappings':    'mappings',
+    'legal_cases':           'legal',
+    'config_storage_buckets':    'configuration',
+    'config_storage_partitions': 'configuration',
+    'config_collaboration_links':'configuration',
+    'config_retention':          'configuration',
+    'config_containers':         'configuration',
+    'config_internal_domains':   'configuration',
+    'config_dynamic_ad':         'configuration',
+    'config_export_policy':      'configuration',
+    'config_report_location':    'configuration',
+    'config_report_email':       'configuration',
+    'config_tag_groups':         'configuration',
+    'config_audit_logs':         'configuration',
+    'admin_org_units':       'administration',
+    'admin_roles':           'administration',
+    'admin_users':           'administration',
+    'admin_security_log':    'administration',
+    'admin_languages':       'administration',
+    'admin_texts':           'administration',
+    'admin_templates':       'administration',
+    'admin_settings':        'administration',
+  };
 
-  const topnav = `
-<header class="topnav" data-purpose="shared-topnav">
-  <div class="topnav-search">
-    <span class="material-symbols-outlined topnav-search-icon" aria-hidden="true">search</span>
-    <input class="cf-input-control topnav-search-input" placeholder="${placeholder}" type="text"/>
-    <kbd class="topnav-search-kbd">⌘K</kbd>
-  </div>
+  const activeTabKey = navToTab[activeNav] || 'dashboard';
 
-  <div class="topnav-right">
-    <nav class="topnav-nav">
-      ${navLink('#', 'docs', 'Docs')}
-      ${navLink('#', 'logs', 'Logs')}
-      ${navLink('#', 'alerts', 'Alerts')}
-    </nav>
-    <div class="topnav-divider" aria-hidden="true"></div>
-    <div class="topnav-actions">
-      <button class="topnav-icon-btn" aria-label="Notifications">
-        <span class="material-symbols-outlined">notifications</span>
-        <span class="topnav-icon-dot" aria-hidden="true"></span>
+  // Default tabs — override by defining TOPNAV_TABS before this script
+  const defaultTabs = [
+    { key: 'dashboard',      label: 'Dashboard',      icon: 'grid_view',       href: '../dashboard/dashboard.html' },
+    { key: 'onprem',         label: 'On-Prem',        icon: 'storage',         href: '../endpoint_management_overview_focus/endpoint_management_overview_focus.html' },
+    { key: 'environments',   label: 'Environments',   icon: 'layers',          href: '../ev_vault_stores_overview/ev_vault_stores_overview.html' },
+    { key: 'mappings',       label: 'Mappings',       icon: 'sync_alt',        href: '../archive_mappings_page_title_sync/archive_mappings_page_title_sync.html' },
+    { key: 'legal',          label: 'Legal',          icon: 'gavel',           href: '../legal_cases_advanced_filters_state_corrected/legal_cases_advanced_filters_state_corrected.html' },
+    { key: 'configuration',  label: 'Configuration',  icon: 'tune',            href: '../storage_buckets_content_sync/storage_buckets_content_sync.html' },
+    { key: 'administration', label: 'Administration', icon: 'manage_accounts', href: '../users_design_sync/users_design_sync.html' },
+  ];
+
+  const tabs = (typeof TOPNAV_TABS !== 'undefined') ? TOPNAV_TABS : defaultTabs.map(t => ({
+    ...t,
+    active: t.key === activeTabKey,
+  }));
+
+  const logoImg = `<img class="cf-brand-mark" src="../_shared/cloudficient_cloudficient-expireon_1760436020615.png" alt="Expireon">`;
+
+  // ─── Utility bar ──────────────────────────────────────────────
+  const utilityBar = `
+<nav class="cf-utility-bar" aria-label="Utility navigation">
+  <a class="cf-brand" href="../dashboard/dashboard.html" aria-label="Expireon Home">
+    ${logoImg}
+  </a>
+
+  <div class="cf-utility-tools">
+    <button class="cf-icon-btn" id="cf-nav-theme" data-cnds-toggle="theme"
+            aria-label="Toggle theme" title="Switch to dark theme">
+      <span class="material-symbols-outlined">bedtime</span>
+    </button>
+
+    <span class="cf-utility-divider" aria-hidden="true"></span>
+
+    <div class="cf-user-info-wrapper">
+      <button class="cf-user-info" id="cf-nav-user"
+              aria-haspopup="menu" aria-expanded="false" aria-controls="cf-user-menu">
+        <span class="cf-user-avatar">${user.initials}</span>
+        <span class="cf-user-name">${user.name}</span>
       </button>
-      <button class="topnav-icon-btn" aria-label="Help">
-        <span class="material-symbols-outlined">help_outline</span>
-      </button>
-      <button class="topnav-avatar" aria-label="Account">
-        <span class="topnav-avatar-initials">DM</span>
-      </button>
+      <div class="cf-account-menu" id="cf-user-menu" role="menu" aria-hidden="true">
+        <div class="cf-account-menu-header">${user.name}</div>
+        <a class="cf-account-menu-item" href="#" role="menuitem">My Profile</a>
+        <a class="cf-account-menu-item" href="#" role="menuitem">Account Settings</a>
+        <a class="cf-account-menu-item" href="#" role="menuitem">API Keys</a>
+        <a class="cf-account-menu-item" href="#" role="menuitem">Sign Out</a>
+      </div>
     </div>
   </div>
-</header>`;
+</nav>`;
 
-  const styleId = '_shared-topnav-styles';
+  // ─── Main nav bar ────────────────────────────────────────────
+  const mainNav = `
+<div class="cf-main-nav-wrapper">
+  <nav class="cf-main-nav" aria-label="Main navigation">
+    ${tabs.map(t => `
+    <a href="${t.href || '#'}" class="cf-main-nav-link ${t.active ? 'active' : ''}" data-key="${t.key}">
+      ${t.icon ? `<span class="material-symbols-outlined">${t.icon}</span>` : ''}
+      <span>${t.label}</span>
+    </a>`).join('')}
+    <button class="cf-main-nav-more" aria-label="More" title="More">
+      <span class="material-symbols-outlined">more_vert</span>
+    </button>
+  </nav>
+</div>`;
+
+  // ─── Title bar (optional, only if TOPNAV_TITLE provided) ────
+  const titleBar = title ? `
+<div class="cf-title-bar">
+  ${back !== '' ? `<a href="${back}" class="cf-title-back" aria-label="Back"><span class="material-symbols-outlined">arrow_back</span></a>` : ''}
+  <span class="cf-title-main">${title}</span>
+  ${section ? `<span class="cf-title-divider" aria-hidden="true"></span><span class="cf-title-section">${section}</span>` : ''}
+  <span class="cf-title-accent" aria-hidden="true"></span>
+</div>` : '';
+
+  // ─── Styles ────────────────────────────────────────────────────
+  const styleId = '_shared-topnav-styles-v4';
   if (!document.getElementById(styleId)) {
     const style = document.createElement('style');
     style.id = styleId;
     style.textContent = `
-      .topnav {
-        display: flex; align-items: center; justify-content: space-between;
-        gap: 1.5rem; height: 64px; padding: 0 1.5rem;
-        background: #ffffff;
-        border-bottom: 1px solid var(--cnds-border-color, #e0e0e0);
-        flex-shrink: 0;
+      /* ─── App shell: top bar SPANS above sidebar + main ─── */
+      body.cf-app-shell {
+        display: flex !important;
+        flex-direction: column !important;
       }
-      .topnav-search { position: relative; flex: 1; max-width: 28rem; display: flex; align-items: center; }
-      .topnav-search-icon {
-        position: absolute; left: 12px;
-        font-size: 18px; color: var(--cnds-secondary-color, #4f4f4f99);
-        pointer-events: none;
+      body.cf-app-shell .cf-app-row {
+        display: flex;
+        flex: 1;
+        min-height: 0;
+        overflow: hidden;
       }
-      .topnav-search-input.cf-input-control {
-        width: 100%;
-        padding-left: 2.5rem !important;
-        padding-right: 3rem !important;
-        height: 38px;
-        background: var(--cnds-surface-light-100, #f5f5f5);
-        border-color: transparent;
+      body.cf-app-shell .sidenav[data-purpose="shared-sidenav"] {
+        height: auto !important;
       }
-      .topnav-search-input.cf-input-control:focus {
-        background: #fff;
-        border-color: var(--cnds-product-accent, #4e45d6);
-      }
-      .topnav-search-kbd {
-        position: absolute; right: 10px;
-        padding: 2px 6px;
-        font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-        font-size: 10.5px;
-        color: var(--cnds-secondary-color, #4f4f4f99);
-        background: rgba(0,0,0,0.04);
-        border: 1px solid var(--cnds-border-color, #e0e0e0);
-        border-radius: 4px;
-        pointer-events: none;
-      }
-      .topnav-right { display: flex; align-items: center; gap: 1rem; }
-      .topnav-nav { display: flex; align-items: center; gap: 1.25rem; }
-      .topnav-link {
-        font-size: 0.875rem; font-weight: 500;
-        color: var(--cnds-secondary-color, #4f4f4f99);
-        text-decoration: none;
-        padding: 6px 2px;
-        border-bottom: 2px solid transparent;
-        transition: color .15s ease, border-color .15s ease;
-      }
-      .topnav-link:hover { color: var(--cnds-body-color, #4f4f4f); }
-      .topnav-link.active {
-        color: var(--cnds-product-accent, #4e45d6);
-        border-bottom-color: var(--cnds-product-accent, #4e45d6);
-      }
-      .topnav-divider {
-        width: 1px; height: 24px;
-        background: var(--cnds-border-color, #e0e0e0);
-      }
-      .topnav-actions { display: flex; align-items: center; gap: 4px; }
-      .topnav-icon-btn {
-        position: relative;
-        background: none; border: 0;
-        padding: 8px; border-radius: 8px;
-        color: var(--cnds-secondary-color, #4f4f4f99);
-        cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        transition: background-color .15s ease, color .15s ease;
-      }
-      .topnav-icon-btn:hover {
-        background: rgba(0,0,0,0.05);
-        color: var(--cnds-body-color, #4f4f4f);
-      }
-      .topnav-icon-btn .material-symbols-outlined { font-size: 20px; }
-      .topnav-icon-dot {
-        position: absolute; top: 8px; right: 8px;
-        width: 8px; height: 8px;
-        background: var(--cnds-semantic-danger-400, #db3a00);
-        border: 2px solid #fff;
-        border-radius: 999px;
-      }
-      .topnav-avatar {
-        margin-left: 6px;
-        width: 32px; height: 32px;
-        border-radius: 999px;
-        border: 0;
-        background: linear-gradient(135deg, var(--cnds-product-expireon-purple-300, #b3afee), var(--cnds-product-accent, #4e45d6));
-        color: #fff; font-size: 12px; font-weight: 700;
-        cursor: pointer;
-        display: flex; align-items: center; justify-content: center;
-        transition: transform .15s ease, box-shadow .15s ease;
-      }
-      .topnav-avatar:hover {
-        transform: scale(1.04);
-        box-shadow: 0 0 0 3px var(--cnds-product-expireon-blue-50, #efeefb);
+      body.cf-app-shell .sidenav[data-purpose="shared-sidenav"] .sidenav-header {
+        display: none !important;
       }
 
-      /* Global pagination override — Expireon accent */
+      /* ─────────────────────────────────────────────────────────
+         Nimbus Header — ExpireOn (light theme)
+         ───────────────────────────────────────────────────────── */
+      .cf-utility-bar {
+        display: flex; align-items: center; justify-content: space-between;
+        height: 64px; padding: 0 32px;
+        background: var(--cnds-surface-light-200, #ebebeb);
+        color: var(--cnds-surface-light-950, #141414);
+        flex-shrink: 0;
+        font-family: var(--cnds-typography-typeface-family-default, "Nunito Sans"), system-ui, sans-serif;
+      }
+
+      /* ─── Brand ──────────────────────────────────────────────── */
+      .cf-brand {
+        display: inline-flex; align-items: center;
+        gap: 14px;
+        text-decoration: none;
+        color: inherit;
+        flex-shrink: 0;
+      }
+      .cf-brand-mark { height: 32px; width: auto; display: block; flex-shrink: 0; }
+
+      /* ─── Utility tools (right side) ────────────────────────── */
+      .cf-utility-tools {
+        display: flex; align-items: center; gap: 8px;
+        flex-shrink: 0;
+      }
+      .cf-utility-divider {
+        display: inline-block;
+        width: 1px; height: 28px;
+        background: rgba(20,20,20,0.18);
+        margin: 0 8px;
+      }
+      .cf-icon-btn {
+        background: 0; border: 0;
+        width: 38px; height: 38px;
+        border-radius: 999px;
+        color: #141414;
+        cursor: pointer;
+        display: inline-flex; align-items: center; justify-content: center;
+        transition: background-color .15s;
+      }
+      .cf-icon-btn:hover { background: rgba(20,20,20,0.06); }
+      .cf-icon-btn .material-symbols-outlined { font-size: 22px; }
+
+      /* ─── User info ──────────────────────────────────────────── */
+      .cf-user-info-wrapper { position: relative; }
+      .cf-user-info {
+        display: inline-flex; align-items: center; gap: 10px;
+        height: 40px; padding: 0 12px 0 4px;
+        background: 0; border: 0;
+        color: #141414;
+        font: inherit; font-size: 14px; font-weight: 500;
+        border-radius: 999px;
+        cursor: pointer;
+        white-space: nowrap;
+      }
+      .cf-user-info:hover { background: rgba(20,20,20,0.06); }
+      .cf-user-avatar {
+        width: 32px; height: 32px;
+        border-radius: 999px;
+        background: var(--cnds-product-expireon-blue-500, #4e45d6);
+        color: #fff;
+        font-weight: 700; font-size: 12px;
+        letter-spacing: -0.02em; line-height: 1;
+        display: flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+        user-select: none;
+      }
+      .cf-user-name { color: #141414; }
+
+      /* ─── Account menu ──────────────────────────────────────── */
+      .cf-account-menu {
+        display: none;
+        position: absolute; top: calc(100% + 8px); right: 0;
+        min-width: 220px;
+        background: #fff;
+        border: 1px solid #cccccc;
+        border-radius: 8px;
+        box-shadow: 0 2px 15px -3px rgba(0,0,0,.12), 0 10px 25px -2px rgba(0,0,0,.10);
+        z-index: 1000;
+        overflow: hidden;
+      }
+      .cf-account-menu.open { display: block; }
+      .cf-account-menu-header {
+        background: #ebebeb;
+        padding: 12px 16px;
+        font-size: 11px; font-weight: 800;
+        letter-spacing: 0.10em; text-transform: uppercase;
+        color: #4f4f4f;
+      }
+      .cf-account-menu-item {
+        display: flex; align-items: center;
+        padding: 10px 16px; height: 40px;
+        font-size: 13.5px; font-weight: 400;
+        color: #4f4f4f;
+        text-decoration: none;
+        transition: background-color .12s;
+      }
+      .cf-account-menu-item:hover { background: #e0e0e0; }
+
+      /* ─── Main nav (pill container with tabs) ───────────────── */
+      .cf-main-nav-wrapper {
+        padding: 12px 24px 0;
+        background: #fff;
+        flex-shrink: 0;
+      }
+      .cf-main-nav {
+        display: flex; align-items: stretch;
+        background: var(--cnds-surface-light-200, #ebebeb);
+        border-radius: 12px;
+        padding: 4px;
+        position: relative;
+        overflow-x: auto;
+        scrollbar-width: thin;
+      }
+      .cf-main-nav-link {
+        display: inline-flex; align-items: center; gap: 10px;
+        padding: 12px 18px;
+        font-size: 13px; font-weight: 700;
+        letter-spacing: 0.12em; text-transform: uppercase;
+        color: var(--cnds-body-color, #4f4f4f);
+        text-decoration: none;
+        border-radius: 8px;
+        position: relative;
+        white-space: nowrap;
+        transition: background-color .15s, color .15s;
+      }
+      .cf-main-nav-link:hover {
+        background: rgba(255,255,255,0.6);
+        color: #1a1a1a;
+      }
+      .cf-main-nav-link.active {
+        background: #fff;
+        color: #1a1a1a;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      }
+      .cf-main-nav-link.active::after {
+        content: '';
+        position: absolute;
+        left: 18px; right: 18px;
+        bottom: 4px;
+        height: 3px;
+        background: var(--cnds-product-expireon-blue-500, #4e45d6);
+        border-radius: 3px;
+      }
+      .cf-main-nav-link .material-symbols-outlined {
+        font-size: 18px;
+        color: var(--cnds-secondary-color, #4f4f4f99);
+      }
+      .cf-main-nav-link.active .material-symbols-outlined {
+        color: var(--cnds-product-accent, #4e45d6);
+      }
+      .cf-main-nav-more {
+        margin-left: auto;
+        background: 0; border: 0;
+        width: 38px; height: 38px;
+        border-radius: 8px;
+        color: var(--cnds-secondary-color, #4f4f4f99);
+        cursor: pointer;
+        display: inline-flex; align-items: center; justify-content: center;
+        flex-shrink: 0;
+      }
+      .cf-main-nav-more:hover { background: rgba(255,255,255,0.6); color: #1a1a1a; }
+      .cf-main-nav-more .material-symbols-outlined { font-size: 20px; }
+
+      /* ─── Title bar (.cf-title-bar) ────────────────────────── */
+      .cf-title-bar {
+        display: flex; align-items: center; gap: 14px;
+        padding: 18px 32px 14px;
+        background: #fff;
+        position: relative;
+        flex-shrink: 0;
+      }
+      .cf-title-back {
+        width: 32px; height: 32px;
+        border-radius: 999px;
+        background: var(--cnds-product-expireon-blue-500, #4e45d6);
+        color: #fff;
+        display: inline-flex; align-items: center; justify-content: center;
+        text-decoration: none;
+        flex-shrink: 0;
+      }
+      .cf-title-back:hover { background: var(--cnds-product-expireon-blue-700, #241e89); }
+      .cf-title-back .material-symbols-outlined { font-size: 18px; }
+      .cf-title-main {
+        font-size: 15px; font-weight: 800;
+        letter-spacing: 0.20em; text-transform: uppercase;
+        color: #141414;
+      }
+      .cf-title-divider {
+        display: inline-block;
+        width: 1px; height: 18px;
+        background: rgba(20,20,20,0.20);
+      }
+      .cf-title-section {
+        font-size: 15px; font-weight: 800;
+        letter-spacing: 0.20em; text-transform: uppercase;
+        color: #141414;
+      }
+      .cf-title-accent {
+        flex: 1; height: 1.5px;
+        background: var(--cnds-product-expireon-blue-500, #4e45d6);
+        margin-left: 6px;
+        border-radius: 2px;
+      }
+
+      /* ─── Page font-family ──────────────────────────────────── */
+      body {
+        font-family: var(--cnds-typography-typeface-family-default, "Nunito Sans"), system-ui, sans-serif;
+      }
+
+      /* Pagination override — Expireon accent */
       .pagination .page-item.active .page-link {
         background-color: var(--cnds-product-accent, #4e45d6);
         border-color: var(--cnds-product-accent, #4e45d6);
@@ -156,14 +390,65 @@
       .pagination .page-item.disabled .page-link { opacity: .5; pointer-events: none; }
       .pagination .page-link { color: var(--cnds-product-accent, #4e45d6); }
       .pagination .page-link:hover { color: var(--cnds-product-expireon-blue-700, #241e89); }
-
-      /* Global font-family for Nimbus-style consistency */
-      body {
-        font-family: var(--cnds-typography-typeface-family-default, "Nunito Sans"), system-ui, sans-serif;
-      }
     `;
     document.head.appendChild(style);
   }
 
-  document.currentScript.insertAdjacentHTML('afterend', topnav);
+  // ─── Restructure DOM so the utility bar spans above sidebar + main ───
+  (function mountShell() {
+    const body    = document.body;
+    const sidenav = document.querySelector('.sidenav[data-purpose="shared-sidenav"]');
+    const appMain = document.querySelector('.app-main');
+
+    if (sidenav && appMain && !document.querySelector('.cf-app-row')) {
+      const row = document.createElement('div');
+      row.className = 'cf-app-row';
+      row.appendChild(sidenav);
+      row.appendChild(appMain);
+      body.classList.add('cf-app-shell');
+      body.appendChild(row);
+      body.insertAdjacentHTML('afterbegin', utilityBar);
+      // Main-nav + title bar go inside app-main, right after this script tag
+      document.currentScript.insertAdjacentHTML('afterend', mainNav + titleBar);
+    } else {
+      // Fallback: render everything inline
+      document.currentScript.insertAdjacentHTML('afterend', utilityBar + mainNav + titleBar);
+    }
+  })();
+
+  // ─── Interactivity ───────────────────────────────────────────
+  (function init() {
+    function bindToggle(triggerId, panelId) {
+      const trigger = document.getElementById(triggerId);
+      const panel = document.getElementById(panelId);
+      if (!trigger || !panel) return;
+      trigger.addEventListener('click', e => {
+        e.stopPropagation();
+        const isOpen = panel.classList.toggle('open');
+        document.querySelectorAll('.cf-account-menu.open').forEach(el => {
+          if (el !== panel) el.classList.remove('open');
+        });
+        trigger.setAttribute('aria-expanded', String(isOpen));
+        panel.setAttribute('aria-hidden', String(!isOpen));
+      });
+    }
+    bindToggle('cf-nav-user', 'cf-user-menu');
+
+    document.addEventListener('click', e => {
+      if (!e.target.closest('.cf-user-info-wrapper')) {
+        document.querySelectorAll('.cf-account-menu.open').forEach(el => el.classList.remove('open'));
+      }
+    });
+
+    const themeBtn = document.getElementById('cf-nav-theme');
+    if (themeBtn) {
+      themeBtn.addEventListener('click', () => {
+        const html = document.documentElement;
+        const isDark = html.getAttribute('data-cnds-theme') === 'dark';
+        html.setAttribute('data-cnds-theme', isDark ? 'light' : 'dark');
+        const icon = themeBtn.querySelector('.material-symbols-outlined');
+        if (icon) icon.textContent = isDark ? 'bedtime' : 'light_mode';
+      });
+    }
+  })();
 })();
