@@ -15,15 +15,13 @@
   <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
   <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
   <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
 
-  <link rel="stylesheet" href="../_shared/expireon-app.css?v=6">
-
   <style>
+    html, body { height: 100%; margin: 0; overflow: hidden; }
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f1f1f1; }
     ::-webkit-scrollbar-thumb { background: #ccc; border-radius: 10px; }
@@ -116,16 +114,8 @@
 
 <body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="Communication Viewer">
 
-  <script>const ACTIVE_NAV = 'legal_cases';</script>
-  <script src="../_shared/sidenav.js"></script>
-
-  <div class="app-main">
-
-    <script>const TOPNAV_SEARCH = 'Search communications…';</script>
-    <script src="../_shared/topnav.js"></script>
-
     <!-- Three-panel chat layout -->
-    <div class="flex overflow-hidden" style="flex:1">
+    <div class="flex overflow-hidden" style="flex:1;width:100%">
 
       <!-- ── Panel 1: Chat List ── -->
       <section class="flex flex-col shrink-0 overflow-hidden bg-white panel-border-r" style="width:310px">
@@ -528,6 +518,5 @@
       </aside>
 
     </div>
-  </div>
 </body>
 </html>
