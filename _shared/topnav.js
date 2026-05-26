@@ -392,6 +392,12 @@
   }
 
   // ─── Mount shell ─────────────────────────────────────────────
+  // Target layout (body flex-column):
+  //   cf-utility-bar        ← full width
+  //   cf-main-nav-wrapper   ← full width
+  //   cf-title-bar          ← full width (optional)
+  //   cf-app-row (flex:1)
+  //     sidenav  |  app-main
   (function mountShell() {
     const body    = document.body;
     const sidenav = document.querySelector('.sidenav[data-purpose="shared-sidenav"]');
@@ -403,9 +409,9 @@
       row.appendChild(sidenav);
       row.appendChild(appMain);
       body.classList.add('cf-app-shell');
+      // All three nav bands span full width — inserted at top of body
+      body.insertAdjacentHTML('afterbegin', utilityBar + mainNav + titleBar);
       body.appendChild(row);
-      body.insertAdjacentHTML('afterbegin', utilityBar);
-      document.currentScript.insertAdjacentHTML('afterend', mainNav + titleBar);
     } else {
       document.currentScript.insertAdjacentHTML('afterend', utilityBar + mainNav + titleBar);
     }
