@@ -1,208 +1,346 @@
 <!DOCTYPE html>
-<html class="h-full light" lang="en">
+<html lang="en" data-cnds-theme="light">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Settings – Expireon</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<!-- Nimbus Design System -->
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
-<!-- Nunito Sans (Nimbus default typeface) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-</style>
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings — Expireon</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../_shared/expireon-app.css?v=5">
 </head>
-<body class="h-full overflow-hidden flex cnds-product-expireon">
 
-<!-- Shared Sidenav -->
-<script>const ACTIVE_NAV = 'admin_settings';</script>
-<script src="../_shared/sidenav.js"></script>
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="P3b · Settings (form/settings shell)">
 
-<!-- Main Content Area -->
-<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+  <script>const ACTIVE_NAV = 'config_settings';</script>
+  <script src="../_shared/sidenav.js"></script>
 
-  <!-- Top Navigation Bar -->
-  <script>const TOPNAV_SEARCH = 'Search settings...';</script>
-  <script src="../_shared/topnav.js"></script>
+  <div class="app-main">
 
-  <!-- Content Canvas -->
-  <main class="flex-1 overflow-y-auto p-8">
-    <div class="max-w-[1440px] mx-auto">
+    <script>const TOPNAV_SEARCH = 'Search settings…';</script>
+    <script src="../_shared/topnav.js"></script>
 
-      <!-- Breadcrumb & Page Title -->
-      <div class="mb-6">
-        <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
-          <a href="#" class="hover:text-primary transition-colors">Administration</a>
-          <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-          <span class="fw-semibold text-on-surface">Settings</span>
-        </nav>
-        <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Settings</h1>
-      </div>
+    <main class="app-scroll">
+      <div class="app-canvas">
 
-      <!-- Tab Navigation -->
-      <ul class="nav nav-tabs nav-tabs-nimbus mb-6" role="tablist">
-        <li class="nav-item" role="presentation"><a href="#" class="nav-link active" data-cnds-tab-init role="tab" aria-selected="true">Actions</a></li>
-        <li class="nav-item" role="presentation"><a href="#" class="nav-link" data-cnds-tab-init role="tab" aria-selected="false">Mapping Cleanup</a></li>
-        <li class="nav-item" role="presentation"><a href="#" class="nav-link" data-cnds-tab-init role="tab" aria-selected="false">User Profile</a></li>
-      </ul>
+        <div class="section-strip">
+          <span><a href="#">Configuration</a></span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="current">Settings</span>
+        </div>
 
-      <!-- Layout: MiddleNav + Workspace -->
-      <div class="flex gap-6">
+        <header class="page-eyebrow">
+          <h1>System-wide configuration · authentication · maintenance · defaults</h1>
+        </header>
 
-        <!-- MiddleNav Sidebar -->
-        <div class="flex-shrink-0" style="width:220px">
-          <nav class="space-y-1">
-            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Identity Management</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Account</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-lg small fw-semibold bg-primary-fixed text-on-primary-fixed">Management</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Legal</a>
-            <a href="#" class="flex items-center px-3 py-2 rounded-lg text-on-surface-variant hover:bg-surface-container transition-colors small fw-semibold">Template</a>
+        <div class="settings-shell">
+
+          <nav class="settings-subnav" aria-label="Settings sections">
+            <div class="subnav-group">Platform</div>
+            <a href="#general" class="active">
+              <span class="material-symbols-outlined">tune</span>General
+            </a>
+            <a href="#auth">
+              <span class="material-symbols-outlined">lock</span>Authentication
+              <span class="count">3</span>
+            </a>
+            <a href="#smtp">
+              <span class="material-symbols-outlined">mail</span>SMTP &amp; Email
+            </a>
+            <a href="#retention">
+              <span class="material-symbols-outlined">gavel</span>Retention Defaults
+            </a>
+
+            <div class="subnav-group">Operations</div>
+            <a href="#maintenance">
+              <span class="material-symbols-outlined">build</span>Maintenance
+              <span class="count">2</span>
+            </a>
+            <a href="#backups">
+              <span class="material-symbols-outlined">cloud_sync</span>Backups
+            </a>
+            <a href="#alerts">
+              <span class="material-symbols-outlined">notifications</span>Alerting
+            </a>
+
+            <div class="subnav-group">Advanced</div>
+            <a href="#api">
+              <span class="material-symbols-outlined">api</span>API &amp; Webhooks
+            </a>
+            <a href="#feature-flags">
+              <span class="material-symbols-outlined">flag</span>Feature Flags
+              <span class="count">12</span>
+            </a>
           </nav>
-        </div>
 
-        <!-- Main Workspace -->
-        <div class="flex-1 space-y-6">
+          <div class="settings-content">
 
-          <!-- Workspace Header -->
-          <div>
-            <h2 class="fw-bold mb-1" style="font-size:1.5rem">Management</h2>
-            <p class="text-muted small">Manage system actions, cache synchronizations, and database cleanups.</p>
-          </div>
+            <section class="form-section" id="general">
+              <div class="form-section-head">
+                <div class="head-title">
+                  <h2>General</h2>
+                  <p class="desc">Tenant identity and display preferences applied across the AdminConsole.</p>
+                </div>
+              </div>
+              <div class="form-section-body">
+                <div class="form-grid">
+                  <label class="form-label" for="tenant-name">Tenant name<span class="req">*</span></label>
+                  <div class="form-control">
+                    <input id="tenant-name" type="text" class="cf-input-control" value="Cloudficient · Production">
+                    <span class="form-help">Shown in the top bar, exports, and audit-log entries.</span>
+                  </div>
 
-          <!-- System Maintenance Banner -->
-          <div class="flex items-start gap-3 p-4 rounded-lg bg-primary-fixed text-on-primary-fixed">
-            <span class="material-symbols-outlined flex-shrink-0" style="margin-top:2px">info</span>
-            <div>
-              <div class="fw-semibold small mb-1">System Maintenance</div>
-              <p class="small mb-0" style="opacity:0.9">Perform manual synchronizations and data recalculations to ensure system integrity.</p>
-            </div>
-          </div>
+                  <label class="form-label" for="tenant-id">Tenant ID</label>
+                  <div class="form-control">
+                    <input id="tenant-id" type="text" class="cf-input-control" value="tn_2025_a4f31b" readonly style="background:#fafafa;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px">
+                    <span class="form-help">Immutable. Used for support and API requests.</span>
+                  </div>
 
-          <!-- Re-Calculate Card -->
-          <div class="card custom-shadow-l1">
-            <div class="card-header flex items-center gap-2">
-              <span class="material-symbols-outlined text-on-surface-variant">calculate</span>
-              <h5 class="card-title mb-0">Re-Calculate</h5>
-            </div>
-            <div class="card-body">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">EV Mapping Statistics</div>
-                    <p class="small text-muted mb-3">Re-calculates current mapping statistics for Enterprise Vault containers.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Re-Calculate</button>
+                  <label class="form-label" for="default-locale">Default locale</label>
+                  <div class="form-control">
+                    <select id="default-locale" class="cf-input-control">
+                      <option>English (en-US)</option>
+                      <option>German (de-DE)</option>
+                      <option>French (fr-FR)</option>
+                    </select>
+                    <span class="form-help">Falls back to this language when a user has no preference set.</span>
+                  </div>
+
+                  <label class="form-label">Time zone</label>
+                  <div class="form-control">
+                    <div class="form-row-2">
+                      <select class="cf-input-control">
+                        <option>UTC (Coordinated Universal Time)</option>
+                        <option>America/New_York</option>
+                        <option>Europe/Berlin</option>
+                      </select>
+                      <select class="cf-input-control">
+                        <option>24-hour format</option>
+                        <option>12-hour format (AM/PM)</option>
+                      </select>
                     </div>
                   </div>
-                </div>
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Container Age Statistics</div>
-                    <p class="small text-muted mb-3">Updates the age structure analysis for all active storage containers.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Re-Calculate</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Container Attachment Statistics</div>
-                    <p class="small text-muted mb-3">Triggers re-creation of Container Attachment statistics. It might take a while.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Re-Calculate</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Source One Statistics</div>
-                    <p class="small text-muted mb-3">Triggers re-creation of Source One Mapping statistics. It might take a while.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Re-Calculate</button>
-                    </div>
-                  </div>
-                </div>
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Cumulative Statistics</div>
-                    <p class="small text-muted mb-3">Triggers re-calculation of account-wide statistics including total sizes, document counts, and retention forecasts. It might take a while.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Re-Calculate</button>
+
+                  <label class="form-label">Logo<span class="opt">Optional</span></label>
+                  <div class="form-control">
+                    <div style="display:flex;gap:14px;align-items:center;">
+                      <div style="width:64px;height:64px;background:#fafafa;border:1px dashed #d0d0d0;border-radius:8px;display:flex;align-items:center;justify-content:center;color:#999;">
+                        <span class="material-symbols-outlined" style="font-size:28px">image</span>
+                      </div>
+                      <div>
+                        <button class="btn btn-secondary" style="height:36px;font-size:13px;">Upload</button>
+                        <span class="form-help" style="display:block;margin-top:5px">PNG or SVG, max 200 KB, square ratio recommended.</span>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </section>
 
-          <!-- Maintenance Card -->
-          <div class="card custom-shadow-l1">
-            <div class="card-header flex items-center gap-2">
-              <span class="material-symbols-outlined text-on-surface-variant">build</span>
-              <h5 class="card-title mb-0">Maintenance</h5>
-            </div>
-            <div class="card-body">
-              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Recover Appliance</div>
-                    <p class="small text-muted mb-3">Triggers recovery of appliance. It might take a while.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Recover</button>
+            <section class="form-section" id="auth">
+              <div class="form-section-head">
+                <div class="head-title">
+                  <h2>Authentication</h2>
+                  <p class="desc">How users sign in and how strict the session policy is.</p>
+                </div>
+                <div class="head-aside">
+                  <span class="status status-success">SAML SSO active</span>
+                </div>
+              </div>
+              <div class="form-section-body">
+
+                <div class="toggle-row">
+                  <div class="toggle-text">
+                    <h4>Require 2FA for all users</h4>
+                    <p>Forces TOTP enrolment on next sign-in. Currently 84% of users have 2FA enabled.</p>
+                  </div>
+                  <button class="toggle-switch" aria-checked="true" role="switch"></button>
+                </div>
+
+                <div class="toggle-row">
+                  <div class="toggle-text">
+                    <h4>Allow password sign-in alongside SSO</h4>
+                    <p>When disabled, users can only sign in via the configured identity provider.</p>
+                  </div>
+                  <button class="toggle-switch" aria-checked="false" role="switch"></button>
+                </div>
+
+                <div class="toggle-row">
+                  <div class="toggle-text">
+                    <h4>Lock accounts after failed attempts</h4>
+                    <p>Auto-lock after 5 invalid attempts. User receives an unlock email.</p>
+                  </div>
+                  <button class="toggle-switch" aria-checked="true" role="switch"></button>
+                </div>
+
+                <div class="form-grid" style="margin-top:20px;padding-top:20px;border-top:1px solid #f0f0f0">
+                  <label class="form-label">Session lifetime</label>
+                  <div class="form-control">
+                    <div class="form-row-2">
+                      <select class="cf-input-control">
+                        <option>8 hours</option>
+                        <option>12 hours</option>
+                        <option>24 hours</option>
+                      </select>
+                      <select class="cf-input-control">
+                        <option>Idle timeout: 30 min</option>
+                        <option>Idle timeout: 60 min</option>
+                        <option>No idle timeout</option>
+                      </select>
                     </div>
                   </div>
-                </div>
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Cleanup Redis cache for Custodians</div>
-                    <p class="small text-muted mb-3">Removes temporary cache data related to custodian lookups and synchronizations.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Cleanup</button>
-                    </div>
+
+                  <label class="form-label">IP allow-list<span class="opt">Optional</span></label>
+                  <div class="form-control">
+                    <textarea class="cf-input-control mono" placeholder="10.0.0.0/8&#10;192.168.0.0/16">10.0.0.0/8
+192.168.0.0/16
+203.0.113.0/24</textarea>
+                    <span class="form-help">CIDR ranges, one per line. Empty list allows all.</span>
                   </div>
                 </div>
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Load Appliance Redis Cache</div>
-                    <p class="small text-muted mb-3">Pre-loads the appliance cache with metadata to improve search and retrieval performance.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Re-Load</button>
+              </div>
+              <div class="form-section-foot">
+                <span class="help">Changes to authentication policy take effect on next sign-in.</span>
+                <button class="text-action">Test SSO connection</button>
+              </div>
+            </section>
+
+            <section class="form-section" id="smtp">
+              <div class="form-section-head">
+                <div class="head-title">
+                  <h2>SMTP &amp; Email</h2>
+                  <p class="desc">Outbound mail used for notifications, invites, and reports.</p>
+                </div>
+                <div class="head-aside">
+                  <span class="status status-success">Connection verified</span>
+                </div>
+              </div>
+              <div class="form-section-body">
+                <div class="form-grid">
+                  <label class="form-label" for="smtp-host">SMTP host<span class="req">*</span></label>
+                  <div class="form-control">
+                    <div class="form-row-2">
+                      <input id="smtp-host" type="text" class="cf-input-control" value="smtp.sendgrid.net">
+                      <input type="number" class="cf-input-control" value="587" placeholder="Port">
                     </div>
                   </div>
+
+                  <label class="form-label" for="smtp-user">Auth user<span class="req">*</span></label>
+                  <div class="form-control">
+                    <input id="smtp-user" type="text" class="cf-input-control" value="apikey">
+                  </div>
+
+                  <label class="form-label">Auth password</label>
+                  <div class="form-control">
+                    <input type="password" class="cf-input-control" value="••••••••••••••••">
+                    <span class="form-help">Stored encrypted. Last changed Mar 18, 2026.</span>
+                  </div>
+
+                  <label class="form-label" for="smtp-from">From address<span class="req">*</span></label>
+                  <div class="form-control">
+                    <div class="form-row-2">
+                      <input id="smtp-from" type="text" class="cf-input-control" value="Cloudficient Expireon">
+                      <input type="email" class="cf-input-control" value="noreply@cloudficient.com">
+                    </div>
+                  </div>
+
+                  <label class="form-label">Encryption</label>
+                  <div class="form-control">
+                    <select class="cf-input-control">
+                      <option>TLS (recommended)</option>
+                      <option>STARTTLS</option>
+                      <option>None</option>
+                    </select>
+                  </div>
                 </div>
-                <div class="card mb-0">
-                  <div class="card-body">
-                    <div class="fw-semibold mb-2">Re-sync Custodians</div>
-                    <p class="small text-muted mb-3">Synchronizes all custodian information with the central directory service.</p>
-                    <div class="flex justify-end">
-                      <button class="btn btn-primary btn-sm">Re-Sync</button>
+              </div>
+              <div class="form-section-foot">
+                <span class="help">Last test successful · 14:02 today.</span>
+                <button class="text-action">Send test email</button>
+              </div>
+            </section>
+
+            <section class="form-section" id="maintenance">
+              <div class="form-section-head">
+                <div class="head-title">
+                  <h2>Maintenance</h2>
+                  <p class="desc">System maintenance window and pending update.</p>
+                </div>
+                <div class="head-aside">
+                  <span class="status status-warning">Update available · v3.5.0</span>
+                </div>
+              </div>
+              <div class="form-section-body">
+                <div class="form-grid">
+                  <label class="form-label">Maintenance window</label>
+                  <div class="form-control">
+                    <div class="form-row-3">
+                      <select class="cf-input-control">
+                        <option>Sunday</option>
+                        <option>Saturday</option>
+                      </select>
+                      <input type="time" class="cf-input-control" value="02:00">
+                      <input type="time" class="cf-input-control" value="06:00">
+                    </div>
+                    <span class="form-help">Updates and indexing run automatically during this window in tenant local time.</span>
+                  </div>
+
+                  <label class="form-label">Pending update</label>
+                  <div class="form-control">
+                    <div style="display:flex;align-items:center;justify-content:space-between;padding:12px 14px;background:#fff5eb;border:1px solid #f3d9c1;border-radius:8px;">
+                      <div>
+                        <strong style="font-size:14px;color:#1a1a1a">Expireon v3.5.0</strong>
+                        <p style="margin:2px 0 0;font-size:12.5px;color:#6b6b6b">Released May 22, 2026 · 18 fixes · 4 new features</p>
+                      </div>
+                      <div style="display:flex;gap:14px">
+                        <button class="text-action muted">Release notes</button>
+                        <button class="text-action">Schedule install</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <label class="form-label">Read-only mode</label>
+                  <div class="form-control">
+                    <div class="toggle-row" style="padding:0;border:0;">
+                      <div class="toggle-text">
+                        <h4>Enable read-only mode</h4>
+                        <p>Disables all writes platform-wide. Use during database migrations or audit windows.</p>
+                      </div>
+                      <button class="toggle-switch" aria-checked="false" role="switch"></button>
                     </div>
                   </div>
                 </div>
               </div>
+            </section>
+
+            <div class="save-bar">
+              <span class="save-status dirty">
+                <span class="material-symbols-outlined">edit</span>3 unsaved changes
+              </span>
+              <span class="spacer"></span>
+              <button class="btn btn-secondary">Discard</button>
+              <button class="btn btn-primary">Save changes</button>
             </div>
-          </div>
 
-          <!-- Footer Actions -->
-          <div class="flex justify-end gap-2 pb-4">
-            <button class="btn btn-secondary">Cancel</button>
-            <button class="btn btn-primary">Save</button>
           </div>
-
         </div>
+
       </div>
-
-    </div>
-  </main>
-</div>
-
+    </main>
+  </div>
 </body>
 </html>

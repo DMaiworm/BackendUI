@@ -1,238 +1,175 @@
 <!DOCTYPE html>
-<html class="h-full light" lang="en">
+<html lang="en" data-cnds-theme="light">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Legal Cases – Expireon</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<!-- Nimbus Design System -->
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
-<!-- Nunito Sans (Nimbus default typeface) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-</style>
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Legal Cases — Expireon</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared/expireon-app.css?v=5">
 </head>
-<body class="h-full overflow-hidden flex cnds-product-expireon">
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="P3a · Legal Cases">
+  <script>const ACTIVE_NAV = 'legal_cases';</script>
+  <script src="../_shared/sidenav.js"></script>
+  <div class="app-main">
+    <script>const TOPNAV_SEARCH = "Search legal cases…";</script>
+    <script src="../_shared/topnav.js"></script>
+    <main class="app-scroll">
+      <div class="app-canvas">
 
-<!-- Shared Sidenav -->
-<script>const ACTIVE_NAV = 'legal_cases';</script>
-<script src="../_shared/sidenav.js"></script>
-
-<!-- Main Content Area -->
-<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
-
-  <!-- Top Navigation Bar -->
-  <script>const TOPNAV_SEARCH = 'Search legal cases...';</script>
-  <script src="../_shared/topnav.js"></script>
-
-  <!-- Content Canvas -->
-  <main class="flex-1 overflow-y-auto p-8">
-    <div class="max-w-[1440px] mx-auto space-y-6">
-
-      <!-- Breadcrumb & Page Title -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-        <div>
-          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
-            <a href="#" class="hover:text-primary transition-colors">Legal</a>
-            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-            <span class="fw-semibold text-on-surface">Legal Cases</span>
-          </nav>
-          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Legal Cases</h1>
-          <p class="text-muted mt-1 mb-0">Manage litigation matters, investigations, and associated data holds.</p>
+        <div class="section-strip">
+          <span><a href="#">Legal</a></span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="current">Cases</span>
         </div>
-        <button class="btn btn-primary flex items-center gap-1">
-          <span class="material-symbols-outlined" style="font-size:18px">download</span>
-          Export Results
-        </button>
-      </div>
 
-      <!-- Search & Advanced Filters Card -->
-      <div class="card custom-shadow-l1">
-        <div class="card-body space-y-4">
+        <header class="page-eyebrow">
+          <h1>Active and historical legal matters governing custodian holds and exports</h1>
+        </header>
 
-          <!-- Search Row -->
-          <div class="flex gap-3 items-center">
-            <div class="relative flex-1">
-              <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">search</span>
-              </span>
-              <input class="cf-input-control w-full" style="padding-left:2.25rem" placeholder="Search legal cases..." type="text"/>
-            </div>
-            <button class="btn btn-secondary flex items-center gap-1">
-              <span class="material-symbols-outlined" style="font-size:18px">tune</span>
-              Advanced Filters
-            </button>
+        <div class="kpi-strip-bar">
+          <div class="kpi-cell">
+            <div class="label">Active Cases</div>
+            <div class="value">17</div>
+            <div class="delta up"><span class="material-symbols-outlined">arrow_upward</span>+2 this month</div>
           </div>
+          <div class="kpi-cell">
+            <div class="label">On Hold</div>
+            <div class="value">12</div>
+            <div class="delta neutral"><span class="material-symbols-outlined">gavel</span>94 custodians</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">Pending Review</div>
+            <div class="value">3</div>
+            <div class="delta neutral"><span class="material-symbols-outlined">schedule</span>5d avg age</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">Closed · 30d</div>
+            <div class="value">8</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">Total Items</div>
+            <div class="value">1.2M</div>
+          </div>
+        </div>
 
-          <!-- Advanced Filters Panel -->
-          <div class="grid grid-cols-1 md:grid-cols-4 gap-4 pt-2 border-t border-outline-variant">
-            <!-- Case Status -->
+        <section class="card">
+          <div class="toolbar-v2">
+            <div class="toolbar-search">
+              <input type="text" class="cf-input-control" placeholder="Search Legal Cases…">
+              <button class="btn btn-secondary btn-search">Search</button>
+            </div>
+            <button class="icon-funnel-btn" aria-label="Filters"><span class="material-symbols-outlined">filter_alt</span></button>
+            <div class="show-control">
+              <span>Show:</span>
+              <select class="cf-input-control"><option>All</option></select>
+            </div>
+            <div class="toolbar-spacer"></div>
+            <div class="view-toggle">
+              <button class="active"><span class="material-symbols-outlined">view_list</span></button>
+              <button><span class="material-symbols-outlined">grid_view</span></button>
+            </div>
+            <button class="btn btn-secondary btn-dropdown">Export as <span class="material-symbols-outlined">arrow_drop_down</span></button>
+            <button class="btn btn-primary btn-primary-cta"><span class="material-symbols-outlined" style="font-size:18px">add</span>New Case</button>
+          </div>
+          <div class="filter-row">
+            
             <div class="cf-input-field">
-              <label class="cf-input-label">Case Status</label>
-              <div class="cf-input-wrapper">
-                <select class="cf-input-control w-full">
-                  <option value="">All Statuses</option>
-                  <option>Active</option>
-                  <option>Closed</option>
-                  <option>On Hold</option>
-                </select>
-              </div>
+              <label class="cf-input-label">Status</label>
+              <select class="cf-input-control"><option>All</option><option>Active</option><option>On Hold</option><option>Closed</option></select>
             </div>
-
-            <!-- Assignee -->
             <div class="cf-input-field">
-              <label class="cf-input-label">Assignee</label>
-              <div class="cf-input-wrapper">
-                <select class="cf-input-control w-full">
-                  <option value="">All Assignees</option>
-                  <option>Unassigned</option>
-                  <option>Admin</option>
-                  <option>Legal Team</option>
-                </select>
-              </div>
+              <label class="cf-input-label">Counsel</label>
+              <select class="cf-input-control"><option>Any</option><option>Internal</option><option>External</option></select>
             </div>
-
-            <!-- Date Range (spans 2 cols) -->
-            <div class="cf-input-field md:col-span-2">
-              <label class="cf-input-label">Date Range</label>
-              <div class="cf-input-wrapper">
-                <div class="flex items-center gap-2">
-                  <input class="cf-input-control flex-1" type="date"/>
-                  <span class="small text-muted">to</span>
-                  <input class="cf-input-control flex-1" type="date"/>
-                </div>
-              </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Priority</label>
+              <select class="cf-input-control"><option>Any</option><option>P1 Critical</option><option>P2 High</option><option>P3 Standard</option></select>
             </div>
-
-            <!-- Action Row -->
-            <div class="md:col-span-4 flex items-center justify-end gap-3">
-              <button class="btn btn-link fw-semibold">Clear All Filters</button>
-              <button class="btn btn-primary">Apply Filter View</button>
+            <div class="filter-actions">
+              <button class="btn btn-secondary">Clear</button>
+              <button class="btn btn-primary">Apply</button>
             </div>
           </div>
-
-        </div>
+          <div class="table-wrap">
+            <table class="table table-hover">
+              <thead><tr>
+                <th style="width:42px"><input type="checkbox" class="form-check-input" aria-label="Select all"></th>
+                <th><span class="th-sort active">Case <span class="material-symbols-outlined">arrow_drop_down</span></span></th>
+                  <th>Reference</th>
+                  <th>Priority</th>
+                  <th>Counsel</th>
+                  <th class="text-end">Custodians</th>
+                  <th>Status</th>
+                <th style="width:48px"></th>
+              </tr></thead>
+              <tbody>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">Mercury Audit</span><span class="cell-secondary">SEC inquiry · ongoing</span></div></div></td><td><span class="cell-mono">CASE-2025-0142</span></td><td><span class="badge badge-danger">P1 Critical</span></td><td>Cooley LLP</td><td class="text-end"><span class="cell-primary">3</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">Project Tempest</span><span class="cell-secondary">Internal investigation · IP theft</span></div></div></td><td><span class="cell-mono">CASE-2025-0118</span></td><td><span class="badge badge-warning">P2 High</span></td><td>Internal Counsel</td><td class="text-end"><span class="cell-primary">7</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">Slack Discovery</span><span class="cell-secondary">Q3 employment matter</span></div></div></td><td><span class="cell-mono">CASE-2025-0103</span></td><td><span class="badge badge-muted">P3 Standard</span></td><td>Wilmer Hale</td><td class="text-end"><span class="cell-primary">1</span></td><td><span class="status status-warning">On Hold</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">Acme Products Litigation</span><span class="cell-secondary">Class action · ongoing</span></div></div></td><td><span class="cell-mono">CASE-2025-0091</span></td><td><span class="badge badge-danger">P1 Critical</span></td><td>Skadden</td><td class="text-end"><span class="cell-primary">12</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">GDPR Article 30 · 2026</span><span class="cell-secondary">Compliance audit</span></div></div></td><td><span class="cell-mono">CASE-2025-0087</span></td><td><span class="badge badge-warning">P2 High</span></td><td>Internal Counsel</td><td class="text-end"><span class="cell-primary">128</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">EU Trade Investigation</span><span class="cell-secondary">Antitrust · DG COMP</span></div></div></td><td><span class="cell-mono">CASE-2025-0072</span></td><td><span class="badge badge-warning">P2 High</span></td><td>Allen Overy</td><td class="text-end"><span class="cell-primary">8</span></td><td><span class="status status-warning">On Hold</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">SOX Annual Audit · 2025</span><span class="cell-secondary">Routine compliance · annual</span></div></div></td><td><span class="cell-mono">CASE-2025-0008</span></td><td><span class="badge badge-muted">P3 Standard</span></td><td>Internal Counsel</td><td class="text-end"><span class="cell-primary">45</span></td><td><span class="status status-muted">Closed</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <div class="pager" style="justify-content:flex-end;width:100%">
+              <label class="pager-rpp">Rows per page:
+                <select class="cf-input-control"><option>10</option><option>25</option><option>50</option></select>
+              </label>
+              <span class="pager-range">1–7 of 17</span>
+              <div class="pager-arrows">
+                <button disabled><span class="material-symbols-outlined">first_page</span></button>
+                <button disabled><span class="material-symbols-outlined">chevron_left</span></button>
+                <button><span class="material-symbols-outlined">chevron_right</span></button>
+                <button><span class="material-symbols-outlined">last_page</span></button>
+              </div>
+            </div>
+          </div>
+        </section>
       </div>
-
-      <!-- Data Table Card -->
-      <div class="card custom-shadow-l1">
-        <div class="table-responsive w-full">
-          <table class="table table-hover mb-0 w-full">
-            <thead>
-              <tr>
-                <th style="width:48px"><input class="form-check-input" type="checkbox"/></th>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Reference Id</th>
-                <th>Created</th>
-                <th>Legal Holds</th>
-              </tr>
-            </thead>
-            <tbody>
-              <!-- Row 1 -->
-              <tr>
-                <td><input class="form-check-input" type="checkbox"/></td>
-                <td class="fw-semibold text-primary">One quick test</td>
-                <td class="small text-muted">—</td>
-                <td class="small text-muted">—</td>
-                <td class="small text-muted">Apr 28, 2025</td>
-                <td class="small text-muted">0</td>
-              </tr>
-              <!-- Row 2 -->
-              <tr>
-                <td><input class="form-check-input" type="checkbox"/></td>
-                <td class="fw-semibold text-primary">ZESH_Latest</td>
-                <td class="small text-muted">—</td>
-                <td class="small text-muted">—</td>
-                <td class="small text-muted">Mar 12, 2025</td>
-                <td class="small text-muted">2</td>
-              </tr>
-              <!-- Row 3 -->
-              <tr>
-                <td><input class="form-check-input" type="checkbox"/></td>
-                <td class="fw-semibold text-primary">Test Case #3</td>
-                <td class="small text-muted">Internal compliance review</td>
-                <td class="small text-muted">REF-2025-003</td>
-                <td class="small text-muted">Feb 05, 2025</td>
-                <td class="small text-muted">1</td>
-              </tr>
-              <!-- Row 4 -->
-              <tr>
-                <td><input class="form-check-input" type="checkbox"/></td>
-                <td class="fw-semibold text-primary">Project Z Investigation (Chat)</td>
-                <td class="small text-muted">Litigation hold for Project Z communications</td>
-                <td class="small text-muted">REF-2024-091</td>
-                <td class="small text-muted">Nov 14, 2024</td>
-                <td class="small text-muted">5</td>
-              </tr>
-              <!-- Row 5 -->
-              <tr>
-                <td><input class="form-check-input" type="checkbox"/></td>
-                <td class="fw-semibold text-primary">CF Test Case 2</td>
-                <td class="small text-muted">—</td>
-                <td class="small text-muted">REF-2024-055</td>
-                <td class="small text-muted">Aug 22, 2024</td>
-                <td class="small text-muted">0</td>
-              </tr>
-              <!-- Row 6 -->
-              <tr>
-                <td><input class="form-check-input" type="checkbox"/></td>
-                <td class="fw-semibold text-primary">Project Tempest</td>
-                <td class="small text-muted">Regulatory investigation – external counsel engaged</td>
-                <td class="small text-muted">REF-2024-018</td>
-                <td class="small text-muted">Mar 01, 2024</td>
-                <td class="small text-muted">8</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Pagination Footer -->
-        <div class="card-footer flex items-center justify-between">
-          <span class="small text-muted">0 selected / 53 total</span>
-          <nav>
-            <ul class="pagination pagination-sm mb-0">
-              <li class="page-item disabled">
-                <a class="page-link" href="#">
-                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">first_page</span>
-                </a>
-              </li>
-              <li class="page-item disabled">
-                <a class="page-link" href="#">
-                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span>
-                </a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
-              <li class="page-item"><a class="page-link" href="#">5</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span>
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">
-                  <span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">last_page</span>
-                </a>
-              </li>
-            </ul>
-          </nav>
-        </div>
-      </div>
-
-    </div>
-  </main>
-</div>
-
+    </main>
+  </div>
 </body>
 </html>

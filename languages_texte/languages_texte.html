@@ -1,246 +1,369 @@
 <!DOCTYPE html>
-<html class="h-full light" lang="en">
+<html lang="en" data-cnds-theme="light">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Texts – Expireon</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<!-- Nimbus Design System -->
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
-<!-- Nunito Sans (Nimbus default typeface) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-</style>
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Translations — Expireon</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../_shared/expireon-app.css?v=5">
+
+  <style>
+    /* Translation table inline styles */
+    .trans-table { width: 100%; border-collapse: collapse; }
+    .trans-table thead th {
+      font-size: 0.6875rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--cnds-secondary-color, #4f4f4f99);
+      background: var(--cnds-surface-light-50, #fafafa);
+      border-bottom: 1px solid var(--cnds-border-color, #e0e0e0);
+      padding: 10px 14px; text-align: left;
+    }
+    .trans-table tbody td {
+      padding: 12px 14px;
+      vertical-align: top;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 13px;
+    }
+    .trans-table .key-cell {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--cnds-product-accent, #4e45d6);
+      white-space: nowrap;
+    }
+    .trans-table .ref-cell {
+      color: var(--cnds-secondary-color, #4f4f4f99);
+      font-style: italic;
+      padding-right: 16px;
+    }
+    .trans-table .trans-input {
+      width: 100%;
+      border: 1px solid transparent;
+      background: transparent;
+      padding: 6px 8px;
+      font: inherit; font-size: 13px;
+      border-radius: 4px;
+      transition: background .1s, border-color .1s;
+    }
+    .trans-table .trans-input:hover { background: #fff; border-color: #e0e0e0; }
+    .trans-table .trans-input:focus {
+      outline: 0;
+      background: #fff;
+      border-color: var(--cnds-product-accent, #4e45d6);
+      box-shadow: 0 0 0 3px var(--cnds-product-expireon-blue-50, #efeefb);
+    }
+    .trans-table .trans-input.untranslated {
+      border-color: #fff3cc;
+      background: #fffdf5;
+    }
+    .trans-table .status-cell {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.04em;
+      width: 90px;
+    }
+    .trans-table .status-cell.ok { color: #2d682f; }
+    .trans-table .status-cell.todo { color: #957100; }
+    .trans-table .status-cell.outdated { color: #b85c01; }
+    .trans-table tbody tr:hover td { background: rgba(78, 69, 214, 0.025); }
+  </style>
 </head>
-<body class="h-full overflow-hidden flex cnds-product-expireon">
 
-<!-- Shared Sidenav -->
-<script>const ACTIVE_NAV = 'admin_texts';</script>
-<script src="../_shared/sidenav.js"></script>
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="P3b · Translations (key-value editor)">
 
-<!-- Main Content Area -->
-<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+  <script>const ACTIVE_NAV = 'admin_languages_texte';</script>
+  <script src="../_shared/sidenav.js"></script>
 
-  <!-- Top Navigation Bar -->
-  <script>const TOPNAV_SEARCH = 'Search texts...';</script>
-  <script src="../_shared/topnav.js"></script>
+  <div class="app-main">
 
-  <!-- Content Canvas -->
-  <main class="flex-1 overflow-y-auto p-8">
-    <div class="max-w-[1440px] mx-auto space-y-6">
+    <script>const TOPNAV_SEARCH = 'Search translation keys…';</script>
+    <script src="../_shared/topnav.js"></script>
 
-      <!-- Breadcrumb & Page Title -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-        <div>
-          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
-            <a href="#" class="hover:text-primary transition-colors">Administration</a>
-            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-            <a href="#" class="hover:text-primary transition-colors">Language Management</a>
-            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-            <span class="fw-semibold text-on-surface">Texts</span>
-          </nav>
-          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Texts</h1>
-          <p class="text-muted mt-1 mb-0">Manage localization keys and translation values across all resource files.</p>
+    <main class="app-scroll">
+      <div class="app-canvas">
+
+        <div class="section-strip">
+          <span><a href="#">Administration</a></span>
+          <span class="sep" aria-hidden="true"></span>
+          <span><a href="../languages_improved_readability_card_view/languages_improved_readability_card_view.html">Languages</a></span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="current">Translations</span>
         </div>
-        <button class="btn btn-primary flex items-center gap-1">
-          <span class="material-symbols-outlined" style="font-size:18px">add</span>
-          New Text
-        </button>
-      </div>
 
-      <!-- KPI Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-        <div class="card custom-shadow-l1 mb-0">
-          <div class="card-body">
-            <p class="small text-muted text-uppercase fw-semibold mb-2">Total Keys</p>
-            <div class="flex items-end justify-between">
-              <span class="fw-bold" style="font-size:2rem">4.821</span>
-              <span class="badge badge-secondary flex items-center gap-1">
-                <span class="material-symbols-outlined" style="font-size:14px">translate</span> Texts
-              </span>
-            </div>
+        <header class="page-eyebrow">
+          <h1>UI string translations · 4,219 keys across 12 locales</h1>
+        </header>
+
+        <div class="kpi-strip-bar">
+          <div class="kpi-cell">
+            <div class="label">Total Keys</div>
+            <div class="value">4,219</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">Translated</div>
+            <div class="value">3,481</div>
+            <div class="delta neutral"><span class="material-symbols-outlined">check</span>82% coverage</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">Missing</div>
+            <div class="value">521</div>
+            <div class="delta down"><span class="material-symbols-outlined">warning</span>across 10 locales</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">Outdated</div>
+            <div class="value">217</div>
+            <div class="delta neutral"><span class="material-symbols-outlined">history</span>source changed</div>
+          </div>
+          <div class="kpi-cell">
+            <div class="label">Locales</div>
+            <div class="value">12</div>
           </div>
         </div>
-        <div class="card custom-shadow-l1 mb-0">
-          <div class="card-body">
-            <p class="small text-muted text-uppercase fw-semibold mb-2">Translated</p>
-            <div class="flex items-end justify-between">
-              <span class="fw-bold" style="font-size:2rem">94%</span>
-              <span class="small text-muted flex items-center gap-1">
-                <span class="material-symbols-outlined text-success" style="font-size:16px">check_circle</span> Ready
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="card custom-shadow-l1 mb-0">
-          <div class="card-body">
-            <p class="small text-muted text-uppercase fw-semibold mb-2">Progress</p>
-            <div class="flex items-end justify-between gap-3">
-              <span class="fw-bold" style="font-size:2rem">94%</span>
-              <div class="progress flex-1 mb-2" style="height:6px">
-                <div class="progress-bar" role="progressbar" style="width:94%" aria-valuenow="94" aria-valuemin="0" aria-valuemax="100"></div>
+
+        <div class="master-detail" style="grid-template-columns:240px 1fr">
+
+          <aside class="master-list" aria-label="Locales">
+            <div class="master-list-head">
+              <div class="toolbar-search" style="border:1px solid #e0e0e0;border-radius:6px;height:34px;">
+                <span class="material-symbols-outlined" style="font-size:16px;color:#888;margin:0 0 0 9px">search</span>
+                <input type="text" class="cf-input-control" placeholder="Filter locales…" style="border:0;height:32px;">
               </div>
             </div>
-          </div>
-        </div>
-        <div class="card custom-shadow-l1 mb-0">
-          <div class="card-body">
-            <p class="small text-muted text-uppercase fw-semibold mb-2">Last Update</p>
-            <div class="flex items-end justify-between">
-              <span class="fw-bold" style="font-size:2rem">Today</span>
-              <span class="small text-muted">2:20 PM</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Table Card -->
-      <div class="card custom-shadow-l1">
-        <!-- Filters -->
-        <div class="card-body border-bottom bg-surface-container-low" style="border-bottom:1px solid var(--outline-variant, #c3c6d7)">
-          <div class="grid grid-cols-1 md:grid-cols-5 gap-4">
-            <div>
-              <label class="cf-input-label">Base Language</label>
-              <select class="cf-input-control w-full">
-                <option>English</option>
-                <option>German</option>
-              </select>
-            </div>
-            <div>
-              <label class="cf-input-label">Target Language</label>
-              <select class="cf-input-control w-full">
-                <option>German</option>
-                <option>French</option>
-              </select>
-            </div>
-            <div>
-              <label class="cf-input-label">Resource Name</label>
-              <select class="cf-input-control w-full">
-                <option>ValidationResources</option>
-                <option>CommonResources</option>
-              </select>
-            </div>
-            <div>
-              <label class="cf-input-label">Target Value</label>
-              <select class="cf-input-control w-full">
-                <option>All</option>
-                <option>Empty</option>
-              </select>
-            </div>
-            <div>
-              <label class="cf-input-label">Search</label>
-              <div class="relative">
-                <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                  <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">search</span>
-                </span>
-                <input class="cf-input-control w-full" style="padding-left:2.25rem" type="text" placeholder="Search..."/>
+            <div class="master-list-body">
+              <div class="master-item">
+                <h4>🇺🇸 English</h4>
+                <p class="meta">en-US <span class="dot"></span> Source · 100%</p>
+              </div>
+              <div class="master-item active">
+                <h4>🇩🇪 German</h4>
+                <p class="meta">de-DE <span class="dot"></span> 100% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇫🇷 French</h4>
+                <p class="meta">fr-FR <span class="dot"></span> 98% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇪🇸 Spanish</h4>
+                <p class="meta">es-ES <span class="dot"></span> 96% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇵🇹 Portuguese (BR)</h4>
+                <p class="meta">pt-BR <span class="dot"></span> 94% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇮🇹 Italian</h4>
+                <p class="meta">it-IT <span class="dot"></span> 91% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇳🇱 Dutch</h4>
+                <p class="meta">nl-NL <span class="dot"></span> 88% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇯🇵 Japanese</h4>
+                <p class="meta">ja-JP <span class="dot"></span> 82% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇨🇳 Chinese</h4>
+                <p class="meta">zh-CN <span class="dot"></span> 79% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇰🇷 Korean</h4>
+                <p class="meta">ko-KR <span class="dot"></span> 65% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇵🇱 Polish</h4>
+                <p class="meta">pl-PL <span class="dot"></span> 52% translated</p>
+              </div>
+              <div class="master-item">
+                <h4>🇨🇿 Czech</h4>
+                <p class="meta">cs-CZ <span class="dot"></span> 47% translated</p>
               </div>
             </div>
-          </div>
+          </aside>
+
+          <section class="detail-pane">
+            <div class="detail-pane-head">
+              <div class="head-title">
+                <h2>🇩🇪 German · de-DE</h2>
+                <p class="meta">4,219 keys total · 4,219 translated · 0 missing · 18 outdated</p>
+              </div>
+              <div class="head-actions">
+                <button class="text-action muted">Import .po</button>
+                <button class="text-action muted">Export .po</button>
+                <button class="text-action">Auto-translate</button>
+              </div>
+            </div>
+
+            <!-- Sub-toolbar for the translation table -->
+            <div class="toolbar-v2" style="border-top:1px solid #f0f0f0;padding:10px 14px;">
+              <div class="toolbar-search">
+                <input type="text" class="cf-input-control" placeholder="Search by key or value…">
+                <button class="btn btn-secondary btn-search">Search</button>
+              </div>
+              <div class="show-control">
+                <span>Show:</span>
+                <select class="cf-input-control">
+                  <option>All</option>
+                  <option>Missing only</option>
+                  <option>Outdated only</option>
+                  <option>By namespace</option>
+                </select>
+              </div>
+              <div class="toolbar-spacer"></div>
+              <span class="status status-success">Auto-save on</span>
+            </div>
+
+            <div style="overflow-x:auto">
+              <table class="trans-table">
+                <thead>
+                  <tr>
+                    <th style="width:200px">Key</th>
+                    <th style="width:280px">English (source)</th>
+                    <th>German translation</th>
+                    <th style="width:90px">Status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="key-cell">app.title</td>
+                    <td class="ref-cell">Expireon Admin Console</td>
+                    <td><input type="text" class="trans-input" value="Expireon Admin Console"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">nav.endpoints</td>
+                    <td class="ref-cell">Endpoints</td>
+                    <td><input type="text" class="trans-input" value="Endpunkte"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">nav.appliances</td>
+                    <td class="ref-cell">Appliances</td>
+                    <td><input type="text" class="trans-input" value="Appliances"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">nav.custodians</td>
+                    <td class="ref-cell">Custodians</td>
+                    <td><input type="text" class="trans-input" value="Verwahrer"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">nav.legal_holds</td>
+                    <td class="ref-cell">Legal Holds</td>
+                    <td><input type="text" class="trans-input" value="Aufbewahrungsanordnungen"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">action.new_endpoint</td>
+                    <td class="ref-cell">New Endpoint</td>
+                    <td><input type="text" class="trans-input" value="Neuer Endpunkt"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">action.bulk_enroll</td>
+                    <td class="ref-cell">Bulk enrollment</td>
+                    <td><input type="text" class="trans-input untranslated" value="Bulk-Anmeldung" placeholder="Translation needed"></td>
+                    <td class="status-cell outdated">Outdated</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">table.col.endpoint_name</td>
+                    <td class="ref-cell">Endpoint Name</td>
+                    <td><input type="text" class="trans-input" value="Endpunktname"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">table.col.status</td>
+                    <td class="ref-cell">Status</td>
+                    <td><input type="text" class="trans-input" value="Status"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">table.col.region</td>
+                    <td class="ref-cell">Region</td>
+                    <td><input type="text" class="trans-input" value="Region"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">filter.region.north_america</td>
+                    <td class="ref-cell">North America</td>
+                    <td><input type="text" class="trans-input" value="Nordamerika"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">filter.region.europe</td>
+                    <td class="ref-cell">Europe</td>
+                    <td><input type="text" class="trans-input" value="Europa"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">filter.region.asia_pacific</td>
+                    <td class="ref-cell">Asia Pacific</td>
+                    <td><input type="text" class="trans-input" value="Asien-Pazifik"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">status.active</td>
+                    <td class="ref-cell">Active</td>
+                    <td><input type="text" class="trans-input" value="Aktiv"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">status.disconnected</td>
+                    <td class="ref-cell">Disconnected</td>
+                    <td><input type="text" class="trans-input" value="Getrennt"></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">status.stale</td>
+                    <td class="ref-cell">Stale</td>
+                    <td><input type="text" class="trans-input untranslated" value="Veraltet"></td>
+                    <td class="status-cell outdated">Outdated</td>
+                  </tr>
+                  <tr>
+                    <td class="key-cell">empty.no_endpoints</td>
+                    <td class="ref-cell">No endpoints match these filters.</td>
+                    <td><input type="text" class="trans-input" value="Keine Endpunkte entsprechen diesen Filtern."></td>
+                    <td class="status-cell ok">OK</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="card-footer">
+              <div class="pager" style="justify-content:flex-end;width:100%">
+                <label class="pager-rpp">Rows per page:
+                  <select class="cf-input-control"><option>25</option><option>50</option><option>100</option><option>All</option></select>
+                </label>
+                <span class="pager-range">1–17 of 4,219</span>
+                <div class="pager-arrows">
+                  <button disabled><span class="material-symbols-outlined">first_page</span></button>
+                  <button disabled><span class="material-symbols-outlined">chevron_left</span></button>
+                  <button><span class="material-symbols-outlined">chevron_right</span></button>
+                  <button><span class="material-symbols-outlined">last_page</span></button>
+                </div>
+              </div>
+            </div>
+          </section>
+
         </div>
 
-        <!-- Table -->
-        <div class="table-responsive w-full">
-          <table class="table table-hover mb-0 w-full">
-            <thead>
-              <tr>
-                <th>Key</th>
-                <th>Base Value</th>
-                <th>Value</th>
-                <th>Resource</th>
-                <th class="text-end">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="fw-semibold small">ComparePropertiesNotMatch</td>
-                <td class="small text-muted">'{0}' and '{1}' do not match.</td>
-                <td class="small">'{0}' und '{1}' stimmen nicht überein.</td>
-                <td class="small text-muted">ValidationResources</td>
-                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">CreditCardAttribute_Invalid</td>
-                <td class="small text-muted">The {0} field is not a valid credit card number.</td>
-                <td class="small">Das Feld '{0}' ist keine gültige Kreditkartennummer.</td>
-                <td class="small text-muted">ValidationResources</td>
-                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">CustomValidationAttribute_ValidationError</td>
-                <td class="small text-muted">{0} is not valid.</td>
-                <td class="small">{0} ist ungültig.</td>
-                <td class="small text-muted">ValidationResources</td>
-                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">DataTypeAttribute_EmptyDataTypeString</td>
-                <td class="small text-muted">The custom DataType string cannot be null or empty.</td>
-                <td class="small">Die benutzerdefinierte DataType-Zeichenfolge darf nicht null oder leer sein.</td>
-                <td class="small text-muted">ValidationResources</td>
-                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">EmailAddressAttribute_Invalid</td>
-                <td class="small text-muted">The {0} field is not a valid e-mail address.</td>
-                <td class="small">Das Feld '{0}' ist keine gültige E-Mail-Adresse.</td>
-                <td class="small text-muted">ValidationResources</td>
-                <td class="text-end"><button class="btn btn-primary btn-sm">Edit</button></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Pagination Footer -->
-        <div class="card-footer flex items-center justify-between">
-          <span class="small text-muted">Showing 1 to 5 of 4,821 texts</span>
-          <nav>
-            <ul class="pagination pagination-sm mb-0">
-              <li class="page-item disabled">
-                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span></a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span></a>
-              </li>
-            </ul>
-          </nav>
-        </div>
       </div>
-
-      <!-- Footer Info Cards -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div class="alert alert-info flex items-start gap-3 mb-0">
-          <span class="material-symbols-outlined flex-shrink-0" style="font-size:22px;margin-top:2px;font-variation-settings:'FILL' 1">info</span>
-          <div>
-            <div class="fw-semibold mb-1">Export Texts</div>
-            <p class="small mb-0">You can export all texts as .resx or .json files to translate them externally.</p>
-          </div>
-        </div>
-        <div class="card custom-shadow-l1 mb-0">
-          <div class="card-body">
-            <div class="fw-semibold mb-1">Text Documentation</div>
-            <p class="small text-muted mb-2">Learn more about placeholders like {0} and {1} in translations.</p>
-            <a href="#" class="btn btn-link p-0 small fw-semibold flex items-center gap-1">
-              Read Documentation <span class="material-symbols-outlined" style="font-size:16px">open_in_new</span>
-            </a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </main>
-</div>
-
+    </main>
+  </div>
 </body>
 </html>

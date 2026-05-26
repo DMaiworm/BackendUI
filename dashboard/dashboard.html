@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" data-cnds-theme="light">
+<head>
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard — Expireon</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../_shared/expireon-app.css?v=5">
+</head>
+
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="Dashboard (5-tab)">
+
+  <script>const ACTIVE_NAV = 'dashboard';</script>
+  <script src="../_shared/sidenav.js"></script>
+
+  <div class="app-main">
+    <script>const TOPNAV_SEARCH = 'Search dashboard…';</script>
+    <script src="../_shared/topnav.js"></script>
+
+    <main class="app-scroll">
+      <div class="app-canvas">
+
+        <header class="page-eyebrow">
+          <h1>Operational overview · all infrastructure, capture, governance, migrations</h1>
+        </header>
+
+        <ul class="nav-tabs-nimbus" role="tablist" id="dash-tabs">
+          <li><a href="#general" class="nav-link active" data-tab="general">General</a></li>
+          <li><a href="#users" class="nav-link" data-tab="users">Users &amp; Custodians</a></li>
+          <li><a href="#email" class="nav-link" data-tab="email">Email Capture</a></li>
+          <li><a href="#gov" class="nav-link" data-tab="gov">Information Governance</a></li>
+          <li><a href="#mig" class="nav-link" data-tab="mig">Migrations</a></li>
+        </ul>
+
+        <!-- ───────────────────────── GENERAL ───────────────────────── -->
+        <div class="tab-pane active" id="general-pane">
+
+          <section class="dash-section">
+            <div class="dash-section-head"><h2>Infrastructure Status</h2></div>
+            <div class="dash-section-body">
+
+              <div class="kpi-block">
+                <div class="kpi-head">
+                  <p class="label">Endpoints</p>
+                  <div class="value">1,248</div>
+                </div>
+                <div class="sub-cells">
+                  <div class="sub-cell"><p class="lbl">Online</p><div class="val success">1,230</div><div class="sub success">98.5%</div></div>
+                  <div class="sub-cell"><p class="lbl">Offline</p><div class="val danger">18</div><div class="sub danger">1.5%</div></div>
+                </div>
+              </div>
+
+              <div class="kpi-block">
+                <div class="kpi-head">
+                  <p class="label">Appliances</p>
+                  <div class="value">42</div>
+                </div>
+                <div class="sub-cells">
+                  <div class="sub-cell"><p class="lbl">Online</p><div class="val success">41</div></div>
+                  <div class="sub-cell"><p class="lbl">Offline</p><div class="val muted">1</div></div>
+                </div>
+              </div>
+
+              <div class="kpi-block">
+                <div class="kpi-head">
+                  <p class="label">Active Modules</p>
+                  <div class="value">156</div>
+                </div>
+                <div class="sub-cells cols-3">
+                  <div class="sub-cell"><p class="lbl">Online</p><div class="val success">149</div></div>
+                  <div class="sub-cell"><p class="lbl">Offline</p><div class="val danger">7</div></div>
+                  <div class="sub-cell"><p class="lbl">New &lt;24h</p><div class="val warning">3</div></div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <section class="dash-section">
+            <div class="dash-section-head"><h2>Connectivity &amp; Storage</h2></div>
+            <div class="dash-section-body">
+
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Storage Locations</h3></div>
+                <div class="kv-block">
+                  <div class="kv-row"><span class="lbl">Total Locations</span><span class="val">28</span></div>
+                  <div class="kv-row"><span class="lbl">GB Used</span><span class="val warning">4,280 GB</span></div>
+                  <div class="kv-row"><span class="lbl">GB Free</span><span class="val success">1,942 GB</span></div>
+                </div>
+                <div class="usage-bar" style="margin-top:14px"><span class="used" style="width:68.8%"></span></div>
+              </div>
+
+              <div class="chart-card muted" style="text-align:center">
+                <div class="chart-card-head" style="margin-bottom:8px"><h3 style="width:100%;text-align:left">Domain Synchronization</h3></div>
+                <div class="donut" style="background:conic-gradient(#439945 0 91.6%, #e0e0e0 0)">
+                  <div class="donut-label">
+                    <div class="v">12</div>
+                  </div>
+                </div>
+                <div class="donut-sub">
+                  <div class="item"><p class="lbl">Synced &lt;24h</p><div class="val success">11</div></div>
+                  <div class="item"><p class="lbl">Failed &lt;24h</p><div class="val danger">1</div></div>
+                </div>
+              </div>
+
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>S3 Cloud Engine</h3></div>
+                <div class="kv-block">
+                  <div class="kv-row"><span class="lbl">Buckets Connected</span><span style="background:#e6f4e7;color:#2d682f;padding:3px 10px;border-radius:999px;font-size:0.75rem;font-weight:700">15 / 15</span></div>
+                  <div class="kv-row" style="border-bottom:0"><span class="lbl">Last Transaction</span><span class="val" style="font-size:0.875rem">2m 14s ago</span></div>
+                </div>
+                <div style="margin-top:16px">
+                  <p style="font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99;margin:0 0 6px">S3 Free Space (8.5 TB total)</p>
+                  <div class="usage-bar"><span class="used" style="width:72.9%"></span><span class="reserved" style="width:11%"></span></div>
+                  <div style="display:flex;justify-content:space-between;margin-top:6px;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase">
+                    <span style="color:#4e45d6">Used: 6.2 TB</span>
+                    <span style="color:#2d682f">Free: 2.3 TB</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </section>
+
+          <section class="dash-section">
+            <div class="dash-section-head">
+              <h2>Indexing Engine</h2>
+              <div class="head-aside"><span class="status status-success">Optimized</span></div>
+            </div>
+            <div class="dash-section-body cols-2">
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Indexing Workers</h3></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:end">
+                  <div><div style="font-size:2.5rem;font-weight:700;line-height:1">124</div><p style="margin:6px 0 0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Total Active</p></div>
+                  <div><div style="font-size:2.5rem;font-weight:700;line-height:1;color:#942700">12</div><p style="margin:6px 0 0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#942700">Errors (24h)</p></div>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Index Storage Health</h3></div>
+                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:16px;text-align:center">
+                  <div><div style="font-size:2rem;font-weight:700;line-height:1">12</div><p style="margin:6px 0 0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">TB Total</p></div>
+                  <div><div style="font-size:2rem;font-weight:700;line-height:1;color:#4e45d6">8.4</div><p style="margin:6px 0 0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4e45d6">TB Used</p></div>
+                  <div><div style="font-size:2rem;font-weight:700;line-height:1;color:#2d682f">3.6</div><p style="margin:6px 0 0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#2d682f">TB Free</p></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <div class="notice-banner">
+            <span class="material-symbols-outlined icon">info</span>
+            <div class="body">
+              <h4>Maintenance Window Scheduled</h4>
+              <p>System maintenance scheduled for Sunday at 02:00 UTC. Backup services will be unaffected.</p>
+            </div>
+            <button class="dismiss" onclick="this.closest('.notice-banner').remove()">Dismiss Notification</button>
+          </div>
+        </div>
+
+        <!-- ───────────────────────── USERS & CUSTODIANS (stub) ───── -->
+        <div class="tab-pane" id="users-pane">
+          <section class="dash-section">
+            <div class="dash-section-head"><h2>Users &amp; Custodians</h2></div>
+            <div class="dash-section-body cols-2" style="padding:60px 22px">
+              <div style="grid-column: 1 / -1; text-align:center; color:#6b6b6b">
+                <span class="material-symbols-outlined" style="font-size:48px; color:#dbd9f7">construction</span>
+                <h3 style="margin:14px 0 6px;font-size:1.125rem;font-weight:700;color:#1a1a1a">Coming soon</h3>
+                <p style="margin:0;font-size:0.9375rem">User and custodian activity dashboards will land here in the next iteration.</p>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ───────────────────────── EMAIL CAPTURE ─────────────────── -->
+        <div class="tab-pane" id="email-pane">
+
+          <section class="dash-section">
+            <div class="dash-section-head">
+              <h2>SMTP Capture</h2>
+              <div class="head-aside">
+                <button class="btn btn-secondary btn-dropdown"><span class="material-symbols-outlined" style="font-size:16px">description</span>Create Report</button>
+                <span style="font-size:0.8125rem;color:#4f4f4f99">Containers</span>
+                <button class="btn btn-secondary btn-dropdown" style="height:34px">SMTP Journal Expireon 2026 <span class="material-symbols-outlined">arrow_drop_down</span></button>
+              </div>
+            </div>
+            <div class="dash-section-body cols-2" style="grid-template-columns:280px 1fr">
+
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+                <div>
+                  <p style="margin:0 0 14px;font-size:0.9375rem;font-weight:700">Total</p>
+                  <div style="margin-bottom:18px">
+                    <p style="margin:0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Captured Items</p>
+                    <div style="font-size:1.75rem;font-weight:700;line-height:1">0</div>
+                  </div>
+                  <div style="margin-bottom:18px">
+                    <p style="margin:0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Failed Items</p>
+                    <div style="font-size:1.75rem;font-weight:700;line-height:1">0</div>
+                  </div>
+                  <div>
+                    <p style="margin:0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Size (compressed)</p>
+                    <div style="font-size:1.75rem;font-weight:700;line-height:1">0.00 B</div>
+                  </div>
+                </div>
+                <div>
+                  <p style="margin:0 0 14px;font-size:0.9375rem;font-weight:700">Last 24h</p>
+                  <div style="margin-bottom:18px">
+                    <p style="margin:0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Captured Items</p>
+                    <div style="font-size:1.75rem;font-weight:700;line-height:1">0</div>
+                  </div>
+                  <div style="margin-bottom:18px">
+                    <p style="margin:0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Failed Items</p>
+                    <div style="font-size:1.75rem;font-weight:700;line-height:1">0</div>
+                  </div>
+                  <div>
+                    <p style="margin:0;font-size:0.625rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Size (compressed)</p>
+                    <div style="font-size:1.75rem;font-weight:700;line-height:1">0.00 B</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>24h Throughput</h3></div>
+                <div class="line-chart">
+                  <svg viewBox="0 0 600 180" preserveAspectRatio="none">
+                    <defs>
+                      <linearGradient id="gradPurple" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stop-color="#4e45d6" stop-opacity="0.25"/>
+                        <stop offset="100%" stop-color="#4e45d6" stop-opacity="0"/>
+                      </linearGradient>
+                    </defs>
+                    <path d="M 0,140 L 50,135 L 100,120 L 150,100 L 200,70 L 250,50 L 300,55 L 350,80 L 400,95 L 450,75 L 500,55 L 550,75 L 600,80 L 600,180 L 0,180 Z" fill="url(#gradPurple)"/>
+                    <path d="M 0,140 L 50,135 L 100,120 L 150,100 L 200,70 L 250,50 L 300,55 L 350,80 L 400,95 L 450,75 L 500,55 L 550,75 L 600,80" fill="none" stroke="#4e45d6" stroke-width="2.5"/>
+                  </svg>
+                </div>
+                <div class="line-chart-labels"><span>00:00</span><span>04:00</span><span>08:00</span><span>12:00</span><span>16:00</span><span>20:00</span><span>23:59</span></div>
+              </div>
+
+            </div>
+            <div class="dash-section-body cols-2" style="border-top:1px solid #e0e0e0">
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Attachment Type Distribution</h3></div>
+                <div style="display:flex;align-items:center;gap:24px">
+                  <div class="donut" style="width:140px;height:140px;background:conic-gradient(#4e45d6 0 36%, #439945 0 70%, #b85c01 0 86%, #957100 0 96%, #c41616 0)"></div>
+                  <div class="donut-legend cols-1">
+                    <div class="lg-item" style="--lg-color:#4e45d6"><span class="lg-label">pdf</span><span class="lg-value">1.43 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#439945"><span class="lg-label">gif</span><span class="lg-value">1.34 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#b85c01"><span class="lg-label">png</span><span class="lg-value">956 GB</span></div>
+                    <div class="lg-item" style="--lg-color:#957100"><span class="lg-label">pptx</span><span class="lg-value">841 GB</span></div>
+                    <div class="lg-item" style="--lg-color:#c41616"><span class="lg-label">jpg</span><span class="lg-value">436 GB</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Items Count per Month</h3></div>
+                <div class="bar-chart">
+                  <div class="bar" style="--h:55%"></div>
+                  <div class="bar" style="--h:48%"></div>
+                  <div class="bar tiny"></div>
+                  <div class="bar tiny"></div>
+                  <div class="bar tiny"></div>
+                  <div class="bar" style="--h:78%"></div>
+                  <div class="bar" style="--h:70%"></div>
+                  <div class="bar tiny"></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">2024-12</span><span class="lbl">2025-02</span><span class="lbl">2025-04</span><span class="lbl">2025-06</span>
+                  <span class="lbl">2025-08</span><span class="lbl">2025-10</span><span class="lbl">2025-12</span><span class="lbl">2026-02</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dash-section">
+            <div class="dash-section-head">
+              <h2>Hyperlink Processing &amp; File Capture</h2>
+              <div class="head-aside">
+                <button class="btn btn-secondary btn-dropdown"><span class="material-symbols-outlined" style="font-size:16px">description</span>Create Report</button>
+                <span style="font-size:0.8125rem;color:#4f4f4f99">Containers</span>
+                <button class="btn btn-secondary btn-dropdown" style="height:34px">All Containers <span class="material-symbols-outlined">arrow_drop_down</span></button>
+              </div>
+            </div>
+            <div class="dash-section-body cols-2" style="grid-template-columns:240px 1fr">
+              <div class="chart-card muted" style="text-align:center;padding:18px 14px">
+                <div class="chart-card-head"><h3 style="width:100%;text-align:center">Processing Queue</h3></div>
+                <div style="margin-bottom:18px">
+                  <p style="margin:0;font-size:0.6875rem;color:#4f4f4f99">To be Processed</p>
+                  <div style="font-size:1.5rem;font-weight:700;line-height:1.2">1,377,078</div>
+                </div>
+                <div style="margin-bottom:18px">
+                  <p style="margin:0;font-size:0.6875rem;color:#4f4f4f99">In Processing Queue</p>
+                  <div style="font-size:1.5rem;font-weight:700;line-height:1.2">13,538</div>
+                </div>
+                <div>
+                  <p style="margin:0;font-size:0.6875rem;color:#4f4f4f99">Items Processed per hour</p>
+                  <div style="font-size:1.5rem;font-weight:700;line-height:1.2">48,290</div>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Hyperlinked Items (by Month)</h3></div>
+                <div class="bar-chart">
+                  <div class="bar tiny"></div><div class="bar tiny"></div><div class="bar tiny"></div>
+                  <div class="bar tiny"></div><div class="bar tiny"></div>
+                  <div class="bar" style="--h:30%"></div>
+                  <div class="bar" style="--h:85%"></div>
+                  <div class="bar" style="--h:100%"></div>
+                  <div class="bar" style="--h:70%"></div>
+                  <div class="bar tiny"></div>
+                  <div class="bar" style="--h:18%"></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">2025-06</span><span class="lbl">2025-08</span><span class="lbl">2025-10</span>
+                  <span class="lbl">2025-12</span><span class="lbl">2026-02</span><span class="lbl">2026-04</span>
+                </div>
+              </div>
+            </div>
+            <div class="dash-section-body cols-2" style="border-top:1px solid #e0e0e0">
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Hyperlinked File Type Distribution</h3></div>
+                <div style="display:flex;align-items:center;gap:18px">
+                  <div class="donut" style="width:160px;height:160px;background:conic-gradient(#4e45d6 0 88%, #439945 0 92%, #b85c01 0 95%, #957100 0 97%, #c41616 0 98.5%, #888 0)">
+                    <div class="donut-label"><div class="v" style="font-size:1.5rem">87.6%</div></div>
+                  </div>
+                  <div class="donut-legend">
+                    <div class="lg-item" style="--lg-color:#4e45d6"><span class="lg-label">.mp4</span><span class="lg-value">1.41 PB</span></div>
+                    <div class="lg-item" style="--lg-color:#dbd9f7"><span class="lg-label">.pdf</span><span class="lg-value">8.69 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#439945"><span class="lg-label">.pptx</span><span class="lg-value">141 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#2d682f"><span class="lg-label">.zip</span><span class="lg-value">8.48 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#b85c01"><span class="lg-label">.xlsx</span><span class="lg-value">15.9 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#957100"><span class="lg-label">.mov</span><span class="lg-value">4.33 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#c41616"><span class="lg-label">.docx</span><span class="lg-value">8.85 TB</span></div>
+                  </div>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Total</h3></div>
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;text-align:center">
+                  <div>
+                    <p style="margin:0;font-size:0.75rem;color:#4f4f4f99">Processed Items</p>
+                    <div style="font-size:1.625rem;font-weight:700;margin-top:6px">31,622,131</div>
+                  </div>
+                  <div>
+                    <p style="margin:0;font-size:0.75rem;color:#4f4f4f99">Successfully Retrieved</p>
+                    <div style="font-size:1.625rem;font-weight:700;color:#2d682f;margin-top:6px">28,450,120</div>
+                  </div>
+                  <div>
+                    <p style="margin:0;font-size:0.75rem;color:#4f4f4f99">Download Failed</p>
+                    <div style="font-size:1.625rem;font-weight:700;color:#b85c01;margin-top:6px">3,172,011</div>
+                  </div>
+                  <div>
+                    <p style="margin:0;font-size:0.75rem;color:#4f4f4f99">Failure Rate</p>
+                    <div style="font-size:1.625rem;font-weight:700;margin-top:6px">75.21%</div>
+                    <button class="btn btn-primary" style="margin-top:10px;height:32px;font-size:12px">Failed items list</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+        </div>
+
+        <!-- ───────────────────────── INFORMATION GOVERNANCE ──────── -->
+        <div class="tab-pane" id="gov-pane">
+
+          <section class="dash-section">
+            <div class="dash-section-head">
+              <h2>Information Under Governance</h2>
+              <div class="head-aside"><button class="btn btn-secondary btn-icon" aria-label="Collapse"><span class="material-symbols-outlined">expand_less</span></button></div>
+            </div>
+            <div class="dash-section-body cols-2">
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Storage Statistics</h3></div>
+                <div style="margin-bottom:18px">
+                  <p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Total Storage Size</p>
+                  <div style="font-size:1.625rem;font-weight:700;line-height:1.2">2.42 PB</div>
+                </div>
+                <div style="margin-bottom:18px">
+                  <p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Total Item Count</p>
+                  <div style="font-size:1.625rem;font-weight:700;line-height:1.2">12,443,047,487</div>
+                </div>
+                <div>
+                  <p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Average Item Size</p>
+                  <div style="font-size:1.625rem;font-weight:700;color:#4e45d6;line-height:1.2">184.20 KB</div>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>File Type Distribution</h3></div>
+                <div style="display:flex;align-items:center;gap:18px">
+                  <div class="donut" style="width:140px;height:140px;background:conic-gradient(#4e45d6 0 32.4%, #439945 0 60%, #c41616 0 80%, #957100 0 90%, #b85c01 0)">
+                    <div class="donut-label"><div class="v" style="font-size:1.25rem">32.4%</div></div>
+                  </div>
+                  <div class="donut-legend">
+                    <div class="lg-item" style="--lg-color:#4e45d6"><span class="lg-label">pdf</span><span class="lg-value">57.98 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#439945"><span class="lg-label">pptx</span><span class="lg-value">36.09 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#b85c01"><span class="lg-label">png</span><span class="lg-value">19.23 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#957100"><span class="lg-label">xlsx</span><span class="lg-value">15.20 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#c41616"><span class="lg-label">jpg</span><span class="lg-value">13.81 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#4e45d6"><span class="lg-label">msg</span><span class="lg-value">12.85 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#439945"><span class="lg-label">gif</span><span class="lg-value">12.80 TB</span></div>
+                    <div class="lg-item" style="--lg-color:#dbd9f7"><span class="lg-label">docx</span><span class="lg-value">8.55 TB</span></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="dash-section-body cols-2" style="border-top:1px solid #e0e0e0">
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Age Distribution (Data Volume)</h3></div>
+                <div class="bar-chart">
+                  <div class="bar" style="--h:5%"></div>
+                  <div class="bar" style="--h:8%"></div>
+                  <div class="bar" style="--h:15%"></div>
+                  <div class="bar" style="--h:22%"></div>
+                  <div class="bar" style="--h:32%"></div>
+                  <div class="bar" style="--h:48%"></div>
+                  <div class="bar" style="--h:74%"></div>
+                  <div class="bar" style="--h:88%"></div>
+                  <div class="bar" style="--h:72%"></div>
+                  <div class="bar" style="--h:42%"></div>
+                  <div class="bar" style="--h:96%"></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">1990</span><span class="lbl">1994</span><span class="lbl">1998</span><span class="lbl">2002</span>
+                  <span class="lbl">2006</span><span class="lbl">2010</span><span class="lbl">2014</span><span class="lbl">2018</span>
+                  <span class="lbl">2022</span><span class="lbl">Out</span><span class="lbl"></span>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Growth YoY (Data Volume)</h3></div>
+                <div class="bar-chart-yoy">
+                  <div class="bar-col"><span class="bar-pos" style="--h:55%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:45%"></span></div>
+                  <div class="bar-col"><span class="bar-neg" style="--h:25%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:30%"></span></div>
+                  <div class="bar-col"><span class="bar-neg" style="--h:45%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:55%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:68%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:90%"></span></div>
+                  <div class="bar-col"><span class="bar-neg" style="--h:75%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:35%"></span></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">2016</span><span class="lbl">2017</span><span class="lbl">2018</span><span class="lbl">2019</span><span class="lbl">2020</span>
+                  <span class="lbl">2021</span><span class="lbl">2022</span><span class="lbl">2023</span><span class="lbl">2024</span><span class="lbl">2025</span>
+                </div>
+              </div>
+            </div>
+            <div class="dash-section-body cols-2" style="border-top:1px solid #e0e0e0">
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Age Distribution (Item Count)</h3></div>
+                <div class="bar-chart">
+                  <div class="bar" style="--h:5%"></div>
+                  <div class="bar" style="--h:8%"></div>
+                  <div class="bar" style="--h:14%"></div>
+                  <div class="bar" style="--h:24%"></div>
+                  <div class="bar" style="--h:42%"></div>
+                  <div class="bar" style="--h:72%"></div>
+                  <div class="bar" style="--h:96%"></div>
+                  <div class="bar" style="--h:78%"></div>
+                  <div class="bar" style="--h:60%"></div>
+                  <div class="bar" style="--h:38%"></div>
+                  <div class="bar" style="--h:18%"></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">1990</span><span class="lbl">1994</span><span class="lbl">1998</span><span class="lbl">2002</span>
+                  <span class="lbl">2006</span><span class="lbl">2010</span><span class="lbl">2014</span><span class="lbl">2018</span>
+                  <span class="lbl">2022</span><span class="lbl">2026</span><span class="lbl"></span>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Growth YoY (Item Count)</h3></div>
+                <div class="bar-chart-yoy">
+                  <div class="bar-col"><span class="bar-pos" style="--h:42%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:48%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:38%"></span></div>
+                  <div class="bar-col"><span class="bar-neg" style="--h:32%"></span></div>
+                  <div class="bar-col"><span class="bar-neg" style="--h:55%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:30%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:50%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:78%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:90%"></span></div>
+                  <div class="bar-col"><span class="bar-pos" style="--h:95%"></span></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">2016</span><span class="lbl">2017</span><span class="lbl">2018</span><span class="lbl">2019</span><span class="lbl">2020</span>
+                  <span class="lbl">2021</span><span class="lbl">2022</span><span class="lbl">2023</span><span class="lbl">2024</span><span class="lbl">2025</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dash-section">
+            <div class="dash-section-head">
+              <h2>Retention &amp; Expiration</h2>
+              <div class="head-aside">
+                <button class="btn btn-secondary btn-dropdown"><span class="material-symbols-outlined" style="font-size:16px">description</span>Create Report</button>
+              </div>
+            </div>
+            <div class="dash-section-body cols-2">
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Expiring Count per Year</h3></div>
+                <div class="line-chart" style="height:120px">
+                  <svg viewBox="0 0 600 120" preserveAspectRatio="none">
+                    <path d="M 0,100 L 60,98 L 120,95 L 180,90 L 240,93 L 300,94 L 360,90 L 420,95 L 480,98 L 540,96 L 600,99" fill="none" stroke="#4e45d6" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="line-chart-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                </div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Expiring Size per Year</h3></div>
+                <div class="line-chart" style="height:120px">
+                  <svg viewBox="0 0 600 120" preserveAspectRatio="none">
+                    <path d="M 0,98 L 60,95 L 120,92 L 180,88 L 240,90 L 300,92 L 360,86 L 420,90 L 480,95 L 540,96 L 600,97" fill="none" stroke="#4e45d6" stroke-width="2"/>
+                  </svg>
+                </div>
+                <div class="line-chart-labels">
+                  <span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- ───────────────────────── MIGRATIONS ─────────────────── -->
+        <div class="tab-pane" id="mig-pane">
+
+          <section class="dash-section">
+            <div class="dash-section-head">
+              <h2>EV Migration</h2>
+              <div class="head-aside">
+                <button class="btn btn-secondary btn-dropdown"><span class="material-symbols-outlined" style="font-size:16px">description</span>Create Report</button>
+                <span style="font-size:0.8125rem;color:#4f4f4f99">Containers</span>
+                <button class="btn btn-secondary btn-dropdown" style="height:34px">All Containers <span class="material-symbols-outlined">arrow_drop_down</span></button>
+              </div>
+            </div>
+            <div class="dash-section-body" style="grid-template-columns:1fr 1fr 1.5fr">
+              <div>
+                <p style="margin:0 0 14px;font-size:0.9375rem;font-weight:700">Total</p>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">EV Archives</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">123,928</div></div>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">EV Reported Items</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">12,380,209,805</div></div>
+                <div><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">EV Compressed Size</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">1.43 PB</div></div>
+              </div>
+              <div>
+                <p style="margin:0 0 14px;font-size:0.9375rem;font-weight:700">Migration</p>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Collected Items</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">11,914,680,778</div></div>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Migrated Items</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">8,440,838,864</div></div>
+                <div><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Failed Items</p><div style="font-size:1.625rem;font-weight:700;color:#942700;line-height:1.2">26,308,571</div></div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Age Distribution</h3></div>
+                <div class="bar-chart">
+                  <div class="bar" style="--h:5%"></div><div class="bar" style="--h:12%"></div><div class="bar" style="--h:10%"></div><div class="bar" style="--h:22%"></div>
+                  <div class="bar" style="--h:40%"></div><div class="bar" style="--h:62%"></div><div class="bar" style="--h:88%"></div><div class="bar" style="--h:96%"></div>
+                  <div class="bar" style="--h:78%"></div><div class="bar" style="--h:54%"></div><div class="bar" style="--h:38%"></div><div class="bar" style="--h:25%"></div><div class="bar" style="--h:18%"></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">1990</span><span class="lbl">1994</span><span class="lbl">1998</span><span class="lbl">2002</span><span class="lbl">2006</span>
+                  <span class="lbl">2010</span><span class="lbl">2014</span><span class="lbl">2018</span><span class="lbl">2022</span><span class="lbl">2026</span>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="dash-section">
+            <div class="dash-section-head">
+              <h2>SourceOne Migration</h2>
+              <div class="head-aside">
+                <button class="btn btn-secondary btn-dropdown"><span class="material-symbols-outlined" style="font-size:16px">description</span>Create Report</button>
+                <span style="font-size:0.8125rem;color:#4f4f4f99">Containers</span>
+                <button class="btn btn-secondary btn-dropdown" style="height:34px">All Containers <span class="material-symbols-outlined">arrow_drop_down</span></button>
+              </div>
+            </div>
+            <div class="dash-section-body" style="grid-template-columns:1fr 1fr 1.5fr">
+              <div>
+                <p style="margin:0 0 14px;font-size:0.9375rem;font-weight:700">Total</p>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Business Folders</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">0</div></div>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Total Items</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">0</div></div>
+                <div><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Total Size (compressed EV)</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">0.00 B</div></div>
+              </div>
+              <div>
+                <p style="margin:0 0 14px;font-size:0.9375rem;font-weight:700">Migration</p>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Collected Items</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">0</div></div>
+                <div style="margin-bottom:18px"><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Migrated Items</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">0</div></div>
+                <div><p style="margin:0;font-size:0.6875rem;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:#4f4f4f99">Failed Items</p><div style="font-size:1.625rem;font-weight:700;line-height:1.2">0</div></div>
+              </div>
+              <div class="chart-card muted">
+                <div class="chart-card-head"><h3>Age Distribution</h3></div>
+                <div class="bar-chart">
+                  <div class="bar" style="--h:5%"></div><div class="bar" style="--h:10%"></div><div class="bar" style="--h:8%"></div><div class="bar" style="--h:18%"></div>
+                  <div class="bar" style="--h:36%"></div><div class="bar" style="--h:58%"></div><div class="bar" style="--h:82%"></div><div class="bar" style="--h:92%"></div>
+                  <div class="bar" style="--h:74%"></div><div class="bar" style="--h:50%"></div><div class="bar" style="--h:34%"></div><div class="bar" style="--h:22%"></div><div class="bar" style="--h:16%"></div>
+                </div>
+                <div class="bar-chart-labels">
+                  <span class="lbl">1990</span><span class="lbl">1994</span><span class="lbl">1998</span><span class="lbl">2002</span><span class="lbl">2006</span>
+                  <span class="lbl">2010</span><span class="lbl">2014</span><span class="lbl">2018</span><span class="lbl">2022</span><span class="lbl">2026</span>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Tab switching
+    document.querySelectorAll('#dash-tabs .nav-link').forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const tab = link.dataset.tab;
+        document.querySelectorAll('#dash-tabs .nav-link').forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
+        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+        document.getElementById(tab + '-pane').classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>

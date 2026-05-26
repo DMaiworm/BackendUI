@@ -1,277 +1,149 @@
 <!DOCTYPE html>
-<html class="h-full" lang="en">
+<html lang="en" data-cnds-theme="light">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Mail Archive Mappings | AdminConsole</title>
-<!-- Tailwind CSS CDN (Layout only) -->
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Nimbus Design System -->
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
-<!-- Fonts -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<style>
-  .material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-  }
-  .custom-shadow-l1 { box-shadow: 0px 4px 12px rgba(0,0,0,0.05); }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-  ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-</style>
-<!-- Nunito Sans (Nimbus default typeface) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Archive Mappings — Expireon</title>
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../_shared/expireon-app.css?v=5">
 </head>
-<body class="h-full overflow-hidden flex font-body-md text-on-surface cnds-product-expireon">
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="P3a · Archive Mappings">
+  <script>const ACTIVE_NAV = 'archive_mappings';</script>
+  <script src="../_shared/sidenav.js"></script>
+  <div class="app-main">
+    <script>const TOPNAV_SEARCH = "Search archive mappings…";</script>
+    <script src="../_shared/topnav.js"></script>
+    <main class="app-scroll">
+      <div class="app-canvas">
 
-<!-- Shared Sidenav -->
-<script>const ACTIVE_NAV = 'ev_mail_mappings';</script>
-<script src="../_shared/sidenav.js"></script>
+        <div class="section-strip">
+          <span><a href="#">Configuration</a></span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="current">Archive Mappings</span>
+        </div>
 
-<!-- Main Content Area -->
-<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+        <header class="page-eyebrow">
+          <h1>Source to destination mappings governing where each archive lands</h1>
+        </header>
 
-  <!-- Top Navigation -->
-  <script>const TOPNAV_SEARCH = 'Search archive mappings...';</script>
-  <script src="../_shared/topnav.js"></script>
 
-  <!-- Page Content -->
-  <main class="flex-1 overflow-y-auto p-xl space-y-xl">
-
-    <!-- Page Title -->
-    <div>
-      <nav class="flex items-center gap-1 text-sm text-on-surface-variant mb-2">
-        <a href="../archive_mappings_page_title_sync/archive_mappings_page_title_sync.html" class="hover:text-primary">Mappings</a>
-        <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-        <span>Enterprise Vault</span>
-        <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-        <span class="text-on-surface fw-semibold">Mail Archive Mappings</span>
-      </nav>
-      <h1 class="font-h1 text-h1 text-on-surface">Mail Archive Mappings</h1>
-    </div>
-
-    <!-- Top Row: Migration Chart + KPI Cards -->
-    <div class="grid grid-cols-12 gap-lg items-stretch">
-
-      <!-- Migration Chart Card -->
-      <div class="col-span-12 lg:col-span-8">
-        <div class="card custom-shadow-l1 h-full">
-          <div class="card-header flex justify-between items-center">
-            <div>
-              <h2 class="card-title mb-1">Migration</h2>
-              <p class="text-muted small mb-0">Real-time status of archive synchronization across endpoints.</p>
+        <section class="card">
+          <div class="toolbar-v2">
+            <div class="toolbar-search">
+              <input type="text" class="cf-input-control" placeholder="Search Archive Mappings…">
+              <button class="btn btn-secondary btn-search">Search</button>
             </div>
-            <div class="flex gap-3">
-              <span class="flex items-center gap-2 small text-muted">
-                <span class="inline-block w-2 h-2 rounded-full bg-primary"></span> Migrated
-              </span>
-              <span class="flex items-center gap-2 small text-muted">
-                <span class="inline-block w-2 h-2 rounded-full bg-outline-variant"></span> Remaining
-              </span>
+            <button class="icon-funnel-btn" aria-label="Filters"><span class="material-symbols-outlined">filter_alt</span></button>
+            <div class="show-control">
+              <span>Show:</span>
+              <select class="cf-input-control"><option>All</option></select>
+            </div>
+            <div class="toolbar-spacer"></div>
+            <div class="view-toggle">
+              <button class="active"><span class="material-symbols-outlined">view_list</span></button>
+              <button><span class="material-symbols-outlined">grid_view</span></button>
+            </div>
+            <button class="btn btn-secondary btn-dropdown">Export as <span class="material-symbols-outlined">arrow_drop_down</span></button>
+            <button class="btn btn-primary btn-primary-cta"><span class="material-symbols-outlined" style="font-size:18px">add</span>New Mapping</button>
+          </div>
+          <div class="filter-row">
+            
+            <div class="cf-input-field">
+              <label class="cf-input-label">Source Type</label>
+              <select class="cf-input-control"><option>All</option><option>EV Vault</option><option>Exchange</option><option>SourceOne</option></select>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Destination</label>
+              <select class="cf-input-control"><option>All</option><option>expireon-prod-us-east</option><option>expireon-prod-eu-west</option><option>expireon-archive-cold</option></select>
+            </div>
+            <div class="cf-input-field">
+              <label class="cf-input-label">Status</label>
+              <select class="cf-input-control"><option>All</option><option>Active</option><option>Suspended</option></select>
+            </div>
+            <div class="filter-actions">
+              <button class="btn btn-secondary">Clear</button>
+              <button class="btn btn-primary">Apply</button>
             </div>
           </div>
-          <div class="card-body p-0">
-            <div class="bg-surface-container overflow-hidden" style="height:192px">
-              <img class="w-full h-full object-cover" style="opacity:0.9"
-                src="https://lh3.googleusercontent.com/aida/ADBb0uhZAYTsEzLwfLskc_3F_3Alf_A2VWT_He5rgdxCTKlaUsGdHzkYSvAEsJ2JI65OMGRc-MBoHYmbI-0u8aPjGTjd8M8ju2BIwiehqripz5Y_0qc-5LOU4pyzb3s-qkYqRJwV5DkB72nLtur4OOSomfJd0EGbtSIYis4w5rSfk37ubSxqyUSKYMszh1tuh5oF9k1-TquyPKKkxiNsC_MWefjJsYH-lD4Z_4aDctf5UP553mh3fuTLGFAw_7PT6snm-OEBA9rqYEKx"
-                alt="Migration Chart"/>
+          <div class="table-wrap">
+            <table class="table table-hover">
+              <thead><tr>
+                <th style="width:42px"><input type="checkbox" class="form-check-input" aria-label="Select all"></th>
+                <th><span class="th-sort active">Source <span class="material-symbols-outlined">arrow_drop_down</span></span></th>
+                  <th>Type</th>
+                  <th>Destination</th>
+                  <th class="text-end">Items Mapped</th>
+                  <th>Status</th>
+                <th style="width:48px"></th>
+              </tr></thead>
+              <tbody>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">input</span></span><div class="cell-stack"><span class="cell-primary">EV-PROD-01 · VS-Mail-Production</span><span class="cell-secondary">Primary mail archive · NYC</span></div></div></td><td><span class="badge badge-primary">EV Vault</span></td><td><span class="cell-mono">expireon-prod-us-east / mail/</span></td><td class="text-end"><span class="cell-primary">1.2M</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">input</span></span><div class="cell-stack"><span class="cell-primary">EV-PROD-02 · VS-Mail-EU</span><span class="cell-secondary">EU production · GDPR scope</span></div></div></td><td><span class="badge badge-primary">EV Vault</span></td><td><span class="cell-mono">expireon-prod-eu-west / mail/</span></td><td class="text-end"><span class="cell-primary">680K</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">input</span></span><div class="cell-stack"><span class="cell-primary">EV-PROD-01 · VS-Journal</span><span class="cell-secondary">Org-wide journal</span></div></div></td><td><span class="badge badge-primary">EV Vault</span></td><td><span class="cell-mono">expireon-prod-us-east / journal/</span></td><td class="text-end"><span class="cell-primary">4.7M</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">input</span></span><div class="cell-stack"><span class="cell-primary">Exchange Online · Tenant A</span><span class="cell-secondary">O365 connector · live import</span></div></div></td><td><span class="badge badge-info">Exchange</span></td><td><span class="cell-mono">expireon-prod-us-east / o365/</span></td><td class="text-end"><span class="cell-primary">342K</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">input</span></span><div class="cell-stack"><span class="cell-primary">SourceOne · Archive A</span><span class="cell-secondary">EMC SourceOne migration</span></div></div></td><td><span class="badge badge-warning">SourceOne</span></td><td><span class="cell-mono">expireon-archive-cold / s1/</span></td><td class="text-end"><span class="cell-primary">2.1M</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">input</span></span><div class="cell-stack"><span class="cell-primary">EV-LEGACY-01 · VS-Mail-Legacy</span><span class="cell-secondary">Legacy · read-only ingest</span></div></div></td><td><span class="badge badge-primary">EV Vault</span></td><td><span class="cell-mono">expireon-archive-cold / legacy/</span></td><td class="text-end"><span class="cell-primary">3.1M</span></td><td><span class="status status-warning">Suspended</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+                  <tr>
+                    <td><input type="checkbox" class="form-check-input" aria-label="Select"></td>
+                    <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">input</span></span><div class="cell-stack"><span class="cell-primary">EV-TEST-01 · VS-Test</span><span class="cell-secondary">QA fixture</span></div></div></td><td><span class="badge badge-primary">EV Vault</span></td><td><span class="cell-mono">expireon-test-bucket / test/</span></td><td class="text-end"><span class="cell-primary">847</span></td><td><span class="status status-success">Active</span></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                  </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="card-footer">
+            <div class="pager" style="justify-content:flex-end;width:100%">
+              <label class="pager-rpp">Rows per page:
+                <select class="cf-input-control"><option>10</option><option>25</option><option>50</option></select>
+              </label>
+              <span class="pager-range">1–7 of 12</span>
+              <div class="pager-arrows">
+                <button disabled><span class="material-symbols-outlined">first_page</span></button>
+                <button disabled><span class="material-symbols-outlined">chevron_left</span></button>
+                <button><span class="material-symbols-outlined">chevron_right</span></button>
+                <button><span class="material-symbols-outlined">last_page</span></button>
+              </div>
             </div>
           </div>
-        </div>
+        </section>
       </div>
-
-      <!-- KPI Cards -->
-      <div class="col-span-12 lg:col-span-4 flex flex-col gap-lg">
-        <div class="card custom-shadow-l1 flex-1">
-          <div class="card-body d-flex flex-column justify-content-center">
-            <div class="text-muted small text-uppercase fw-semibold mb-2">Migrated Items</div>
-            <div class="flex items-baseline gap-2">
-              <span class="fw-bold text-primary" style="font-size:1.875rem;font-family:Manrope">1,245,672</span>
-              <span class="text-success small fw-semibold flex items-center gap-1">
-                +12.4% <span class="material-symbols-outlined" style="font-size:14px">trending_up</span>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="card custom-shadow-l1 flex-1">
-          <div class="card-body d-flex flex-column justify-content-center">
-            <div class="text-muted small text-uppercase fw-semibold mb-2">Total Items</div>
-            <div class="flex items-baseline gap-2">
-              <span class="fw-bold text-on-surface" style="font-size:1.875rem;font-family:Manrope">3,892,104</span>
-            </div>
-          </div>
-        </div>
-        <div class="card custom-shadow-l1 flex-1">
-          <div class="card-body d-flex flex-column justify-content-center">
-            <div class="text-muted small text-uppercase fw-semibold mb-2">Average Item Size</div>
-            <div class="flex items-baseline gap-2">
-              <span class="fw-bold text-on-surface" style="font-size:1.875rem;font-family:Manrope">124 KB</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Table Card -->
-    <div class="card custom-shadow-l1">
-
-      <!-- Tab Bar + Actions -->
-      <div class="card-header d-flex align-items-center justify-content-between p-0" style="border-bottom:none">
-        <ul class="nav nav-tabs nav-tabs-nimbus border-0 px-3" role="tablist">
-          <li class="nav-item" role="presentation">
-            <a class="nav-link active" href="#" data-cnds-tab-init role="tab" aria-selected="true">Active</a>
-          </li>
-          <li class="nav-item" role="presentation">
-            <a class="nav-link" href="#" data-cnds-tab-init role="tab" aria-selected="false">Finished</a>
-          </li>
-        </ul>
-        <div class="flex items-center gap-2 px-3">
-          <button class="btn btn-secondary btn-sm flex items-center gap-1">
-            <span class="material-symbols-outlined" style="font-size:16px">filter_alt</span>
-            Filter
-          </button>
-          <button class="btn btn-secondary btn-sm flex items-center gap-1">
-            <span class="material-symbols-outlined" style="font-size:16px">download</span>
-            Export
-          </button>
-        </div>
-      </div>
-
-      <!-- Table -->
-      <div class="table-responsive w-full">
-        <table class="table table-hover mb-0 w-full">
-          <thead>
-            <tr>
-              <th>Id</th>
-              <th>Archive Name</th>
-              <th>Progress</th>
-              <th>Total Items</th>
-              <th>Collected Items</th>
-              <th>Migrated Items</th>
-              <th>Failed Items</th>
-              <th>Delta</th>
-              <th>Last Success</th>
-              <th>Created</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td class="text-primary fw-semibold">74</td>
-              <td class="fw-semibold">MIZE Test EV SC 3</td>
-              <td>
-                <div class="flex items-center gap-2">
-                  <div class="progress mb-0" style="width:96px;height:6px">
-                    <div class="progress-bar" role="progressbar" style="width:4%" aria-valuenow="4" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <span class="text-muted small">4%</span>
-                </div>
-              </td>
-              <td class="text-muted">1,245</td>
-              <td class="text-muted">1,245</td>
-              <td class="text-muted">50</td>
-              <td><span class="badge badge-danger">0</span></td>
-              <td class="text-muted">No</td>
-              <td class="text-muted">2023-11-24 14:22</td>
-              <td class="text-muted">2023-10-15</td>
-              <td>
-                <button class="btn btn-link btn-sm p-1">
-                  <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-primary fw-semibold">75</td>
-              <td class="fw-semibold">PROD Arch Cluster A</td>
-              <td>
-                <div class="flex items-center gap-2">
-                  <div class="progress mb-0" style="width:96px;height:6px">
-                    <div class="progress-bar" role="progressbar" style="width:65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <span class="text-muted small">65%</span>
-                </div>
-              </td>
-              <td class="text-muted">542,000</td>
-              <td class="text-muted">410,000</td>
-              <td class="text-muted">352,300</td>
-              <td><span class="badge badge-warning">124</span></td>
-              <td class="text-muted">Yes</td>
-              <td class="text-muted">2023-11-25 09:15</td>
-              <td class="text-muted">2023-10-10</td>
-              <td>
-                <button class="btn btn-link btn-sm p-1">
-                  <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td class="text-primary fw-semibold">76</td>
-              <td class="fw-semibold">Backup Vault SC 12</td>
-              <td>
-                <div class="flex items-center gap-2">
-                  <div class="progress mb-0" style="width:96px;height:6px">
-                    <div class="progress-bar" role="progressbar" style="width:12%" aria-valuenow="12" aria-valuemin="0" aria-valuemax="100"></div>
-                  </div>
-                  <span class="text-muted small">12%</span>
-                </div>
-              </td>
-              <td class="text-muted">89,450</td>
-              <td class="text-muted">12,400</td>
-              <td class="text-muted">10,700</td>
-              <td><span class="badge badge-danger">2</span></td>
-              <td class="text-muted">No</td>
-              <td class="text-muted">2023-11-24 23:59</td>
-              <td class="text-muted">2023-11-01</td>
-              <td>
-                <button class="btn btn-link btn-sm p-1">
-                  <span class="material-symbols-outlined text-on-surface-variant">more_vert</span>
-                </button>
-              </td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <!-- Pagination Footer -->
-      <div class="card-footer flex items-center justify-between">
-        <span class="text-muted small">Showing 1 to 3 of 58 entries</span>
-        <nav>
-          <ul class="pagination pagination-sm mb-0">
-            <li class="page-item disabled">
-              <a class="page-link" href="#">
-                <span class="material-symbols-outlined" style="font-size:16px">chevron_left</span>
-              </a>
-            </li>
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item">
-              <a class="page-link" href="#">
-                <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-              </a>
-            </li>
-          </ul>
-        </nav>
-      </div>
-
-    </div>
-
-    <!-- Info Banner -->
-    <div class="alert alert-info flex items-start gap-3">
-      <span class="material-symbols-outlined flex-shrink-0" style="font-variation-settings:'FILL' 1">info</span>
-      <div>
-        <div class="fw-semibold mb-1">Active Mapping Strategy</div>
-        <p class="mb-0 small">All active archive mappings are currently utilizing the 'Sequential Batching' migration strategy. If throughput falls below 50MB/s, consider adjusting agent deployment density in the Environments module.</p>
-      </div>
-    </div>
-
-  </main>
-</div>
-
+    </main>
+  </div>
 </body>
 </html>

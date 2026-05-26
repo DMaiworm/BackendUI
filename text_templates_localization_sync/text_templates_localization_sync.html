@@ -1,174 +1,229 @@
 <!DOCTYPE html>
-<html class="h-full light" lang="en">
+<html lang="en" data-cnds-theme="light">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Text Templates – Expireon</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<!-- Nimbus Design System -->
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
-<!-- Nunito Sans (Nimbus default typeface) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-</style>
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Text Templates — Expireon</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../_shared/expireon-app.css?v=5">
 </head>
-<body class="h-full overflow-hidden flex cnds-product-expireon">
 
-<!-- Shared Sidenav -->
-<script>const ACTIVE_NAV = 'admin_templates';</script>
-<script src="../_shared/sidenav.js"></script>
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="P3b · Text Templates (master/detail)">
 
-<!-- Main Content Area -->
-<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+  <script>const ACTIVE_NAV = 'config_text_templates';</script>
+  <script src="../_shared/sidenav.js"></script>
 
-  <!-- Top Navigation Bar -->
-  <script>const TOPNAV_SEARCH = 'Search templates...';</script>
-  <script src="../_shared/topnav.js"></script>
+  <div class="app-main">
 
-  <!-- Content Canvas -->
-  <main class="flex-1 overflow-y-auto p-8">
-    <div class="max-w-[1440px] mx-auto space-y-6">
+    <script>const TOPNAV_SEARCH = 'Search templates…';</script>
+    <script src="../_shared/topnav.js"></script>
 
-      <!-- Breadcrumb & Page Title -->
-      <div class="flex flex-col md:flex-row justify-between items-start md:items-end gap-4">
-        <div>
-          <nav class="flex items-center gap-1 text-xs text-on-surface-variant mb-1">
-            <a href="#" class="hover:text-primary transition-colors">Administration</a>
-            <span class="material-symbols-outlined" style="font-size:16px">chevron_right</span>
-            <span class="fw-semibold text-on-surface">Text Templates</span>
-          </nav>
-          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Text Templates</h1>
-          <p class="text-muted mt-1 mb-0">Manage your email templates and localized notifications.</p>
-        </div>
-        <button class="btn btn-primary flex items-center gap-1">
-          <span class="material-symbols-outlined" style="font-size:18px">add_circle</span>
-          Create New Template
-        </button>
-      </div>
+    <main class="app-scroll">
+      <div class="app-canvas">
 
-      <!-- Table Card -->
-      <div class="card custom-shadow-l1">
-        <!-- Toolbar -->
-        <div class="card-header flex flex-wrap items-center justify-between gap-3">
-          <div class="relative" style="min-width:16rem">
-            <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-              <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">search</span>
-            </span>
-            <input class="cf-input-control w-full" style="padding-left:2.25rem" type="text" placeholder="Search by name or language..."/>
-          </div>
-          <div class="flex items-center gap-2">
-            <button class="btn btn-secondary btn-sm flex items-center gap-1">
-              <span class="material-symbols-outlined" style="font-size:18px">filter_list</span>
-              Filter
-            </button>
-            <button class="btn btn-secondary btn-sm flex items-center gap-1">
-              <span class="material-symbols-outlined" style="font-size:18px">download</span>
-              Export
-            </button>
-          </div>
+        <div class="section-strip">
+          <span><a href="#">Configuration</a></span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="current">Text Templates</span>
         </div>
 
-        <!-- Info Banner -->
-        <div class="px-4 pt-4">
-          <div class="alert alert-info flex items-start gap-3 mb-0">
-            <span class="material-symbols-outlined flex-shrink-0" style="font-size:20px;margin-top:2px;font-variation-settings:'FILL' 1">info</span>
-            <div>
-              <div class="fw-semibold mb-1">Localization Note</div>
-              <p class="small mb-0">These templates are used for system emails and notifications. Localized versions override the default language, if available.</p>
+        <header class="page-eyebrow">
+          <h1>Email and notification templates used across the platform</h1>
+        </header>
+
+        <div class="master-detail">
+
+          <aside class="master-list" aria-label="Templates">
+            <div class="master-list-head">
+              <div class="toolbar-search" style="border:1px solid #e0e0e0;border-radius:6px;height:34px;">
+                <span class="material-symbols-outlined" style="font-size:16px;color:#888;margin:0 0 0 9px">search</span>
+                <input type="text" class="cf-input-control" placeholder="Filter templates…" style="border:0;height:32px;">
+              </div>
+              <button class="btn-icon-small" title="New template" aria-label="New template">
+                <span class="material-symbols-outlined" style="font-size:18px">add</span>
+              </button>
             </div>
-          </div>
+            <div class="master-list-body">
+
+              <div class="master-item active">
+                <h4>Legal Hold · Notice</h4>
+                <p class="meta">7 locales <span class="dot"></span> Required <span class="dot"></span> Last edit: 2d ago</p>
+              </div>
+              <div class="master-item">
+                <h4>Legal Hold · Reminder</h4>
+                <p class="meta">7 locales <span class="dot"></span> Auto-send: Day 7, 14</p>
+              </div>
+              <div class="master-item">
+                <h4>Legal Hold · Release</h4>
+                <p class="meta">5 locales <span class="dot"></span> Required</p>
+              </div>
+              <div class="master-item">
+                <h4>Custodian Invite</h4>
+                <p class="meta">12 locales <span class="dot"></span> Auto-send: On creation</p>
+              </div>
+              <div class="master-item">
+                <h4>Custodian · 2FA Enroll</h4>
+                <p class="meta">12 locales <span class="dot"></span> Auto-send</p>
+              </div>
+              <div class="master-item">
+                <h4>Account · Password Reset</h4>
+                <p class="meta">12 locales <span class="dot"></span> Required</p>
+              </div>
+              <div class="master-item">
+                <h4>Export · Job Complete</h4>
+                <p class="meta">7 locales <span class="dot"></span> Auto-send</p>
+              </div>
+              <div class="master-item">
+                <h4>Export · Job Failed</h4>
+                <p class="meta">7 locales <span class="dot"></span> Auto-send</p>
+              </div>
+              <div class="master-item">
+                <h4>Collaboration · Link Created</h4>
+                <p class="meta">3 locales <span class="dot"></span> Auto-send</p>
+              </div>
+              <div class="master-item">
+                <h4>Collaboration · Link Expiring</h4>
+                <p class="meta">3 locales <span class="dot"></span> Auto-send: Day 7, 14</p>
+              </div>
+              <div class="master-item">
+                <h4>System · Maintenance Notice</h4>
+                <p class="meta">2 locales <span class="dot"></span> Manual</p>
+              </div>
+              <div class="master-item">
+                <h4>System · Welcome (Admin)</h4>
+                <p class="meta">2 locales <span class="dot"></span> Manual</p>
+              </div>
+            </div>
+          </aside>
+
+          <section class="detail-pane">
+            <div class="detail-pane-head">
+              <div class="head-title">
+                <h2>Legal Hold · Notice</h2>
+                <p class="meta">Used when a custodian is placed on a new legal hold. Tracked for audit.</p>
+              </div>
+              <div class="head-actions">
+                <button class="text-action muted">Preview</button>
+                <button class="text-action">Send test</button>
+              </div>
+            </div>
+
+            <div class="detail-pane-body">
+
+              <!-- Locale tabs -->
+              <ul class="nav-tabs-nimbus" role="tablist" style="margin-bottom:18px;">
+                <li><a href="#" class="nav-link active">🇺🇸 English</a></li>
+                <li><a href="#" class="nav-link">🇩🇪 German</a></li>
+                <li><a href="#" class="nav-link">🇫🇷 French</a></li>
+                <li><a href="#" class="nav-link">🇪🇸 Spanish</a></li>
+                <li><a href="#" class="nav-link">🇵🇹 Portuguese</a></li>
+                <li><a href="#" class="nav-link">🇯🇵 Japanese <span class="tab-badge">Outdated</span></a></li>
+                <li><a href="#" class="nav-link">🇨🇳 Chinese</a></li>
+              </ul>
+
+              <div class="form-grid">
+                <label class="form-label" for="tpl-name">Internal name</label>
+                <div class="form-control">
+                  <input id="tpl-name" type="text" class="cf-input-control" value="legal_hold_notice" readonly style="background:#fafafa;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:13px">
+                  <span class="form-help">Immutable. Used in API and audit logs.</span>
+                </div>
+
+                <label class="form-label" for="tpl-subject">Subject<span class="req">*</span></label>
+                <div class="form-control">
+                  <input id="tpl-subject" type="text" class="cf-input-control" value="Important: You have been placed on legal hold for {{case_name}}">
+                  <span class="form-help">Subject lines support template variables like <code style="font-family:ui-monospace;font-size:12px;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">{{case_name}}</code> and <code style="font-family:ui-monospace;font-size:12px;background:rgba(0,0,0,0.05);padding:1px 4px;border-radius:3px">{{custodian_name}}</code>.</span>
+                </div>
+
+                <label class="form-label" for="tpl-body">Body<span class="req">*</span></label>
+                <div class="form-control">
+                  <textarea id="tpl-body" class="cf-input-control mono" rows="14">Dear {{custodian_name}},
+
+You have been placed on a legal hold related to:
+
+  Case: {{case_name}}
+  Reference: {{case_reference}}
+  Effective: {{hold_start_date}}
+
+What this means
+---------------
+Effective immediately, you are required to preserve all documents,
+emails, messages, files, and other electronic communications related
+to this matter — including content stored on personal devices used
+for work purposes.
+
+Do not delete, modify, or move any potentially relevant materials.
+The legal hold remains in effect until you receive an official
+release notice from {{counsel_contact}}.
+
+Acknowledge by clicking the link below within 7 days:
+  {{acknowledge_url}}
+
+Questions? Reply to this email or contact {{counsel_contact}}.
+
+Sincerely,
+{{sender_name}}
+{{sender_title}}</textarea>
+                  <span class="form-help">Supports Markdown. Variables resolved at send time. <a href="#" style="color:var(--cnds-product-accent)">View all available variables</a>.</span>
+                </div>
+
+                <label class="form-label">From address</label>
+                <div class="form-control">
+                  <div class="form-row-2">
+                    <input type="text" class="cf-input-control" value="Cloudficient Legal" placeholder="Display name">
+                    <input type="email" class="cf-input-control" value="legal@cloudficient.com">
+                  </div>
+                </div>
+
+                <label class="form-label">Reply-to<span class="opt">Optional</span></label>
+                <div class="form-control">
+                  <input type="email" class="cf-input-control" value="" placeholder="custodian replies route here">
+                  <span class="form-help">Leave empty to reply to the From address.</span>
+                </div>
+
+                <label class="form-label">Audit category</label>
+                <div class="form-control">
+                  <select class="cf-input-control">
+                    <option>Legal · Hold notifications</option>
+                    <option>Legal · Release notifications</option>
+                    <option>System · Operations</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="form-section-foot">
+              <span class="help">Auto-sent when a custodian is added to a hold. Last sent: <strong>14:18 today</strong> · to Nicole Roberts.</span>
+              <div style="display:flex;gap:18px;align-items:center;">
+                <button class="text-action danger">
+                  <span class="material-symbols-outlined">delete</span>Delete
+                </button>
+                <button class="text-action muted">Duplicate</button>
+                <button class="btn btn-primary" style="height:34px;font-size:13px;">Save</button>
+              </div>
+            </div>
+          </section>
+
         </div>
 
-        <!-- Table -->
-        <div class="table-responsive w-full mt-3">
-          <table class="table table-hover mb-0 w-full">
-            <thead>
-              <tr>
-                <th>Name</th>
-                <th class="text-center">Inline Localized</th>
-                <th class="text-center">Is Layout</th>
-                <th>Layout</th>
-                <th>Default Language Name</th>
-                <th class="text-end">Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td class="fw-semibold small">NewUser</td>
-                <td class="text-center"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">check_box_outline_blank</span></td>
-                <td class="text-center"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">check_box_outline_blank</span></td>
-                <td class="small text-muted">StandardLayout</td>
-                <td class="small text-muted">German</td>
-                <td class="text-end"><a href="#" class="btn btn-link p-0 fw-semibold small flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:16px">edit</span> Edit Content</a></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">EntityChangeExportFailed</td>
-                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_box</span></td>
-                <td class="text-center"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">check_box_outline_blank</span></td>
-                <td class="small text-muted">ErrorLayout</td>
-                <td class="small text-muted">German</td>
-                <td class="text-end"><a href="#" class="btn btn-link p-0 fw-semibold small flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:16px">edit</span> Edit Content</a></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">EntityChangeExportCompleted</td>
-                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_box</span></td>
-                <td class="text-center"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">check_box_outline_blank</span></td>
-                <td class="small text-muted">SuccessLayout</td>
-                <td class="small text-muted">German</td>
-                <td class="text-end"><a href="#" class="btn btn-link p-0 fw-semibold small flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:16px">edit</span> Edit Content</a></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">AuditLogExportFailed</td>
-                <td class="text-center"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">check_box_outline_blank</span></td>
-                <td class="text-center"><span class="material-symbols-outlined text-on-surface-variant" style="font-size:20px">check_box_outline_blank</span></td>
-                <td class="small text-muted">ErrorLayout</td>
-                <td class="small text-muted">German</td>
-                <td class="text-end"><a href="#" class="btn btn-link p-0 fw-semibold small flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:16px">edit</span> Edit Content</a></td>
-              </tr>
-              <tr>
-                <td class="fw-semibold small">SystemNotification</td>
-                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_box</span></td>
-                <td class="text-center"><span class="material-symbols-outlined text-primary" style="font-size:20px;font-variation-settings:'FILL' 1">check_box</span></td>
-                <td class="small text-muted">—</td>
-                <td class="small text-muted">German</td>
-                <td class="text-end"><a href="#" class="btn btn-link p-0 fw-semibold small flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:16px">edit</span> Edit Content</a></td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-        <!-- Pagination Footer -->
-        <div class="card-footer flex items-center justify-between">
-          <span class="small text-muted">Showing 1-5 of 42 templates</span>
-          <nav>
-            <ul class="pagination pagination-sm mb-0">
-              <li class="page-item disabled">
-                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_left</span></a>
-              </li>
-              <li class="page-item active"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">...</a></li>
-              <li class="page-item"><a class="page-link" href="#">9</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#"><span class="material-symbols-outlined" style="font-size:16px;vertical-align:middle">chevron_right</span></a>
-              </li>
-            </ul>
-          </nav>
-        </div>
       </div>
-
-    </div>
-  </main>
-</div>
-
+    </main>
+  </div>
 </body>
 </html>

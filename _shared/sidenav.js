@@ -113,7 +113,7 @@
 
   <ul class="sidenav-menu flex-1">
 
-    ${item('#', 'dashboard', 'grid_view', 'Dashboard')}
+    ${item('../dashboard/dashboard.html', 'dashboard', 'grid_view', 'Dashboard')}
 
     ${group('onprem', 'storage', 'OnPrem', onpremOpen)}
     ${collapseStart(onpremOpen)}
