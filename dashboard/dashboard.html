@@ -805,12 +805,20 @@
   </div>
 
   <script>
-    // Show pane based on URL hash; update on hashchange (no reload)
+    // Show pane and sync sidenav active state on hash change
     function showPane(hash) {
       const tab = hash.replace('#', '') || 'general';
+
+      // Switch visible pane
       document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
       const target = document.getElementById(tab + '-pane');
       if (target) target.classList.add('active');
+
+      // Sync sidenav active link
+      document.querySelectorAll('.sidenav-link').forEach(a => {
+        const href = a.getAttribute('href') || '';
+        a.classList.toggle('active', href.includes('#' + tab));
+      });
     }
     showPane(window.location.hash);
     window.addEventListener('hashchange', () => showPane(window.location.hash));
