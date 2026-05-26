@@ -26,7 +26,10 @@
 
 <body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="Dashboard (5-tab)">
 
-  <script>const ACTIVE_NAV = 'dashboard';</script>
+  <script>
+    const _dashTab = window.location.hash.replace('#', '') || 'general';
+    const ACTIVE_NAV = 'dash_' + _dashTab;
+  </script>
   <script src="../_shared/sidenav.js"></script>
 
   <div class="app-main">
@@ -40,16 +43,9 @@
           <h1>Operational overview · all infrastructure, capture, governance, migrations</h1>
         </header>
 
-        <ul class="nav-tabs-nimbus" role="tablist" id="dash-tabs">
-          <li><a href="#general" class="nav-link active" data-tab="general">General</a></li>
-          <li><a href="#users" class="nav-link" data-tab="users">Users &amp; Custodians</a></li>
-          <li><a href="#email" class="nav-link" data-tab="email">Email Capture</a></li>
-          <li><a href="#gov" class="nav-link" data-tab="gov">Information Governance</a></li>
-          <li><a href="#mig" class="nav-link" data-tab="mig">Migrations</a></li>
-        </ul>
 
         <!-- ───────────────────────── GENERAL ───────────────────────── -->
-        <div class="tab-pane active" id="general-pane">
+        <div class="tab-pane" id="general-pane">
 
           <section class="dash-section">
             <div class="dash-section-head"><h2>Infrastructure Status</h2></div>
@@ -619,17 +615,15 @@
   </div>
 
   <script>
-    // Tab switching
-    document.querySelectorAll('#dash-tabs .nav-link').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        const tab = link.dataset.tab;
-        document.querySelectorAll('#dash-tabs .nav-link').forEach(l => l.classList.remove('active'));
-        link.classList.add('active');
-        document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
-        document.getElementById(tab + '-pane').classList.add('active');
-      });
-    });
+    // Show pane based on URL hash; update on hashchange (no reload)
+    function showPane(hash) {
+      const tab = hash.replace('#', '') || 'general';
+      document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+      const target = document.getElementById(tab + '-pane');
+      if (target) target.classList.add('active');
+    }
+    showPane(window.location.hash);
+    window.addEventListener('hashchange', () => showPane(window.location.hash));
   </script>
 </body>
 </html>

@@ -25,6 +25,11 @@
   // ─── Auto-title map (ACTIVE_NAV → section + page title) ──────
   const navInfo = {
     'dashboard':              { section: null,            title: 'Dashboard' },
+    'dash_general':           { section: 'Dashboard',    title: 'General' },
+    'dash_users':             { section: 'Dashboard',    title: 'Users & Custodians' },
+    'dash_email':             { section: 'Dashboard',    title: 'Email Capture' },
+    'dash_gov':               { section: 'Dashboard',    title: 'Information Governance' },
+    'dash_mig':               { section: 'Dashboard',    title: 'Migrations' },
     'endpoints':              { section: 'On-Prem',       title: 'Endpoints' },
     'appliances':             { section: 'On-Prem',       title: 'Appliances' },
     'nodes':                  { section: 'On-Prem',       title: 'Nodes' },
@@ -74,7 +79,9 @@
 
   // ─── Active tab ───────────────────────────────────────────────
   const navToTab = {
-    'dashboard':             'dashboard',
+    'dashboard':   'dashboard',
+    'dash_general':'dashboard', 'dash_users': 'dashboard',
+    'dash_email':  'dashboard', 'dash_gov':   'dashboard', 'dash_mig': 'dashboard',
     'endpoints':             'onprem',   'appliances': 'onprem', 'nodes': 'onprem', 'modules': 'onprem',
     'ad_custodians':         'environments', 'ad_domains': 'environments', 'ad_unresolved': 'environments',
     'ev_directories':        'environments', 'ev_vault_stores': 'environments', 'ev_archives': 'environments',

@@ -14,9 +14,9 @@
 
   // ─── Section membership ─────────────────────────────────────
   const navToSection = {
-    'dashboard':             'dashboard',
-    'dash_overview':         'dashboard', 'dash_health': 'dashboard',
-    'dash_activity':         'dashboard', 'dash_alerts': 'dashboard',
+    'dashboard':   'dashboard',
+    'dash_general':'dashboard', 'dash_users': 'dashboard',
+    'dash_email':  'dashboard', 'dash_gov':   'dashboard', 'dash_mig': 'dashboard',
     'endpoints':             'onprem',   'appliances': 'onprem', 'nodes': 'onprem', 'modules': 'onprem',
     'ad_custodians':         'environments', 'ad_domains': 'environments', 'ad_unresolved': 'environments',
     'ev_directories':        'environments', 'ev_vault_stores': 'environments', 'ev_archives': 'environments',
@@ -86,10 +86,11 @@
 
   const sectionItems = {
     dashboard: `
-      ${item('../dashboard/dashboard.html', 'dashboard', 'grid_view', 'Overview')}
-      ${item('#', 'dash_health', 'monitor_heart', 'System Health')}
-      ${item('#', 'dash_activity', 'timeline', 'Activity')}
-      ${item('#', 'dash_alerts', 'notifications_active', 'Alerts')}`,
+      ${item('../dashboard/dashboard.html#general', 'dash_general', 'grid_view', 'General')}
+      ${item('../dashboard/dashboard.html#users',   'dash_users',   'people',    'Users & Custodians')}
+      ${item('../dashboard/dashboard.html#email',   'dash_email',   'mail',      'Email Capture')}
+      ${item('../dashboard/dashboard.html#gov',     'dash_gov',     'policy',    'Information Governance')}
+      ${item('../dashboard/dashboard.html#mig',     'dash_mig',     'moving',    'Migrations')}`,
 
     onprem: `
       ${item('../endpoint_management_overview_focus/endpoint_management_overview_focus.html', 'endpoints', 'computer', 'Endpoints')}
