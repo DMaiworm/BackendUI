@@ -216,7 +216,7 @@
         display: inline-flex; align-items: center; gap: 12px;
         text-decoration: none; color: inherit; flex-shrink: 0;
       }
-      .cf-brand-mark { height: 28px; width: auto; display: block; }
+      .cf-brand-mark { height: 40px; width: auto; display: block; }
       .cf-utility-tools {
         display: flex; align-items: center; gap: 4px; flex-shrink: 0;
       }
