@@ -186,9 +186,12 @@
     style.id = styleId;
     style.textContent = `
       /* ─── App shell ─────────────────────────────────────────── */
+      html { height: 100%; }
       body.cf-app-shell {
         display: flex !important;
         flex-direction: column !important;
+        height: 100vh !important;
+        overflow: hidden !important;
       }
       body.cf-app-shell .cf-app-row {
         display: flex;
