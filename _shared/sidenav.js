@@ -15,6 +15,8 @@
   // ─── Section membership ─────────────────────────────────────
   const navToSection = {
     'dashboard':             'dashboard',
+    'dash_overview':         'dashboard', 'dash_health': 'dashboard',
+    'dash_activity':         'dashboard', 'dash_alerts': 'dashboard',
     'endpoints':             'onprem',   'appliances': 'onprem', 'nodes': 'onprem', 'modules': 'onprem',
     'ad_custodians':         'environments', 'ad_domains': 'environments', 'ad_unresolved': 'environments',
     'ev_directories':        'environments', 'ev_vault_stores': 'environments', 'ev_archives': 'environments',
@@ -83,7 +85,11 @@
   const adminLgOpen = ['admin_languages','admin_texts'].includes(nav);
 
   const sectionItems = {
-    dashboard: ``,
+    dashboard: `
+      ${item('../dashboard/dashboard.html', 'dashboard', 'grid_view', 'Overview')}
+      ${item('#', 'dash_health', 'monitor_heart', 'System Health')}
+      ${item('#', 'dash_activity', 'timeline', 'Activity')}
+      ${item('#', 'dash_alerts', 'notifications_active', 'Alerts')}`,
 
     onprem: `
       ${item('../endpoint_management_overview_focus/endpoint_management_overview_focus.html', 'endpoints', 'computer', 'Endpoints')}
@@ -153,7 +159,7 @@
   };
 
   const menuItems = sectionItems[section] || '';
-  const hasSidebar = section !== 'dashboard' && menuItems.trim() !== '';
+  const hasSidebar = menuItems.trim() !== '';
 
   const sidenav = `
 <nav id="sidebar-cf"
