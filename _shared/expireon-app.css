@@ -380,21 +380,8 @@ select.cf-input-control {
    v2 — Designer-aligned patterns (May 2026)
    ═══════════════════════════════════════════════════════════════════════ */
 
-/* ─── Section strip (replaces breadcrumb) ───────────────────────────── */
-.section-strip {
-  display: flex; align-items: center; gap: 14px;
-  margin: 0 0 14px;
-  font-size: 11px; font-weight: 700;
-  letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--cnds-secondary-color, #4f4f4f99);
-}
-.section-strip .sep {
-  width: 1px; height: 12px;
-  background: var(--cnds-border-color, #d0d0d0);
-}
-.section-strip .current { color: var(--cnds-body-color, #1a1a1a); }
-.section-strip a { color: inherit; text-decoration: none; }
-.section-strip a:hover { color: var(--cnds-product-accent, #4e45d6); }
+/* ─── Section strip — hidden (superseded by TopNav title bar) ─────── */
+.section-strip { display: none !important; }
 
 /* Hide old breadcrumb if still in DOM */
 .crumbs { display: none !important; }
