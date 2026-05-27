@@ -1536,7 +1536,7 @@ textarea.cf-input-control.mono {
   background: #fff;
   border: 1px solid var(--cnds-border-color, #e0e0e0);
   border-radius: 12px;
-  padding: 18px 20px;
+  padding: 22px 26px;
 }
 .chart-card.muted { background: var(--cnds-surface-light-100, #f5f5f5); border: 0; }
 .chart-card-head {
