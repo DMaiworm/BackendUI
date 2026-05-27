@@ -27,6 +27,24 @@
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
 
   <link rel="stylesheet" href="../_shared/expireon-app.css?v=6">
+
+  <style>
+    /* 2-column card layout for this view */
+    .people-list {
+      grid-template-columns: repeat(2, 1fr) !important;
+    }
+    .people-row {
+      grid-template-columns: 1fr !important;
+      gap: 14px !important;
+      padding: 20px 22px !important;
+    }
+    .people-actions {
+      flex-direction: row !important;
+      justify-content: flex-start !important;
+      padding-top: 10px;
+      border-top: 1px solid var(--cnds-border-color, #e0e0e0);
+    }
+  </style>
 </head>
 
 <body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="P2 · Custodians (N6 People-Row)">
