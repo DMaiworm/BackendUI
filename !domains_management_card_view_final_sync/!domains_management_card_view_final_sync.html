@@ -106,10 +106,20 @@
           </nav>
           <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Domains</h1>
         </div>
-        <button class="btn btn-primary flex items-center gap-2">
-          <span class="material-symbols-outlined" style="font-size:18px">search_check</span>
-          Scan AD
-        </button>
+        <div class="flex items-center gap-3">
+          <div role="group" aria-label="View" style="display:flex;border:1px solid var(--cnds-border-color,#e0e0e0);border-radius:6px;overflow:hidden;flex-shrink:0">
+            <button title="List" aria-label="Table view" onclick="location.href='../domains_management_list_view_sidebar_sync/domains_management_list_view_sidebar_sync.html'" style="display:flex;align-items:center;padding:6px 10px;background:transparent;border:0;cursor:pointer;color:#9e9e9e">
+              <span class="material-symbols-outlined" style="font-size:18px">view_list</span>
+            </button>
+            <button title="Cards" aria-label="Card view" style="display:flex;align-items:center;padding:6px 10px;background:var(--cnds-product-expireon-blue-50,#f0f0fa);border:0;border-left:1px solid var(--cnds-border-color,#e0e0e0);cursor:default;color:var(--cnds-product-accent,#4e45d6)">
+              <span class="material-symbols-outlined" style="font-size:18px">grid_view</span>
+            </button>
+          </div>
+          <button class="btn btn-primary flex items-center gap-2">
+            <span class="material-symbols-outlined" style="font-size:18px">search_check</span>
+            Scan AD
+          </button>
+        </div>
       </div>
 
       <!-- Summary Status Row -->
