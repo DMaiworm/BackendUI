@@ -163,6 +163,61 @@
               </div>
               <div class="form-section-body">
 
+                <ul class="nav-tabs-nimbus" role="tablist" style="margin-bottom:20px;">
+                  <li><a href="#" class="nav-link active" onclick="return false">Password Policy</a></li>
+                  <li><a href="#" class="nav-link" onclick="return false">Lockout</a></li>
+                  <li><a href="#" class="nav-link" onclick="return false">Identity Verification</a></li>
+                  <li><a href="#" class="nav-link" onclick="return false">User Profile</a></li>
+                  <li><a href="#" class="nav-link" onclick="return false">Sessions</a></li>
+                </ul>
+
+                <div style="display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:20px;">
+                  <div class="card" style="margin:0">
+                    <div class="card-body">
+                      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                        <span class="material-symbols-outlined" style="color:var(--cnds-product-accent);font-variation-settings:'FILL' 1">verified_user</span>
+                        <strong>Password Strength</strong>
+                      </div>
+                      <div class="form-grid">
+                        <label class="form-label">Required Length</label>
+                        <div class="form-control">
+                          <input type="number" class="cf-input-control" value="6" style="width:8rem">
+                        </div>
+                        <label class="form-label">Required Unique Chars</label>
+                        <div class="form-control">
+                          <input type="number" class="cf-input-control" value="1" style="width:8rem">
+                        </div>
+                      </div>
+                      <div style="margin-top:14px;display:flex;flex-direction:column;gap:10px;">
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="form-check-input" checked> <span class="small">Require non-alphanumeric character</span></label>
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="form-check-input" checked> <span class="small">Require lowercase character</span></label>
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="form-check-input" checked> <span class="small">Require uppercase character</span></label>
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="form-check-input" checked> <span class="small">Require digit</span></label>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="card" style="margin:0">
+                    <div class="card-body">
+                      <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                        <span class="material-symbols-outlined" style="color:var(--cnds-product-accent);font-variation-settings:'FILL' 1">update</span>
+                        <strong>Password Change</strong>
+                      </div>
+                      <div style="display:flex;flex-direction:column;gap:14px;">
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer"><input type="checkbox" class="form-check-input"> <span class="small">Users must change password periodically</span></label>
+                        <div class="form-grid">
+                          <label class="form-label">Change Interval (Days)</label>
+                          <div class="form-control">
+                            <div style="display:flex;align-items:center;gap:10px;">
+                              <input type="number" class="cf-input-control" value="0" style="width:8rem">
+                              <span class="small text-muted">Set to 0 to disable.</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
                 <div class="toggle-row">
                   <div class="toggle-text">
                     <h4>Require 2FA for all users</h4>
