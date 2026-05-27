@@ -124,37 +124,32 @@
                   <tr>
                     
                     <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">shield_person</span></span><div class="cell-stack"><span class="cell-primary">Administrator</span><span class="cell-secondary">Full system access</span></div></div></td><td><span class="badge badge-primary">System</span></td><td><span class="badge badge-muted">All (47)</span></td><td class="text-end"><span class="cell-primary">5</span></td><td><div class="cell-stack"><span class="cell-primary">May 12, 2026</span><span class="cell-secondary">d.maiworm</span></div></td>
-                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions" onclick="openPermissionsModal('Administrator')"><span class="material-symbols-outlined">more_vert</span></button></td>
                   </tr>
                   <tr>
-                    
+
                     <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">analytics</span></span><div class="cell-stack"><span class="cell-primary">Analyst</span><span class="cell-secondary">Read + analyze + export</span></div></div></td><td><span class="badge badge-info">Tenant</span></td><td><span class="badge badge-muted">22 perms</span></td><td class="text-end"><span class="cell-primary">38</span></td><td><div class="cell-stack"><span class="cell-primary">Apr 24, 2026</span><span class="cell-secondary">d.maiworm</span></div></td>
-                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions" onclick="openPermissionsModal('Analyst')"><span class="material-symbols-outlined">more_vert</span></button></td>
                   </tr>
                   <tr>
-                    
                     <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">visibility</span></span><div class="cell-stack"><span class="cell-primary">Read-only</span><span class="cell-secondary">View-only access · no exports</span></div></div></td><td><span class="badge badge-info">Tenant</span></td><td><span class="badge badge-muted">11 perms</span></td><td class="text-end"><span class="cell-primary">62</span></td><td><div class="cell-stack"><span class="cell-primary">Jan 05, 2025</span><span class="cell-secondary">system</span></div></td>
-                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions" onclick="openPermissionsModal('Read-only')"><span class="material-symbols-outlined">more_vert</span></button></td>
                   </tr>
                   <tr>
-                    
                     <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">gavel</span></span><div class="cell-stack"><span class="cell-primary">Auditor</span><span class="cell-secondary">Audit logs + compliance reports</span></div></div></td><td><span class="badge badge-primary">System</span></td><td><span class="badge badge-muted">9 perms</span></td><td class="text-end"><span class="cell-primary">7</span></td><td><div class="cell-stack"><span class="cell-primary">Mar 11, 2026</span><span class="cell-secondary">t.ferreira</span></div></td>
-                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions" onclick="openPermissionsModal('Auditor')"><span class="material-symbols-outlined">more_vert</span></button></td>
                   </tr>
                   <tr>
-                    
                     <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">engineering</span></span><div class="cell-stack"><span class="cell-primary">Operations · L1</span><span class="cell-secondary">Day-to-day operations · no destructive</span></div></div></td><td><span class="badge badge-info">Tenant</span></td><td><span class="badge badge-muted">18 perms</span></td><td class="text-end"><span class="cell-primary">12</span></td><td><div class="cell-stack"><span class="cell-primary">Feb 28, 2026</span><span class="cell-secondary">k.wagner</span></div></td>
-                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions" onclick="openPermissionsModal('Operations · L1')"><span class="material-symbols-outlined">more_vert</span></button></td>
                   </tr>
                   <tr>
-                    
                     <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">vpn_key</span></span><div class="cell-stack"><span class="cell-primary">Storage Admin</span><span class="cell-secondary">Manage buckets, partitions, retention</span></div></div></td><td><span class="badge badge-info">Tenant</span></td><td><span class="badge badge-muted">15 perms</span></td><td class="text-end"><span class="cell-primary">3</span></td><td><div class="cell-stack"><span class="cell-primary">Apr 02, 2026</span><span class="cell-secondary">d.maiworm</span></div></td>
-                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions" onclick="openPermissionsModal('Storage Admin')"><span class="material-symbols-outlined">more_vert</span></button></td>
                   </tr>
                   <tr>
-                    
                     <td><div class="cell-avatar"><span class="icon-tile"><span class="material-symbols-outlined">lock_open</span></span><div class="cell-stack"><span class="cell-primary">Legal Hold Manager</span><span class="cell-secondary">Custom · Mercury Audit</span></div></div></td><td><span class="badge badge-warning">Project</span></td><td><span class="badge badge-muted">7 perms</span></td><td class="text-end"><span class="cell-primary">2</span></td><td><div class="cell-stack"><span class="cell-primary">May 14, 2026</span><span class="cell-secondary">t.ferreira</span></div></td>
-                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions"><span class="material-symbols-outlined">more_vert</span></button></td>
+                    <td class="text-end"><button class="btn btn-link p-1" aria-label="Row actions" onclick="openPermissionsModal('Legal Hold Manager')"><span class="material-symbols-outlined">more_vert</span></button></td>
                   </tr>
               </tbody>
             </table>
@@ -189,22 +184,142 @@
   </div>
 
   <script>
-    window.addEventListener('error', e => {
-      if (e.message && e.message.includes('ResizeObserver loop')) {
-        e.stopImmediatePropagation();
-        e.preventDefault();
-      }
-    });
-    document.querySelector('.app-alert .alert-dismiss')?.addEventListener('click', function(){
-      this.closest('.app-alert').remove();
-    });
-    // View toggle
     document.querySelectorAll('.view-toggle button').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.view-toggle button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
       });
     });
+  </script>
+
+  <!-- Permissions Modal -->
+  <div id="permissions-modal" style="display:none;position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.4);backdrop-filter:blur(2px)" onclick="if(event.target===this)closePermissionsModal()">
+    <div style="background:#fff;width:100%;max-width:64rem;height:800px;max-height:90vh;border-radius:12px;border:1px solid var(--cnds-border-color,#e0e0e0);box-shadow:0 20px 60px rgba(0,0,0,0.2);display:flex;flex-direction:column;overflow:hidden">
+
+      <!-- Modal Header -->
+      <div style="padding:20px 24px 16px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0)">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="fw-bold mb-0">Permissions — <span class="text-primary" id="modal-role-name"></span></h4>
+          <button class="btn btn-link p-1" onclick="closePermissionsModal()">
+            <span class="material-symbols-outlined text-muted">close</span>
+          </button>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="toolbar-search" style="flex:1">
+            <input class="cf-input-control" type="text" placeholder="Filter permissions…">
+          </div>
+          <div class="flex items-center gap-3 px-4 py-2 rounded-lg" style="background:var(--cnds-surface-container,#ededf9)">
+            <span class="fw-semibold small">Grant all permissions</span>
+            <div class="form-check form-switch mb-0">
+              <input class="form-check-input" type="checkbox">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Body: Two-Column -->
+      <div style="flex:1;display:flex;overflow:hidden">
+
+        <!-- Left: Category List -->
+        <div style="width:20rem;flex-shrink:0;border-right:1px solid var(--cnds-border-color,#e0e0e0);background:var(--cnds-surface-container-low,#f3f3fe);overflow-y:auto">
+          <div style="padding:12px;display:flex;flex-direction:column;gap:4px">
+            <button id="cat-btn-0" class="w-full flex items-center justify-between p-3 rounded-lg text-start fw-semibold" style="background:var(--cnds-product-expireon-blue-50,#f0f0fa);color:var(--cnds-product-accent,#4e45d6);border:0" onclick="selectCategory(0,'Identity Management Permissions')">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:20px;font-variation-settings:'FILL' 1">account_circle</span>Identity Management</span>
+              <span class="badge badge-primary">12</span>
+            </button>
+            <button id="cat-btn-1" class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" style="border:0" onclick="selectCategory(1,'Audit Logging Permissions')">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:20px">receipt_long</span>Audit Logging</span>
+              <span class="badge badge-secondary">8</span>
+            </button>
+            <button id="cat-btn-2" class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" style="border:0" onclick="selectCategory(2,'Account Permissions')">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:20px">manage_accounts</span>Account</span>
+              <span class="badge badge-secondary">4</span>
+            </button>
+            <button id="cat-btn-3" class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" style="border:0" onclick="selectCategory(3,'Language Management Permissions')">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:20px">language</span>Language Management</span>
+              <span class="badge badge-secondary">6</span>
+            </button>
+            <button id="cat-btn-4" class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" style="border:0" onclick="selectCategory(4,'Template Management Permissions')">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:20px">description</span>Template Management</span>
+              <span class="badge badge-secondary">15</span>
+            </button>
+            <button id="cat-btn-5" class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" style="border:0" onclick="selectCategory(5,'Advanced Config Permissions')">
+              <span class="flex items-center gap-2"><span class="material-symbols-outlined" style="font-size:20px">settings_suggest</span>Advanced Config</span>
+              <span class="badge badge-secondary">5</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Permissions List -->
+        <div style="flex:1;overflow-y:auto;padding:24px;display:flex;flex-direction:column;gap:16px">
+          <div class="flex items-center gap-2 pb-3" style="border-bottom:1px solid var(--cnds-border-color,#e0e0e0)">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">badge</span>
+            <h5 class="fw-semibold mb-0" id="perm-category-title">Identity Management Permissions</h5>
+          </div>
+
+          <div class="card" style="margin:0">
+            <div class="card-header flex items-center gap-2">
+              <input class="form-check-input" type="checkbox" checked>
+              <span class="fw-semibold small">User Management</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+              <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox" checked><span class="small">Create Users</span></label>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox" checked><span class="small fw-semibold">Edit Users</span></label>
+                <div style="margin-left:16px;padding-left:12px;border-left:2px solid var(--cnds-border-color,#e0e0e0);display:flex;flex-direction:column;gap:6px">
+                  <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox" checked><span class="small text-muted">Manage Roles</span></label>
+                  <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox"><span class="small text-muted">Manage Organization Tree</span></label>
+                  <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox" checked><span class="small text-muted">Reset Passwords</span></label>
+                </div>
+              </div>
+              <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox"><span class="small">Delete Users</span></label>
+            </div>
+          </div>
+
+          <div class="card" style="margin:0">
+            <div class="card-header flex items-center gap-2">
+              <input class="form-check-input" type="checkbox">
+              <span class="fw-semibold small">Group Management</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+              <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox"><span class="small">Create Groups</span></label>
+              <label class="flex items-center gap-2 cursor-pointer"><input class="form-check-input" type="checkbox"><span class="small">Modify Group Membership</span></label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="card-footer flex justify-end gap-2" style="border-top:1px solid var(--cnds-border-color,#e0e0e0)">
+        <button class="btn btn-secondary" onclick="closePermissionsModal()">Cancel</button>
+        <button class="btn btn-primary">Save Changes</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openPermissionsModal(roleName) {
+      document.getElementById('modal-role-name').textContent = roleName;
+      document.getElementById('perm-category-title').textContent = 'Identity Management Permissions';
+      selectCategory(0, 'Identity Management Permissions');
+      document.getElementById('permissions-modal').style.display = 'flex';
+    }
+    function closePermissionsModal() {
+      document.getElementById('permissions-modal').style.display = 'none';
+    }
+    function selectCategory(idx, title) {
+      for (let i = 0; i < 6; i++) {
+        const b = document.getElementById('cat-btn-' + i);
+        if (!b) continue;
+        b.style.background = i === idx ? 'var(--cnds-product-expireon-blue-50,#f0f0fa)' : '';
+        b.style.color     = i === idx ? 'var(--cnds-product-accent,#4e45d6)' : '';
+      }
+      document.getElementById('perm-category-title').textContent = title;
+    }
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closePermissionsModal(); });
+
+    // Also wire New Role button
+    document.querySelector('.btn-primary-cta').addEventListener('click', () => openPermissionsModal('New Role'));
   </script>
 </body>
 </html>

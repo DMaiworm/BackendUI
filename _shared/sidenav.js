@@ -128,7 +128,7 @@
       ${item('#', 'sourceone_mappings', 'source', 'SourceOne Mappings')}`,
 
     legal: `
-      ${item('../!legal_cases_row_selection_state_final_sync/!legal_cases_row_selection_state_final_sync.html', 'legal_cases', 'gavel', 'Legal Cases')}`,
+      ${item('../legal_cases_advanced_filters_state_corrected/legal_cases_advanced_filters_state_corrected.html', 'legal_cases', 'gavel', 'Legal Cases')}`,
 
     configuration: `
       ${item('../storage_buckets_content_sync/storage_buckets_content_sync.html', 'config_storage_buckets', 'storage', 'Storage Buckets')}
@@ -147,7 +147,7 @@
     administration: `
       ${groupStart('admin_identity', 'badge', 'Identity Management', adminIdOpen)}
         ${sub('#', 'admin_org_units', 'Org Units')}
-        ${sub('../!roles_permissions_modal_overlay_final_sync/!roles_permissions_modal_overlay_final_sync.html', 'admin_roles', 'Roles')}
+        ${sub('../roles_design_sync/roles_design_sync.html', 'admin_roles', 'Roles')}
         ${sub('../users_design_sync/users_design_sync.html', 'admin_users', 'Users')}
         ${sub('../security_logs_design_sync/security_logs_design_sync.html', 'admin_security_log', 'Security Log')}
       ${groupEnd()}
