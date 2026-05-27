@@ -1,287 +1,331 @@
 <!DOCTYPE html>
-<html class="h-full light" lang="en">
+<html lang="en" data-cnds-theme="light">
 <head>
-<meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Roles – Expireon</title>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Manrope:wght@600;700;800&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-<!-- Nimbus Design System -->
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
-<link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
-<!-- Nunito Font -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-<script id="tailwind-config">
-  tailwind.config = {
-    darkMode: "class",
-    theme: {
-      extend: {
-        "colors": {
-          "inverse-surface": "#2e3039",
-          "secondary-fixed": "#d3e4fe",
-          "error": "#ba1a1a",
-          "surface": "#faf8ff",
-          "primary-fixed": "#dbe1ff",
-          "secondary-fixed-dim": "#b7c8e1",
-          "on-error": "#ffffff",
-          "on-background": "#191b23",
-          "surface-container-high": "#e7e7f3",
-          "surface-container-highest": "#e1e2ed",
-          "on-surface-variant": "#434655",
-          "on-primary-container": "#eeefff",
-          "tertiary": "#943700",
-          "on-secondary-fixed": "#0b1c30",
-          "surface-tint": "#0053db",
-          "primary-fixed-dim": "#b4c5ff",
-          "primary-container": "#2563eb",
-          "primary": "#004ac6",
-          "background": "#faf8ff",
-          "on-secondary": "#ffffff",
-          "on-tertiary-fixed-variant": "#7d2d00",
-          "surface-container-lowest": "#ffffff",
-          "tertiary-container": "#bc4800",
-          "on-tertiary": "#ffffff",
-          "on-secondary-container": "#54647a",
-          "on-tertiary-container": "#ffede6",
-          "outline-variant": "#c3c6d7",
-          "outline": "#737686",
-          "surface-container": "#ededf9",
-          "on-primary-fixed": "#00174b",
-          "inverse-primary": "#b4c5ff",
-          "error-container": "#ffdad6",
-          "on-primary-fixed-variant": "#003ea8",
-          "tertiary-fixed-dim": "#ffb596",
-          "surface-dim": "#d9d9e5",
-          "on-tertiary-fixed": "#360f00",
-          "on-primary": "#ffffff",
-          "secondary": "#505f76",
-          "on-secondary-fixed-variant": "#38485d",
-          "surface-bright": "#faf8ff",
-          "inverse-on-surface": "#f0f0fb",
-          "on-surface": "#191b23",
-          "surface-container-low": "#f3f3fe",
-          "secondary-container": "#d0e1fb",
-          "surface-variant": "#e1e2ed",
-          "on-error-container": "#93000a",
-          "tertiary-fixed": "#ffdbcd"
-        }
-      }
-    }
-  }
-</script>
-<style>
-  .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; vertical-align: middle; }
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { background: #f1f5f9; }
-  ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
-  .custom-scrollbar::-webkit-scrollbar { width: 4px; }
-  .custom-scrollbar::-webkit-scrollbar-thumb { background: #c3c6d7; border-radius: 10px; }
-</style>
+  <script>
+    window.addEventListener('error', e => {
+      if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }
+    }, true);
+    const _origError = console.error;
+    console.error = function(...args) {
+      if (args[0] && String(args[0]).includes('ResizeObserver')) return;
+      _origError.apply(console, args);
+    };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roles — Expireon</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../_shared/expireon-app.css?v=6">
+
+  <style>
+    .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+    .custom-scrollbar::-webkit-scrollbar-thumb { background: #c3c6d7; border-radius: 10px; }
+  </style>
 </head>
-<body class="h-full overflow-hidden flex">
 
-<!-- Shared Sidenav -->
-<script>const ACTIVE_NAV = 'admin_roles';</script>
-<script src="../_shared/sidenav.js"></script>
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="P2 · Roles">
 
-<!-- Main Content Area -->
-<div class="flex-1 flex flex-col min-w-0 overflow-hidden">
+  <script>const ACTIVE_NAV = 'admin_roles';</script>
+  <script src="../_shared/sidenav.js"></script>
 
-  <!-- Top Navigation Bar -->
-  <script>const TOPNAV_SEARCH = 'Search roles...';</script>
-  <script src="../_shared/topnav.js"></script>
+  <div class="app-main">
 
-  <!-- Content Canvas (dimmed under modal) -->
-  <main class="flex-1 overflow-y-auto p-8" style="filter:blur(1px);pointer-events:none;user-select:none">
-    <div class="max-w-[1440px] mx-auto space-y-6">
-      <div class="flex justify-between items-end">
-        <div>
-          <h1 class="fw-bold" style="font-size:1.875rem;line-height:2.25rem">Roles</h1>
-          <p class="text-muted mt-1 mb-0">Manage role definitions, permissions, and access control for the system.</p>
+    <script>const TOPNAV_SEARCH = 'Search roles…';</script>
+    <script src="../_shared/topnav.js"></script>
+
+    <main class="app-scroll" id="main-content">
+      <div class="app-canvas">
+
+        <div class="section-strip">
+          <span><a href="#">Admin</a></span>
+          <span class="sep" aria-hidden="true"></span>
+          <span class="current">Roles</span>
         </div>
-        <button class="btn btn-primary flex items-center gap-1">
-          <span class="material-symbols-outlined" style="font-size:18px">add</span>
-          New Role
-        </button>
-      </div>
-      <div class="card custom-shadow-l1">
-        <div class="table-responsive w-full">
-          <table class="table table-hover mb-0 w-full">
-            <thead><tr><th>Actions</th><th>Role Name</th><th>User Count</th></tr></thead>
-            <tbody>
-              <tr>
-                <td><button class="btn btn-primary btn-sm flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:16px">settings</span> Actions</button></td>
-                <td class="fw-semibold">Test</td>
-                <td class="small text-muted">0</td>
-              </tr>
-              <tr>
-                <td><button class="btn btn-primary btn-sm flex items-center gap-1"><span class="material-symbols-outlined" style="font-size:16px">settings</span> Actions</button></td>
-                <td class="fw-semibold">admin</td>
-                <td class="small text-muted">11</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-        <div class="card-footer"><span class="small text-muted">7 total</span></div>
-      </div>
-    </div>
-  </main>
-</div>
 
-<!-- Permissions Modal Overlay -->
-<div class="fixed inset-0 z-50 flex items-center justify-center p-6" style="background:rgba(0,0,0,0.4);backdrop-filter:blur(2px)">
-  <div class="bg-surface-container-lowest w-full flex flex-col overflow-hidden border border-outline-variant rounded-xl" style="max-width:64rem;height:800px;max-height:90vh;box-shadow:0 20px 60px rgba(0,0,0,0.2)">
+        <header class="page-eyebrow">
+          <h1>Manage role definitions, permissions, and access control for the system</h1>
+        </header>
 
-    <!-- Modal Header -->
-    <div class="flex flex-col gap-3 p-6 border-bottom" style="border-bottom:1px solid var(--outline-variant)">
-      <div class="flex items-center justify-between">
-        <h4 class="fw-bold mb-0">Permissions — <span class="text-primary">Test Role</span></h4>
-        <button class="btn btn-link p-1">
-          <span class="material-symbols-outlined text-on-surface-variant">close</span>
-        </button>
-      </div>
-      <div class="flex items-center gap-4">
-        <div class="relative flex-1">
-          <span class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-            <span class="material-symbols-outlined text-on-surface-variant" style="font-size:18px">filter_list</span>
-          </span>
-          <input class="cf-input-control w-full" style="padding-left:2.25rem" type="text" placeholder="Filter permissions..."/>
-        </div>
-        <div class="flex items-center gap-3 px-4 py-2 rounded-lg bg-surface-container">
-          <span class="fw-semibold small">Grant all permissions</span>
-          <div class="form-check form-switch mb-0">
-            <input class="form-check-input" type="checkbox"/>
+        <section class="card">
+
+          <div class="toolbar-v2">
+            <div class="toolbar-search">
+              <input type="text" class="cf-input-control" placeholder="Search roles…">
+              <button class="btn btn-secondary btn-search">Search</button>
+            </div>
+            <div class="toolbar-spacer"></div>
+            <button class="btn btn-primary btn-primary-cta" onclick="openModal('New Role', true)">
+              <span class="material-symbols-outlined" style="font-size:18px">add</span>
+              New Role
+            </button>
           </div>
-        </div>
-      </div>
-    </div>
 
-    <!-- Modal Body: Two-Column -->
-    <div class="flex-1 flex overflow-hidden">
-
-      <!-- Left: Category List -->
-      <div class="flex-shrink-0 border-end overflow-y-auto custom-scrollbar bg-surface-container-low" style="width:20rem;border-right:1px solid var(--outline-variant)">
-        <div class="p-3 space-y-1">
-          <button class="w-full flex items-center justify-between p-3 rounded-lg text-start fw-semibold bg-secondary-container text-on-secondary-container">
-            <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined" style="font-size:20px;font-variation-settings:'FILL' 1">account_circle</span>
-              Identity Management
-            </span>
-            <span class="badge badge-primary">12</span>
-          </button>
-          <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-on-surface-variant hover:bg-surface-container transition-colors">
-            <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined" style="font-size:20px">receipt_long</span>
-              Audit Logging
-            </span>
-            <span class="badge badge-secondary">8</span>
-          </button>
-          <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-on-surface-variant hover:bg-surface-container transition-colors">
-            <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined" style="font-size:20px">manage_accounts</span>
-              Account
-            </span>
-            <span class="badge badge-secondary">4</span>
-          </button>
-          <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-on-surface-variant hover:bg-surface-container transition-colors">
-            <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined" style="font-size:20px">language</span>
-              Language Management
-            </span>
-            <span class="badge badge-secondary">6</span>
-          </button>
-          <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-on-surface-variant hover:bg-surface-container transition-colors">
-            <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined" style="font-size:20px">description</span>
-              Template Management
-            </span>
-            <span class="badge badge-secondary">15</span>
-          </button>
-          <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-on-surface-variant hover:bg-surface-container transition-colors">
-            <span class="flex items-center gap-2">
-              <span class="material-symbols-outlined" style="font-size:20px">settings_suggest</span>
-              Advanced Config
-            </span>
-            <span class="badge badge-secondary">5</span>
-          </button>
-        </div>
-      </div>
-
-      <!-- Right: Permissions List -->
-      <div class="flex-1 overflow-y-auto custom-scrollbar p-6 space-y-4 bg-surface-container-lowest">
-        <div class="flex items-center gap-2 pb-3 border-bottom" style="border-bottom:1px solid var(--outline-variant)">
-          <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">badge</span>
-          <h5 class="fw-semibold mb-0">Identity Management Permissions</h5>
-        </div>
-
-        <!-- Category: User Management -->
-        <div class="card mb-0">
-          <div class="card-header flex items-center gap-2 bg-surface-container">
-            <input class="form-check-input" type="checkbox" checked/>
-            <span class="fw-semibold small">User Management</span>
+          <div class="table-wrap">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Role Name</th>
+                  <th>User Count</th>
+                  <th class="text-end">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="fw-semibold">Test</td>
+                  <td class="small text-muted">0</td>
+                  <td class="text-end">
+                    <button class="btn btn-secondary btn-sm flex items-center gap-1" style="margin-left:auto" onclick="openModal('Test')">
+                      <span class="material-symbols-outlined" style="font-size:16px">lock_open</span>
+                      Permissions
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">admin</td>
+                  <td class="small text-muted">11</td>
+                  <td class="text-end">
+                    <button class="btn btn-secondary btn-sm flex items-center gap-1" style="margin-left:auto" onclick="openModal('admin')">
+                      <span class="material-symbols-outlined" style="font-size:16px">lock_open</span>
+                      Permissions
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Legal Reviewer</td>
+                  <td class="small text-muted">4</td>
+                  <td class="text-end">
+                    <button class="btn btn-secondary btn-sm flex items-center gap-1" style="margin-left:auto" onclick="openModal('Legal Reviewer')">
+                      <span class="material-symbols-outlined" style="font-size:16px">lock_open</span>
+                      Permissions
+                    </button>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="fw-semibold">Read Only</td>
+                  <td class="small text-muted">23</td>
+                  <td class="text-end">
+                    <button class="btn btn-secondary btn-sm flex items-center gap-1" style="margin-left:auto" onclick="openModal('Read Only')">
+                      <span class="material-symbols-outlined" style="font-size:16px">lock_open</span>
+                      Permissions
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
-          <div class="card-body space-y-3">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input class="form-check-input" type="checkbox" checked/>
-              <span class="small">Create Users</span>
-            </label>
-            <div class="space-y-2">
-              <label class="flex items-center gap-2 cursor-pointer">
-                <input class="form-check-input" type="checkbox" checked/>
-                <span class="small fw-semibold">Edit Users</span>
-              </label>
-              <div class="ms-4 space-y-2 ps-3 border-start border-outline-variant">
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input class="form-check-input" type="checkbox" checked/>
-                  <span class="small text-muted">Manage Roles</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input class="form-check-input" type="checkbox"/>
-                  <span class="small text-muted">Manage Organization Tree</span>
-                </label>
-                <label class="flex items-center gap-2 cursor-pointer">
-                  <input class="form-check-input" type="checkbox" checked/>
-                  <span class="small text-muted">Reset Passwords</span>
-                </label>
+
+          <div class="card-footer">
+            <div class="pager" style="justify-content:flex-end;width:100%">
+              <span class="pager-range">1–4 of 7</span>
+              <div class="pager-arrows">
+                <button disabled aria-label="First"><span class="material-symbols-outlined">first_page</span></button>
+                <button disabled aria-label="Previous"><span class="material-symbols-outlined">chevron_left</span></button>
+                <button aria-label="Next"><span class="material-symbols-outlined">chevron_right</span></button>
+                <button aria-label="Last"><span class="material-symbols-outlined">last_page</span></button>
               </div>
             </div>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input class="form-check-input" type="checkbox"/>
-              <span class="small">Delete Users</span>
-            </label>
           </div>
-        </div>
 
-        <!-- Category: Group Management -->
-        <div class="card mb-0">
-          <div class="card-header flex items-center gap-2 bg-surface-container">
-            <input class="form-check-input" type="checkbox"/>
-            <span class="fw-semibold small">Group Management</span>
+        </section>
+
+      </div>
+    </main>
+
+  </div>
+
+  <!-- Permissions Modal -->
+  <div id="permissions-modal" style="display:none;position:fixed;inset:0;z-index:50;align-items:center;justify-content:center;padding:24px;background:rgba(0,0,0,0.4);backdrop-filter:blur(2px)" onclick="handleBackdropClick(event)">
+    <div class="flex flex-col overflow-hidden" style="background:#fff;width:100%;max-width:64rem;height:800px;max-height:90vh;border-radius:12px;border:1px solid var(--cnds-border-color,#e0e0e0);box-shadow:0 20px 60px rgba(0,0,0,0.2)">
+
+      <!-- Modal Header -->
+      <div style="padding:20px 24px 16px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0)">
+        <div class="flex items-center justify-between mb-3">
+          <h4 class="fw-bold mb-0">Permissions — <span class="text-primary" id="modal-role-name">Role</span></h4>
+          <button class="btn btn-link p-1" onclick="closeModal()">
+            <span class="material-symbols-outlined text-muted">close</span>
+          </button>
+        </div>
+        <div class="flex items-center gap-4">
+          <div class="toolbar-search" style="flex:1">
+            <input class="cf-input-control" type="text" placeholder="Filter permissions…">
           </div>
-          <div class="card-body space-y-3">
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input class="form-check-input" type="checkbox"/>
-              <span class="small">Create Groups</span>
-            </label>
-            <label class="flex items-center gap-2 cursor-pointer">
-              <input class="form-check-input" type="checkbox"/>
-              <span class="small">Modify Group Membership</span>
-            </label>
+          <div class="flex items-center gap-3 px-4 py-2 rounded-lg" style="background:var(--cnds-surface-container,#ededf9)">
+            <span class="fw-semibold small">Grant all permissions</span>
+            <div class="form-check form-switch mb-0">
+              <input class="form-check-input" type="checkbox">
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <!-- Modal Footer -->
-    <div class="card-footer flex justify-end gap-2" style="border-top:1px solid var(--outline-variant)">
-      <button class="btn btn-secondary">Cancel</button>
-      <button class="btn btn-primary">Save Changes</button>
+      <!-- Modal Body: Two-Column -->
+      <div class="flex-1 flex overflow-hidden">
+
+        <!-- Left: Category List -->
+        <div class="flex-shrink-0 overflow-y-auto custom-scrollbar" style="width:20rem;border-right:1px solid var(--cnds-border-color,#e0e0e0);background:var(--cnds-surface-container-low,#f3f3fe)">
+          <div style="padding:12px;display:flex;flex-direction:column;gap:4px">
+            <button class="w-full flex items-center justify-between p-3 rounded-lg text-start fw-semibold" style="background:var(--cnds-product-expireon-blue-50,#f0f0fa);color:var(--cnds-product-accent,#4e45d6)" onclick="selectCategory(this, 'Identity Management Permissions')">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:20px;font-variation-settings:'FILL' 1">account_circle</span>
+                Identity Management
+              </span>
+              <span class="badge badge-primary">12</span>
+            </button>
+            <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" onclick="selectCategory(this, 'Audit Logging Permissions')">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:20px">receipt_long</span>
+                Audit Logging
+              </span>
+              <span class="badge badge-secondary">8</span>
+            </button>
+            <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" onclick="selectCategory(this, 'Account Permissions')">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:20px">manage_accounts</span>
+                Account
+              </span>
+              <span class="badge badge-secondary">4</span>
+            </button>
+            <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" onclick="selectCategory(this, 'Language Management Permissions')">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:20px">language</span>
+                Language Management
+              </span>
+              <span class="badge badge-secondary">6</span>
+            </button>
+            <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" onclick="selectCategory(this, 'Template Management Permissions')">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:20px">description</span>
+                Template Management
+              </span>
+              <span class="badge badge-secondary">15</span>
+            </button>
+            <button class="w-full flex items-center justify-between p-3 rounded-lg text-start text-muted" onclick="selectCategory(this, 'Advanced Config Permissions')">
+              <span class="flex items-center gap-2">
+                <span class="material-symbols-outlined" style="font-size:20px">settings_suggest</span>
+                Advanced Config
+              </span>
+              <span class="badge badge-secondary">5</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Permissions List -->
+        <div class="flex-1 overflow-y-auto custom-scrollbar" style="padding:24px;display:flex;flex-direction:column;gap:16px">
+          <div class="flex items-center gap-2 pb-3" style="border-bottom:1px solid var(--cnds-border-color,#e0e0e0)">
+            <span class="material-symbols-outlined text-primary" style="font-variation-settings:'FILL' 1">badge</span>
+            <h5 class="fw-semibold mb-0" id="perm-category-title">Identity Management Permissions</h5>
+          </div>
+
+          <!-- User Management -->
+          <div class="card" style="margin:0">
+            <div class="card-header flex items-center gap-2">
+              <input class="form-check-input" type="checkbox" checked>
+              <span class="fw-semibold small">User Management</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input class="form-check-input" type="checkbox" checked>
+                <span class="small">Create Users</span>
+              </label>
+              <div style="display:flex;flex-direction:column;gap:6px">
+                <label class="flex items-center gap-2 cursor-pointer">
+                  <input class="form-check-input" type="checkbox" checked>
+                  <span class="small fw-semibold">Edit Users</span>
+                </label>
+                <div style="margin-left:16px;padding-left:12px;border-left:2px solid var(--cnds-border-color,#e0e0e0);display:flex;flex-direction:column;gap:6px">
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input class="form-check-input" type="checkbox" checked>
+                    <span class="small text-muted">Manage Roles</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input class="form-check-input" type="checkbox">
+                    <span class="small text-muted">Manage Organization Tree</span>
+                  </label>
+                  <label class="flex items-center gap-2 cursor-pointer">
+                    <input class="form-check-input" type="checkbox" checked>
+                    <span class="small text-muted">Reset Passwords</span>
+                  </label>
+                </div>
+              </div>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input class="form-check-input" type="checkbox">
+                <span class="small">Delete Users</span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Group Management -->
+          <div class="card" style="margin:0">
+            <div class="card-header flex items-center gap-2">
+              <input class="form-check-input" type="checkbox">
+              <span class="fw-semibold small">Group Management</span>
+            </div>
+            <div class="card-body" style="display:flex;flex-direction:column;gap:10px">
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input class="form-check-input" type="checkbox">
+                <span class="small">Create Groups</span>
+              </label>
+              <label class="flex items-center gap-2 cursor-pointer">
+                <input class="form-check-input" type="checkbox">
+                <span class="small">Modify Group Membership</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="card-footer flex justify-end gap-2" style="border-top:1px solid var(--cnds-border-color,#e0e0e0)">
+        <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+        <button class="btn btn-primary">Save Changes</button>
+      </div>
     </div>
   </div>
-</div>
+
+  <script>
+    function openModal(roleName, isNew) {
+      document.getElementById('modal-role-name').textContent = isNew ? 'New Role' : roleName;
+      document.getElementById('perm-category-title').textContent = 'Identity Management Permissions';
+      document.getElementById('permissions-modal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('permissions-modal').style.display = 'none';
+    }
+
+    function handleBackdropClick(e) {
+      if (e.target === document.getElementById('permissions-modal')) closeModal();
+    }
+
+    function selectCategory(btn, title) {
+      // Update active state on category buttons
+      btn.closest('div').querySelectorAll('button').forEach(b => {
+        b.style.background = '';
+        b.style.color = '';
+        b.classList.remove('fw-semibold');
+        b.classList.add('text-muted');
+      });
+      btn.style.background = 'var(--cnds-product-expireon-blue-50,#f0f0fa)';
+      btn.style.color = 'var(--cnds-product-accent,#4e45d6)';
+      btn.classList.add('fw-semibold');
+      btn.classList.remove('text-muted');
+      document.getElementById('perm-category-title').textContent = title;
+    }
+
+    // Close modal on Escape key
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+  </script>
 
 </body>
 </html>
