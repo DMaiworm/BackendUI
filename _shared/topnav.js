@@ -71,6 +71,7 @@
     'admin_texts':        { section: 'Administration', title: 'Texts' },
     'admin_templates':    { section: 'Administration', title: 'Text Templates' },
     'admin_settings':     { section: 'Administration', title: 'Settings' },
+    'evidence_reader':    { section: 'Legal',          title: 'File Preview' },
   };
 
   const autoInfo  = navInfo[activeNav] || { section: null, title: '' };
@@ -91,6 +92,7 @@
     'onedrive_mappings':     'mappings',  'smtp_mappings': 'mappings',
     'sharepoint_mappings':   'mappings',  'sourceone_mappings': 'mappings',
     'legal_cases':           'legal',
+    'evidence_reader':       'legal',
     'config_storage_buckets':'configuration', 'config_storage_partitions': 'configuration',
     'config_collaboration_links':'configuration', 'config_retention': 'configuration',
     'config_containers':     'configuration', 'config_internal_domains': 'configuration',

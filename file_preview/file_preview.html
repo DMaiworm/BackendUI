@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en" data-cnds-theme="light">
+<head>
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>File Preview — Expireon</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../_shared/expireon-app.css">
+
+  <style>
+    /* Workspace needs full remaining height — override default canvas padding */
+    .app-scroll { padding: 12px !important; display: flex; }
+    .app-canvas { display: flex; flex: 1; min-width: 0; min-height: 0; max-width: none !important; }
+  </style>
+</head>
+
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="File Preview (v6 Workspace)">
+
+  <script>const ACTIVE_NAV = 'evidence_reader';</script>
+  <script src="../_shared/sidenav.js"></script>
+
+  <div class="app-main">
+    <script>
+      const TOPNAV_USER  = { name: 'Justice Wargrave', initials: 'JW' };
+    </script>
+    <script src="../_shared/topnav.js"></script>
+
+    <main class="app-scroll">
+      <div class="app-canvas">
+
+        <div class="workspace">
+
+          <!-- ──────────────── RAIL ──────────────── -->
+          <aside class="workspace-rail" aria-label="Filter rail">
+            <div class="workspace-rail-tabs" role="tablist">
+              <button class="active" data-rail="structure"><span class="material-symbols-outlined">account_tree</span>Structure</button>
+              <button data-rail="types"><span class="material-symbols-outlined">category</span>Types</button>
+              <button data-rail="review"><span class="material-symbols-outlined">label</span>Review</button>
+            </div>
+
+            <div class="workspace-rail-body" id="rail-structure">
+              <ul class="tree-nav">
+                <li>
+                  <div class="tree-node">
+                    <span class="material-symbols-outlined tree-chevron">arrow_drop_down</span>
+                    <span class="material-symbols-outlined tree-icon">folder</span>
+                    <span class="tree-label">Samples.E01</span>
+                    <span class="tree-count">2,832</span>
+                  </div>
+                  <ul>
+                    <li>
+                      <div class="tree-node">
+                        <span class="material-symbols-outlined tree-chevron">arrow_drop_down</span>
+                        <span class="material-symbols-outlined tree-icon">database</span>
+                        <span class="tree-label">Manifest.db</span>
+                        <span class="tree-count">721</span>
+                      </div>
+                      <ul>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">volume_up</span><span class="tree-label">Audios</span><span class="tree-count">2</span></div></li>
+                        <li>
+                          <div class="tree-node">
+                            <span class="material-symbols-outlined tree-chevron">arrow_drop_down</span>
+                            <span class="material-symbols-outlined tree-icon">chat_bubble</span>
+                            <span class="tree-label">Chats</span>
+                            <span class="tree-count">58</span>
+                          </div>
+                          <ul>
+                            <li><div class="tree-node active"><span class="tree-chevron invisible"></span><span class="material-symbols-outlined tree-icon">forum</span><span class="tree-label">WhatsApp</span><span class="tree-count">17</span></div></li>
+                            <li><div class="tree-node"><span class="tree-chevron invisible"></span><span class="material-symbols-outlined tree-icon">account_circle</span><span class="tree-label">Vipole</span><span class="tree-count">41</span></div></li>
+                          </ul>
+                        </li>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">description</span><span class="tree-label">Documents</span><span class="tree-count">5</span></div></li>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">apps</span><span class="tree-label">Installed apps</span><span class="tree-count">130</span></div></li>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">smartphone</span><span class="tree-label">iPhone 6S (13.0)</span><span class="tree-count">42</span></div></li>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">mail</span><span class="tree-label">Mails</span><span class="tree-count">19</span></div></li>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">image</span><span class="tree-label">Pictures</span><span class="tree-count">103</span></div></li>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">settings</span><span class="tree-label">System files</span><span class="tree-count">188</span></div></li>
+                        <li><div class="tree-node"><span class="material-symbols-outlined tree-chevron">arrow_right</span><span class="material-symbols-outlined tree-icon">play_circle</span><span class="tree-label">Videos</span><span class="tree-count">9</span></div></li>
+                      </ul>
+                    </li>
+                    <li>
+                      <div class="tree-node">
+                        <span class="material-symbols-outlined tree-chevron">arrow_drop_down</span>
+                        <span class="material-symbols-outlined tree-icon">hard_drive</span>
+                        <span class="tree-label">Volume</span>
+                        <span class="tree-count">2,104</span>
+                      </div>
+                      <ul>
+                        <li>
+                          <div class="tree-node">
+                            <span class="material-symbols-outlined tree-chevron">arrow_drop_down</span>
+                            <span class="material-symbols-outlined tree-icon">search</span>
+                            <span class="tree-label">[NTFS] Allocated</span>
+                            <span class="tree-count">2,104</span>
+                          </div>
+                          <ul>
+                            <li><div class="tree-node"><span class="tree-chevron invisible"></span><span class="material-symbols-outlined tree-icon">language</span><span class="tree-label">Browsers</span><span class="tree-count">502</span></div></li>
+                            <li><div class="tree-node"><span class="tree-chevron invisible"></span><span class="material-symbols-outlined tree-icon">description</span><span class="tree-label">Documents</span><span class="tree-count">46</span></div></li>
+                            <li><div class="tree-node"><span class="tree-chevron invisible"></span><span class="material-symbols-outlined tree-icon">apps</span><span class="tree-label">Installed apps</span><span class="tree-count">431</span></div></li>
+                          </ul>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="workspace-rail-body" id="rail-types" style="display:none">
+              <div class="facet-group">
+                <div class="facet-group-head">Communications <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">mail</span><span class="facet-label">Emails</span><span class="facet-count">19</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">chat_bubble</span><span class="facet-label">Chats</span><span class="facet-count">58</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Documents <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">picture_as_pdf</span><span class="facet-label">PDF</span><span class="facet-count">5</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">article</span><span class="facet-label">Office Docs</span><span class="facet-count">46</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">text_snippet</span><span class="facet-label">Text &amp; Other</span><span class="facet-count">3</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Media <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">image</span><span class="facet-label">Images</span><span class="facet-count">103</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">play_circle</span><span class="facet-label">Videos</span><span class="facet-count">9</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">volume_up</span><span class="facet-label">Audio</span><span class="facet-count">2</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">collections</span><span class="facet-label">Thumbnails</span><span class="facet-count">5</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">System &amp; Apps <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">apps</span><span class="facet-label">Installed Apps</span><span class="facet-count">561</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">language</span><span class="facet-label">Browser Data</span><span class="facet-count">502</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">settings</span><span class="facet-label">System Files</span><span class="facet-count">188</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">app_shortcut</span><span class="facet-label">Mobile App Data</span><span class="facet-count">126</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">draft</span><span class="facet-label">Other</span><span class="facet-count">8</span></div>
+              </div>
+            </div>
+
+            <div class="workspace-rail-body" id="rail-review" style="display:none">
+              <div class="facet-group">
+                <div class="facet-group-head">Review Status <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="facet-label">Not Reviewed</span><span class="facet-count">234</span></div>
+                <div class="facet-item"><span class="facet-label">In Progress</span><span class="facet-count">45</span></div>
+                <div class="facet-item"><span class="facet-label">Reviewed</span><span class="facet-count">89</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Relevance <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="facet-label">Responsive</span><span class="facet-chip responsive">67</span></div>
+                <div class="facet-item"><span class="facet-label">Non-Responsive</span><span class="facet-count">22</span></div>
+                <div class="facet-item"><span class="facet-label">Privileged</span><span class="facet-chip privileged">8</span></div>
+                <div class="facet-item"><span class="facet-label">Unclassified</span><span class="facet-chip unclassified">271</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Custodians <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="facet-avatar">JD</span><span class="facet-label">John Doe</span><span class="facet-count">145</span></div>
+                <div class="facet-item"><span class="facet-avatar">JS</span><span class="facet-label">Jane Smith</span><span class="facet-count">98</span></div>
+                <div class="facet-item"><span class="facet-avatar">MT</span><span class="facet-label">M. Torres</span><span class="facet-count">67</span></div>
+                <div class="facet-item"><span class="facet-avatar">SC</span><span class="facet-label">Sarah Chen</span><span class="facet-count">58</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Tags &amp; Bookmarks <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">bookmark</span><span class="facet-label">Key Document</span><span class="facet-count">23</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">local_fire_department</span><span class="facet-label">Hot Doc</span><span class="facet-count">8</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">lock</span><span class="facet-label">Confidential</span><span class="facet-count">31</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">star</span><span class="facet-label">Bookmarked</span><span class="facet-count">14</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Date Range <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">schedule</span><span class="facet-label">Last 7 days</span><span class="facet-count">12</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">calendar_month</span><span class="facet-label">Last 30 days</span><span class="facet-count">45</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">date_range</span><span class="facet-label">Last 90 days</span><span class="facet-count">89</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">history</span><span class="facet-label">Older</span><span class="facet-count">222</span></div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- ──────────────── MIDDLE: file list + metadata ──────────────── -->
+          <section class="workspace-content split" aria-label="File list and metadata">
+
+            <div class="content-top">
+              <div class="path-crumbs">
+                <button class="crumb-btn" aria-label="Back"><span class="material-symbols-outlined">chevron_left</span></button>
+                <button class="crumb-btn" aria-label="Forward"><span class="material-symbols-outlined">chevron_right</span></button>
+                <button class="crumb-btn" aria-label="Up"><span class="material-symbols-outlined">arrow_upward</span></button>
+                <span class="crumb muted">Samples.E01</span>
+                <span class="crumb-sep">›</span>
+                <span class="crumb muted">Volume</span>
+                <span class="crumb-sep">›</span>
+                <span class="crumb muted">[NTFS] Allocated</span>
+                <span class="crumb-sep">›</span>
+                <span class="crumb">Local Disk (E:)</span>
+                <span class="spacer"></span>
+                <button class="crumb-btn" aria-label="Layout"><span class="material-symbols-outlined">view_list</span></button>
+              </div>
+              <div class="file-toolbar">
+                <div class="search-mini">
+                  <span class="material-symbols-outlined">search</span>
+                  <input type="text" placeholder="Search this folder…">
+                </div>
+                <button class="btn btn-secondary btn-dropdown" style="height:32px;padding:0 10px;font-size:11.5px">Sort: Name <span class="material-symbols-outlined" style="font-size:16px">arrow_drop_down</span></button>
+                <button class="btn btn-secondary btn-dropdown" style="height:32px;padding:0 10px;font-size:11.5px">Filter <span class="material-symbols-outlined" style="font-size:16px">filter_alt</span></button>
+                <div style="flex:1"></div>
+                <span style="font-size:0.75rem;color:#4f4f4f99">19 items</span>
+              </div>
+              <div class="file-list">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th style="width:32px"><input type="checkbox" class="form-check-input"></th>
+                      <th><span class="th-sort active">Name <span class="material-symbols-outlined">arrow_drop_down</span></span></th>
+                      <th><span class="th-sort">Date Modified <span class="material-symbols-outlined">unfold_more</span></span></th>
+                      <th>Type</th>
+                      <th class="text-end">Size</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined folder">folder</span>$Extend</span></td><td>21.09.2023 16:29</td><td>Folder</td><td class="text-end">16 MB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined folder">folder</span>Documents</span></td><td>01.09.2023 19:40</td><td>Folder</td><td class="text-end">22 MB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined folder">folder</span>Music</span></td><td>01.09.2023 19:40</td><td>Folder</td><td class="text-end">0 KB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined folder">folder</span>Photos</span></td><td>21.09.2023 21:32</td><td>Folder</td><td class="text-end">4.5 GB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined folder">folder</span>Pictures</span></td><td>22.09.2023 17:29</td><td>Folder</td><td class="text-end">5.6 GB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined folder">folder</span>System Volume Information</span></td><td>21.09.2023 16:30</td><td>Folder</td><td class="text-end">0 KB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined folder">folder</span>Videos</span></td><td>01.09.2023 19:45</td><td>Folder</td><td class="text-end">220 MB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined">description</span>$AttrDef</span></td><td>21.09.2023 16:29</td><td>File</td><td class="text-end">2 KB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined">description</span>$BadClus</span></td><td>21.09.2023 16:29</td><td>File</td><td class="text-end">0 KB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined">description</span>$Bitmap</span></td><td>21.09.2023 16:29</td><td>File</td><td class="text-end">462 KB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined">description</span>$Boot</span></td><td>21.09.2023 16:29</td><td>File</td><td class="text-end">8 KB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined">description</span>$LogFile</span></td><td>21.09.2023 16:29</td><td>File</td><td class="text-end">21 MB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined">description</span>$MFT</span></td><td>21.09.2023 16:29</td><td>File</td><td class="text-end">16 MB</td></tr>
+                    <tr><td><input type="checkbox" class="form-check-input"></td><td><span class="file-name"><span class="material-symbols-outlined">description</span>Configuration.txt</span></td><td>01.09.2023 19:40</td><td>Document</td><td class="text-end">2 KB</td></tr>
+                    <tr class="table-active"><td><input type="checkbox" class="form-check-input" checked></td><td><span class="file-name"><span class="material-symbols-outlined" style="color:#4e45d6">image</span>wallpaper1920.jpg</span></td><td>15.03.2022 13:19</td><td>Picture</td><td class="text-end">276 KB</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="content-bottom">
+              <div class="meta-header">
+                <h3>wallpaper1920.jpg · Metadata</h3>
+                <span class="spacer"></span>
+                <button class="crumb-btn" title="Pin"><span class="material-symbols-outlined">push_pin</span></button>
+                <button class="crumb-btn" title="Collapse"><span class="material-symbols-outlined">expand_more</span></button>
+              </div>
+              <div class="meta-tabs" role="tablist">
+                <button class="active"><span class="material-symbols-outlined">article</span>Content</button>
+                <button><span class="material-symbols-outlined">draft</span>File</button>
+                <button><span class="material-symbols-outlined">link</span>Source</button>
+              </div>
+              <div class="meta-body">
+                <div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">EXIF / Image Metadata</div>
+                    <table class="kv-table">
+                      <tr><td class="k">Image Title</td><td class="v">Evening Landscape</td></tr>
+                      <tr><td class="k">Artist</td><td class="v">Michael Torres</td></tr>
+                      <tr><td class="k">Camera Make</td><td class="v">Apple</td></tr>
+                      <tr><td class="k">Camera Model</td><td class="v">iPhone 14 Pro</td></tr>
+                      <tr><td class="k">Resolution</td><td class="v">1920 × 1080 px · 72 dpi</td></tr>
+                      <tr><td class="k">Color Space</td><td class="v">sRGB</td></tr>
+                      <tr><td class="k">Date Taken</td><td class="v">15.03.2022 13:19:54</td></tr>
+                    </table>
+                  </div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">GPS</div>
+                    <table class="kv-table">
+                      <tr><td class="k">Latitude</td><td class="v mono">48.8566° N</td></tr>
+                      <tr><td class="k">Longitude</td><td class="v mono">2.3522° E</td></tr>
+                      <tr><td class="k">Altitude</td><td class="v">35 m</td></tr>
+                    </table>
+                  </div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">Copyright</div>
+                    <table class="kv-table">
+                      <tr><td class="k">Copyright</td><td class="v">© 2022 Michael Torres</td></tr>
+                      <tr><td class="k">Software</td><td class="v">iPhone OS 16.3.1</td></tr>
+                    </table>
+                  </div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">Message Context (WhatsApp)</div>
+                    <table class="kv-table">
+                      <tr><td class="k">Direction</td><td class="v">Incoming</td></tr>
+                      <tr><td class="k">From</td><td class="v mono">79112820734@s.whatsapp.net</td></tr>
+                      <tr><td class="k">From (nick)</td><td class="v">Justice Wargrave</td></tr>
+                      <tr><td class="k">To</td><td class="v mono">79112820734-1564573314@g.us</td></tr>
+                      <tr><td class="k">Sent (UTC)</td><td class="v">7/31/2019 11:41:54 AM</td></tr>
+                      <tr><td class="k">Message</td><td class="v">[GROUP CHAT CREATED] created by 79112820734@s.whatsapp.net</td></tr>
+                      <tr><td class="k">Participants</td><td class="v">Professor · Crime Group · Justice Wargrave</td></tr>
+                      <tr><td class="k">Delivery</td><td class="v">Delivered</td></tr>
+                      <tr><td class="k">Is deleted</td><td class="v">No</td></tr>
+                    </table>
+                  </div>
+                </div>
+                <div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">Identity</div>
+                    <table class="kv-table">
+                      <tr><td class="k">File Name</td><td class="v">wallpaper1920.jpg</td></tr>
+                      <tr><td class="k">Extension</td><td class="v">.jpg — JPEG Image</td></tr>
+                      <tr><td class="k">Size</td><td class="v">276 KB (282,624 bytes)</td></tr>
+                      <tr><td class="k">Full Path</td><td class="v mono">/Volume/NTFS/Photos/wallpaper1920.jpg</td></tr>
+                    </table>
+                  </div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">Timestamps</div>
+                    <table class="kv-table">
+                      <tr><td class="k">Created</td><td class="v">15.03.2022 13:19:54 UTC</td></tr>
+                      <tr><td class="k">Modified</td><td class="v">15.03.2022 13:19:54 UTC</td></tr>
+                      <tr><td class="k">Accessed</td><td class="v">21.09.2023 16:30:01 UTC</td></tr>
+                    </table>
+                  </div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">Integrity</div>
+                    <table class="kv-table">
+                      <tr><td class="k">MD5</td><td class="v mono">a3f4b2c1d09e4f87c12d3a4e5f6b7c8d</td></tr>
+                      <tr><td class="k">SHA-256</td><td class="v mono">3a7b8c9d…e94f1a2b</td></tr>
+                    </table>
+                  </div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">Permissions</div>
+                    <table class="kv-table">
+                      <tr><td class="k">Owner</td><td class="v">Justice Wargrave</td></tr>
+                      <tr><td class="k">Permissions</td><td class="v mono">-rw-r--r--</td></tr>
+                      <tr><td class="k">MFT Entry</td><td class="v mono">#8142</td></tr>
+                    </table>
+                  </div>
+                  <div class="detail-section">
+                    <div class="detail-section-head">Acquisition</div>
+                    <table class="kv-table">
+                      <tr><td class="k">Source Image</td><td class="v">Samples.E01 / Manifest.db</td></tr>
+                      <tr><td class="k">Partition</td><td class="v">NTFS (Allocated)</td></tr>
+                      <tr><td class="k">Evidence ID</td><td class="v mono">EVD-2023-0041</td></tr>
+                      <tr><td class="k">Acquired by</td><td class="v">J. Doe · 21.09.2023</td></tr>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </section>
+
+          <!-- ──────────────── RIGHT: Preview + Version History ──────────────── -->
+          <aside class="workspace-detail preview-pane" aria-label="File preview and version history">
+            <div class="workspace-detail-head">
+              <h2>Northwind Traders Proposal.pdf</h2>
+              <div class="actions">
+                <button title="Download"><span class="material-symbols-outlined">download</span></button>
+                <button title="Close"><span class="material-symbols-outlined">close</span></button>
+              </div>
+            </div>
+            <div class="detail-tabs" role="tablist">
+              <button class="active" data-pane="preview"><span class="material-symbols-outlined">visibility</span>Preview</button>
+              <button data-pane="versions"><span class="material-symbols-outlined">history</span>Version History</button>
+              <div class="spacer"></div>
+              <span style="font-size:11px;color:#4f4f4f99;padding:0 4px;">1.2 MB · Modified 10/12/2023</span>
+            </div>
+
+            <div class="pane-preview" id="pane-preview">
+              <div class="preview-toolbar">
+                <button title="Rotate"><span class="material-symbols-outlined">rotate_right</span></button>
+                <button title="Zoom out"><span class="material-symbols-outlined">zoom_out</span></button>
+                <span class="zoom">125%</span>
+                <button title="Zoom in"><span class="material-symbols-outlined">zoom_in</span></button>
+                <span class="spacer"></span>
+                <button title="Download"><span class="material-symbols-outlined">download</span></button>
+                <button title="More"><span class="material-symbols-outlined">more_horiz</span></button>
+              </div>
+
+              <div class="preview-body">
+                <div class="preview-page">
+                  <h4>4. COST BREAKDOWN</h4>
+                  <table>
+                    <thead>
+                      <tr><th>Phase</th><th>Description</th><th class="num">Cost (USD)</th></tr>
+                    </thead>
+                    <tbody>
+                      <tr><td>Infrastructure</td><td>Cloud setup &amp; networking</td><td class="num">$45,000</td></tr>
+                      <tr><td>Implementation</td><td>Development &amp; integration</td><td class="num">$120,500</td></tr>
+                      <tr><td>QA &amp; Testing</td><td>Security &amp; load testing</td><td class="num">$35,000</td></tr>
+                      <tr><td style="font-weight:700">Total</td><td></td><td class="num" style="font-weight:700">$200,500</td></tr>
+                    </tbody>
+                  </table>
+                  <p style="margin:14px 0 6px;font-size:10.5px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;color:#4f4f4f99">Budget Allocation</p>
+                  <div class="preview-mini-chart">
+                    <div class="bar" style="height:80%"></div>
+                    <div class="bar" style="height:30%"></div>
+                    <div class="bar" style="height:22%"></div>
+                  </div>
+                  <div class="preview-mini-legend">
+                    <span class="lg">Dev</span>
+                    <span class="lg" style="--c:#dbd9f7">Infra</span>
+                    <span class="lg">QA</span>
+                  </div>
+                </div>
+              </div>
+
+              <div class="preview-pagebar">
+                <div class="arrows">
+                  <button><span class="material-symbols-outlined">navigate_before</span></button>
+                  <button><span class="material-symbols-outlined">navigate_next</span></button>
+                </div>
+                <span>Page 4 of 12</span>
+                <span style="font-size:11px">100%</span>
+              </div>
+            </div>
+
+            <div class="pane-versions" id="pane-versions" style="display:none">
+              <div class="version-block" style="border-top:0;padding:18px 18px 24px">
+                <div class="version-block-head">
+                  <h3>Version History</h3>
+                  <span class="count">5 versions</span>
+                  <span class="spacer"></span>
+                  <button title="Filter"><span class="material-symbols-outlined">filter_list</span></button>
+                  <button title="Download all"><span class="material-symbols-outlined">download</span></button>
+                </div>
+                <div class="version-table-wrap">
+                  <table class="version-table">
+                    <thead>
+                      <tr>
+                        <th>Filename</th>
+                        <th>Date / Time</th>
+                        <th>Version</th>
+                        <th>Saved By</th>
+                        <th class="text-end">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Northwind Traders Proposal.pdf</td>
+                        <td>10.12.2023 · 14:20</td>
+                        <td><span class="ver">v1.4</span></td>
+                        <td>Sarah Chen</td>
+                        <td class="text-end">
+                          <button title="Send"><span class="material-symbols-outlined">send</span></button>
+                          <button title="Group · 4 collaborators"><span class="material-symbols-outlined">group</span><span class="count">4</span></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Northwind Traders Proposal.pdf</td>
+                        <td>08.12.2023 · 09:15</td>
+                        <td><span class="ver">v1.3</span></td>
+                        <td>Marcus Reid</td>
+                        <td class="text-end">
+                          <button title="Send"><span class="material-symbols-outlined">send</span></button>
+                          <button title="Group · 2 collaborators"><span class="material-symbols-outlined">group</span><span class="count">2</span></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Northwind Traders Proposal.pdf</td>
+                        <td>05.12.2023 · 17:42</td>
+                        <td><span class="ver">v1.2</span></td>
+                        <td>Sarah Chen</td>
+                        <td class="text-end">
+                          <button title="Send"><span class="material-symbols-outlined">send</span></button>
+                          <button title="Single author"><span class="material-symbols-outlined">person</span></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Northwind Traders Proposal.pdf</td>
+                        <td>02.12.2023 · 11:30</td>
+                        <td><span class="ver">v1.1</span></td>
+                        <td>Michael Torres</td>
+                        <td class="text-end">
+                          <button title="Send"><span class="material-symbols-outlined">send</span></button>
+                          <button title="Group · 3 collaborators"><span class="material-symbols-outlined">group</span><span class="count">3</span></button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td>Northwind Traders Proposal.pdf</td>
+                        <td>28.11.2023 · 08:55</td>
+                        <td><span class="ver">v1.0</span></td>
+                        <td>Sarah Chen</td>
+                        <td class="text-end">
+                          <button title="Send"><span class="material-symbols-outlined">send</span></button>
+                          <button title="Single author"><span class="material-symbols-outlined">person</span></button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+
+        </div>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    // Rail tab switch
+    document.querySelectorAll('.workspace-rail-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.workspace-rail-tabs button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        ['structure','types','review'].forEach(k => {
+          const pane = document.getElementById('rail-' + k);
+          if (pane) pane.style.display = (k === btn.dataset.rail) ? '' : 'none';
+        });
+      });
+    });
+    // Detail pane tab switch — Preview / Version History
+    document.querySelectorAll('.detail-tabs button[data-pane]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.detail-tabs button[data-pane]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        const target = btn.dataset.pane;
+        document.getElementById('pane-preview').style.display  = (target === 'preview')  ? '' : 'none';
+        document.getElementById('pane-versions').style.display = (target === 'versions') ? '' : 'none';
+      });
+    });
+    // Meta tab switch (visual only)
+    document.querySelectorAll('.meta-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.meta-tabs button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
