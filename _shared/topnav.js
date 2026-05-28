@@ -72,6 +72,7 @@
     'admin_templates':    { section: 'Administration', title: 'Text Templates' },
     'admin_settings':     { section: 'Administration', title: 'Settings' },
     'evidence_reader':    { section: 'Legal',          title: 'File Preview' },
+    'evidence_chat':      { section: 'Legal',          title: 'Chat Preview' },
   };
 
   const autoInfo  = navInfo[activeNav] || { section: null, title: '' };
@@ -93,6 +94,7 @@
     'sharepoint_mappings':   'mappings',  'sourceone_mappings': 'mappings',
     'legal_cases':           'legal',
     'evidence_reader':       'legal',
+    'evidence_chat':         'legal',
     'config_storage_buckets':'configuration', 'config_storage_partitions': 'configuration',
     'config_collaboration_links':'configuration', 'config_retention': 'configuration',
     'config_containers':     'configuration', 'config_internal_domains': 'configuration',

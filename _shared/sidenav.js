@@ -27,6 +27,7 @@
     'sharepoint_mappings':   'mappings', 'sourceone_mappings': 'mappings',
     'legal_cases':           'legal',
     'evidence_reader':       'legal',
+    'evidence_chat':         'legal',
     'config_storage_buckets':    'configuration', 'config_storage_partitions': 'configuration',
     'config_collaboration_links':'configuration', 'config_retention': 'configuration',
     'config_containers':         'configuration', 'config_internal_domains': 'configuration',
@@ -130,7 +131,8 @@
 
     legal: `
       ${item('../legal_cases_advanced_filters_state_corrected/legal_cases_advanced_filters_state_corrected.html', 'legal_cases', 'gavel', 'Legal Cases')}
-      ${item('../file_preview/file_preview.html', 'evidence_reader', 'preview', 'File Preview')}`,
+      ${item('../file_preview/file_preview.html', 'evidence_reader', 'preview', 'File Preview')}
+      ${item('../chat_preview/chat_preview.html', 'evidence_chat', 'forum', 'Chat Preview')}`,
 
     configuration: `
       ${item('../storage_buckets_content_sync/storage_buckets_content_sync.html', 'config_storage_buckets', 'storage', 'Storage Buckets')}

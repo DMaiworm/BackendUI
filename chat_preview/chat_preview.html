@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="en" data-cnds-theme="light">
+<head>
+  <script>
+    window.addEventListener('error', e => { if (e.message && e.message.includes('ResizeObserver')) { e.stopImmediatePropagation(); e.preventDefault(); return true; }}, true);
+    const _o = console.error;
+    console.error = function(...a) { if (a[0] && String(a[0]).includes('ResizeObserver')) return; _o.apply(console, a); };
+  </script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Chat Preview — Expireon</title>
+
+  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/primitives.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/themes/light.css">
+  <link rel="stylesheet" href="https://wswilliams67.github.io/nimbus/css/nimbus.css">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,400;6..12,500;6..12,600;6..12,700;6..12,800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL@20..24,400..600,0..1&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="../_shared/expireon-app.css">
+
+  <style>
+    /* Full-height workspace — same override as file_preview */
+    .app-scroll { padding: 12px !important; display: flex; }
+    .app-canvas { display: flex; flex: 1; min-width: 0; min-height: 0; max-width: none !important; }
+
+    /* ── Chat list (rail) ─────────────────────────────────────── */
+    .chat-item { cursor: pointer; border-bottom: 1px solid var(--cnds-border-color, #e0e0e0); padding: 14px 16px; }
+    .chat-item:hover { background: #f9f9fb; }
+    .chat-item-active {
+      background: #f0f0fa;
+      border-left: 3px solid var(--cnds-product-accent, #4e45d6);
+      padding-left: 13px;
+    }
+    .chat-avatar {
+      width: 38px; height: 38px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 18px; color: #fff; flex-shrink: 0;
+    }
+    .chat-avatar-teams { background: #5059c9; }
+    .chat-avatar-slack  { background: var(--cnds-product-accent, #4e45d6); }
+    .chat-avatar-wa     { background: #25d366; }
+    .avatar-stack { display: flex; }
+    .avatar-stack .av, .avatar-stack .av-more {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid #fff; margin-left: -5px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7px; font-weight: 700;
+    }
+    .avatar-stack .av:first-child, .avatar-stack .av-more:first-child { margin-left: 0; }
+    .av-more { background: #c3c6d7; color: #fff; }
+    .chat-stats { display: flex; align-items: center; gap: 10px; font-size: 10px; color: #4f4f4f99; font-weight: 600; margin-top: 6px; }
+    .chat-stats span { display: flex; align-items: center; gap: 3px; }
+    .platform-chip {
+      display: inline-flex; align-items: center; gap: 3px;
+      font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+      padding: 1px 6px; border-radius: 10px; border: 1px solid;
+    }
+    .chip-slack  { background: #f0f0fa; color: var(--cnds-product-accent,#4e45d6); border-color: #d4d1f5; }
+    .chip-teams  { background: #eef0fb; color: #5059c9; border-color: #c5caee; }
+    .chip-wa     { background: #e8faf0; color: #1a9641; border-color: #b3e8c6; }
+
+    /* ── Source filter chips ──────────────────────────────────── */
+    .src-chip {
+      background: transparent; border: 1px solid #e2e8f0;
+      border-radius: 9999px; padding: 2px 10px;
+      font-size: 10px; font-weight: 700; color: #64748b;
+      cursor: pointer; white-space: nowrap; letter-spacing: .03em;
+      transition: all .15s; display: inline-flex; align-items: center; gap: 4px;
+    }
+    .src-chip:hover { border-color: var(--cnds-product-accent,#4e45d6); color: var(--cnds-product-accent,#4e45d6); }
+    .src-chip.active { background: #f0f0fa; border-color: var(--cnds-product-accent,#4e45d6); color: var(--cnds-product-accent,#4e45d6); }
+
+    /* ── Review panel ─────────────────────────────────────────── */
+    .rv-section { border-bottom: 1px solid var(--cnds-border-color,#e0e0e0); }
+    .rv-section-hdr {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 12px; background: #f8fafc;
+      font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #64748b;
+      cursor: pointer;
+    }
+    .rv-item {
+      display: flex; align-items: center; gap: 7px;
+      padding: 5px 12px; font-size: 12px; color: #475569; cursor: pointer;
+    }
+    .rv-item:hover { background: #f8fafc; }
+    .rv-item.rv-active { background: #f0f0fa; color: var(--cnds-product-accent,#4e45d6); font-weight: 600; }
+    .rv-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .rv-count { margin-left: auto; font-size: 11px; color: #94a3b8; }
+    .rv-tag-chip {
+      display: inline-flex; align-items: center; gap: 4px;
+      background: #f1f5f9; border: 1px solid #e2e8f0;
+      border-radius: 9999px; padding: 1px 8px;
+      font-size: 11px; font-weight: 600; color: #475569; cursor: pointer;
+    }
+    .rv-tag-chip:hover { background: #e0e7ff; border-color: #c7d2fe; color: #3730a3; }
+    .rv-tag-chip.active { background: #dbeafe; border-color: #93c5fd; color: #1d4ed8; }
+
+    /* ── Thread toolbar (action buttons) ─────────────────────── */
+    .action-btn {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 10px; border-radius: 6px;
+      font-size: 11.5px; font-weight: 700; cursor: pointer; white-space: nowrap; border: 1px solid;
+    }
+    .action-btn .material-symbols-outlined { font-size: 14px; }
+    .action-btn-relevant   { background: #f0fdf4; color: #166534; border-color: #bbf7d0; }
+    .action-btn-irrelevant { background: #fef2f2; color: #991b1b; border-color: #fecaca; }
+    .action-btn-privileged { background: #eff6ff; color: #1e40af; border-color: #bfdbfe; }
+    .action-btn-query      { background: #fff7ed; color: #9a3412; border-color: #fed7aa; }
+
+    /* ── Message thread ───────────────────────────────────────── */
+    .thread-msg { display: flex; gap: 12px; padding: 4px 0; }
+    .thread-msg:hover { background: #fafafa; border-radius: 6px; }
+    .msg-avatar {
+      width: 36px; height: 36px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; flex-shrink: 0; margin-top: 2px;
+    }
+    .msg-sys {
+      display: flex; align-items: center; gap: 10px;
+      padding: 2px 0; color: #94a3b8; font-size: 11.5px; font-style: italic;
+    }
+    .msg-sys .sys-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: #f5f5f5; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .code-block {
+      background: #1e1e1e; color: #d4d4d4;
+      font-family: 'Courier New', Courier, monospace;
+      font-size: 11.5px; line-height: 1.5;
+      border-radius: 8px; padding: 14px 16px;
+      overflow-x: auto; margin-top: 8px;
+    }
+    .code-block pre { margin: 0; }
+
+    /* ── Timeline rail ────────────────────────────────────────── */
+    .tl-date-active {
+      flex: 1; font-size: 9.5px; padding: 2px 5px;
+      background: #f0f0fa; border: 1px solid #bcb8ed;
+      border-radius: 4px; color: var(--cnds-product-accent,#4e45d6); white-space: nowrap;
+    }
+    .tl-date {
+      flex: 1; font-size: 9.5px; padding: 2px 5px;
+      background: #fafafa; border: 1px solid #e0e0e0;
+      border-radius: 4px; color: #9e9e9e; white-space: nowrap;
+    }
+    .tl-bar-active { width: 6px; height: 14px; background: var(--cnds-product-accent,#4e45d6); border-radius: 2px; flex-shrink: 0; }
+    .tl-bar        { width: 6px; height: 14px; background: #d0d0d0; border-radius: 2px; flex-shrink: 0; }
+
+    /* ── Right detail pane tabs (overrides detail-tabs for text tabs) ── */
+    .detail-pane-tabs {
+      display: flex; padding: 0 4px;
+      border-bottom: 1px solid var(--cnds-border-color,#e0e0e0);
+      background: #f8fafc; flex-shrink: 0;
+    }
+    .detail-pane-tab {
+      background: transparent; border: 0; border-bottom: 2px solid transparent;
+      padding: 10px 12px; font-size: 12px; font-weight: 600; color: #64748b;
+      cursor: pointer; display: inline-flex; align-items: center; gap: 5px;
+      margin-bottom: -1px; transition: color .15s, border-color .15s;
+    }
+    .detail-pane-tab:hover { color: var(--cnds-product-accent,#4e45d6); }
+    .detail-pane-tab.active { color: var(--cnds-product-accent,#4e45d6); border-bottom-color: var(--cnds-product-accent,#4e45d6); }
+
+    /* ── Member rows ─────────────────────────────────────────── */
+    .member-row { display: flex; align-items: center; gap: 10px; padding: 8px 16px; }
+    .member-row:hover { background: #f9f9fb; }
+    .member-avatar {
+      width: 30px; height: 30px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 10px; font-weight: 700; flex-shrink: 0;
+    }
+
+    /* ── Attachment rows ─────────────────────────────────────── */
+    .attach-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 16px; border-bottom: 1px solid var(--cnds-border-color,#e0e0e0);
+      cursor: pointer;
+    }
+    .attach-row:hover { background: #f9f9fb; }
+    .attach-icon {
+      width: 32px; height: 32px; border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+
+<body class="cnds-product-expireon h-full overflow-hidden flex" data-screen-label="Chat Preview (v6 Workspace)">
+
+  <script>const ACTIVE_NAV = 'evidence_chat';</script>
+  <script src="../_shared/sidenav.js"></script>
+
+  <div class="app-main">
+    <script>
+      const TOPNAV_USER = { name: 'Justice Wargrave', initials: 'JW' };
+    </script>
+    <script src="../_shared/topnav.js"></script>
+
+    <main class="app-scroll">
+      <div class="app-canvas">
+
+        <div class="workspace">
+
+          <!-- ──────────────── RAIL: Chat List ──────────────── -->
+          <aside class="workspace-rail" aria-label="Chat list">
+            <div class="workspace-rail-tabs" role="tablist">
+              <button class="active" data-rail="chats"><span class="material-symbols-outlined">forum</span>Chats</button>
+              <button data-rail="filters"><span class="material-symbols-outlined">filter_alt</span>Filters</button>
+              <button data-rail="review"><span class="material-symbols-outlined">label</span>Review</button>
+            </div>
+
+            <!-- ── PANEL: Chats ── -->
+            <div class="workspace-rail-body" id="rail-chats" style="padding:0;overflow-y:auto">
+
+              <!-- Search + Sort -->
+              <div style="padding:10px 12px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0);display:flex;gap:6px">
+                <div class="cf-input-wrapper" style="flex:1">
+                  <input type="text" class="cf-input-control" placeholder="Search chats…" style="font-size:12px">
+                </div>
+                <button class="btn btn-link p-1">
+                  <span class="material-symbols-outlined" style="font-size:18px">sort</span>
+                </button>
+              </div>
+
+              <!-- Chat Item 1 — active, Slack -->
+              <div class="chat-item chat-item-active">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                  <div class="chat-avatar chat-avatar-slack">
+                    <span class="material-symbols-outlined" style="font-size:20px">hub</span>
+                  </div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+                      <span class="fw-bold" style="font-size:0.8125rem">#&thinsp;test2</span>
+                      <span class="platform-chip chip-slack">Slack</span>
+                    </div>
+                    <span class="text-muted" style="font-size:10.5px">04/16/24 – 10/18/24</span>
+                    <div class="avatar-stack" style="margin-top:6px">
+                      <div class="av" style="background:#fff3e0;color:#e65100">DM</div>
+                      <div class="av" style="background:#e8eaf6;color:#3949ab">BO</div>
+                      <div class="av" style="background:#f3e5f5;color:#7b1fa2">TC</div>
+                      <div class="av-more">+9</div>
+                    </div>
+                    <div class="chat-stats">
+                      <span><span class="material-symbols-outlined" style="font-size:12px">visibility</span>14</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">chat_bubble</span>26</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">attach_file</span>8</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chat Item 2 — Teams channel -->
+              <div class="chat-item" style="opacity:.82">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                  <div class="chat-avatar chat-avatar-teams" style="font-size:14px;font-weight:700">T</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+                      <span class="fw-bold" style="font-size:0.8125rem">legal-docs</span>
+                      <span class="platform-chip chip-teams">Teams</span>
+                    </div>
+                    <span class="text-muted" style="font-size:10.5px">11/02/23 – 12/10/23</span>
+                    <div class="chat-stats">
+                      <span>6</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">chat_bubble</span>41</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">attach_file</span>14</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chat Item 3 — Slack DM -->
+              <div class="chat-item" style="opacity:.82">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                  <div class="chat-avatar chat-avatar-slack" style="font-size:11px;font-weight:700">DM</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+                      <span class="fw-bold" style="font-size:0.8125rem">daniel.maiworm</span>
+                      <span class="platform-chip chip-slack">Slack</span>
+                    </div>
+                    <span class="text-muted" style="font-size:10.5px">10/20/24 – 10/20/24</span>
+                    <div class="chat-stats">
+                      <span>2</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">chat_bubble</span>7</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">attach_file</span>2</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Chat Item 4 — WhatsApp group -->
+              <div class="chat-item" style="opacity:.82">
+                <div style="display:flex;align-items:flex-start;gap:10px">
+                  <div class="chat-avatar chat-avatar-wa">
+                    <span class="material-symbols-outlined" style="font-size:20px">forum</span>
+                  </div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:2px">
+                      <span class="fw-bold" style="font-size:0.8125rem">Crime Group</span>
+                      <span class="platform-chip chip-wa">WhatsApp</span>
+                    </div>
+                    <span class="text-muted" style="font-size:10.5px">07/31/19 – 09/21/23</span>
+                    <div class="avatar-stack" style="margin-top:6px">
+                      <div class="av" style="background:#e0f2f1;color:#00695c">JW</div>
+                      <div class="av" style="background:#fce4ec;color:#880e4f">PR</div>
+                      <div class="av-more">+3</div>
+                    </div>
+                    <div class="chat-stats">
+                      <span>5</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">chat_bubble</span>17</span>
+                      <span><span class="material-symbols-outlined" style="font-size:12px">attach_file</span>3</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Skeleton -->
+              <div class="chat-item" style="opacity:.25">
+                <div style="height:12px;background:#e0e0e0;border-radius:4px;width:55%;margin-bottom:8px"></div>
+                <div style="height:10px;background:#ebebeb;border-radius:4px;width:75%"></div>
+              </div>
+
+              <!-- Rail pagination -->
+              <div style="padding:8px 12px;border-top:1px solid var(--cnds-border-color,#e0e0e0);display:flex;align-items:center;justify-content:center;gap:6px">
+                <button class="btn btn-secondary btn-sm" style="padding:3px 6px">
+                  <span class="material-symbols-outlined" style="font-size:15px;vertical-align:middle">chevron_left</span>
+                </button>
+                <span class="small fw-semibold px-1">1</span>
+                <button class="btn btn-secondary btn-sm" style="padding:3px 6px">
+                  <span class="material-symbols-outlined" style="font-size:15px;vertical-align:middle">chevron_right</span>
+                </button>
+                <select class="cf-input-control ms-2" style="width:auto;font-size:11px;padding:3px 20px 3px 8px">
+                  <option>10</option><option>25</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ── PANEL: Filters ── -->
+            <div class="workspace-rail-body" id="rail-filters" style="display:none">
+              <div class="facet-group">
+                <div class="facet-group-head">Source Platform <span class="material-symbols-outlined">expand_less</span></div>
+                <div style="padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px">
+                  <button class="src-chip active">All</button>
+                  <button class="src-chip">
+                    <span class="material-symbols-outlined" style="font-size:11px">hub</span>Slack
+                  </button>
+                  <button class="src-chip">
+                    <span class="material-symbols-outlined" style="font-size:11px">groups</span>Teams
+                  </button>
+                  <button class="src-chip">
+                    <span class="material-symbols-outlined" style="font-size:11px">forum</span>WhatsApp
+                  </button>
+                </div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Chat Type <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">tag</span><span class="facet-label">Channel</span><span class="facet-count">2</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">person</span><span class="facet-label">Direct Message</span><span class="facet-count">1</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">group</span><span class="facet-label">Group Chat</span><span class="facet-count">1</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Date Range <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">schedule</span><span class="facet-label">Last 7 days</span><span class="facet-count">0</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">calendar_month</span><span class="facet-label">2024</span><span class="facet-count">2</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">calendar_month</span><span class="facet-label">2023</span><span class="facet-count">1</span></div>
+                <div class="facet-item"><span class="material-symbols-outlined">history</span><span class="facet-label">Older</span><span class="facet-count">1</span></div>
+              </div>
+              <div class="facet-group">
+                <div class="facet-group-head">Custodians <span class="material-symbols-outlined">expand_less</span></div>
+                <div class="facet-item"><span class="facet-avatar">DM</span><span class="facet-label">daniel.maiworm</span><span class="facet-count">26</span></div>
+                <div class="facet-item"><span class="facet-avatar">BO</span><span class="facet-label">bruno.oliveira</span><span class="facet-count">19</span></div>
+                <div class="facet-item"><span class="facet-avatar">JW</span><span class="facet-label">Justice Wargrave</span><span class="facet-count">14</span></div>
+                <div class="facet-item"><span class="facet-avatar">TC</span><span class="facet-label">tea.cota</span><span class="facet-count">8</span></div>
+              </div>
+            </div>
+
+            <!-- ── PANEL: Review ── -->
+            <div class="workspace-rail-body" id="rail-review" style="display:none;padding:0;overflow-y:auto">
+              <div class="rv-section">
+                <div class="rv-section-hdr">
+                  <span>Review Status</span>
+                  <span class="material-symbols-outlined" style="font-size:15px">expand_less</span>
+                </div>
+                <div class="rv-item rv-active"><span class="rv-dot" style="background:#ef4444"></span><span style="flex:1">Not Reviewed</span><span class="rv-count">38</span></div>
+                <div style="height:3px;background:#e2e8f0;margin:0 12px 4px"><div style="height:100%;width:70%;background:#ef4444;border-radius:2px"></div></div>
+                <div class="rv-item"><span class="rv-dot" style="background:#f59e0b"></span><span style="flex:1">In Progress</span><span class="rv-count">12</span></div>
+                <div style="height:3px;background:#e2e8f0;margin:0 12px 4px"><div style="height:100%;width:22%;background:#f59e0b;border-radius:2px"></div></div>
+                <div class="rv-item"><span class="rv-dot" style="background:#22c55e"></span><span style="flex:1">Reviewed</span><span class="rv-count">4</span></div>
+                <div style="height:3px;background:#e2e8f0;margin:0 12px 10px"><div style="height:100%;width:8%;background:#22c55e;border-radius:2px"></div></div>
+              </div>
+              <div class="rv-section">
+                <div class="rv-section-hdr">
+                  <span>Relevance</span>
+                  <span class="material-symbols-outlined" style="font-size:15px">expand_less</span>
+                </div>
+                <div class="rv-item"><span class="material-symbols-outlined" style="font-size:14px;color:var(--cnds-product-accent,#4e45d6)">check_circle</span><span style="flex:1">Responsive</span><span class="rv-count">14</span></div>
+                <div class="rv-item"><span class="material-symbols-outlined" style="font-size:14px;color:#94a3b8">cancel</span><span style="flex:1">Non-Responsive</span><span class="rv-count">7</span></div>
+                <div class="rv-item"><span class="material-symbols-outlined" style="font-size:14px;color:#f59e0b">lock</span><span style="flex:1">Privileged</span><span class="rv-count">2</span></div>
+                <div class="rv-item" style="padding-bottom:10px"><span class="material-symbols-outlined" style="font-size:14px;color:#cbd5e1">radio_button_unchecked</span><span style="flex:1">Unclassified</span><span class="rv-count">31</span></div>
+              </div>
+              <div class="rv-section">
+                <div class="rv-section-hdr">
+                  <span>Tags</span>
+                  <span class="material-symbols-outlined" style="font-size:15px">expand_less</span>
+                </div>
+                <div style="padding:8px 12px;display:flex;flex-wrap:wrap;gap:6px">
+                  <span class="rv-tag-chip active"><span class="material-symbols-outlined" style="font-size:11px">bookmark</span>Key Message <span style="color:#94a3b8;font-weight:400">8</span></span>
+                  <span class="rv-tag-chip"><span class="material-symbols-outlined" style="font-size:11px">local_fire_department</span>Hot Doc <span style="color:#94a3b8;font-weight:400">3</span></span>
+                  <span class="rv-tag-chip"><span class="material-symbols-outlined" style="font-size:11px">lock</span>Confidential <span style="color:#94a3b8;font-weight:400">5</span></span>
+                </div>
+              </div>
+            </div>
+          </aside>
+
+          <!-- ──────────────── MIDDLE: Message Thread ──────────────── -->
+          <section class="workspace-content" aria-label="Message thread" style="display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--cnds-border-color,#e0e0e0)">
+
+            <!-- Toolbar: Preview/Comments tabs + Action buttons -->
+            <div style="display:flex;align-items:center;justify-content:space-between;padding:0 16px;height:52px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0);flex-shrink:0;background:#fff">
+              <ul class="nav nav-tabs-nimbus" role="tablist" style="border:0;margin:0;height:100%;align-items:flex-end">
+                <li><a href="#" class="nav-link active" onclick="return false" style="height:52px;display:flex;align-items:center;padding-bottom:4px">Preview</a></li>
+                <li><a href="#" class="nav-link" onclick="return false" style="height:52px;display:flex;align-items:center;padding-bottom:4px">Comments</a></li>
+              </ul>
+              <div style="display:flex;align-items:center;gap:6px">
+                <button class="action-btn action-btn-relevant">
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">check_circle</span>Relevant
+                </button>
+                <button class="action-btn action-btn-irrelevant">
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">cancel</span>Not Relevant
+                </button>
+                <button class="action-btn action-btn-privileged">
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">lock</span>Privileged
+                </button>
+                <button class="action-btn action-btn-query">
+                  <span class="material-symbols-outlined" style="font-variation-settings:'FILL' 1">help</span>Query
+                </button>
+              </div>
+            </div>
+
+            <!-- Thread header -->
+            <div style="padding:10px 20px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0);background:#fafafa;display:flex;align-items:center;justify-content:space-between;flex-shrink:0">
+              <div style="display:flex;align-items:center;gap:10px">
+                <span class="fw-bold" style="font-size:0.9375rem">#&thinsp;test2</span>
+                <span class="platform-chip chip-slack">Slack</span>
+                <span class="text-muted small">04/16/24 – 10/18/24</span>
+                <span class="badge badge-secondary" style="font-size:10px">26 messages</span>
+              </div>
+              <div style="display:flex;align-items:center;gap:2px">
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:18px;color:#c3c6d7">info</span></button>
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:18px;color:#c3c6d7">share</span></button>
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:18px;color:#c3c6d7">more_vert</span></button>
+              </div>
+            </div>
+
+            <!-- Thread search -->
+            <div style="padding:8px 20px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0);flex-shrink:0;background:#fff">
+              <div style="position:relative;max-width:440px">
+                <span class="material-symbols-outlined" style="font-size:15px;position:absolute;left:10px;top:50%;transform:translateY(-50%);color:#9e9e9e">search</span>
+                <input type="text" class="cf-input-control" placeholder="Search in this conversation…" style="padding-left:30px;font-size:12px">
+                <button class="btn btn-link p-1" style="position:absolute;right:4px;top:50%;transform:translateY(-50%)">
+                  <span class="material-symbols-outlined" style="font-size:14px;color:#9e9e9e">close</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Messages + Timeline -->
+            <div style="flex:1;overflow-y:auto;padding:20px 20px 20px 20px;display:flex;gap:16px">
+
+              <!-- Message feed -->
+              <div style="flex:1;display:flex;flex-direction:column;gap:18px">
+
+                <!-- System: joined -->
+                <div class="msg-sys">
+                  <div class="sys-icon"><span class="material-symbols-outlined" style="font-size:14px;color:#9e9e9e">person</span></div>
+                  <span>tea.cota has joined the channel</span>
+                  <span style="margin-left:auto;font-size:10px;color:#bbb;white-space:nowrap">04/16/24 15:32</span>
+                </div>
+
+                <!-- Message: daniel.maiworm -->
+                <div class="thread-msg">
+                  <div class="msg-avatar" style="background:#fff3e0;color:#e65100">DM</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+                      <span class="small fw-bold">daniel.maiworm</span>
+                      <span style="font-size:10px;color:#9e9e9e">04/16/24 16:12</span>
+                    </div>
+                    <p class="small mb-0" style="color:#3c3c3c;line-height:1.7">Who would have thought that someone would chat just to create test messages.</p>
+                  </div>
+                </div>
+
+                <!-- Message: bruno.oliveira -->
+                <div class="thread-msg">
+                  <div class="msg-avatar" style="background:#e8eaf6;color:#3949ab">BO</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+                      <span class="small fw-bold">bruno.oliveira</span>
+                      <span style="font-size:10px;color:#9e9e9e">04/16/24 16:34</span>
+                    </div>
+                    <p class="small mb-0" style="color:#3c3c3c;line-height:1.7">kind of weird</p>
+                  </div>
+                </div>
+
+                <!-- Message: bruno.oliveira with code block -->
+                <div class="thread-msg">
+                  <div class="msg-avatar" style="background:#e8eaf6;color:#3949ab">BO</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+                      <span class="small fw-bold">bruno.oliveira</span>
+                      <span style="font-size:10px;color:#9e9e9e">04/17/24 14:12</span>
+                    </div>
+                    <p class="small mb-0" style="color:#3c3c3c;line-height:1.7">and now I'm proposing some custom properties based on our last talk:</p>
+                    <div class="code-block">
+<pre><code>"conversations": [
+  {
+    "id": "C06H2G6MN59",
+    "display": "test2",
+    "platform": "Slack",
+    "type": "channel",
+    "participants": [
+      "U06GW0R8STY", "U06HKJOCAW",
+      "U06HF9C1LKF", "U06HF9C405P"
+    ],
+    "custodian": "U06GW0R8STY"
+  }
+]</code></pre>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Message: daniel.maiworm — with attachment -->
+                <div class="thread-msg">
+                  <div class="msg-avatar" style="background:#fff3e0;color:#e65100">DM</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+                      <span class="small fw-bold">daniel.maiworm</span>
+                      <span style="font-size:10px;color:#9e9e9e">04/17/24 15:45</span>
+                    </div>
+                    <p class="small mb-2" style="color:#3c3c3c;line-height:1.7">Attaching the proposal for reference — please review before Thursday.</p>
+                    <!-- File attachment bubble -->
+                    <div style="display:inline-flex;align-items:center;gap:10px;border:1px solid #e2e8f0;border-radius:8px;padding:10px 14px;background:#f8fafc;max-width:320px">
+                      <div style="width:36px;height:36px;border-radius:6px;background:#fde8e8;display:flex;align-items:center;justify-content:center;flex-shrink:0">
+                        <span class="material-symbols-outlined" style="font-size:20px;color:#c0392b">picture_as_pdf</span>
+                      </div>
+                      <div style="flex:1;min-width:0">
+                        <div class="small fw-bold text-truncate">Northwind Traders Proposal.pdf</div>
+                        <div class="text-muted" style="font-size:10px">1.2 MB · PDF</div>
+                      </div>
+                      <button class="btn btn-link p-1">
+                        <span class="material-symbols-outlined" style="font-size:16px;color:#94a3b8">download</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- System: date separator -->
+                <div style="display:flex;align-items:center;gap:10px;padding:4px 0">
+                  <div style="flex:1;height:1px;background:#e2e8f0"></div>
+                  <span style="font-size:10px;font-weight:700;color:#94a3b8;white-space:nowrap">June 12, 2024</span>
+                  <div style="flex:1;height:1px;background:#e2e8f0"></div>
+                </div>
+
+                <!-- Message: tea.cota -->
+                <div class="thread-msg">
+                  <div class="msg-avatar" style="background:#f3e5f5;color:#7b1fa2">TC</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+                      <span class="small fw-bold">tea.cota</span>
+                      <span style="font-size:10px;color:#9e9e9e">06/12/24 09:17</span>
+                    </div>
+                    <p class="small mb-0" style="color:#3c3c3c;line-height:1.7">Catching up on this thread. @daniel.maiworm — did we ever get sign-off on the cost breakdown? I see the PDF but no approval trail.</p>
+                  </div>
+                </div>
+
+                <!-- Message: dan.levine — highlight (relevant) -->
+                <div class="thread-msg" style="background:#f0fdf4;border-radius:8px;padding:10px 10px 10px 10px;border-left:3px solid #22c55e;margin-left:-10px">
+                  <div class="msg-avatar" style="background:#e3f2fd;color:#1565c0">DL</div>
+                  <div style="flex:1;min-width:0">
+                    <div style="display:flex;align-items:baseline;gap:8px;margin-bottom:4px">
+                      <span class="small fw-bold">dan.levine</span>
+                      <span style="font-size:10px;color:#9e9e9e">10/18/24 11:03</span>
+                      <span class="badge badge-success" style="font-size:9px">Relevant</span>
+                    </div>
+                    <p class="small mb-0" style="color:#3c3c3c;line-height:1.7">Sign-off was given verbally in the Oct 8 meeting. I can provide the recording if needed. The $200,500 figure was approved by the board.</p>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Timeline Rail -->
+              <div style="width:120px;flex-shrink:0;border-left:1px solid var(--cnds-border-color,#e0e0e0);padding-left:12px;display:flex;flex-direction:column;gap:4px">
+                <div style="font-size:10px;font-weight:700;color:#9e9e9e;text-transform:uppercase;letter-spacing:.08em;margin-bottom:6px">Timeline</div>
+                <div style="display:flex;align-items:center;gap:5px">
+                  <div class="tl-date-active">2024-04-16</div><div class="tl-bar-active"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;opacity:.45">
+                  <div class="tl-date">2024-04-17</div><div class="tl-bar"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;opacity:.45">
+                  <div class="tl-date">2024-04-22</div><div class="tl-bar"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;opacity:.45">
+                  <div class="tl-date">2024-04-23</div><div class="tl-bar"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;opacity:.45">
+                  <div class="tl-date">2024-04-30</div><div class="tl-bar"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;opacity:.45">
+                  <div class="tl-date">2024-06-12</div><div class="tl-bar"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;opacity:.45">
+                  <div class="tl-date">2024-10-08</div><div class="tl-bar"></div>
+                </div>
+                <div style="display:flex;align-items:center;gap:5px;opacity:.45">
+                  <div class="tl-date">2024-10-18</div><div class="tl-bar"></div>
+                </div>
+                <button class="btn btn-secondary btn-sm mt-3" style="font-size:11px;padding:3px 8px">Reset</button>
+              </div>
+
+            </div>
+          </section>
+
+          <!-- ──────────────── RIGHT: Members + Attachments ──────────────── -->
+          <aside class="workspace-detail" aria-label="Channel details">
+
+            <!-- Header -->
+            <div class="workspace-detail-head">
+              <h2>#&thinsp;test2</h2>
+              <div class="actions">
+                <button title="Export"><span class="material-symbols-outlined">download</span></button>
+                <button title="Close"><span class="material-symbols-outlined">close</span></button>
+              </div>
+            </div>
+
+            <!-- Tabs: Members / Attachments -->
+            <div class="detail-pane-tabs" role="tablist">
+              <button class="detail-pane-tab active" id="dt-tab-members" onclick="switchDetailTab('members')">
+                <span class="material-symbols-outlined" style="font-size:15px">group</span>Members
+              </button>
+              <button class="detail-pane-tab" id="dt-tab-attachments" onclick="switchDetailTab('attachments')">
+                <span class="material-symbols-outlined" style="font-size:15px">attach_file</span>Attachments
+                <span class="badge badge-secondary" style="font-size:10px;margin-left:2px">8</span>
+              </button>
+            </div>
+
+            <!-- ── PANE: Members ── -->
+            <div id="dt-members" style="flex:1;overflow-y:auto;display:flex;flex-direction:column">
+
+              <!-- Search -->
+              <div style="padding:10px 14px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0)">
+                <div style="display:flex;gap:6px">
+                  <div class="cf-input-wrapper" style="flex:1">
+                    <input type="text" class="cf-input-control" placeholder="Search members…" style="font-size:12px">
+                  </div>
+                  <button class="btn btn-primary btn-sm" style="padding:0 10px">
+                    <span class="material-symbols-outlined" style="font-size:15px">search</span>
+                  </button>
+                </div>
+              </div>
+
+              <!-- Active members -->
+              <div style="padding:12px 14px 6px">
+                <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+                  <span class="small fw-bold">Active members (6)</span>
+                  <button class="btn btn-link" style="font-size:11px;padding:0">Mute all</button>
+                </div>
+              </div>
+
+              <div class="member-row">
+                <div class="member-avatar" style="background:#e8eaf6;color:#3949ab">BO</div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">bruno.oliveira</div>
+                  <div style="display:flex;align-items:center;gap:3px;color:#94a3b8;font-size:9.5px">
+                    <span class="material-symbols-outlined" style="font-size:11px">login</span>04/17/24 – 06/12/24
+                  </div>
+                </div>
+                <button class="btn btn-link p-0" style="color:#d0d0d0"><span class="material-symbols-outlined" style="font-size:15px">volume_up</span></button>
+              </div>
+              <div class="member-row">
+                <div class="member-avatar" style="background:#e3f2fd;color:#1565c0">DL</div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">dan.levine</div>
+                  <div style="display:flex;align-items:center;gap:3px;color:#94a3b8;font-size:9.5px">
+                    <span class="material-symbols-outlined" style="font-size:11px">login</span>10/18/24 – 10/18/24
+                  </div>
+                </div>
+                <button class="btn btn-link p-0" style="color:#d0d0d0"><span class="material-symbols-outlined" style="font-size:15px">volume_up</span></button>
+              </div>
+              <div class="member-row">
+                <div class="member-avatar" style="background:#fff3e0;color:#e65100">DM</div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">daniel.maiworm</div>
+                  <div style="display:flex;align-items:center;gap:3px;color:#94a3b8;font-size:9.5px">
+                    <span class="material-symbols-outlined" style="font-size:11px">login</span>04/16/24 – 04/17/24
+                  </div>
+                </div>
+                <button class="btn btn-link p-0" style="color:#d0d0d0"><span class="material-symbols-outlined" style="font-size:15px">volume_up</span></button>
+              </div>
+              <div class="member-row">
+                <div class="member-avatar" style="background:#f3e5f5;color:#7b1fa2">TC</div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">tea.cota</div>
+                  <div style="display:flex;align-items:center;gap:3px;color:#94a3b8;font-size:9.5px">
+                    <span class="material-symbols-outlined" style="font-size:11px">login</span>04/16/24 – 10/08/24
+                  </div>
+                </div>
+                <button class="btn btn-link p-0" style="color:#d0d0d0"><span class="material-symbols-outlined" style="font-size:15px">volume_up</span></button>
+              </div>
+
+              <!-- Inactive members -->
+              <div style="padding:12px 14px 6px;margin-top:4px;border-top:1px solid #f1f5f9">
+                <span class="small fw-bold text-muted">Inactive members (10)</span>
+              </div>
+              <div style="opacity:.5">
+                <div class="member-row">
+                  <div class="member-avatar" style="background:#f5f5f5;color:#757575">AF</div>
+                  <div class="small fw-bold text-truncate">adam.feher</div>
+                </div>
+                <div class="member-row">
+                  <div class="member-avatar" style="background:#f5f5f5;color:#757575">PK</div>
+                  <div class="small fw-bold text-truncate">peter.kozak</div>
+                </div>
+                <div class="member-row">
+                  <div class="member-avatar" style="background:#f5f5f5;color:#757575">CF</div>
+                  <div class="small fw-bold text-truncate">cloudficient</div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- ── PANE: Attachments ── -->
+            <div id="dt-attachments" style="flex:1;overflow-y:auto;display:none;flex-direction:column">
+
+              <!-- Mini toolbar -->
+              <div style="padding:8px 14px;border-bottom:1px solid var(--cnds-border-color,#e0e0e0);display:flex;align-items:center;gap:6px">
+                <div class="cf-input-wrapper" style="flex:1">
+                  <input type="text" class="cf-input-control" placeholder="Filter attachments…" style="font-size:12px">
+                </div>
+                <button class="btn btn-link p-1" title="Download all">
+                  <span class="material-symbols-outlined" style="font-size:17px;color:#94a3b8">download</span>
+                </button>
+              </div>
+
+              <!-- Attachment list -->
+              <div class="attach-row">
+                <div class="attach-icon" style="background:#fde8e8">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#c0392b">picture_as_pdf</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">Northwind Traders Proposal.pdf</div>
+                  <div class="text-muted" style="font-size:10px">daniel.maiworm · 04/17/24 · 1.2 MB</div>
+                </div>
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:15px;color:#94a3b8">download</span></button>
+              </div>
+              <div class="attach-row">
+                <div class="attach-icon" style="background:#e8f5e9">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#2e7d32">table_chart</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">Q4_Budget_Review.xlsx</div>
+                  <div class="text-muted" style="font-size:10px">bruno.oliveira · 04/22/24 · 348 KB</div>
+                </div>
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:15px;color:#94a3b8">download</span></button>
+              </div>
+              <div class="attach-row">
+                <div class="attach-icon" style="background:#e3f2fd">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#1565c0">article</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">Meeting_Notes_Oct_8.docx</div>
+                  <div class="text-muted" style="font-size:10px">dan.levine · 10/08/24 · 54 KB</div>
+                </div>
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:15px;color:#94a3b8">download</span></button>
+              </div>
+              <div class="attach-row">
+                <div class="attach-icon" style="background:#fff3e0">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#e65100">image</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">screenshot_approval.png</div>
+                  <div class="text-muted" style="font-size:10px">tea.cota · 06/12/24 · 82 KB</div>
+                </div>
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:15px;color:#94a3b8">download</span></button>
+              </div>
+              <div class="attach-row">
+                <div class="attach-icon" style="background:#f3e5f5">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#7b1fa2">text_snippet</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">config_schema_v2.json</div>
+                  <div class="text-muted" style="font-size:10px">bruno.oliveira · 04/17/24 · 12 KB</div>
+                </div>
+                <button class="btn btn-link p-1"><span class="material-symbols-outlined" style="font-size:15px;color:#94a3b8">download</span></button>
+              </div>
+              <div class="attach-row" style="opacity:.5">
+                <div class="attach-icon" style="background:#f5f5f5">
+                  <span class="material-symbols-outlined" style="font-size:18px;color:#9e9e9e">draft</span>
+                </div>
+                <div style="flex:1;min-width:0">
+                  <div class="small fw-bold text-truncate">+ 3 more attachments</div>
+                  <div class="text-muted" style="font-size:10px">Load all</div>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+
+        </div><!-- .workspace -->
+      </div><!-- .app-canvas -->
+    </main>
+  </div><!-- .app-main -->
+
+  <script>
+    // ── Rail tab switch ──────────────────────────────────────────
+    document.querySelectorAll('.workspace-rail-tabs button').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.workspace-rail-tabs button').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        ['chats','filters','review'].forEach(k => {
+          const p = document.getElementById('rail-' + k);
+          if (p) p.style.display = (k === btn.dataset.rail) ? '' : 'none';
+        });
+      });
+    });
+
+    // ── Right pane tab switch ────────────────────────────────────
+    function switchDetailTab(tab) {
+      ['members','attachments'].forEach(k => {
+        const p = document.getElementById('dt-' + k);
+        const b = document.getElementById('dt-tab-' + k);
+        if (p) p.style.display = (k === tab) ? 'flex' : 'none';
+        if (b) b.classList.toggle('active', k === tab);
+      });
+    }
+
+    // ── Source filter chips ──────────────────────────────────────
+    document.querySelectorAll('.src-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        document.querySelectorAll('.src-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
