@@ -1896,3 +1896,21 @@ textarea.cf-input-control.mono {
   padding: 1px 6px; border-radius: 3px;
   color: var(--cnds-body-color, #1a1a1a);
 }
+
+/* ── Pane resizer (drag-to-resize divider) ─────────────────── */
+.pane-resizer {
+  flex-shrink: 0;
+  width: 5px;
+  cursor: col-resize;
+  background: transparent;
+  position: relative;
+  z-index: 10;
+  transition: background .12s;
+}
+.pane-resizer::after {
+  content: '';
+  position: absolute;
+  inset: 0 -3px;  /* widen hit-area to 11px */
+}
+.pane-resizer:hover { background: var(--cnds-product-accent, #4e45d6); opacity: .28; }
+.pane-resizer.is-resizing { background: var(--cnds-product-accent, #4e45d6); opacity: .45; }

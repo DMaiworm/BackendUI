@@ -254,6 +254,8 @@
             </div>
           </aside>
 
+          <div class="pane-resizer" data-resize="prev" aria-hidden="true"></div>
+
           <!-- ──────────────── MIDDLE: file list + metadata ──────────────── -->
           <section class="workspace-content split" aria-label="File list and metadata">
 
@@ -406,6 +408,8 @@
             </div>
 
           </section>
+
+          <div class="pane-resizer" data-resize="next" aria-hidden="true"></div>
 
           <!-- ──────────────── RIGHT: Preview + Version History ──────────────── -->
           <aside class="workspace-detail preview-pane" aria-label="File preview and version history">
@@ -637,6 +641,37 @@
 
   <!-- Floating tooltip for version history -->
   <div id="rp-tooltip"></div>
+
+  <!-- Pane resize logic -->
+  <script>
+    document.querySelectorAll('.pane-resizer').forEach(resizer => {
+      resizer.addEventListener('mousedown', e => {
+        e.preventDefault();
+        const side   = resizer.dataset.resize; // 'prev' or 'next'
+        const target = side === 'prev' ? resizer.previousElementSibling : resizer.nextElementSibling;
+        const startX = e.clientX;
+        const startW = target.getBoundingClientRect().width;
+        resizer.classList.add('is-resizing');
+        document.body.style.cursor = 'col-resize';
+        document.body.style.userSelect = 'none';
+        const onMove = e => {
+          const dx = e.clientX - startX;
+          const newW = Math.max(160, side === 'prev' ? startW + dx : startW - dx);
+          target.style.width = newW + 'px';
+          target.style.flex  = 'none';
+        };
+        const onUp = () => {
+          resizer.classList.remove('is-resizing');
+          document.body.style.cursor = '';
+          document.body.style.userSelect = '';
+          document.removeEventListener('mousemove', onMove);
+          document.removeEventListener('mouseup', onUp);
+        };
+        document.addEventListener('mousemove', onMove);
+        document.addEventListener('mouseup', onUp);
+      });
+    });
+  </script>
 
   <script>
     // ── Rail tab switch ──────────────────────────────────────────
